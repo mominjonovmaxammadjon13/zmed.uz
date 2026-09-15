@@ -1,0 +1,37 @@
+# ══ UZMED — Netlify sozlamasi ══
+# Build kerak emas: bu tayyor statik paket.
+
+[build]
+  publish = "."
+  command = ""
+
+# index.html — har doim yangilanishni tekshirsin (SW ham network-first)
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+
+# Service worker hech qachon keshlanmasin — aks holda yangilanish qotib qoladi
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+# RAG bazasi: statik va og'ir (39 MB) — uzoq keshlansin
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+    Content-Type = "application/javascript; charset=utf-8"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+
+# ⚠️ SPA catch-all redirect ATAYIN qo'shilmadi.
+# index.html assetlarni NISBIY yo'l bilan yuklaydi ('assets/...').
+# /* → /index.html 200 qoidasi chuqur URL larda yo'lni sindiradi.
