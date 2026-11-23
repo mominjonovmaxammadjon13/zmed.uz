@@ -104063,5 +104063,131 @@ function qur() {
 })();
 </script>
 
+
+<script id="uzmed-fix-zaxira-recursion-v1">
+/* ════════════════════════════════════════════════════════════════════════
+   UZMED · FIX · Zaxira rekursiyasi (so'rovlar bo'roni)
+   id: uzmed-fix-zaxira-recursion-v1   ·   sana: 2026-11-24
+
+   XATO (brauzerda isbotlangan, mock tarmoq bilan):
+     uzmed-fix-transport-v1 AI so'rovi yiqilganda (429/5xx/tarmoq)
+     zaxiraSora() -> UZMED_ONLINE.generate() ni chaqiradi. generate()
+     yuborgan so'rovlar ham window.fetch -> transport qatlamidan o'tadi.
+     Ular ham yiqilsa — yana zaxiraSora() -> generate() ... Chuqurlik
+     cheklanmagan. Natija: foydalanuvchi hech narsa bosmasa ham fon
+     tekshiruvlari (probe) 45 s da 6000+ so'rovga aylanadi.
+
+   TUZATISH (additive, eski kodga 0 belgi tegilmagan):
+     UZMED_ONLINE.generate ustiga yupqa qo'riqchi. Chaqiruv zaxiraSora()
+     ichidan kelsa VA xuddi shu (yoki o'zaro ichma-ich) savol bo'yicha
+     zaxira allaqachon ishlayotgan bo'lsa — ichki takroriy zaxira darhol
+     xato bilan qaytadi. Transport bu holatda ASL javobni qaytaradi
+     (uning .catch() mantiqi). Birinchi darajali zaxira avvalgidek ishlaydi.
+
+   TEGILMAGAN: kalitlar, endpointlar, provayderlar, model IDlari,
+   so'rov/javob formati, transport va boshqa bloklar.
+   ════════════════════════════════════════════════════════════════════════ */
+(function (root) {
+  'use strict';
+  if (root.__UZMED_FIX_ZAXIRA_REC_V1__) return;
+  root.__UZMED_FIX_ZAXIRA_REC_V1__ = true;
+
+  var BELGI = '__uzZaxiraRecV1';
+  var MAX_UMR = 70000;          /* zaxira timeouti 60 s — biroz ko'proq */
+  var STAT = { otkazildi: 0, toxtatildi: 0, faol: 0 };
+  var faol = [];                /* ishlayotgan zaxira savollari */
+
+  function norm(p) { try { return String(p || '').replace(/\s+/g, ' ').trim(); } catch (e) { return ''; } }
+
+  function zaxiradanmi() {
+    var s = '';
+    try { s = String(new Error().stack || ''); } catch (e) { s = ''; }
+    return s.indexOf('zaxiraSora') >= 0;
+  }
+
+  function takrormi(n) {
+    if (!n) return false;
+    for (var i = 0; i < faol.length; i++) {
+      var f = faol[i].n;
+      if (!f) continue;
+      if (n === f || n.indexOf(f) >= 0 || f.indexOf(n) >= 0) return true;
+    }
+    return false;
+  }
+
+  function olibTashla(yozuv) {
+    for (var i = 0; i < faol.length; i++) if (faol[i] === yozuv) { faol.splice(i, 1); break; }
+    STAT.faol = faol.length;
+  }
+
+  function orab(asl) {
+    if (typeof asl !== 'function' || asl[BELGI]) return asl;
+    var g = function (prompt, cb) {
+      var z = false;
+      try { z = zaxiradanmi(); } catch (e) { z = false; }
+      if (!z) return asl.apply(this, arguments);
+
+      var n = norm(prompt);
+      if (takrormi(n)) {
+        STAT.toxtatildi++;
+        try {
+          setTimeout(function () {
+            try { if (typeof cb === 'function') cb({ error: 'takroriy zaxira to`xtatildi (rekursiya himoyasi)' }); } catch (e) {}
+          }, 0);
+        } catch (e) {}
+        return;
+      }
+
+      STAT.otkazildi++;
+      var yozuv = { n: n };
+      faol.push(yozuv); STAT.faol = faol.length;
+      var tugadi = false;
+      var t = setTimeout(function () { if (!tugadi) { tugadi = true; olibTashla(yozuv); } }, MAX_UMR);
+      var cb2 = function () {
+        if (!tugadi) { tugadi = true; clearTimeout(t); olibTashla(yozuv); }
+        if (typeof cb === 'function') return cb.apply(this, arguments);
+      };
+      var a = Array.prototype.slice.call(arguments);
+      a[1] = cb2;
+      try { return asl.apply(this, a); }
+      catch (e) { if (!tugadi) { tugadi = true; clearTimeout(t); olibTashla(yozuv); } throw e; }
+    };
+    g[BELGI] = true;
+    g.__asl = asl;
+    return g;
+  }
+
+  function ornat() {
+    try {
+      var O = root.UZMED_ONLINE;
+      if (!O || typeof O.generate !== 'function') return false;
+      if (!O.generate[BELGI]) O.generate = orab(O.generate);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* Darhol o'rnatamiz; keyin 60 s davomida (cheklangan) tekshirib turamiz —
+     agar kimdir generate ni almashtirsa, faqat BELGIsiz bo'lsa qayta o'raladi. */
+  ornat();
+  var n = 0;
+  var iv = setInterval(function () {
+    ornat();
+    if (++n >= 30) { clearInterval(iv); }
+  }, 2000);
+
+  root.UZMEDZaxiraRec = {
+    versiya: 'v1',
+    holat: function () {
+      var O = root.UZMED_ONLINE;
+      return {
+        ornatilgan: !!(O && O.generate && O.generate[BELGI]),
+        zaxiraOtkazildi: STAT.otkazildi,
+        takrorToxtatildi: STAT.toxtatildi,
+        hozirFaol: STAT.faol
+      };
+    }
+  };
+})(window);
+</script>
 </body>
 </html>
