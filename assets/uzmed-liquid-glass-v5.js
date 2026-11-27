@@ -1,4 +1,4 @@
-/* UZMED — Liquid Glass v5.1 (iOS 26 / Telegram uslubi) — iPhone-xavfsiz, hamma uchun
+/* UZMED — Liquid Glass v5.2 (iOS 26 / Telegram uslubi) — iPhone-xavfsiz, hamma uchun
    v4 dagi xato: iPhone Safari (WebKit ContentChangeObserver) teginish paytida yangi "bosiladigan" element
    (button/a/input...) ko'rinib qolsa, click'ni bekor qiladi. v4 linza ichiga knopkalarning aynan nusxasini qo'yardi.
    v5 qoidalari:
@@ -8,6 +8,8 @@
    3) CSS transition ishlatilmaydi (faqat Web Animations).
    4) Juda katta elementlarga linza chiqmaydi.
    5) v5.1: hamma uchun doim yoqilgan (yoqib-o'chirish yo'q). Faqat tizimda "harakatni kamaytirish" yoqilgan bo'lsa ishlamaydi.
+   6) v5.2: linza ichidagi matn knopkadagidek o'rtada; linza tagi orqa fon rangida (ikki qavat matn ko'rinmaydi);
+      guruhdagi faol bo'lmagan elementlar linza ostida ko'k bo'ladi; barmoq ushlab turilsa linza 8 soniyagacha turadi.
    Joylashuv o'zgarmaydi: qatlam <html> ichida, <body> dan tashqarida; ilova elementlariga tegilmaydi. */
 (function(){
   'use strict';
@@ -17,7 +19,7 @@
   /* ---------- Doim yoqilgan (sinov rejimi olib tashlandi) ---------- */
   try{ localStorage.removeItem('uzm_lg_test'); }catch(_){}   /* eski sinov belgisini tozalash */
   var NS = window.UZMEDLiquidGlass = window.UZMEDLiquidGlass || {};
-  NS.version = '5.1'; NS.enabled = true;
+  NS.version = '5.2'; NS.enabled = true;
 
   /* ---------- Sozlamalar ---------- */
   var SEL = 'button,[role="button"],[role="tab"],a.btn,.btn,input[type="button"],input[type="submit"],[onclick]';
@@ -139,20 +141,28 @@
     out = document.createElement(CONVERT[tag] ? (inline && tag !== 'BUTTON' ? 'span' : 'div') : (tag === 'SPAN' || tag === 'B' || tag === 'I' || tag === 'STRONG' || tag === 'EM' || tag === 'SMALL' || tag === 'SUP' || tag === 'SUB' ? tag.toLowerCase() : 'div'));
     var cls = src.getAttribute('class');
     if (cls) out.setAttribute('class', cls);              /* ::before/::after ikonkalari uchun */
-    var st = styleString(cs, PROPS);
-    if (CONVERT[tag] && cs.display === 'inline-block' && tag === 'BUTTON') st += 'display:inline-flex;';
+    var st = styleString(cs, PROPS), host = out;
+    /* <button> ichidagi matn brauzerda vertikal o'rtada turadi; <div> da esa yo'q. Shuni takrorlaymiz. */
+    var btnLike = tag === 'BUTTON' || (tag === 'INPUT' && /^(button|submit|reset)$/i.test(src.type || ''));
+    var centerIt = btnLike && !/flex|grid|contents|none/.test(cs.display);
+    if (centerIt) st += 'display:' + (inline ? 'inline-flex' : 'flex') + ';flex-direction:row;align-items:center;justify-content:center;';
     out.setAttribute('style', st);
+    if (centerIt){
+      host = document.createElement('div');
+      host.setAttribute('style', 'display:block;width:100%;min-width:0;margin:0;padding:0;text-align:' + (cs.textAlign || 'center') + ';');
+      out.appendChild(host);
+    }
     if (tint && !itemColor) out.classList.add('uzm-lg-tint');
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT'){
       var txt = tag === 'SELECT' ? (src.options && src.selectedIndex >= 0 ? src.options[src.selectedIndex].text : '') : (src.value || src.placeholder || '');
       if (src.type === 'password') txt = txt.replace(/./g, '•');
-      out.textContent = txt;
+      host.textContent = txt;
       return out;
     }
     if (tag === 'IFRAME' || tag === 'VIDEO' || tag === 'AUDIO' || tag === 'CANVAS' || tag === 'OBJECT' || tag === 'EMBED') return out;
     for (var n = src.firstChild; n; n = n.nextSibling){
       var c = build(n, tintSet, tint ? myColor : null);
-      if (c) out.appendChild(c);
+      if (c) host.appendChild(c);
       if (budget > MAX_NODES) break;
     }
     return out;
@@ -209,6 +219,28 @@
     if (el.matches('input:not([type=button]):not([type=submit]),textarea,select,[contenteditable="true"]')) return false;
     return true;
   }
+  /* Element orqasidagi ko'rinadigan fon rangi (ota elementlar ranglarini qo'shib hisoblash) */
+  function parseRGBA(v){
+    var m = /rgba?\(([^)]+)\)/.exec(v || ''); if (!m) return null;
+    var p = m[1].split(/[ ,\/]+/).filter(Boolean).map(parseFloat);
+    if (p.length < 3 || p.some(isNaN)) return null;
+    return [p[0], p[1], p[2], p.length > 3 ? p[3] : 1];
+  }
+  function bgBehind(el){
+    var layers = [], e = el && el.parentElement;
+    while (e && layers.length < 24){
+      var c = parseRGBA(getComputedStyle(e).backgroundColor);
+      if (c && c[3] > 0.02){ layers.push(c); if (c[3] >= 0.97) break; }
+      e = e.parentElement;
+    }
+    if (!layers.length || layers[layers.length - 1][3] < 0.97){
+      var root = parseRGBA(getComputedStyle(document.documentElement).backgroundColor) || [0, 0, 0, 0];
+      layers.push(root[3] >= 0.5 ? [root[0], root[1], root[2], 1] : (matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? [12, 16, 24, 1] : [245, 247, 250, 1]));
+    }
+    var r = 0, g = 0, b = 0;
+    for (var i = layers.length - 1; i >= 0; i--){ var a = layers[i][3]; r = layers[i][0] * a + r * (1 - a); g = layers[i][1] * a + g * (1 - a); b = layers[i][2] * a + b * (1 - a); }
+    return 'rgba(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ',.9)';
+  }
   function transparentBg(el){
     var m = /rgba?\(([^)]+)\)/.exec(getComputedStyle(el).backgroundColor || '');
     if (!m) return true;
@@ -263,6 +295,7 @@
   function appear(r, rad, src, tintSet){
     cancel();
     size(r.w, r.h, rad);
+    try{ lens.style.backgroundColor = src ? bgBehind(src) : ''; }catch(_){ lens.style.backgroundColor = ''; }
     buildLayers(src, tintSet);
     setNow(r.cx, r.cy, GX, GY, 1);
     L.on = true;
@@ -317,7 +350,7 @@
 
   /* ---------- Hodisalar (teginish davomida qisqa taymer YO'Q) ---------- */
   var P = null, suppress = { until:0, par:null }, watchdog = 0;
-  function kick(){ clearTimeout(watchdog); watchdog = setTimeout(function(){ if (P){ P = null; vanish(true); } }, 2500); }  /* 2500ms > 400ms: iOS kuzatmaydi */
+  function kick(){ clearTimeout(watchdog); watchdog = setTimeout(function(){ if (P){ P = null; vanish(true); } }, 8000); }  /* 8000ms > 400ms: iOS kuzatmaydi; ushlab turganda linza turadi */
 
   document.addEventListener('pointerdown', function(e){
     try{
@@ -335,7 +368,7 @@
         if (countNodes(g.par) <= MAX_NODES){
           src = g.par;
           /* Telegram kabi: linza ostidagi faol bo'lmagan (shaffof fonli) elementlar ko'k bo'ladi */
-          tintSet = g.items.filter(function(it){ return !isActive(it) && transparentBg(it); });
+          tintSet = g.items.filter(function(it){ return !isActive(it); });
         }
         if (g.prev){ var pr = rectOf(g.prev); if (onScreen(pr)){ start = pr; startRad = radiusOf(g.prev, pr); } }
       }
