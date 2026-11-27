@@ -120,7 +120,15 @@
       const details=node('details');
       const leading=id==='primary'&&index===0;
       details.open=leading;
-      details.append(node('summary',(leading?'Eng asosli taxmin: ':'')+item.name));
+      const head=node('summary',(leading?'Eng asosli taxmin: ':'')+item.name);
+      if(Number.isInteger(item.likelihood)){
+       const meter=node('span','','qc-dx-pct');
+       meter.style.setProperty('--qc-dx-pct',item.likelihood+'%');
+       meter.append(node('b',item.likelihood+'%'));
+       meter.title='AI taxminiy ehtimoli — kiritilgan ma’lumotlar asosida, o‘lchangan qiymat emas';
+       head.append(meter);
+      }
+      details.append(head);
       if(item.summary)details.append(node('p',item.summary,'minor'));
       if(item.risk==='urgent')details.append(node('p','Zudlik bilan klinik baholash va istisno qilish kerak.','qc-dx-status'));
       else if(item.risk==='prompt')details.append(node('p','Yaqin muddatda klinik baholash kerak.','minor'));
@@ -145,7 +153,25 @@
        status.textContent=id==='comorbid'?'Hamroh tashxis qoralamaga qo‘shildi.':'Asosiy tashxis qoralamaga qo‘shildi.';
       };
       selectionButtons.push({button:use,field,name:item.name});
-      option.append(details,use);
+      const pick=node('button','100%','qc-choice qc-dx-pick');
+      pick.type='button';
+      pick.setAttribute('aria-label',item.name+' — asosiy tashxis sifatida yozish');
+      pick.title='Shifokor tasdig‘i: asosiy tashxis va MKB-10 maydoniga yoziladi';
+      pick.onclick=()=>{
+       if(!same(scope(),current)||keyFor(current,snapshot())!==key){invalidate();return;}
+       const main=$('field-diagnosis'),icd=$('field-icd');
+       if(!main)return;
+       if(main.maxLength>=0&&item.name.length>main.maxLength){status.textContent='Qoralama maydoni chegarasi oshdi.';return;}
+       main.value=item.name;
+       if(icd&&item.code)icd.value=item.code;
+       $('icdChecked').checked=false;
+       $('approved').checked=false;
+       main.dispatchEvent(new W.Event('input',{bubbles:true}));
+       if(icd&&item.code)icd.dispatchEvent(new W.Event('input',{bubbles:true}));
+       status.textContent='Asosiy tashxis yozildi: '+item.name+(item.code?' · '+item.code+' (MKB-10 kodini tekshiring)':'')+'.';
+       main.scrollIntoView({block:'center',behavior:'smooth'});
+      };
+      option.append(details,use,pick);
       result.append(option);
      }
     }
