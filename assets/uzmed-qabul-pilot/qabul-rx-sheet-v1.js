@@ -273,7 +273,11 @@
   const open=btn('AI retsept','rx','qcx-action qcx-icon-only qt-manual qrx-open-btn',show,true);
   const anchor=tools.querySelector('.qt-manual');
   if(anchor)anchor.after(open);else tools.prepend(open);
-  const sync=()=>{open.hidden=section.hidden||bridge()?.read?.()?.readOnly===true;if(section.hidden&&S.open)hide();};
+  // GLM 5.3 Flash faqat Admin yoki faol UZMED PRO uchun: oddiy foydalanuvchiga tugma ko‘rinmaydi.
+  const allowed=()=>{try{return (W.parent?.UZMEDPremiumFlash||W.UZMEDPremiumFlash)?.allowed===true;}catch(_){return false;}};
+  const sync=()=>{open.hidden=section.hidden||bridge()?.read?.()?.readOnly===true||!allowed();if(section.hidden&&S.open)hide();};
+  let checks=0;(function poll(){sync();if(allowed()||++checks>40)return;setTimeout(poll,1500);})();
+  try{W.parent?.addEventListener?.('uzmed:auth-change',()=>{checks=0;sync();setTimeout(sync,3000);});}catch(_){}
   new MutationObserver(sync).observe(section,{attributes:true,attributeFilter:['hidden']});
   W.addEventListener('qabul:session-ready',()=>{S.data=null;S.key='';sync();});
   W.addEventListener('qabul:clinical-locked',sync);
