@@ -1,0 +1,37 @@
+/* UZMED Qabul unified examination + investigation catalog, November 2026. */
+#qabulFocus .qc-observations[data-qc-target="field-exam"]{border:1px solid var(--q-line);border-radius:13px;background:var(--q-card);padding:14px;margin:12px 0}
+#qabulFocus .qc-observations[data-qc-target="field-exam"] .qf-helper-inline{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;margin:12px 0 0!important;padding:6px 0 0!important;border-top:1px solid var(--q-line)!important}
+#qabulFocus .qc-observations[data-qc-target="field-exam"] .qf-helper-inline>summary{font-size:13px!important;font-weight:700}
+#qabulFocus .qc-tests-unified{min-width:0;padding:14px 12px;margin:14px 0;border:1px solid var(--q-line);border-radius:14px;background:var(--q-card);display:flex;flex-direction:column;gap:11px}
+#qabulFocus .qc-tests-unified-head{display:flex;flex-direction:column;gap:4px}
+#qabulFocus .qc-tests-unified-head h3{margin:0;font-size:17px;font-weight:750;letter-spacing:-.01em}
+#qabulFocus .qc-tests-unified-head p{margin:0;font-size:12px;line-height:1.5;color:var(--q-muted)}
+#qabulFocus .qc-tests-unified .qf-lab-search{display:flex!important;align-items:center;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+#qabulFocus .qc-tests-unified .qf-lab-search input{flex:1 1 230px;min-width:0;min-height:44px;border:1px solid var(--q-line);border-radius:10px;background:var(--q-soft);color:var(--q-text);font-size:15px;padding:10px 12px;box-sizing:border-box}
+#qabulFocus .qc-tests-unified .qf-lab-selected{font-size:12px;font-weight:700;color:var(--q-accent);white-space:nowrap}
+#qabulFocus .qc-tests-unified .qc-test-nav{display:flex!important;align-items:center;gap:6px;flex-wrap:wrap;margin:0}
+#qabulFocus .qc-tests-unified .qc-test-nav>button{font-size:12px;line-height:1.2;font-weight:650;padding:8px 10px;min-height:39px;border-radius:10px;white-space:normal;border:1px solid var(--q-line);background:var(--q-soft);color:var(--q-text)}
+#qabulFocus .qc-tests-unified .qc-test-nav>button.selected{background:var(--q-accent);border-color:var(--q-accent);color:#073326}
+#qabulFocus .qc-tests-unified .qc-tests-summary{color:var(--q-muted);font-size:12px;line-height:1.4;margin:0}
+#qabulFocus .qc-tests-unified>.qc-chips{display:flex;flex-wrap:wrap;gap:7px;margin:0}
+#qabulFocus .qc-tests-unified>.qc-chips>button{flex:0 1 auto;min-height:41px;border-radius:9px;white-space:normal;line-height:1.25}
+#qabulFocus .qc-tests-unified #testPresets{margin:0;max-height:min(53dvh,580px)!important;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:0 2px 8px 0;display:grid;gap:7px}
+#qabulFocus .qc-tests-unified #testPresets>.qf-lab-group{margin:0;border:1px solid var(--q-line);border-radius:10px;background:var(--q-soft);overflow:hidden}
+#qabulFocus .qc-tests-unified #testPresets>.qf-lab-group summary{display:flex;align-items:center;min-height:42px;padding:9px 12px;gap:8px;font-size:13px;font-weight:700;line-height:1.3}
+#qabulFocus .qc-tests-unified #testPresets .preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:6px 9px 11px}
+#qabulFocus .qc-tests-unified #testPresets .preset-grid>label{display:flex;align-items:center;gap:9px;min-width:0;min-height:48px;margin:0;padding:9px 10px;box-sizing:border-box;border:1px solid var(--q-line);border-radius:9px;background:var(--q-card);color:var(--q-text);font-size:12px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+#qabulFocus .qc-tests-unified #testPresets .preset-grid>label:has(input:checked){border-color:var(--q-accent);background:var(--q-light)}
+#qabulFocus .qc-tests-unified #testPresets .preset-grid input{flex:0 0 18px;width:18px;height:18px;margin:0;accent-color:var(--q-accent);pointer-events:none}
+#qabulFocus .qc-tests-unified .qc-selected-tests{display:grid;gap:8px;margin:2px 0 0;padding:10px 0 0;border:0;border-top:1px solid var(--q-line);border-radius:0;background:transparent}
+#qabulFocus .qc-tests-unified .qc-selected-tests h3{font-size:14px;margin:0}
+#qabulFocus .qc-tests-unified .qc-selected-row{display:flex;align-items:center;gap:8px;padding:7px 2px;border-bottom:1px solid var(--q-line);font-size:12px;line-height:1.4}
+#qabulFocus .qc-tests-unified .qc-selected-row button{margin-left:auto;min-width:35px;min-height:35px;padding:5px 9px;font-size:16px;border:1px solid var(--q-line);border-radius:8px;background:var(--q-soft)}
+#qabulFocus .qc-tests-unified #slot-tests{margin:4px 0}
+#qabulFocus .qc-tests-unified #slot-tests textarea{width:100%;min-width:0;box-sizing:border-box}
+#qabulFocus .qc-tests-unified .minor{margin:0;font-size:12px}
+#qabulFocus .qc-tests-unified>label{display:grid;gap:7px;font-size:12px;font-weight:600}
+#qabulFocus .qc-tests-unified>label textarea{min-height:68px;width:100%;min-width:0;box-sizing:border-box;border-radius:9px;padding:10px;color:var(--q-text);background:var(--q-soft);border:1px solid var(--q-line)}
+#qabulFocus .qc-tests-unified :is(button,input,textarea):focus-visible{outline:2px solid var(--q-accent);outline-offset:2px}
+@media(max-width:650px){#qabulFocus .qc-tests-unified{padding:10px 8px;gap:9px;margin:9px 0;border-radius:11px}#qabulFocus .qc-tests-unified #testPresets{max-height:min(52dvh,540px)!important}#qabulFocus .qc-tests-unified .qc-test-nav>button{font-size:11px;min-height:39px;padding:7px 9px}#qabulFocus .qc-tests-unified #testPresets .preset-grid{gap:6px;padding:5px 7px 9px}#qabulFocus .qc-tests-unified #testPresets .preset-grid>label{font-size:11px;padding:8px;min-height:48px}#qabulFocus .qc-tests-unified .qf-lab-search{flex-direction:row!important}#qabulFocus .qc-tests-unified .qf-lab-selected{width:100%}}
+@media(max-width:365px){#qabulFocus .qc-tests-unified #testPresets .preset-grid{grid-template-columns:1fr}}
+@media print{#qabulFocus .qc-tests-unified,.qf-helper-inline{display:none!important}}

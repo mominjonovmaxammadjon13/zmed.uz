@@ -1,0 +1,43 @@
+/* Passport shared by new-patient entry and authenticated visit editor. */
+#uzQabulEntry.qpremium.qp-new-view :is(.qp-hero,.qp-tiles,.qp-list-section){display:none!important}
+#uzQabulEntry.qpremium.qp-new-view .qstart-content{margin-top:0}
+.qp-passport{--pp-bg:#101827;--pp-field:#192436;--pp-border:#263446;--pp-text:#edf3fc;--pp-muted:#99a8bd;--pp-accent:#10b98a;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;width:100%;max-width:760px;margin:0 auto;padding:24px;background:var(--pp-bg);color:var(--pp-text);border:1px solid var(--pp-border);border-radius:18px;font:inherit;text-align:left;color-scheme:dark}
+html[data-uzmed-ux-theme=light] .qp-passport,html[data-theme=light] .qp-passport{--pp-bg:#fff;--pp-field:#f3f6fa;--pp-border:#dbe2eb;--pp-text:#162638;--pp-muted:#62748b;color-scheme:light}
+.qp-passport *{box-sizing:border-box;min-width:0}
+.qp-passport-head{display:flex;align-items:center;gap:14px;padding-bottom:19px;border-bottom:1px solid var(--pp-border)}
+.qp-passport-avatar{display:grid;place-items:center;flex:0 0 54px;width:54px;height:54px;border-radius:15px;background:#1a2b49;color:#eef5ff;font-weight:750;font-size:20px}
+.qp-passport-head>div{flex:1;overflow-wrap:anywhere}
+.qp-passport-head strong{display:block;font-size:21px;line-height:1.3}
+.qp-passport-head span:not(.qp-passport-avatar){display:block;color:var(--pp-muted);font-size:14px;margin-top:5px}
+.qp-passport-back{min-width:44px;min-height:44px;border:0;border-radius:11px;background:var(--pp-field);color:var(--pp-text);font-size:22px;cursor:pointer}
+.qp-passport-grid{display:grid;gap:17px}
+.qp-passport-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.qp-passport-field{display:flex;flex-direction:column;gap:8px}
+.qp-passport-field label,.qp-passport-sex legend{color:var(--pp-muted);font-size:12px;font-weight:700;letter-spacing:.035em}
+.qp-passport :is(input:not([type=radio]),select,textarea){display:block;width:100%;max-width:100%;min-height:49px;padding:12px 13px;border:1px solid var(--pp-border);border-radius:9px;background:var(--pp-field);color:var(--pp-text);font:inherit;font-size:16px;line-height:1.4;margin:0}
+.qp-passport textarea{min-height:74px;resize:vertical}
+.qp-passport ::placeholder{color:var(--pp-muted);opacity:.8}
+.qp-passport :is(input,select,textarea,button):focus-visible{outline:2px solid var(--pp-accent);outline-offset:2px}
+.qp-passport-sex{display:flex;padding:4px;gap:4px;margin:0;border:0;border-radius:9px;background:var(--pp-field)}
+.qp-passport-sex legend{margin-bottom:8px}
+.qp-passport-sex label{flex:1;position:relative;text-align:center;cursor:pointer}
+.qp-passport-sex input{position:absolute;opacity:0;width:1px;height:1px}
+.qp-passport-sex span{display:grid;place-items:center;min-height:43px;border-radius:7px;font-size:14px;color:var(--pp-muted)}
+.qp-passport-sex input:checked+span{background:var(--pp-bg);color:var(--pp-text);font-weight:700}
+.qp-passport-sex input:focus-visible+span{outline:2px solid var(--pp-accent)}
+.qp-passport-save{display:block;width:100%;min-height:49px;padding:12px 16px;border:1px solid #29d7a6;border-radius:10px;background:#079e78;color:#fff;font:inherit;font-weight:750;cursor:pointer}
+.qp-passport-save:disabled{opacity:.55;cursor:wait}
+.qp-passport-status{margin:0;font-size:13px;line-height:1.5;color:var(--pp-muted);overflow-wrap:anywhere}
+.qp-passport-status:empty{display:none}
+.qp-passport-status[role=alert]{color:#ffb4b4}
+#uzQabulEntry.qpremium.qp-new-view #qstartStatus:empty{display:none}
+@media(max-width:650px){.qp-passport{padding:17px 14px;gap:17px;border-radius:14px}.qp-passport-head strong{font-size:20px}.qp-passport-pair{gap:9px}.qp-passport-head{padding-bottom:17px}.qp-passport-sex span{font-size:12px}.qp-passport-grid{gap:16px}}
+@media(max-width:350px){.qp-passport-pair{grid-template-columns:1fr}}
+.qp-passport .qp-passport-save-top{width:auto;flex:0 0 auto;min-height:40px;padding:9px 12px;font-size:12px;border-radius:9px}
+
+/* The embedded editor owns the single toolbar; keep the parent save/status bridge. */
+#uzBemorlarHub.ubh-visit-mode.ubh-compact :is(.ubh-head,.ubh-description),#uzBemorlarHub.ubh-compact-ready .ubh-tools{display:none!important}
+body#uzmedMobile #uzBemorlarHub.ubh-visit-mode.ubh-compact{padding:0!important;gap:0!important;height:var(--ubh-viewport-height,100dvh)!important;max-height:var(--ubh-viewport-height,100dvh)!important;}
+#uzBemorlarHub.ubh-visit-mode.ubh-compact .ubh-qabul{gap:0!important;min-height:0;display:flex;flex-direction:column;flex:1 1 0}
+#uzBemorlarHub.ubh-visit-mode.ubh-compact .ubh-note{font-size:11px!important;line-height:1.35;padding:3px 10px!important;margin:0!important;max-height:36px;min-height:21px}
+#uzBemorlarHub.ubh-visit-mode.ubh-compact .ubh-frame{border:0!important;border-radius:0!important;min-height:0!important;height:0!important;flex:1 1 0}

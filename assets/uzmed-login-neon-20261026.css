@@ -1,0 +1,108 @@
+/* UZMED glass login: presentation only. Repeated ID overrides the existing
+   important UX theme without changing markup, native handlers or auth state. */
+#uzmedAuthOverlay#uzmedAuthOverlay{
+--glass-text:#edfffd;--glass-muted:#b7dcdf;color-scheme:dark!important;color:var(--glass-text)!important;
+background:radial-gradient(ellipse at 50% 2%,#08686a,transparent 47%),radial-gradient(ellipse at 0 80%,#075956,transparent 45%),linear-gradient(155deg,#001e29,#002b32 58%,#00131d)!important;
+padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(28px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))!important;
+overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain;isolation:isolate;
+}
+#uzmedAuthOverlay#uzmedAuthOverlay[hidden]{display:none!important}
+#uzmedAuthOverlay#uzmedAuthOverlay::before{
+content:""!important;position:fixed!important;inset:0!important;pointer-events:none!important;z-index:-1;
+background:radial-gradient(circle at 15% 15%,#4cfff97a 0 1px,transparent 5px),radial-gradient(circle at 81% 31%,#19e9d4a1 0 2px,transparent 8px),radial-gradient(circle at 9% 66%,#15e9cd94 0 2px,transparent 9px),radial-gradient(circle at 89% 80%,#17e7ec99 0 1px,transparent 8px),radial-gradient(circle at 31% 94%,#09dab5a3 0 2px,transparent 8px),radial-gradient(ellipse at 18% 42%,#07d8cb38,transparent 22%),radial-gradient(ellipse at 85% 62%,#21b3d131,transparent 30%)!important;
+background-size:193px 277px,307px 391px,397px 283px,251px 419px,331px 347px,100% 100%,100% 100%!important;animation:uzGlassAtmosphere 12s ease-in-out infinite alternate;
+}
+#uzmedAuthOverlay#uzmedAuthOverlay::after{
+content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.7;
+background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 1000'%3E%3Cdefs%3E%3ClinearGradient id='l' x2='1' y2='1'%3E%3Cstop stop-color='%2327d4ae' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%23054249'/%3E%3C/linearGradient%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1.5'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='url(%23l)' stroke='%235ae4c3' stroke-opacity='.2' filter='url(%23b)'%3E%3Cpath d='M-30 1010Q-80 850 120 835Q120 970-30 1010ZM-20 946Q-100 767 20 751Q92 864-20 946ZM660 117Q566 57 625-12Q753-17 744 89Q706 139 660 117ZM686 956Q594 879 679 790Q784 845 756 934Z'/%3E%3C/g%3E%3Cg fill='none' stroke='%2345eacc' stroke-width='7' stroke-linejoin='round' opacity='.3'%3E%3Cpath d='M39 95v-17h15v17h17v15H54v17H39v-17H22V95zM645 410v-17h15v17h17v15h-17v17h-15v-17h-17v-15z'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;
+}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-stage{display:flex!important;flex-direction:column!important;width:min(440px,100%)!important;min-width:0;flex-shrink:0;gap:10px!important;margin:auto!important;position:relative}
+/* The existing aria-hidden branding nodes form the decorative medical scene. */
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand{position:relative;width:100%;height:175px;min-height:0!important;margin:0!important;padding:0!important;display:grid;place-items:center;isolation:isolate;pointer-events:none;overflow:hidden}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-logo{
+position:relative;width:154px!important;height:154px!important;border-radius:50%!important;margin:0!important;overflow:visible!important;border:1px solid #9bfff0;
+background:radial-gradient(ellipse at 28% 15%,#d3fffae8,#a0fff455 17%,transparent 42%),radial-gradient(circle at 60% 60%,#01c3a3,#007d81 57%,#1ff4db 76%,#06495f 95%)!important;
+box-shadow:inset 2px 3px 9px #d6fffcd9,inset -5px -7px 12px #0b688f,0 0 0 4px #3be8d42b,0 0 0 9px #36efd315,0 0 42px #05edcb7d!important;animation:uzGlassFloat 6s ease-in-out infinite;
+}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-logo::before{content:""!important;position:absolute!important;width:auto!important;height:auto!important;inset:5px!important;border-radius:50%!important;background:radial-gradient(ellipse at 37% 12%,#f1fffcaa 0 3%,transparent 33%)!important;border-top:2px solid #c4fff0b0;border-bottom:2px solid #8dfff4a0;z-index:2}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-logo::after{content:""!important;position:absolute!important;inset:10%!important;width:auto!important;height:auto!important;border-radius:50%!important;background:url('/assets/uzmed-favicon-round-20261026-v5-512.png') center/contain no-repeat!important;mix-blend-mode:screen;filter:drop-shadow(0 3px 7px #003945)}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand-name,.uz-auth-brand-tag){position:absolute;inset:0;display:block!important;margin:0!important;font-size:0!important;line-height:0!important;color:transparent!important;text-shadow:none!important;pointer-events:none}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-name)::before,
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-name)::after{content:"";position:absolute;width:54px;height:54px;border-radius:20px;border:1px solid #b4ffef9c;box-shadow:inset 2px 2px 5px #b4fff396,inset -1px -3px 8px #10c4ae54,0 8px 24px #001f3580;background-color:#007d7e4d;background-repeat:no-repeat;background-position:center;background-size:65% 65%,100% 100%;animation:uzGlassFloat 5.5s ease-in-out infinite}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand::before{left:9%;top:13%;rotate:-16deg;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='8' y='6' width='25' height='31' rx='4' fill='%234b9aff' stroke='%23a0e9ff' stroke-width='2'/%3E%3Cpath d='M15 6V3h12v6H15z' fill='%239eefff'/%3E%3Cpath d='M14 15h13M14 21h13M14 27h8' stroke='%230f4bab' stroke-width='2.5'/%3E%3C/svg%3E"),linear-gradient(135deg,#82ffed40,#00536b38)}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand::after{left:0;top:58%;rotate:16deg;animation-delay:-2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg transform='rotate(-36 20 20)' stroke='%23002e39' stroke-width='2.5' fill='none'%3E%3Crect x='11' y='3' width='18' height='34' rx='9'/%3E%3Cpath d='M11 20h18'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#82ffed40,#00536b38)}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-name::before{right:8%;top:14%;rotate:13deg;animation-delay:-1.2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 35 5 21C-5 8 12-1 20 9 28-1 45 8 35 21Z' fill='%230d9cf8' stroke='%2366dfff'/%3E%3Cpath d='M3 20h8l3-8 5 15 4-10 3 4h11' fill='none' stroke='%23efffff' stroke-width='1.8'/%3E%3C/svg%3E"),linear-gradient(135deg,#82ffed40,#00536b38)}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-name::after{right:0;top:59%;rotate:-9deg;animation-delay:-3.4s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%23002d33' stroke-width='2.3' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 5v29m-8 2h16M5 10h30M10 10 4 25h12L10 10Zm20 0-6 15h12L30 10Z'/%3E%3Cpath d='M4 25q6 8 12 0m8 0q6 8 12 0' fill='%23003239'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#82ffed40,#00536b38)}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-tag{z-index:-1}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-tag::before,
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-tag::after{content:"";position:absolute;inset:20% 12% -28%;border:2px solid #4bfff1;border-left-color:#3bfff12b;border-right-color:#a0ffe98c;border-radius:50%;box-shadow:0 0 6px #66ffe8,inset 0 0 9px #0de3d9,0 0 18px #08f9bf45;animation:uzGlassOrbit 10s linear infinite}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-tag::after{inset:14% 7% -30%;border-color:#31edd687 #a4fffd transparent #19f3d4;animation-direction:reverse;animation-duration:14s}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box{
+position:relative;isolation:isolate;width:100%!important;min-width:0;max-width:440px;padding:26px 28px 22px!important;border-radius:36px!important;border:1px solid #a0fff0bd!important;color:var(--glass-text)!important;
+background:radial-gradient(ellipse at 0 0,#6dfff437,transparent 48%),linear-gradient(135deg,#08787e5e,#003d49ad 65%,#0453567a)!important;
+box-shadow:inset 3px 2px 3px #c6ffed69,inset -2px -3px 6px #31d8dd80,inset 0 0 26px #08e4cc1f,0 0 0 3px #30bbbc57,0 0 0 5px #c3fff34a,0 20px 65px #000c1c7d,0 0 30px #0edcc42b!important;backdrop-filter:blur(18px) saturate(145%)!important;-webkit-backdrop-filter:blur(18px) saturate(145%)!important;
+}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::before{content:"";position:absolute;inset:7px;border:1px solid #6cfff125;border-radius:29px;pointer-events:none;z-index:-1}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::after{content:"";position:absolute;inset:-7px;border-radius:inherit;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 22px 3px at 84% 5px,#edfffc,#42ffdf9c 35%,transparent),radial-gradient(ellipse 3px 23px at calc(100% - 5px) 55%,#e7fffc,#33e7dc99 35%,transparent),radial-gradient(ellipse 25px 3px at 18% calc(100% - 5px),#e7fffc,#33e7dc99 35%,transparent);animation:uzGlassBreathe 4s ease-in-out infinite alternate}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-head{margin-bottom:20px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-title{color:var(--glass-text)!important;font-size:25px!important;font-weight:800!important;letter-spacing:-.7px}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-subtitle,.uz-auth-label,.uz-auth-remember,.uz-auth-note,.uz-auth-admin-hint,.uz-auth-reset-copy,.uz-auth-inline,.uz-auth-divider){color:var(--glass-muted)!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-subtitle{margin-top:5px!important;font-size:14px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tabs{padding:4px!important;gap:4px!important;margin-bottom:13px!important;border:1px solid #32d5cb63!important;border-radius:24px!important;background:#002b3870!important;box-shadow:inset 0 0 0 3px #00253245}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab{position:relative;isolation:isolate;overflow:hidden;border-radius:20px!important;min-height:44px!important;padding:9px 6px!important;color:#c4e5e5!important;font-size:13px!important;background:transparent!important;transition:transform .2s ease,box-shadow .2s ease}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab.active{color:#f0fffc!important;background:linear-gradient(105deg,#005b60a3,#008d8199 65%,#16edbcb3)!important;box-shadow:inset 1px 1px 2px #d7fff5cc,inset -2px -1px 7px #1ef4d8c4,0 0 0 1px #9affebc4,0 0 17px #16dfbb4f!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-field{margin:13px 0!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-label{font-size:13px!important;font-weight:650;margin-bottom:6px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input{height:48px!important;min-height:48px!important;border-radius:15px!important;color:var(--glass-text)!important;background:linear-gradient(110deg,#00384080,#00343e4d 74%,#13d1c152)!important;border:1px solid #70e8dfd9!important;box-shadow:inset 1px 1px 2px #bffff64d,inset -2px -2px 8px #0ae1cf38,0 0 12px #13efcf17!important;font-size:16px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input::placeholder{color:#b0d1d6!important;opacity:1}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input:focus{outline:2px solid #9bffdf!important;outline-offset:2px!important;box-shadow:0 0 14px #21eec642!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input:-webkit-autofill{-webkit-text-fill-color:#eafffa!important;-webkit-box-shadow:0 0 0 1000px #06464f inset!important;caret-color:#eafffa}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-input-icon,.uz-auth-eye){color:#bcebf0!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-extra{gap:0 8px!important;margin:0 0 8px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-remember{gap:7px;font-size:12px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-remember input{accent-color:#0eb59f!important;width:20px;height:20px;flex-shrink:0}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-link,.uz-auth-inline button){color:#69f6e7!important;font-size:12px!important;text-decoration:underline;text-underline-offset:3px}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn{position:relative;isolation:isolate;overflow:hidden;min-height:48px!important;border-radius:999px!important;font-size:14px!important;font-weight:750!important;border:1px solid #a8fff0d1!important;color:#f4fffd!important;box-shadow:inset 1px 2px 3px #e3fff785,inset -1px -2px 7px #02ffcd85,0 0 0 2px #39d4d640,0 0 20px #19e6ca38!important;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-primary{background:linear-gradient(105deg,#005660a8,#007e7ac2 55%,#0df1c1bf)!important}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-secondary,.uz-auth-admin,.uz-auth-close){background:linear-gradient(110deg,#003d4a99,#00474b66 70%,#02bca461)!important;color:var(--glass-text)!important;border-color:#76f1e5ad!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-danger{background:#591b3385!important;color:#ffdde1!important;border-color:#ef98aa!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn::before,
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab.active::before{content:"";position:absolute;inset:-20% auto -20% -70%;width:48%;z-index:-1;pointer-events:none;background:linear-gradient(100deg,transparent,#a5fff324,#d5fff573,transparent);transform:skewX(-24deg);animation:uzGlassSweep 5s ease-in-out infinite}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-secondary::before{animation-delay:-2.1s}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab.active::before{animation-delay:-1.3s}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 22px 2px at 28% 1px,#e8fff5,transparent),radial-gradient(ellipse 22px 2px at 75% calc(100% - 1px),#b2fff2,transparent);animation:uzGlassBreathe 3s ease-in-out infinite alternate}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn:not(:disabled):hover{transform:translateY(-1px)!important;filter:brightness(1.12)!important}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-btn,.uz-auth-tab):not(:disabled):active{transform:scale(.98)!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn:disabled{opacity:.65!important;cursor:wait!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn:disabled::before{animation-play-state:paused}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-divider{margin:12px 0 2px!important;font-size:10px;letter-spacing:1.5px}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-divider::before,
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-divider::after{background:#9bd4da66!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-inline{margin-top:8px!important;font-size:12px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-note{font-size:12px}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg{border-radius:13px;overflow-wrap:anywhere}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.ok{color:#abffe7;background:#0c756147;border-color:#47e5b661}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.info{color:#c0f5ff;background:#036c7c47;border-color:#5cdddc61}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.err{color:#ffd4dc;background:#60273880;border-color:#f0a0ad73}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-userbar{color:var(--glass-text)!important;background:#002d3d66!important;border-color:#7beeda73!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-bigavatar{background:linear-gradient(125deg,#007b7c,#05a98e)!important}
+#uzmedAuthOverlay#uzmedAuthOverlay.uz-admin-mode .uz-auth-box{border-color:#9effee!important}
+#uzmedAuthOverlay#uzmedAuthOverlay [hidden]{display:none!important}
+#uzmedAuthOverlay#uzmedAuthOverlay :is(button,input):focus-visible{outline:2px solid #b6ffdf!important;outline-offset:3px!important}
+@keyframes uzGlassAtmosphere{to{opacity:.65}}
+@keyframes uzGlassFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@keyframes uzGlassOrbit{from{transform:perspective(450px) rotateX(67deg) rotateZ(-12deg)}to{transform:perspective(450px) rotateX(67deg) rotateZ(348deg)}}
+@keyframes uzGlassBreathe{from{opacity:.45}to{opacity:1}}
+@keyframes uzGlassSweep{0%,30%{left:-70%}75%,100%{left:135%}}
+@media(max-width:390px){
+#uzmedAuthOverlay#uzmedAuthOverlay{padding-inline:max(14px,env(safe-area-inset-left,0px)) max(14px,env(safe-area-inset-right,0px))!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box{padding:24px 20px 18px!important;border-radius:30px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::before{border-radius:23px}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand{height:157px}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-logo{width:138px!important;height:138px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-title{font-size:23px!important}
+#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab{font-size:12px!important}
+}
+@media(min-width:1000px){#uzmedAuthOverlay#uzmedAuthOverlay::after{background-size:min(950px,100vw) 1150px}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box{background:linear-gradient(135deg,#07545bed,#02313bed)!important}}
+@media(prefers-reduced-motion:reduce){#uzmedAuthOverlay#uzmedAuthOverlay,#uzmedAuthOverlay#uzmedAuthOverlay *,#uzmedAuthOverlay#uzmedAuthOverlay::before,#uzmedAuthOverlay#uzmedAuthOverlay::after,#uzmedAuthOverlay#uzmedAuthOverlay *::before,#uzmedAuthOverlay#uzmedAuthOverlay *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

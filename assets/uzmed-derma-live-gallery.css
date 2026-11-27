@@ -1,0 +1,33 @@
+/* UZMED dermatology discovery: isolated to the current derma-screen, mobile-first. */
+#derma-screen .uzd-discovery{--uzd-teal:#0f766e;--uzd-ink:#13343c;--uzd-muted:#52727e;margin:13px 10px 18px;padding:16px;border:1px solid rgba(13,148,136,.2);border-radius:19px;background:linear-gradient(140deg,#f1fbfa,#f6fafe 70%,#f8fafc);box-shadow:0 10px 28px rgba(15,68,85,.08);color:var(--uzd-ink);max-width:100%;min-width:0}
+#derma-screen .uzd-discovery *{box-sizing:border-box}
+#derma-screen .uzd-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+#derma-screen .uzd-kicker{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--uzd-teal);text-transform:uppercase}
+#derma-screen .uzd-intro h2{font-weight:800;letter-spacing:-.025em;font-size:19px;line-height:1.2;margin:4px 0 6px;color:#143844}
+#derma-screen .uzd-intro p{font-size:12px;line-height:1.45;color:#5b7480;margin:0}
+#derma-screen .uzd-status{background:#d9f5ef;color:#06665d;font-weight:800;font-size:11px;white-space:nowrap;border:1px solid #b3e9de;padding:7px 9px;border-radius:12px}
+#derma-screen .uzd-form{display:flex;align-items:stretch;gap:8px;width:100%;min-width:0}
+#derma-screen .uzd-form input{height:44px;border:1px solid #b5d8da;border-radius:12px;min-width:0;flex:1 1 auto;width:100%;background:#fff;color:#122e3c;padding:0 12px;font:500 14px/1.4 system-ui,-apple-system,sans-serif;outline:0}
+#derma-screen .uzd-form input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.13)}
+#derma-screen .uzd-form button{height:44px;background:#087f77;border:1px solid #07635f;color:#fff;font:800 12px system-ui,-apple-system,sans-serif;border-radius:12px;padding:0 15px;cursor:pointer;flex:0 0 auto}
+#derma-screen .uzd-form button:disabled{opacity:.65;cursor:wait}
+#derma-screen .uzd-topics{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0 10px}
+#derma-screen .uzd-chip{border:1px solid #c7dfe2;border-radius:999px;padding:7px 10px;background:#fff;color:#195160;font:700 11px system-ui,-apple-system,sans-serif;cursor:pointer;min-height:35px}
+#derma-screen .uzd-chip:hover,#derma-screen .uzd-chip:focus-visible{background:#d9f5ef;border-color:#68bcb2}
+#derma-screen .uzd-feedback{font-size:12px;font-weight:600;color:#38606b;padding:4px 0 10px;line-height:1.45}
+#derma-screen .uzd-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:0}
+#derma-screen .uzd-card{min-width:0;border:1px solid #dae9e9;border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;box-shadow:0 3px 9px rgba(14,61,75,.04)}
+#derma-screen .uzd-picture{height:135px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(145deg,#dfecee,#e9f2f3)}
+#derma-screen .uzd-picture img{height:100%;width:100%;object-fit:contain}
+#derma-screen .uzd-image-error{font-size:12px;font-weight:700;color:#6e7d85}
+#derma-screen .uzd-card-content{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:11px 12px;min-width:0;overflow-wrap:anywhere}
+#derma-screen .uzd-card-title{color:#183f4b;font-size:13px;line-height:1.4}
+#derma-screen .uzd-source{font-size:11px;color:#0d7772;font-weight:800}
+#derma-screen .uzd-meta{color:#67808a;font-size:10px;line-height:1.35;overflow-wrap:anywhere}
+#derma-screen .uzd-credit{font:700 11px/1.4 system-ui,-apple-system,sans-serif;color:#0569a6;text-decoration:underline;text-underline-offset:2px}
+#derma-screen .uzd-warning{font-size:11px;color:#5e6875;border-top:1px solid #d5e8e8;padding:12px 2px 0;margin:12px 0 0;line-height:1.5}
+#derma-screen .uzd-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:760px){#derma-screen .uzd-discovery{margin:16px auto 22px;padding:20px;max-width:940px}#derma-screen .uzd-results{grid-template-columns:repeat(3,minmax(0,1fr))}#derma-screen .uzd-picture{height:165px}}
+@media(max-width:420px){#derma-screen .uzd-discovery{margin:8px 6px 16px;padding:12px;border-radius:16px}#derma-screen .uzd-intro h2{font-size:17px}#derma-screen .uzd-results{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}#derma-screen .uzd-picture{height:108px}#derma-screen .uzd-card-content{padding:9px}#derma-screen .uzd-form{flex-wrap:wrap}#derma-screen .uzd-form button{flex:1 1 100%}}
+@media(max-width:320px){#derma-screen .uzd-results{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#derma-screen .uzd-discovery *,#derma-screen .uzd-discovery *::before{animation:none!important;transition:none!important}}

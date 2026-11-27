@@ -1,0 +1,46 @@
+/* UZMED Qabul — report type, specialty and paper layout selector. */
+#documentDialog .qc-output-bar{display:grid;gap:11px;margin:6px 0 16px;padding:12px;border-radius:12px;border:1px solid var(--q-line,#567);background:var(--q-soft,#183e34)}
+#documentDialog .qd-selection-title{display:flex;flex-direction:column;gap:4px}
+#documentDialog .qd-selection-title strong{font-size:16px;color:var(--q-text,inherit)}
+#documentDialog .qd-selection-title small,#documentDialog .qd-choice-help{font-size:12px;color:var(--q-muted,#abc);line-height:1.4}
+#documentDialog .qd-document-choice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+#documentDialog .qd-document-choice label{display:flex;flex-direction:column;gap:7px;color:var(--q-text,inherit);min-width:0;font-size:13px;font-weight:650}
+#documentDialog .qd-document-choice :is(select,input){display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;padding:8px 10px;min-height:45px;color:var(--q-text,#eff);background:var(--q-card,#173c31);border:1px solid var(--q-line,#586);border-radius:9px;font:inherit;font-size:14px}
+#documentDialog #docSpecialtyOtherWrap[hidden]{display:none!important}
+#documentDialog .qd-choice-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#documentDialog .qd-choice-actions button{min-height:40px;min-width:50px;padding:8px 10px;border:1px solid var(--q-line,#567);border-radius:9px;color:var(--q-text,inherit);background:var(--q-card,#173c31);cursor:pointer}
+#documentDialog .qd-choice-actions button[aria-pressed=true]{background:var(--q-accent,#26c79a);color:#041e18;border-color:transparent;font-weight:700}
+#documentDialog .qd-choice-help{margin:0}
+#documentDialog .qd-document-choice :is(select,input):focus-visible,#documentDialog .qd-choice-actions button:focus-visible{outline:2px solid var(--q-accent,#26c79a);outline-offset:2px}
+@media(max-width:680px){#documentDialog .qc-output-bar{padding:10px}#documentDialog .qd-document-choice{grid-template-columns:1fr}#documentDialog .qd-document-choice :is(select,input){font-size:16px}}
+/* Hospital style: paper-like clinical extract, no decorative imitation stamps. */
+.docPage[data-design=hospital] .docBand{padding:0 0 7pt!important;margin:0 0 10pt!important;border-bottom:0!important}
+.docPage[data-design=hospital] .docFormalMasthead{display:block!important;min-height:0!important;margin:0 0 8pt!important;text-align:center}
+.docPage[data-design=hospital] .docFormalLogo,.docPage[data-design=hospital] .docFormalStamp,.docPage[data-design=hospital] .docFormalDivider{display:none!important}
+.docPage[data-design=hospital] .docFormalOrg{font:700 10.5pt/1.14 'Times New Roman',serif!important;letter-spacing:0!important;text-transform:none!important;text-align:center!important}
+.docPage[data-design=hospital] .docFormalOrg .docInstitution{margin:3pt auto 0!important;font-size:10.5pt!important;line-height:1.15!important}
+.docPage[data-design=hospital] .docFormalTitle{font:700 12pt/1.14 'Times New Roman',serif!important;letter-spacing:1.1pt!important;margin:5pt 0 0!important}
+.docPage[data-design=hospital] .docFormalSubtitle{font:700 9.5pt/1.12 'Times New Roman',serif!important;letter-spacing:1.6pt!important;margin:0 0 10pt!important}
+.docPage[data-design=hospital] .docType{font-size:9pt!important;margin:0 0 7pt!important}
+.docPage[data-design=hospital] .docIdentityLine{font-size:10pt!important;margin:0 0 2pt!important;line-height:1.24!important}
+.docPage[data-design=hospital] .docSection{margin-bottom:5pt!important;line-height:1.24!important}
+.docPage[data-design=hospital] .docSection p{margin:0 0 3pt!important;text-align:justify!important}
+.docPage[data-design=hospital] .docHeading{font-style:italic!important;font-weight:700!important}
+.docPage[data-design=hospital] .docReview{margin-top:9pt!important;font-size:7pt!important}
+.docPage[data-design=hospital] .docSign{margin-top:15pt!important}
+.docPage[data-design=modern] .docFormalMasthead{border-left:3pt solid #228567!important;padding-left:9pt!important}
+.docPage[data-design=modern] .docBand{border-bottom:1.5pt solid #228567!important;margin-bottom:12pt!important}
+.docPage[data-design=modern] .docFormalTitle{font-family:Arial,sans-serif!important;font-size:15pt!important;letter-spacing:0!important}
+.docPage[data-design=modern] .docFormalSubtitle{font-family:Arial,sans-serif!important;letter-spacing:.4pt!important;color:#285646!important}
+.docPage[data-design=modern] .docSection{margin-bottom:8pt!important}
+.docPage[data-design=modern] .docHeading{font-family:Arial,sans-serif!important;color:#175b44!important}
+.docPage[data-design=compact] .docFormalMasthead{display:block!important;min-height:0!important;margin-bottom:4pt!important;text-align:center}
+.docPage[data-design=compact] .docFormalLogo,.docPage[data-design=compact] .docFormalStamp,.docPage[data-design=compact] .docFormalDivider{display:none!important}
+.docPage[data-design=compact] .docBand{margin:0 0 4pt!important;padding:0!important;border:0!important}
+.docPage[data-design=compact] .docFormalTitle{font-size:11pt!important;margin:3pt 0 0!important}
+.docPage[data-design=compact] .docFormalSubtitle{font-size:8.5pt!important;margin:0 0 4pt!important}
+.docPage[data-design=compact] .docType{margin:0 0 4pt!important}
+.docPage[data-design=compact] .docIdentityLine,.docPage[data-design=compact] .docSection{font-size:9.5pt!important;line-height:1.12!important;margin-bottom:2pt!important}
+.docPage[data-design=compact] .docReview{font-size:6.7pt!important;margin:5pt 0 0!important}
+.docPage[data-design=compact] .docSign{margin-top:7pt!important}
+@media print{#qabulPrint .docPage[data-design=hospital] .docFormalMasthead,#qabulPrint .docPage[data-design=compact] .docFormalMasthead{display:block!important}}

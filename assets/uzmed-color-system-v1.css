@@ -1,0 +1,692 @@
+/* ==========================================================================
+   UZMED Clinical Color System v1 · 2026-11-25
+   Faqat RANG qatlami: joylashuv, o'lcham, tugma o'rni, funksiya, ma'lumot
+   O'ZGARMAYDI. Barcha qoidalar faqat color/background/border-color/
+   box-shadow/fill/stroke/filter xususiyatlariga tegadi.
+   O'chirish: <script ... uzmed-color-system-v1.js> qatorini olib tashlash.
+
+   Prefiks `:root:not(#uzc)` — ID darajasidagi spetsifiklik beradi, shuning
+   uchun keyin yuklangan CSS fayllar ham bu ranglarni bosib keta olmaydi.
+   ========================================================================== */
+
+/* ---------- 1. TOKENLAR · KUNDUZGI (default) ---------- */
+:root:not(#uzc){
+  --uzc-bg:#F3F6FB;
+  --uzc-bg-grad:radial-gradient(ellipse at 50% -10%,#E4ECFA 0,transparent 60%),#F3F6FB;
+  --uzc-surface:#FFFFFF;
+  --uzc-surface-2:#F7F9FD;
+  --uzc-raised:#FFFFFF;
+  --uzc-field:#F7F9FD;
+  --uzc-line:#DFE6F0;
+  --uzc-line-strong:#B4C1D3;
+  --uzc-ink:#132036;
+  --uzc-ink-2:#2B3A52;
+  --uzc-muted:#56667F;
+  --uzc-primary:#2563EB;
+  --uzc-primary-2:#1D4ED8;
+  --uzc-primary-ink:#FFFFFF;
+  --uzc-primary-soft:#E8F0FE;
+  --uzc-primary-line:rgba(37,99,235,.32);
+  --uzc-accent:#1D4ED8;            /* havola / matn aksenti */
+  --uzc-brand:#2563EB;             /* UZMED yurak logotipi */
+  --uzc-focus:rgba(37,99,235,.38);
+  --uzc-ring:#3B82F6;
+  --uzc-shadow:0 1px 2px rgba(16,32,64,.05),0 6px 18px rgba(16,32,64,.06);
+  --uzc-shadow-lg:0 18px 44px rgba(16,32,64,.12);
+  --uzc-on-accent:#FFFFFF;
+  --uzc-ok:#047857;  --uzc-ok-soft:#E7F7EF;
+  --uzc-warn:#9A5B00;--uzc-warn-soft:#FFF5E1;
+  --uzc-err:#B42335; --uzc-err-soft:#FFF0F2;
+  --uzc-info:#1D4F91;--uzc-info-soft:#EEF5FF;
+  /* Bosh sahifa banneri */
+  --uzc-hero:radial-gradient(ellipse at 92% 85%,rgba(125,211,252,.42),transparent 52%),linear-gradient(120deg,#1E4FD8 0%,#2563EB 48%,#0E7FB8 100%);
+  --uzc-hero-line:rgba(37,99,235,.35);
+  --uzc-hero-ink:#FFFFFF;
+  --uzc-hero-sub:rgba(255,255,255,.90);
+  --uzc-hero-accent:#BAE6FD;
+  --uzc-hero-ecg:#A5F3FC;
+  --uzc-shell:transparent;
+  --uzc-shell-line:transparent;
+  /* Bo'lim aksentlari (kunduzgi — to'qroq, oq fonda >= 5:1 kontrast) */
+  --uzc-c-qabul:#047857;     --uzc-s-qabul:#E3F6EE;
+  --uzc-c-protocols:#4338CA; --uzc-s-protocols:#ECEBFE;
+  --uzc-c-mkb:#1D4ED8;       --uzc-s-mkb:#E6EEFE;
+  --uzc-c-drugs:#BE123C;     --uzc-s-drugs:#FDECEF;
+  --uzc-c-scores:#0F766E;    --uzc-s-scores:#E1F5F2;
+  --uzc-c-analysis:#6D28D9;  --uzc-s-analysis:#F1EAFE;
+  --uzc-c-patients:#B45309;  --uzc-s-patients:#FEF3DC;
+  --uzc-c-legal:#475569;     --uzc-s-legal:#EDF1F6;
+  --uzc-c-chat:#0369A1;      --uzc-s-chat:#E2F2FB;
+  --uzc-c-templates:#A21CAF; --uzc-s-templates:#FBE9FC;
+  --uzc-c-history:#C2410C;   --uzc-s-history:#FFEEE3;
+}
+
+/* ---------- 1b. TOKENLAR · TUNGI ---------- */
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode),[data-uzc-theme='dark']:not([data-uzmed-ux-theme])){
+  --uzc-bg:#0B1220;
+  --uzc-bg-grad:radial-gradient(ellipse at 50% -8%,#16233F 0,transparent 58%),#0B1220;
+  --uzc-surface:#121B2D;
+  --uzc-surface-2:#162136;
+  --uzc-raised:#18243B;
+  --uzc-field:#0F1828;
+  --uzc-line:#24324B;
+  --uzc-line-strong:#3A4B69;
+  --uzc-ink:#E8EEF7;
+  --uzc-ink-2:#C9D4E4;
+  --uzc-muted:#9AA9C0;
+  --uzc-primary:#3468DC;
+  --uzc-primary-2:#2A57C2;
+  --uzc-primary-ink:#FFFFFF;
+  --uzc-primary-soft:#172A4D;
+  --uzc-primary-line:rgba(125,170,255,.38);
+  --uzc-accent:#8DB8FF;
+  --uzc-brand:#6FA3FF;
+  --uzc-focus:rgba(125,170,255,.45);
+  --uzc-ring:#7DAAFF;
+  --uzc-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 8px 22px rgba(0,0,0,.28);
+  --uzc-shadow-lg:0 22px 54px rgba(0,0,0,.42);
+  --uzc-on-accent:#0B1220;
+  --uzc-ok:#6EE7B7;  --uzc-ok-soft:rgba(16,185,129,.15);
+  --uzc-warn:#FCD58A;--uzc-warn-soft:rgba(245,158,11,.14);
+  --uzc-err:#FDA4AF; --uzc-err-soft:rgba(244,63,94,.15);
+  --uzc-info:#93C5FD;--uzc-info-soft:rgba(59,130,246,.15);
+  --uzc-hero:radial-gradient(ellipse at 92% 88%,rgba(56,189,248,.26),transparent 52%),linear-gradient(120deg,#172B57 0%,#16305E 50%,#123A55 100%);
+  --uzc-hero-line:rgba(125,170,255,.28);
+  --uzc-hero-ink:#F4F7FD;
+  --uzc-hero-sub:#C7D3E6;
+  --uzc-hero-accent:#7DD3FC;
+  --uzc-hero-ecg:#67E8F9;
+  --uzc-shell:linear-gradient(180deg,#0F1729 0%,#0C1322 100%);
+  --uzc-shell-line:#1E2A42;
+  /* Bo'lim aksentlari (tungi — yumshoq pastel, ko'zni charchatmaydi) */
+  --uzc-c-qabul:#4ADE9F;     --uzc-s-qabul:rgba(74,222,159,.13);
+  --uzc-c-protocols:#A5B4FC; --uzc-s-protocols:rgba(129,140,248,.16);
+  --uzc-c-mkb:#7DB7FF;       --uzc-s-mkb:rgba(96,165,250,.15);
+  --uzc-c-drugs:#FDA4AF;     --uzc-s-drugs:rgba(251,113,133,.14);
+  --uzc-c-scores:#5EEAD4;    --uzc-s-scores:rgba(45,212,191,.13);
+  --uzc-c-analysis:#C4B5FD;  --uzc-s-analysis:rgba(167,139,250,.15);
+  --uzc-c-patients:#FCD34D;  --uzc-s-patients:rgba(251,191,36,.13);
+  --uzc-c-legal:#CBD5E1;     --uzc-s-legal:rgba(148,163,184,.15);
+  --uzc-c-chat:#7DD3FC;      --uzc-s-chat:rgba(56,189,248,.14);
+  --uzc-c-templates:#F0ABFC; --uzc-s-templates:rgba(232,121,249,.13);
+  --uzc-c-history:#FDBA74;   --uzc-s-history:rgba(251,146,60,.14);
+}
+
+/* ---------- 2. MAVJUD UX TOKENLARINI QAYTA XARITALASH ---------- */
+:root:not(#uzc)[data-uzmed-ux='on']{
+  --ux-bg:var(--uzc-bg);
+  --ux-surface:var(--uzc-surface);
+  --ux-raised:var(--uzc-raised);
+  --ux-soft:var(--uzc-surface-2);
+  --ux-ink:var(--uzc-ink);
+  --ux-muted:var(--uzc-muted);
+  --ux-line:var(--uzc-line);
+  --ux-line-strong:var(--uzc-line-strong);
+  --ux-accent:var(--uzc-accent);
+  --ux-accent-soft:var(--uzc-primary-soft);
+  --ux-primary:var(--uzc-primary);
+  --ux-primary-hover:var(--uzc-primary-2);
+  --ux-primary-ink:var(--uzc-primary-ink);
+  --ux-danger:var(--uzc-err);
+  --ux-danger-soft:var(--uzc-err-soft);
+  --ux-warning:var(--uzc-warn);
+  --ux-warning-soft:var(--uzc-warn-soft);
+  --ux-info:var(--uzc-info);
+  --ux-info-soft:var(--uzc-info-soft);
+}
+:root:not(#uzc)[data-uzmed-ux='on']:not([data-uzmed-ux-theme='light']){
+  --ux-header:rgba(14,21,36,.94);
+  --ux-overlay:rgba(5,9,18,.78);
+  --ux-shadow:0 20px 60px rgba(0,0,0,.36);
+}
+:root:not(#uzc)[data-uzmed-ux='on'][data-uzmed-ux-theme='light']{
+  --ux-header:rgba(255,255,255,.94);
+  --ux-overlay:rgba(16,28,52,.42);
+  --ux-shadow:0 20px 60px rgba(16,32,64,.12);
+}
+/* Eski (legacy) aksent o'zgaruvchilari — body darajasida !important bilan
+   e'lon qilingani uchun shu darajada qayta beramiz. */
+:root:not(#uzc) body:not(#uzc-a):not(#uzc-b):not(#uzc-c){
+  --um-accent:var(--uzc-primary)!important;
+  --um-tint:var(--uzc-primary-soft)!important;
+  --accent:var(--uzc-primary)!important;
+  --accent-grad:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;
+  --uz-clinic-teal:var(--uzc-primary)!important;
+  --lg-accent:var(--uzc-primary)!important;
+  --lg-accent-ink:var(--uzc-accent)!important;
+  --lg-accent-soft:var(--uzc-primary-soft)!important;
+  --lg-accent-line:var(--uzc-primary-line)!important;
+}
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzc-a):not(#uzc-b):not(#uzc-c){
+  --um-accent:var(--uzc-accent)!important;
+}
+/* Bemorlar ekranlari --um-accent ni element darajasida qayta e'lon qiladi
+   (#18dc9d / #008d62). Yorqinligi mos ko'k bilan almashtiramiz — oq matnli
+   tugmalar kontrasti saqlanadi. */
+:root:not(#uzc) body #patients-screen:not(#uzc-a),
+:root:not(#uzc) body #uzBemorlarHub:not(#uzc-a){
+  --um-accent:var(--uzc-primary)!important;
+  --um-tint:var(--uzc-primary-soft)!important;
+}
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body #patients-screen:not(#uzc-a),
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body #uzBemorlarHub:not(#uzc-a){
+  --um-accent:var(--uzc-accent)!important;
+}
+:root:not(#uzc) body #derma-screen .uzd-discovery:not(#uzc-a){--uzd-teal:var(--uzc-primary)!important}
+
+/* ---------- 3. BOSH SAHIFA (Neon home → Clinical calm) ---------- */
+:root:not(#uzc).unh-active .phone-shell,
+:root:not(#uzc).unh-active .screens{background:var(--uzc-bg)!important}
+:root:not(#uzc) #uzmed-home-screen.unh-home-mode{background:var(--uzc-bg-grad)!important}
+:root:not(#uzc) #uzmedNeonHome{color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-shell{
+  background:var(--uzc-shell)!important;
+  border-color:var(--uzc-shell-line)!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-menu{background:transparent!important}
+:root:not(#uzc) #uzmedNeonHome .unh-menu svg{stroke:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-brand-logo{color:var(--uzc-brand)!important;filter:none!important}
+:root:not(#uzc) #uzmedNeonHome .unh-brand-text strong{color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-brand-text small{color:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-voice{
+  background:var(--uzc-surface)!important;
+  border:1px solid var(--uzc-line)!important;
+  box-shadow:var(--uzc-shadow)!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-voice svg{fill:var(--uzc-c-protocols)!important;stroke:var(--uzc-c-protocols)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-voice[aria-pressed='false'] svg{fill:var(--uzc-muted)!important;stroke:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-chat{
+  color:#fff!important;
+  background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;
+  border:1px solid transparent!important;
+  box-shadow:0 6px 16px rgba(37,99,235,.28)!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-hero{
+  background:var(--uzc-hero)!important;
+  border-color:var(--uzc-hero-line)!important;
+  box-shadow:0 14px 34px rgba(20,48,110,.22)!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-hero:after{background:radial-gradient(ellipse,rgba(255,255,255,.10),transparent 65%)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-hero h1{color:var(--uzc-hero-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-hero h1 span{color:var(--uzc-hero-accent)!important;text-shadow:none!important}
+:root:not(#uzc) #uzmedNeonHome .unh-hero p{color:var(--uzc-hero-sub)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-ecg{filter:none!important;opacity:.7!important}
+:root:not(#uzc) #uzmedNeonHome .unh-ecg path{stroke:var(--uzc-hero-ecg)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search{background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important;box-shadow:var(--uzc-shadow)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search input{color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search input::placeholder{color:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search-icon{stroke:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search-go{background:var(--uzc-primary)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-search-go svg{stroke:#fff!important}
+
+/* Kartalar: neytral sirt + har bo'limga o'z rangidagi yumshoq badge */
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button{--t:var(--uzc-primary);--ts:var(--uzc-primary-soft)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='qabul']{--t:var(--uzc-c-qabul);--ts:var(--uzc-s-qabul)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='protocols']{--t:var(--uzc-c-protocols);--ts:var(--uzc-s-protocols)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='mkb']{--t:var(--uzc-c-mkb);--ts:var(--uzc-s-mkb)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='drugs']{--t:var(--uzc-c-drugs);--ts:var(--uzc-s-drugs)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='scores']{--t:var(--uzc-c-scores);--ts:var(--uzc-s-scores)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='analysis']{--t:var(--uzc-c-analysis);--ts:var(--uzc-s-analysis)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='patients']{--t:var(--uzc-c-patients);--ts:var(--uzc-s-patients)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='legal']{--t:var(--uzc-c-legal);--ts:var(--uzc-s-legal)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='chat']{--t:var(--uzc-c-chat);--ts:var(--uzc-s-chat)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='templates']{--t:var(--uzc-c-templates);--ts:var(--uzc-s-templates)}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button[data-unh-action='history']{--t:var(--uzc-c-history);--ts:var(--uzc-s-history)}
+
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button,
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button.primary{
+  color:var(--uzc-ink)!important;
+  background:var(--uzc-surface)!important;
+  border:1px solid var(--uzc-line)!important;
+  box-shadow:var(--uzc-shadow)!important;
+}
+/* Ikki katta karta — o'z rangida juda yengil tus */
+:root:not(#uzc) #uzmedNeonHome .unh-grid.big .unh-grid-button,
+:root:not(#uzc) #uzmedNeonHome .unh-grid.big .unh-grid-button.primary{
+  background:linear-gradient(140deg,var(--ts) 0%,var(--uzc-surface) 78%)!important;
+  border-color:color-mix(in srgb,var(--t) 30%,var(--uzc-line))!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button:hover,
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button:focus-visible{border-color:color-mix(in srgb,var(--t) 55%,var(--uzc-line))!important}
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button:focus-visible{outline-color:var(--uzc-focus)!important}
+/* Ikonka: monoxrom chiziqli SVG, yumaloq yumshoq badge ichida.
+   Badge box-shadow spread bilan chiziladi → layout o'lchami 0 px o'zgaradi. */
+:root:not(#uzc) #uzmedNeonHome .unh-grid-button svg{
+  stroke:var(--t)!important;
+  filter:none!important;
+  background:var(--ts)!important;
+  border-radius:16px!important;
+  box-shadow:0 0 0 5px var(--ts)!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-card-copy strong{color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-card-copy small{color:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-arrow{
+  background:var(--t)!important;
+  color:var(--uzc-on-accent)!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-footer{
+  background:var(--uzc-surface)!important;
+  border-color:var(--uzc-line)!important;
+  box-shadow:var(--uzc-shadow)!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-footer-title svg{stroke:var(--uzc-primary)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-footer strong{color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-footer small{color:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedNeonHome .unh-tools-go{
+  color:#fff!important;
+  background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;
+  border-color:transparent!important;
+}
+:root:not(#uzc) #uzmedNeonHome .unh-status{color:var(--uzc-warn)!important}
+:root:not(#uzc) #unhMenuBackdrop{background:rgba(8,14,28,.42)!important}
+
+/* ---------- 4. LOGIN / PROFIL OYNASI (#uzmedAuthOverlay) ---------- */
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay{
+  --glass-text:#EEF3FB;--glass-muted:#B4C2D8;
+  background:radial-gradient(ellipse at 50% 0,#1C3A78 0,transparent 52%),radial-gradient(ellipse at 0 85%,#173058 0,transparent 46%),linear-gradient(160deg,#0B1428 0%,#0E1B33 55%,#0A1222 100%)!important;
+}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay::before{opacity:.35!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-brand-logo{border-color:rgba(147,197,253,.55)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand-tag)::before,
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand-tag)::after{border-color:rgba(125,170,255,.55)!important;box-shadow:0 0 6px rgba(125,170,255,.35)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-name)::before,
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-name)::after{background-color:rgba(37,72,140,.38)!important;border-color:rgba(165,195,255,.45)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box{
+  background:linear-gradient(150deg,rgba(24,40,74,.94),rgba(14,24,44,.96))!important;
+  border-color:rgba(147,180,240,.38)!important;
+  box-shadow:0 24px 60px rgba(0,0,0,.45)!important;
+}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::before{border-color:rgba(147,180,240,.12)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::after{opacity:.25!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tabs{background:rgba(8,14,30,.55)!important;border-color:rgba(125,160,230,.30)!important;box-shadow:none!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab{color:#B9C6DC!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab.active{
+  color:#fff!important;
+  background:linear-gradient(135deg,#2F62D8,#3B7BF0)!important;
+  box-shadow:0 4px 14px rgba(47,98,216,.35)!important;
+}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input{
+  background:rgba(9,16,32,.62)!important;
+  border-color:rgba(125,160,230,.38)!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input::placeholder{color:#8E9DB6!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input:focus{outline-color:#7DAAFF!important;box-shadow:0 0 0 4px rgba(96,140,255,.18)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #13213D inset!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-input-icon,.uz-auth-eye){color:#A9B8D2!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-remember input{accent-color:#3B7BF0!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-link,.uz-auth-inline button){color:#8DB8FF!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn{border-color:rgba(165,195,255,.40)!important;box-shadow:0 6px 18px rgba(0,0,0,.25)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn::before{opacity:.35!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-primary{background:linear-gradient(135deg,#2D5FD3,#3B7BF0)!important;border-color:transparent!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-secondary,.uz-auth-close){background:rgba(20,34,62,.85)!important;border-color:rgba(125,160,230,.40)!important}
+/* Admin panel tugmasi — binafsha (rol tugmasi ajralib tursin) */
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-admin{background:linear-gradient(135deg,rgba(91,70,200,.55),rgba(76,59,170,.45))!important;border-color:rgba(196,181,253,.50)!important;color:#EDE9FE!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-danger{background:rgba(127,29,52,.45)!important;border-color:rgba(253,164,175,.55)!important;color:#FFE1E6!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-divider)::before,
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-divider)::after{background:rgba(148,170,210,.35)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.ok{color:#A7F3D0!important;background:rgba(16,185,129,.14)!important;border-color:rgba(52,211,153,.35)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.info{color:#BFDBFE!important;background:rgba(59,130,246,.14)!important;border-color:rgba(96,165,250,.35)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-userbar{background:rgba(9,16,32,.55)!important;border-color:rgba(125,160,230,.35)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-bigavatar{background:linear-gradient(135deg,#2D5FD3,#5B8DEF)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay.uz-admin-mode .uz-auth-box{border-color:rgba(196,181,253,.55)!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay :is(button,input):focus-visible{outline-color:#93B8FF!important}
+
+/* Login/profil · KUNDUZGI variant */
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay{
+  --glass-text:#132036;--glass-muted:#56667F;
+  color-scheme:light!important;
+  background:radial-gradient(ellipse at 50% 0,#DCE8FF 0,transparent 55%),radial-gradient(ellipse at 0 90%,#E6F4FF 0,transparent 45%),linear-gradient(165deg,#F4F7FD,#EAF0FA)!important;
+}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box{
+  background:rgba(255,255,255,.94)!important;
+  border-color:#D9E2F0!important;
+  box-shadow:0 24px 60px rgba(16,32,64,.14)!important;
+}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::before{border-color:rgba(37,99,235,.08)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box::after{opacity:0!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tabs{background:#EEF2F8!important;border-color:#DCE4EF!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab{color:#3B4B66!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-tab.active{color:#fff!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input{background:#F7F9FD!important;border-color:#CFD9E8!important;color:#132036!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input::placeholder{color:#7D8BA2!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-input:-webkit-autofill{-webkit-text-fill-color:#132036!important;-webkit-box-shadow:0 0 0 1000px #F7F9FD inset!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-input-icon,.uz-auth-eye){color:#5A6A84!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-link,.uz-auth-inline button){color:#1D4ED8!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-secondary,.uz-auth-close){background:#FFFFFF!important;border-color:#CFD9E8!important;color:#132036!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-admin{background:#F1EAFE!important;border-color:#D4C4FB!important;color:#5B21B6!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-danger{background:#FFF0F2!important;border-color:#F7B9C3!important;color:#9F1239!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn{box-shadow:0 4px 12px rgba(16,32,64,.08)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-primary{color:#fff!important;box-shadow:0 8px 18px rgba(37,99,235,.28)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-userbar{background:#F3F6FB!important;border-color:#DCE4EF!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-divider)::before,
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-divider)::after{background:#DCE4EF!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.ok{color:#065F46!important;background:#E7F7EF!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.info{color:#1E3A8A!important;background:#EEF5FF!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-msg.err{color:#9F1239!important;background:#FFF0F2!important}
+
+/* ---------- 5. UMUMIY: fokus halqasi (teal → ko'k) ---------- */
+:root:not(#uzc) :focus-visible{outline-color:var(--uzc-ring)!important}
+:root:not(#uzc) :is(input,textarea,select,button,[tabindex]):focus{outline-color:var(--uzc-ring)!important}
+
+/* ---------- 6. YON MENYU: har bo'lim ikonkasiga o'z rangi ---------- */
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='chat'] svg{color:var(--uzc-c-chat)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='calculate'] svg{color:var(--uzc-c-scores)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='analysis'] svg{color:var(--uzc-c-analysis)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='differential'] svg{color:var(--uzc-c-protocols)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='specialists'] svg{color:var(--uzc-c-qabul)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='mkb'] svg{color:var(--uzc-c-mkb)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='drugs'] svg{color:var(--uzc-c-drugs)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='interactions'] svg{color:var(--uzc-c-drugs)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='protocols'] svg{color:var(--uzc-c-protocols)!important}
+:root:not(#uzc) #uzmedSidebar #uzmedNavLegal20261023 svg{color:var(--uzc-c-legal)!important}
+:root:not(#uzc) #uzmedSidebar #uzmedNavSources20261023 svg{color:var(--uzc-c-legal)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='derma'] svg{color:var(--uzc-c-templates)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='scores'] svg{color:var(--uzc-c-scores)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='growth'] svg{color:var(--uzc-c-qabul)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='prices'] svg{color:var(--uzc-c-patients)!important}
+:root:not(#uzc) #uzmedSidebar #uzmedNavQabul20261023 svg{color:var(--uzc-c-qabul)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='history'] svg{color:var(--uzc-c-history)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='models'] svg{color:var(--uzc-c-analysis)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='search'] svg{color:var(--uzc-c-mkb)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='profile'] svg{color:var(--uzc-c-legal)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[data-uzmed-section='settings'] svg{color:var(--uzc-c-legal)!important}
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button[aria-current] svg,
+:root:not(#uzc) #uzmedSidebar .uxn-nav-button.active svg{color:var(--uzc-accent)!important}
+
+/* ---------- 7. HISOBLASH / CHAT tugmalari (#087d83 → asosiy ko'k) ---------- */
+:root:not(#uzc) body:is(#uzmedMobile,.um-clinic) :is(.dc-calc-btn,.uhp-open){
+  background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;
+  color:#fff!important;
+}
+:root:not(#uzc) body:is(#uzmedMobile,.um-clinic) #aiSendBtn:not(:disabled){background:var(--uzc-primary)!important;color:#fff!important}
+
+/* Protokol / mutaxassis / vosita ikonkalari (teal → bo'lim ranglari) */
+:root:not(#uzc) body#uzmedMobile .ur-proto-symbol{color:var(--uzc-c-protocols)!important;background:var(--uzc-s-protocols)!important}
+:root:not(#uzc) body#uzmedMobile .ur-proto-group:nth-child(3n) .ur-proto-symbol{color:var(--uzc-c-mkb)!important;background:var(--uzc-s-mkb)!important}
+:root:not(#uzc) body#uzmedMobile .ur-proto-group:nth-child(3n+1) .ur-proto-symbol{color:var(--uzc-c-analysis)!important;background:var(--uzc-s-analysis)!important}
+:root:not(#uzc) body#uzmedMobile .ur-proto-card .ur-proto-arrow{color:var(--uzc-muted)!important;stroke:var(--uzc-muted)!important}
+:root:not(#uzc) body#uzmedMobile .uia-sp-ico{color:var(--uzc-c-history)!important;background:var(--uzc-s-history)!important}
+:root:not(#uzc) body#uzmedMobile .uia-sp-card:nth-child(3n) .uia-sp-ico{color:var(--uzc-c-mkb)!important;background:var(--uzc-s-mkb)!important}
+:root:not(#uzc) body#uzmedMobile .uia-sp-card:nth-child(3n+1) .uia-sp-ico{color:var(--uzc-c-drugs)!important;background:var(--uzc-s-drugs)!important}
+:root:not(#uzc) body#uzmedMobile .um-tool-icon{color:var(--ur-tool,var(--uzc-accent))!important;background:var(--ur-tool-bg,var(--uzc-primary-soft))!important}
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body#uzmedMobile .um-tool-icon{color:var(--uzc-accent)!important;background:var(--uzc-primary-soft)!important}
+:root:not(#uzc) body#uzmedMobile .bottom-nav .nav-icon{color:var(--uzc-accent)!important}
+:root:not(#uzc) body#uzmedMobile .um-hero .ur-hero-top,
+:root:not(#uzc) body#uzmedMobile .um-hero .ur-hero-top .ur-icon{color:var(--uzc-accent)!important;stroke:currentColor!important}
+
+/* Protokol AI paneli (qorong'i teal gradient → neytral sirt) */
+:root:not(#uzc) body#uzmedMobile #assosi-screen .uzmed-protocol-ai-details{
+  background:linear-gradient(135deg,var(--uzc-s-protocols),var(--uzc-surface) 80%)!important;
+  border-color:color-mix(in srgb,var(--uzc-c-protocols) 28%,var(--uzc-line))!important;
+}
+:root:not(#uzc) body#uzmedMobile #assosi-screen .uzmed-protocol-ai-details>summary{color:var(--uzc-c-protocols)!important}
+:root:not(#uzc) body#uzmedMobile #assosi-screen .uzmed-protocol-ai-details>summary:after{color:var(--uzc-c-protocols)!important}
+:root:not(#uzc) body #assosi-screen .uss-card{background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc) body #assosi-screen .uss-card span{color:var(--uzc-muted)!important}
+:root:not(#uzc) body #drugDbList .drug-db-inn-hdr>span{color:var(--uzc-c-drugs)!important}
+
+/* ---------- 8. SHIFOKOR QABULI (yashil → yumshoq zumrad + sariq) ---------- */
+:root:not(#uzc) #uzQabulEntry.qpremium{
+  --qp-bg:var(--uzc-bg);--qp-shell:var(--uzc-surface);--qp-surface:var(--uzc-surface);
+  --qp-border:var(--uzc-line);--qp-text:var(--uzc-ink);--qp-muted:var(--uzc-muted);
+  --qp-green:var(--uzc-c-qabul);--qp-accent:var(--uzc-c-qabul);--qp-field:var(--uzc-field);
+}
+:root:not(#uzc) body#uzmedMobile:has(#uzQabulEntry.qpremium.active){background:var(--uzc-bg)!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-hero{
+  color:var(--uzc-ink)!important;
+  background:linear-gradient(135deg,var(--uzc-s-qabul) 0%,var(--uzc-surface) 75%)!important;
+  border-color:color-mix(in srgb,var(--uzc-c-qabul) 30%,var(--uzc-line))!important;
+}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-hero:before{border-color:color-mix(in srgb,var(--uzc-c-qabul) 12%,transparent)!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-hero-badge{background:var(--uzc-c-qabul)!important;color:var(--uzc-on-accent)!important;box-shadow:0 8px 20px rgba(4,120,87,.22)!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-hero-badge .qp-icon{color:var(--uzc-on-accent)!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-profile .qp-icon{background:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-tile-new{--tile-accent:var(--uzc-c-qabul);background:linear-gradient(135deg,var(--uzc-s-qabul),var(--uzc-surface) 85%)!important;border-color:color-mix(in srgb,var(--uzc-c-qabul) 26%,var(--uzc-line))!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qp-tile-mine{--tile-accent:var(--uzc-c-patients);background:linear-gradient(135deg,var(--uzc-s-patients),var(--uzc-surface) 85%)!important;border-color:color-mix(in srgb,var(--uzc-c-patients) 26%,var(--uzc-line))!important}
+:root:not(#uzc) #uzQabulEntry.qpremium .qstart-form .qstart-primary{background:linear-gradient(135deg,#059669,#047857)!important;color:#fff!important}
+
+/* ---------- 9. BO'LIM MANBALARI (#uzmedSourcesView) ---------- */
+:root:not(#uzc) #uzmedSourcesView{background:var(--uzc-bg)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-top{background:var(--ux-header,var(--uzc-surface))!important;border-bottom-color:var(--uzc-line)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-back{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedSourcesView :is(.usv-brand,.usv-eyebrow){color:var(--uzc-accent)!important}
+:root:not(#uzc) #uzmedSourcesView :is(h1,.usv-title){color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedSourcesView :is(.usv-intro,.usv-help,.usv-note,.usv-empty,.usv-url){color:var(--uzc-muted)!important}
+:root:not(#uzc) #uzmedSourcesView :is(.usv-nav,.usv-body){background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-body-head{border-bottom-color:var(--uzc-line)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-note{border-top-color:var(--uzc-line)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-tab{color:var(--uzc-ink-2)!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+:root:not(#uzc) #uzmedSourcesView .usv-tab:hover{background:var(--uzc-surface-2)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-tab[aria-selected='true']{background:var(--uzc-primary-soft)!important;color:var(--uzc-accent)!important;border-color:var(--uzc-primary-line)!important;box-shadow:inset 0 -3px var(--uzc-primary)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-search{background:var(--uzc-field)!important;border-color:var(--uzc-line-strong)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-search:focus{border-color:var(--uzc-primary)!important;box-shadow:0 0 0 3px var(--uzc-focus)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-source{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-source a{color:var(--uzc-accent)!important}
+:root:not(#uzc) #uzmedSourcesView .usv-status{background:var(--uzc-primary-soft)!important;border-color:var(--uzc-primary-line)!important;color:var(--uzc-ink-2)!important}
+
+/* ---------- 10. DIFFERENSIAL DIAGNOSTIKA — kunduzgi variant ---------- */
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap{
+  --page-grad:linear-gradient(180deg,#F3F6FB 0%,#EEF3FA 60%,#E9F0FA 100%);
+  --uzp-glass-chrome:rgba(255,255,255,.92);
+  --uzp-glass:#FFFFFF;
+  --text:#132036;--text2:#2B3A52;--muted:#56667F;
+  --border:rgba(16,32,64,.12);
+  --uzp-sh-1:0 6px 18px rgba(16,32,64,.07);
+  color:#132036;
+}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-in{background:#FFFFFF!important;color:#132036!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-x{color:#2B3A52!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap :is(.uzdx2-b.ghost,.uzdx2-qb button){background:#FFFFFF!important;color:#2B3A52!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-h em{background:rgba(16,32,64,.06)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-rank{background:rgba(16,32,64,.06)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-bar{background:rgba(16,32,64,.06)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-flag .t{color:#B91C1C!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-flag li{color:#7F1D1D!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-flag li b{color:#450A0A!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-act{background:#FEE2E2!important;color:#7F1D1D!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-chip{color:#047857!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-chip.no{color:#56667F!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-chip button{background:rgba(16,32,64,.08)!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-card.emg .uzdx2-rank{color:#B91C1C!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-l.ok{color:#047857!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-l.no{color:#B91C1C!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-l.wr{color:#92400E!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-qb button.y{color:#047857!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-qb button.n{color:#B91C1C!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-note{color:#92400E!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-note.info{color:#3730A3!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-note.err{color:#B91C1C!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] .uzdx2-wrap .uzdx2-empty .e{color:#4338CA!important}
+
+/* ---------- 11. TAHLIL (AI) — shadow DOM o'zgaruvchilari, faqat kunduzgi ----------
+   Shadow ichidagi uslub (JS qo'shadi) var(--uzc-doc-*, asl_rang) ishlatadi;
+   o'zgaruvchi faqat kunduzgi rejimda beriladi → tungi rejim asl holicha. */
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmed-doc-v2{
+  --uzc-doc-ink:#132036;--uzc-doc-ink2:#2B3A52;--uzc-doc-muted:#56667F;
+  --uzc-doc-bg:#FFFFFF;--uzc-doc-bg2:#F7F9FD;--uzc-doc-bg3:#EEF3FA;
+  --uzc-doc-line:#DFE6F0;--uzc-doc-line2:#C9D4E4;
+  --uzc-doc-field:#FFFFFF;--uzc-doc-soft:#ECEBFE;--uzc-doc-softink:#4338CA;
+  --uzc-doc-intro:linear-gradient(130deg,#EEF2FF,#FFFFFF);
+  --uzc-doc-err-bg:#FFF0F2;--uzc-doc-err-line:#F7B9C3;--uzc-doc-err-ink:#9F1239;
+  --uzc-doc-warn-bg:#FFF5E1;--uzc-doc-warn-line:#F2D28A;--uzc-doc-warn-ink:#7A4B08;
+  --uzc-doc-viewer:#F3F6FB;
+}
+
+/* ---------- 12. TIBBIY HUQUQ sahifalari (alohida HTML) ---------- */
+:root:not(#uzc)[data-uzc-page='legal']{
+  --bg:var(--uzc-bg);--surface:var(--uzc-surface);--surface2:var(--uzc-surface-2);
+  --text:var(--uzc-ink);--ink:var(--uzc-ink);--muted:var(--uzc-muted);--line:var(--uzc-line);
+  --accent:var(--uzc-accent);--soft:var(--uzc-primary-soft);--btntext:var(--uzc-on-accent);
+}
+:root:not(#uzc)[data-uzc-theme='light'][data-uzc-page='legal']{color-scheme:light}
+:root:not(#uzc)[data-uzc-page='legal'] body{background:var(--uzc-bg)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .top{background:var(--uzc-surface)!important;border-bottom-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .hero{background:linear-gradient(120deg,var(--uzc-s-legal),var(--uzc-surface) 80%)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .hero p{color:var(--uzc-muted)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .pill{border-color:var(--uzc-line-strong)!important;color:var(--uzc-ink-2)!important}
+:root:not(#uzc)[data-uzc-page='legal'] #lawSearch,
+:root:not(#uzc)[data-uzc-page='legal'] #legalQuestion{background:var(--uzc-field)!important;border-color:var(--uzc-line-strong)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='legal'] #lawSearch:focus{box-shadow:0 0 0 3px var(--uzc-focus)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .quick button{border-color:var(--uzc-line)!important;color:var(--uzc-ink-2)!important}
+:root:not(#uzc)[data-uzc-page='legal'] :is(.result,.legal-source-card,.legal-agent-text){background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='legal'] :is(.result .tag,.result footer){color:var(--uzc-muted)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .excerpt{color:var(--uzc-ink-2)!important}
+:root:not(#uzc)[data-uzc-page='legal'] .code{color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='legal'] :is(.link-button,#legalAskButton){color:var(--uzc-on-accent)!important}
+:root:not(#uzc)[data-uzc-page='legal'] :is(.feature,.panel){background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important}
+
+/* ---------- 13. Qo'shimcha: login holati, fokus, chop etish tugmasi ---------- */
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-online{color:#6EE7B7!important}
+:root:not(#uzc)[data-uzmed-ux-theme='light'] #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-online{color:#047857!important}
+:root:not(#uzc) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-box:focus{outline-color:var(--uzc-focus)!important}
+:root:not(#uzc) #qabulPrintTools #qdNativePrint{background:#2563EB!important;border-color:#2563EB!important;color:#fff!important}
+
+/* ---------- 14. SHIFOKOR QABULI · EPKR ish maydoni (iframe sahifa) ----------
+   Yashil "emerald" mavzu → neytral sirt + klinik ko'k aksent.
+   Chop etiladigan rasmiy hujjat (.docPage) ranglariga TEGILMAYDI. */
+:root:not(#uzc)[data-uzc-page='qabul']{
+  --bg:var(--uzc-bg);--surface:var(--uzc-surface);--soft:var(--uzc-surface-2);
+  --text:var(--uzc-ink);--muted:var(--uzc-muted);--line:var(--uzc-line);
+  --accent:var(--uzc-accent);--accent-soft:var(--uzc-primary-soft);
+}
+:root:not(#uzc)[data-uzc-page='qabul'][data-theme] .qf{
+  --q-bg:var(--uzc-bg);--q-card:var(--uzc-surface);--q-text:var(--uzc-ink);
+  --q-muted:var(--uzc-muted);--q-soft:var(--uzc-surface-2);--q-line:var(--uzc-line);
+  --q-accent:var(--uzc-accent);--q-light:var(--uzc-primary-soft);--q-blue:var(--uzc-accent);
+}
+:root:not(#uzc)[data-uzc-page='qabul'][data-theme] body.uzmed-responsive-page{background:var(--uzc-bg)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf .qf-header{box-shadow:0 6px 18px rgba(8,16,36,.08)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf :is(input,select,textarea):focus{border-color:var(--uzc-primary)!important;box-shadow:0 0 0 3px var(--uzc-focus)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf :is(.qf-primary,.primary){background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;color:#fff!important;border-color:transparent!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf .qf-rail .qf-nav.active{background:var(--uzc-primary)!important;border-color:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf .qf-rail #uv5RailHome{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line-strong)!important;box-shadow:none!important}
+
+/* v3 / v6 davolash maydoni */
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3{
+  --v3-base:var(--uzc-bg);--v3-card:var(--uzc-surface);--v3-soft:var(--uzc-surface-2);
+  --v3-line:var(--uzc-line);--v3-text:var(--uzc-ink);--v3-muted:var(--uzc-muted);
+  --v3-accent:var(--uzc-primary);--v3-accent-ink:#fff;
+}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-panel,.uv3-welcome,.uv3-template-hero){background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 button{color:var(--uzc-ink)}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 button:hover{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line-strong)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(button.uv3-primary,.uv3-mode[aria-pressed=true],.uv3-mobile-button[aria-pressed=true],.uv3-filter[aria-pressed=true]){background:var(--uzc-primary)!important;border-color:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 button.uv3-subtle{background:var(--uzc-surface-2)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-field input,.uv3-source-box input){background:var(--uzc-field)!important;border-color:var(--uzc-line-strong)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-list,.uv3-middle-body){scrollbar-color:var(--uzc-line-strong) transparent!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-list-row[aria-current=true],.uv3-template-row[aria-current=true]){background:var(--uzc-primary-soft)!important;border-color:var(--uzc-primary-line)!important;box-shadow:inset 3px 0 var(--uzc-primary)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-list-row small,.uv3-drug small,.uv3-plan-rows .rx-grid label,.uv3-fact p,.uv3-template-fact p){color:var(--uzc-muted)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 .uv3-drug{background:transparent!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 .uv3-drug-arrow{color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-count,.uv3-pill,.uv3-template-category){background:var(--uzc-primary-soft)!important;border-color:var(--uzc-primary-line)!important;color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 .uv3-plan-rows .rx-card{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 #addRx{background:var(--uzc-primary-soft)!important;border-color:var(--uzc-primary-line)!important;color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-source-box,.uv3-existing,.uv3-fact,.uv3-safety>details,.uv3-native-extra,.uv3-category-subheading){border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(.uv3-source-box summary,.uv3-native-extra summary,.uv3-safety>details>summary,.uv3-fact h4,.uv3-template-fact h4,.uv3-status,.uv3-breadcrumb,.uv3-welcome .uv3-eyebrow,.uv3-category-subheading){color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3[data-layout='v6'] .uv3-breadcrumb{color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 .uv3-welcome-steps span{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important;color:var(--uzc-ink-2)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3[data-layout='v6'] .uv3-category-heading{background:var(--uzc-surface-2)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3[data-layout='v6'] .uv3-category-heading>span{background:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3[data-layout='v6'] .uv3-template-fact{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3[data-layout='v6'] .uv3-home-link{background:var(--uzc-surface-2)!important;color:var(--uzc-accent)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uzmedQabulV3 :is(button,input):focus-visible{outline-color:var(--uzc-ring)!important}
+
+/* v7 qabul paneli (#uv5Dashboard) */
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard{
+  --uv5-bg:var(--uzc-bg);--uv5-surface:var(--uzc-surface);--uv5-line:var(--uzc-line);
+  --uv5-muted:var(--uzc-muted);--uv5-ink:var(--uzc-ink);--uv5-primary:var(--uzc-primary);
+}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard button:hover{background:var(--uzc-surface-2)!important;border-color:var(--uzc-line-strong)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard :is(.uv5-kicker,.uv5-step-state,.uv5-patient-icon){color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-patient-icon{border-color:var(--uzc-primary-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard :is(.uv5-patient-info p,.uv5-patient-info small,.uv5-count,.uv5-note,.uv5-hero p){color:var(--uzc-muted)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard button.uv5-patient-edit{border-color:var(--uzc-line-strong)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard button.uv5-step{background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-step-num{background:var(--uzc-primary-soft)!important;color:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-step.has-data .uv5-step-state{color:var(--uzc-ok)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard button.uv5-treatment-step{background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;border-color:transparent!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-treatment-step :is(.uv5-step-num,.uv5-step-state){background:rgba(255,255,255,.18)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-treatment-step .uv5-step-state{background:transparent!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-quick .uv5-primary{background:var(--uzc-primary)!important;border-color:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard .uv5-section-heading h2{color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5Dashboard button:focus-visible{outline-color:var(--uzc-ring)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf:has(#uv5Dashboard) #uv5PatientStrip{background:var(--uzc-surface)!important;color:var(--uzc-ink)!important;border-bottom-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5PatientStrip span{color:var(--uzc-muted)!important;border-left-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] #uv5PatientStrip .uv5-strip-diagnosis{color:var(--uzc-accent)!important}
+
+/* Yangi bemor dialogi (#patientDialog) */
+:root:not(#uzc)[data-uzc-page='qabul'][data-theme] #patientDialog{
+  --uip-bg:var(--uzc-surface);--uip-surface:var(--uzc-surface-2);--uip-border:var(--uzc-line);
+  --uip-ink:var(--uzc-ink);--uip-muted:var(--uzc-muted);--uip-accent:var(--uzc-primary);
+}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog.qf-dialog{background:var(--uzc-surface)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog::backdrop{background:rgba(6,11,24,.72)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog .qf-dialog-head{background:linear-gradient(120deg,var(--uzc-s-qabul),var(--uzc-surface-2) 85%)!important;color:var(--uzc-ink)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog .qf-dialog-head:before{color:var(--uzc-c-qabul)!important;border-color:var(--uzc-line)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog .form-grid :is(input,select):focus{outline-color:var(--uzc-focus)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog .inline-note{background:var(--uzc-primary-soft)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qf #patientDialog>.qf-primary{background:linear-gradient(135deg,var(--uzc-primary),var(--uzc-primary-2))!important;border-color:transparent!important;color:#fff!important}
+
+/* Hujjat tanlash, o'chirish oynasi, ovoz paneli, video maydonlar */
+:root:not(#uzc)[data-uzc-page='qabul'] #documentDialog .qd-choice-actions button[aria-pressed=true]{background:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qv-compact :is(#voiceStop,#qvChatSend,#voiceStart){background:var(--uzc-primary)!important;color:#fff!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qv-compact .qv-wave i{background:var(--uzc-accent)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] :is(.qv-compact button,.qv-compact input,.vf-action,.vf-field input):focus-visible{outline-color:var(--uzc-ring)!important}
+:root:not(#uzc)[data-uzc-page='qabul'] .qd-editable [data-qabul-field]{outline-color:var(--uzc-primary)!important}
+
+/* ---------- 15. MKB-10 · qidiruv paneli: shaffof "liquid glass" (iOS uslubi) ----------
+   Yorliq ("Kasallik yoki MKB kodi") vizual yashiriladi — input aria-label'i
+   saqlanadi. Panel foni olib tashlanadi; input shaffof shisha bo'lib, orqadagi
+   ro'yxat xira ko'rinib turadi. */
+:root:not(#uzc) #mkb-db-screen .v19-mkb-search{
+  background:transparent!important;
+  pointer-events:none;
+}
+:root:not(#uzc) #mkb-db-screen .v19-mkb-search label{display:none!important}
+:root:not(#uzc) #mkb-db-screen .v19-mkb-search input{
+  pointer-events:auto;
+  --uzc-glass:rgba(255,255,255,.62);
+  --uzc-glass-line:rgba(16,32,64,.10);
+  --uzc-glass-hi:rgba(255,255,255,.75);
+  background:var(--uzc-glass)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--uzc-glass-line)!important;
+  border-radius:16px!important;
+  box-shadow:inset 0 1px 0 var(--uzc-glass-hi),0 8px 24px rgba(16,32,64,.10)!important;
+  color:var(--uzc-ink)!important;
+  transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s cubic-bezier(.32,.72,0,1),background-color .25s ease,border-color .25s ease;
+  animation:uzcGlassIn .5s cubic-bezier(.32,.72,0,1) both;
+}
+:root:not(#uzc):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) #mkb-db-screen .v19-mkb-search input{
+  --uzc-glass:rgba(22,33,54,.58);
+  --uzc-glass-line:rgba(255,255,255,.12);
+  --uzc-glass-hi:rgba(255,255,255,.08);
+  box-shadow:inset 0 1px 0 var(--uzc-glass-hi),0 10px 28px rgba(0,0,0,.35)!important;
+}
+:root:not(#uzc) #mkb-db-screen .v19-mkb-search input::placeholder{color:var(--uzc-muted)!important;opacity:1}
+:root:not(#uzc) #mkb-db-screen .v19-mkb-search input:focus{
+  outline:none!important;
+  transform:translateY(-1px) scale(1.012);
+  border-color:var(--uzc-primary-line)!important;
+  box-shadow:inset 0 1px 0 var(--uzc-glass-hi),0 0 0 4px var(--uzc-focus),0 14px 34px rgba(16,32,64,.16)!important;
+}
+/* Eslatma: ota elementga transform/opacity animatsiyasi qo'yilmaydi —
+   u backdrop-filter'ni o'chirib qo'yadi. Animatsiya faqat input'ning o'zida.
+   Shisha qo'llab-quvvatlanmasa — yarim shaffof, lekin o'qiladigan fon */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root:not(#uzc) #mkb-db-screen .v19-mkb-search input{background:var(--uzc-surface)!important}
+}
+@keyframes uzcGlassIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  :root:not(#uzc) #mkb-db-screen .v19-mkb-search input{transition:none;animation:none}
+  :root:not(#uzc) #mkb-db-screen .v19-mkb-search input:focus{transform:none}
+}
+
+/* ---------- 16. Bosh sahifa banneri: shifokor rasmi ortidagi yashil oval olib tashlandi ----------
+   Asl rasm (uzmed-doctor-source-hq-v4.webp) o'zgartirilmagan; xuddi shu o'lchamdagi
+   yashil fonsiz nusxa (shaffof) faqat ko'rinish uchun almashtiriladi. */
+:root:not(#uzc) #uzmedNeonHome img.unh-doctor{content:url('/assets/uzmed-doctor-nogreen-v1.webp?v=1')}

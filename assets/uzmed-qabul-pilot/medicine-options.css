@@ -1,0 +1,10 @@
+/* Same native select as food, with a custom value when needed. */
+#qcMedicine .qc-med-field{display:grid;gap:8px;min-width:0}
+#qcMedicine .qc-med-field label{margin:0}
+#qcMedicine .qc-med-field :is(input,select){box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:44px;font-size:16px}
+#qcMedicine .qc-med-field input[hidden]{display:none!important}
+#qcMedicine .qc-med-field .minor{margin:0;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+#qcMedicine .qc-med-reference{border:1px solid var(--q-line);border-radius:12px;padding:10px 12px;margin:0 0 16px;max-width:100%;overflow-wrap:anywhere}
+#qcMedicine .qc-med-reference summary{min-height:36px;cursor:pointer;font-weight:650}
+#qcMedicine .qc-med-reference p{white-space:pre-wrap;font-size:14px;line-height:1.5}
+#qcMedicine .qc-med-reference a{color:var(--q-accent);text-decoration:underline}

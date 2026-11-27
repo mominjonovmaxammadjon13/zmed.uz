@@ -1,0 +1,183 @@
+/* UZMED patient workspace v1 — presentation only.
+   Preserve all patient/visit actions, record IDs and access checks.
+   Uses the same emerald clinical design as Shifokor qabuli. */
+#upMenuLink,#upHomeLink,
+#uzmedSidebar [data-uzmed-section="patients"],
+#uzmedWorkspaceRail [data-ux-rail="patients"]{display:none!important}
+body#uzmedMobile #patients-screen{
+  --um-ink:#f1fff9;--um-muted:#a3c8b9;
+  --um-surface:#0c3026;--um-soft:#0c2922;--um-bg:#061b16;
+  --um-line:rgba(91,206,155,.27);--um-accent:#18dc9d;--um-tint:rgba(12,210,140,.14);
+  --ug-card:linear-gradient(147deg,rgba(4,95,67,.24),rgba(6,34,29,.9) 62%);
+  --ug-shadow:0 9px 26px rgba(0,14,10,.16);
+  width:100%;max-width:1280px;min-width:0;
+  padding:clamp(16px,2.6vw,28px)!important;
+  color:var(--um-ink);background:var(--um-bg);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+html[data-uzmed-ux-theme="light"] body#uzmedMobile #patients-screen{
+  --um-ink:#13392d;--um-muted:#59786c;
+  --um-surface:#f4fcf8;--um-soft:#e9f8f1;--um-bg:#f8fdfb;
+  --um-line:#d0e7dd;--um-accent:#008d62;--um-tint:#d7f8e8;
+  --ug-card:linear-gradient(145deg,#ffffff,#f1faf5);
+  --ug-shadow:0 8px 24px rgba(8,89,54,.07);
+}
+#patients-screen,#patients-screen *{box-sizing:border-box}
+#patients-screen .up-top{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin:0 0 20px;padding:17px 19px;
+  border:1px solid var(--um-line);border-radius:20px;
+  background:radial-gradient(ellipse at 100% 40%,rgba(0,198,126,.19),transparent 58%),var(--ug-card);
+}
+#patients-screen .up-top h1{font-size:clamp(22px,2.65vw,31px);letter-spacing:-.025em;color:var(--um-ink)}
+#patients-screen .up-top p{font-size:13px;margin:4px 0 0;color:var(--um-muted)}
+#patients-screen .up-eyebrow{font-size:11px;color:var(--um-accent)}
+#patients-screen .up-panel{
+  border:1px solid var(--um-line);
+  background:var(--ug-card);
+  border-radius:20px;padding:clamp(16px,2.5vw,25px);
+  box-shadow:var(--ug-shadow);margin-bottom:16px;
+}
+#patients-screen .up-actions{gap:9px;min-width:0}
+#patients-screen .up-btn{
+  min-height:46px;padding:10px 16px;border-radius:13px;
+  background:var(--um-surface);color:var(--um-ink);
+  border:1px solid var(--um-line);
+  box-shadow:none;font-weight:700;font-size:13px;line-height:1.45;
+  transition:background .12s ease,border-color .12s ease;
+}
+#patients-screen .up-btn:hover:not(:disabled){background:var(--um-tint)}
+#patients-screen .up-btn.up-primary{
+  color:#062820;background:linear-gradient(115deg,#51edbc,#0cce91);
+  border-color:rgba(124,255,203,.35);font-weight:800;
+}
+html[data-uzmed-ux-theme="light"] #patients-screen .up-btn.up-primary{color:#034536}
+#patients-screen .up-btn.up-quiet{background:transparent}
+#patients-screen .up-card-header{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,410px);
+  align-items:start;gap:22px;
+}
+#patients-screen .up-card-identity{align-items:center;min-width:0;gap:15px}
+#patients-screen .up-avatar{
+  display:grid;place-items:center;
+  color:#44edb4;background:linear-gradient(145deg,#076a50,#07372c);
+  border-radius:15px;border:1px solid rgba(73,234,162,.17);
+  width:50px;height:50px;flex:none;font-size:15px;font-weight:780;
+}
+#patients-screen .up-card-identity .up-avatar{width:66px;height:66px;font-size:22px}
+#patients-screen .up-card-identity h1{font-size:clamp(24px,3vw,33px);line-height:1.2;margin:2px 0 5px}
+#patients-screen .up-demographics{display:flex;flex-wrap:wrap;gap:8px 15px;font-size:12px;color:var(--um-muted);margin-top:10px}
+#patients-screen .up-patient-id{font-size:10px;opacity:.64;line-height:1.5;margin-top:8px}
+#patients-screen .up-card-header>.up-actions{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;width:100%;align-self:center;
+}
+#patients-screen .up-card-header>.up-actions .up-btn{width:100%;min-width:0}
+#patients-screen .up-tabs{
+  display:flex;gap:8px;min-width:0;max-width:100%;
+  overflow-x:auto;scrollbar-width:thin;scroll-snap-type:x proximity;
+  border:0;margin:6px 0 13px;padding:4px 2px 8px;
+}
+#patients-screen .up-tab{
+  min-height:40px;padding:10px 14px;white-space:nowrap;
+  border:1px solid var(--um-line);border-radius:11px;
+  background:var(--um-surface);color:var(--um-muted);
+  font-size:12px;font-weight:740;scroll-snap-align:start;
+}
+#patients-screen .up-tab[aria-selected="true"]{
+  color:#073527;border-color:rgba(66,255,178,.3);
+  background:linear-gradient(125deg,#3ae4ab,#02c885);
+}
+#patients-screen .up-mobile-tabs{display:none!important}
+#patients-screen #upTabContent{min-width:0}
+#patients-screen #upTabContent .up-panel h2{font-size:clamp(18px,2vw,23px);margin-bottom:14px}
+#patients-screen .up-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 25px}
+#patients-screen .up-fact{padding:11px 12px;border-radius:11px;border:1px solid var(--um-line);background:rgba(19,116,82,.065)}
+#patients-screen .up-fact dt{font-size:11px;color:var(--um-muted);margin-bottom:6px}
+#patients-screen .up-fact dd{font-size:13px;color:var(--um-ink);line-height:1.5}
+#patients-screen .up-export-actions{
+  display:flex;justify-content:flex-end;gap:9px;
+  margin:2px 0 10px;
+}
+#patients-screen .up-tag{border-radius:999px;padding:5px 9px}
+#patients-screen .up-toolbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap}
+#patients-screen .up-workspace input:not([type=file]),
+#patients-screen input:not([type=file]),
+#patients-screen select,#patients-screen textarea{
+  background:var(--um-surface);color:var(--um-ink);
+  border:1px solid var(--um-line);border-radius:12px;
+  min-height:46px;max-width:100%;
+}
+#patients-screen .up-field>span{font-size:12px;color:var(--um-muted)}
+#patients-screen .up-toolbar .up-field:first-child{flex:1 1 260px}
+#patients-screen .up-filter-options{min-width:0}
+#patients-screen .up-filter-grid{flex-wrap:wrap}
+#patients-screen .up-filters{gap:9px}
+#patients-screen .up-filters .up-btn[aria-pressed="true"]{
+  background:linear-gradient(120deg,#39e0a6,#08be85);
+  color:#06392b;border-color:rgba(64,253,170,.3)
+}
+#patients-screen .up-table th{background:rgba(15,143,95,.11);color:var(--um-muted)}
+#patients-screen .up-table td{border-color:var(--um-line)}
+#patients-screen .up-patient-link{min-height:46px;color:var(--um-ink)}
+#patients-screen .up-patient-link strong{font-size:13px}
+#patients-screen .up-patient-link small{font-size:11px}
+#patients-screen .up-record{background:var(--um-surface);border:1px solid var(--um-line);border-radius:14px}
+#patients-screen .up-form-footer{border-color:var(--um-line)}
+#patients-screen .up-details{border-color:var(--um-line)}
+#patients-screen .up-details summary{color:var(--um-accent)}
+/* Clinical editor wrapper: keep its original iframe and saving logic. */
+#uzBemorlarHub.ubh-visit-mode{
+  --um-accent:#48dbb4;--um-line:rgba(88,208,167,.26);
+  --um-surface:#113229;--um-bg:#091f1a;--um-ink:#effff8;
+  --um-muted:#a6c4b9;
+}
+#uzBemorlarHub.ubh-visit-mode .ubh-tools .ubh-button{
+  border-color:var(--um-line);background:var(--um-surface);color:var(--um-ink);
+  border-radius:12px;font-weight:700
+}
+#uzBemorlarHub.ubh-visit-mode .ubh-tools .ubh-primary{
+  background:linear-gradient(110deg,#50e2b2,#13c891);
+  color:#053629;border-color:rgba(86,255,184,.22)
+}
+#uzBemorlarHub.ubh-visit-mode .ubh-frame{border-color:var(--um-line);border-radius:15px}
+@media(max-width:760px){
+ body#uzmedMobile #patients-screen{padding:12px 12px 26px!important}
+ #patients-screen .up-top{padding:14px;gap:11px;flex-direction:column;align-items:stretch;margin-bottom:12px}
+ #patients-screen .up-top h1{font-size:23px}
+ #patients-screen .up-panel{padding:14px;border-radius:17px;margin-bottom:12px}
+ #patients-screen .up-card-header{grid-template-columns:minmax(0,1fr);gap:15px}
+ #patients-screen .up-card-identity{gap:12px}
+ #patients-screen .up-card-identity .up-avatar{width:52px;height:52px;font-size:19px}
+ #patients-screen .up-card-header>.up-actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #patients-screen .up-card-header>.up-actions .up-primary{grid-column:1/-1}
+ #patients-screen .up-btn{min-height:45px;padding:10px 9px;font-size:12px}
+ #patients-screen .up-tabs{display:flex!important;overflow-x:auto;gap:5px;margin:2px 0 10px;padding:3px 0 8px}
+ #patients-screen .up-tab{font-size:11px;padding:9px 11px;min-height:39px}
+ #patients-screen .up-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #patients-screen .up-fact{padding:9px;border-radius:10px}
+ #patients-screen .up-fact dd{font-size:12px}
+ #patients-screen .up-toolbar{display:grid;grid-template-columns:minmax(0,1fr)!important;gap:9px}
+ #patients-screen .up-toolbar .up-field:first-child{grid-column:1/-1}
+ #patients-screen .up-filter-options{grid-column:1/-1}
+ #patients-screen .up-form-footer{flex-wrap:wrap}
+ #patients-screen .up-export-actions{justify-content:stretch}
+ #patients-screen .up-export-actions>.up-btn{flex:1 1 0}
+}
+@media(max-width:359px){
+ #patients-screen .up-facts{grid-template-columns:minmax(0,1fr)}
+ #patients-screen .up-card-header>.up-actions{grid-template-columns:minmax(0,1fr)}
+ #patients-screen .up-card-header>.up-actions .up-primary{grid-column:auto}
+}
+@media print{
+ #patients-screen .up-panel{box-shadow:none!important;background:#fff!important;color:#111!important}
+ #patients-screen .up-export-actions{display:none!important}
+}
+
+/* Compact display: full internal UUID stays in the DOM but not in the visual header. */
+#patients-screen .up-patient-id{display:none}
+#patients-screen .up-tab{flex:0 0 auto!important;min-width:max-content!important;max-width:none!important;overflow:visible!important;text-overflow:clip!important}
+@media(max-width:359px){
+ body#uzmedMobile #patients-screen .up-card-header>.up-actions{grid-template-columns:minmax(0,1fr)!important}
+ body#uzmedMobile #patients-screen .up-card-header>.up-actions .up-primary{grid-column:auto!important}
+}

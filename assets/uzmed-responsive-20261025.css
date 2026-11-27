@@ -1,0 +1,55 @@
+/* Screen-only constraints; document/A4 print layout remains owned by document.css. */
+@media screen{
+  body#uzmedMobile .phone-shell,body#uzmedMobile .screens,body#uzmedMobile .screen{min-width:0}
+  body#uzmedMobile .screen{overflow-wrap:anywhere;scroll-padding-block:16px}
+  body#uzmedMobile .screen :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea){min-width:0;max-width:100%;box-sizing:border-box;font-size:16px}
+  body#uzmedMobile .screen :is(img,video,iframe){max-width:100%}
+  body#uzmedMobile :is(.uzc-table-wrap,.up-table-wrap){min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+  html[data-uzmed-ux='on'][data-uzmed-navigation='sidebar-v12'] .uxn-header{grid-template-columns:44px minmax(0,1fr) auto;gap:8px}
+  html[data-uzmed-ux='on'] .uxn-heading{overflow:hidden}
+  html[data-uzmed-ux='on'] .uxn-header .uxn-compose{min-height:44px;max-width:100%}
+  body#uzmedMobile :is(.screen.active,.uz-auth-box) :is(button,input,select,textarea,summary){scroll-margin-block:20px}
+  body#uzmedMobile :is(#uzmedAuthOverlay,.um-dialog,.uz-price-dialog){overscroll-behavior:contain;max-width:100%}
+  body#uzmedMobile .uz-auth-stage{min-height:0;min-width:0;flex-shrink:0}
+  body#uzmedMobile :is(.uzc-form,.up-filters){flex-wrap:wrap}
+  body#uzmedMobile :is(.uzc-form,.up-filters)>*{min-width:0;max-width:100%}
+  body.uzmed-responsive-page{overflow-wrap:anywhere}
+  body.uzmed-responsive-page :is(main,.container,.panel,.card,.row,.top,.legal-topic-top){min-width:0}
+  body.uzmed-responsive-page :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-width:0;max-width:100%;font-size:16px}
+  body.uzmed-responsive-page :is(button,.back,.link-button){min-height:44px}
+  body.uzmed-responsive-page :is(.row,.top){flex-wrap:wrap}
+  body.uzmed-responsive-page .row>*{min-width:0}
+  .qf :is(.qf-main,.qf-card,.qf-dialog,.qf-section,.form-grid>*,.rx-grid>*){min-width:0}
+  .qf :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-width:0;max-width:100%;box-sizing:border-box}
+  .qf :is(.qf-dialog,.qf-card){overflow-wrap:anywhere}
+  .qf .qf-dialog{max-width:calc(100vw - 24px);overscroll-behavior:contain}
+  .qf :is(input,select,textarea,button){scroll-margin-block:24px}
+}
+@media screen and (max-width:600px){
+  html[data-uzmed-ux='on'] .uxn-heading{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;line-height:1.3}
+  html[data-uzmed-ux='on'] .uxn-heading-brand{font-size:15px}
+  html[data-uzmed-ux='on'] .uxn-heading-section{display:block;font-size:12px;max-width:100%}
+  body#uzmedMobile .screen :is(.uzd-query-row,.udm-search-row){flex-wrap:wrap}
+  body#uzmedMobile .screen :is(.uzd-query-row,.udm-search-row)>input{flex:1 1 180px}
+  body#uzmedMobile .screen :is(.uzd-query-row,.udm-search-row)>button{min-height:44px}
+  body#uzmedMobile :is(.uzc-form,.up-filters)>:is(input,select){flex:1 1 180px}
+  body#uzmedMobile #uzmedAuthOverlay{align-items:flex-start;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:max(24px,env(safe-area-inset-bottom,0px))}
+  body.uzmed-responsive-page .card{padding:18px}
+}
+@media screen and (max-width:374px){
+  html[data-uzmed-ux='on'] .uxn-header .uxn-compose span{display:none}
+  html[data-uzmed-ux='on'] .uxn-header .uxn-compose{width:44px;min-width:44px;padding:0;justify-content:center}
+}
+@media screen and (min-width:761px) and (max-width:1100px){
+  .qf .qf-header{gap:12px;padding-inline:16px}
+  .qf .qf-patient{min-width:0;flex:1 1 180px}
+  .qf .qf-header-end{flex-shrink:0;gap:6px}
+  .qf .qf-local{display:none}
+}
+@media screen and (max-width:600px){
+  body#uzmedMobile .drug-filter-row{flex-wrap:wrap}
+  body#uzmedMobile .drug-filter-input{flex:1 1 180px;min-width:0}
+  body#uzmedMobile .drug-filter-row .sort-btn{flex:0 1 auto;min-height:44px;max-width:100%}
+}
+
+@media screen{.qf .qv-pro-tag{white-space:nowrap;flex-shrink:0}.qf .qv-launch>div{min-width:0;flex:1}}

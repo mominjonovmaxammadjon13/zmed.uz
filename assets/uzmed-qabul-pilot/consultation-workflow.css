@@ -1,0 +1,85 @@
+/* One compact action bar, seven reachable steps, and one scrolling editor. */
+#qabulFocus.qflow.qflow-compact{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:52px 52px 51px minmax(0,1fr)!important;gap:0!important}
+#qabulFocus.qflow.qflow-compact .qf-header{grid-area:1/1!important;display:flex!important;position:static!important;min-height:0!important;height:52px!important;padding:4px 10px!important;overflow:hidden}
+#qabulFocus.qflow.qflow-compact :is(#qfBrand,.qf-header-end,.qf-dock,#uv5Dashboard,#uv5PatientStrip,.qf-mobile-nav,.uv5-rail-home,.qf-footnote,.qf-eyebrow,.qf-tools .uv5-back){display:none!important}
+#qabulFocus.qflow.qflow-compact .qf-patient{display:flex!important;min-width:0;width:100%;max-width:100%;min-height:44px;height:44px;max-height:44px;margin:0;padding:5px 10px}
+#qabulFocus.qflow.qflow-compact .qf-patient>span{min-width:0}
+#qabulFocus.qflow.qflow-compact #patientSummary{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#qabulFocus.qflow.qflow-compact #patientMeta{font-size:11px}
+#qabulFocus.qflow.qflow-compact .qflow-toolbar{grid-area:2/1!important;display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;gap:6px;padding:4px 10px;border-bottom:1px solid var(--q-line);background:var(--q-card);min-width:0}
+#qabulFocus.qflow.qflow-compact .qflow-toolbar>button:first-child{margin-right:auto}
+.qflow-action{border:1px solid var(--q-line);border-radius:9px;background:var(--q-soft);color:var(--q-text);min-height:44px;padding:9px 12px;font:inherit;font-size:13px;cursor:pointer}
+#qabulFocus.qflow.qflow-compact .qflow-icon{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 44px;width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;padding:10px!important;border-radius:10px;font-size:0!important}
+#qabulFocus.qflow.qflow-compact .qflow-icon svg{display:block;width:22px;height:22px;flex-shrink:0;pointer-events:none}
+#qflowSave{background:var(--q-accent);color:var(--q-bg);border-color:var(--q-accent)}
+#qabulFocus.qflow.qflow-compact .qf-rail{grid-area:3/1!important;display:flex!important;flex-direction:row;align-items:center;gap:4px;padding:3px 10px!important;overflow:hidden!important;width:100%;height:51px!important;min-height:0!important;border:0;border-bottom:1px solid var(--q-line);position:static}
+#qabulFocus.qflow.qflow-compact .qf-rail .qf-nav{display:flex;flex:1 1 0;min-width:0;width:auto;height:44px;min-height:44px;padding:7px 8px;align-items:center;justify-content:center;gap:6px;border:1px solid var(--q-line);border-radius:8px;font-size:12px;margin:0}
+#qabulFocus.qflow.qflow-compact .qf-nav svg{width:17px;height:17px;margin:0;padding:0;background:none;flex-shrink:0}
+#qabulFocus.qflow.qflow-compact .qf-main{grid-area:4/1!important;display:grid!important;grid-template-columns:300px minmax(0,1fr);align-items:start;align-content:start;gap:14px;overflow:auto;min-height:0;padding:14px!important;margin:0}
+#qabulFocus.qflow.qflow-compact .qf-main>.qf-card{display:block!important;padding:18px!important;background:var(--q-card)!important;border:1px solid var(--q-line)!important;border-radius:12px!important;min-width:0;min-height:0}
+#qabulFocus.qflow.qflow-compact .qflow-passport{grid-column:1;grid-row:1/5;min-width:0;position:sticky;top:0}
+#qabulFocus.qflow.qflow-compact .qflow-passport .qp-passport{padding:14px;gap:14px;border-radius:12px}
+#qabulFocus.qflow.qflow-compact .qp-passport-head strong{font-size:18px}
+#qabulFocus.qflow.qflow-compact .qp-passport-avatar{width:42px;height:42px;flex-basis:42px;font-size:16px}
+#qabulFocus.qflow.qflow-compact .qp-passport-sex span{font-size:11px;padding:6px 3px;white-space:nowrap}
+#qabulFocus.qflow.qflow-compact .qf-main>.qf-card>.qf-card-head{display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+#qabulFocus.qflow.qflow-compact .qf-card-head h1{font-size:22px;letter-spacing:-.03em}
+#qabulFocus.qflow.qflow-compact .qf-tools{display:flex;flex-wrap:nowrap;gap:4px;flex-shrink:0}
+#qabulFocus.qflow.qflow-compact .qf-tools .qflow-icon{width:40px!important;min-width:40px!important;max-width:40px!important;flex-basis:40px}
+#qabulFocus.qflow.qflow-compact .qf-main>#qfStatus{grid-column:2;overflow-wrap:anywhere;font-size:12px;margin:0}
+#qabulFocus.qflow.qflow-compact .qf-main>#qfStatus:empty{display:none}
+.qflow-treatment-tools{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+#qflowModes .qflow-action,#qflowMenu>.qflow-action{display:block;width:100%;margin:8px 0;text-align:left}
+#qflowMenu>#clear{display:block;width:100%;min-height:44px;margin-top:18px;color:#f28291;border-color:#a84255;text-align:left}
+#panel-treatment[data-qflow-mode=text] .rx-card{display:block;border-left:3px solid var(--q-accent);padding-left:12px}
+#panel-treatment[data-qflow-mode=group] .rx-card{border:1px solid var(--q-accent);border-radius:12px}
+.qflow-history-item{border-bottom:1px solid var(--q-line);padding:10px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+#qflowCalculatorDialog{width:min(640px,calc(100vw - 20px))}
+#qflowCalculatorDialog .qflow-bmi{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+#qflowCalculatorDialog .qflow-bmi[hidden]{display:none}
+#qflowCalculatorDialog label{display:flex;flex-direction:column;gap:7px;font-size:13px;margin:0}
+#qflowCalculatorDialog input,#qflowCalculatorDialog select{font-size:16px}
+#qflowBmiResult,#qflowCalculatorDialog .qflow-bmi>p{grid-column:1/-1;font-size:14px;line-height:1.5;min-height:20px}
+#qflowBmiResult{font-size:19px;font-weight:700}
+#qflowCalculatorDialog #qabulEgfrCalculator{margin-top:16px;display:grid;gap:12px}
+#qflowCalculatorDialog #qabulEgfrCalculator[hidden]{display:none}
+#qflowCalculatorDialog input[type=checkbox]{width:22px;height:22px;min-height:22px}
+@media(max-width:1000px){
+ #qabulFocus.qflow.qflow-compact .qf-main{display:block!important;padding:8px!important}
+ #qabulFocus.qflow.qflow-compact .qflow-passport{display:none;position:static;margin-bottom:10px}
+ #qabulFocus.qflow.qflow-compact.qflow-passport-open .qflow-passport{display:block}
+ #qabulFocus.qflow.qflow-compact.qflow-passport-open .qf-main>.qf-card{display:none!important}
+ #qabulFocus.qflow.qflow-compact .qflow-passport .qp-passport{max-width:640px;margin:0 auto}
+ #qabulFocus.qflow.qflow-compact .qf-main>.qf-card{padding:12px!important}
+ #qabulFocus.qflow.qflow-compact .qf-card-head h1{font-size:20px}
+ #qabulFocus.qflow.qflow-compact .segmented{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;gap:4px;padding-bottom:3px}
+ #qabulFocus.qflow.qflow-compact .segmented>button{flex:0 0 auto;font-size:12px;min-height:40px;white-space:nowrap;padding:8px 10px}
+ #qabulFocus.qflow.qflow-compact .qf-rail{padding:3px 4px!important;gap:1px}
+ #qabulFocus.qflow.qflow-compact .qf-rail .qf-nav{flex-direction:column;gap:2px;padding:4px 1px;font-size:10px;border-radius:6px;border-color:transparent}
+ #qabulFocus.qflow.qflow-compact .qf-rail .qf-nav>span{display:none}
+ #qabulFocus.qflow.qflow-compact .qf-nav::after{content:attr(data-short);font-size:9px;line-height:12px}
+ #qabulFocus.qflow.qflow-compact .qf-nav.has-data i{width:4px;height:4px;top:3px;right:3px}
+ .qflow-treatment-tools .qflow-action{flex:1 1 44%;font-size:12px;padding:8px;min-height:40px}
+}
+@media print{.qflow-passport,.qflow-toolbar,.qflow-treatment-tools{display:none!important}}
+/* Explicit structured authoring controls, readable on phone and desktop. */
+.qc-observations,.qc-library,.qc-followup,.qc-selected-tests{padding:16px;margin:16px 0;border:1px solid var(--q-line);border-radius:14px;background:var(--q-card);min-width:0}
+.qc-observation{padding:15px 0;border:0;border-bottom:1px solid var(--q-line);margin:0;min-width:0}
+.qc-observation legend{font-size:13px;font-weight:650;color:var(--q-muted);padding:0;float:left;width:100%;margin-bottom:10px}
+.qc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;clear:both}
+.qc-choice,.qc-primary,.qc-edit-med{background:var(--q-soft);border:1px solid var(--q-line);border-radius:9px;color:var(--q-text);padding:10px 13px;font:inherit;font-size:13px;min-height:41px;cursor:pointer}
+.qc-choice.selected,.qc-primary{background:var(--q-accent);border-color:var(--q-accent);color:#fff}
+.qc-choice:disabled,.qc-primary:disabled{opacity:.55;cursor:default}
+.qc-vitals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.qc-vitals label,.qc-followup label,#qcMedicine label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--q-muted);min-width:0}
+.qc-vitals input,.qc-followup input,.qc-library>input,#qcMedicine input,#qcCustomTest input{width:100%;min-width:0;background:var(--q-soft);border:1px solid var(--q-line);border-radius:9px;color:var(--q-text);padding:12px;font:inherit;min-height:43px}
+.qc-library>.qc-chips:first-of-type .qc-choice{border-radius:30px}
+#qcMedicine form{display:grid;gap:15px}#qcMedicine{width:min(600px,calc(100vw - 24px))}
+.qc-selected-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--q-line)}
+.qc-selected-row span{overflow-wrap:anywhere}.qc-legacy{margin:14px 0;padding:12px;border:1px solid var(--q-line);border-radius:9px}
+#qabulFocus .qc-test-nav{display:flex!important}#qabulFocus #testPresets [hidden]{display:none!important}
+#qabulFocus.qflow #testPresets{max-height:450px;overflow:auto}.qc-observations input:invalid{border-color:#d45c68}
+
+.qc-output-bar{display:grid;gap:8px;margin:12px 0}.qc-output-bar button,.qc-format-cards button{border:1px solid var(--q-line);border-radius:9px;background:var(--q-soft);color:var(--q-text);padding:12px;font:inherit;cursor:pointer}.qc-output-bar button[aria-pressed=true]{background:var(--q-accent);color:#fff}.qc-output-bar select{width:100%;padding:12px;background:var(--q-soft);color:var(--q-text);border:1px solid var(--q-line);border-radius:9px}.qc-format-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.qc-format-cards[hidden]{display:none}.qc-format-cards button{min-height:86px;font-weight:600;text-align:left}.docPage[data-paper=A5]{width:148mm!important;min-width:148mm!important;max-width:148mm!important;height:210mm!important;min-height:210mm!important;max-height:210mm!important}@media print{#qabulPrint .docPage[data-paper=A5]{width:148mm!important;min-width:148mm!important;max-width:148mm!important;height:210mm!important;min-height:210mm!important;max-height:210mm!important}}@media(max-width:500px){.qc-format-cards{grid-template-columns:1fr}.qc-vitals{gap:8px}.qc-observations{padding:12px}.qc-choice{padding:9px 11px}}
+.qc-diet-list{display:flex;flex-wrap:wrap;gap:9px;max-height:420px;overflow:auto}.qc-diet-item{display:flex;align-items:center;gap:3px}.qc-diet-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--q-soft);border-radius:12px}.qc-diet-metrics dd{margin:0;font-weight:700}#qcDietInfo label{display:flex;flex-direction:column;gap:8px;margin:13px 0}#qcDietInfo textarea{min-height:80px}
+.qc-med-preview{margin:14px 0;min-width:0}.qc-med-preview[hidden]{display:none}.qc-med-table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--q-line);border-radius:9px}.qc-med-preview table{border-collapse:collapse;min-width:780px;font-size:12px;width:100%}.qc-med-preview th,.qc-med-preview td{padding:10px;border:1px solid var(--q-line);text-align:left;vertical-align:top;white-space:pre-wrap}.qc-med-preview p{white-space:pre-wrap;line-height:1.6}.qc-med-preview th{background:var(--q-soft)}#qcDiagnoses>.qc-chips:last-of-type{max-height:420px;overflow:auto}.qc-drag-med{cursor:grab}

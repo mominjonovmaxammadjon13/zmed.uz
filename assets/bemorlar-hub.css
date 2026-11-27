@@ -1,0 +1,175 @@
+/* UZMED Bemorlarim — scoped responsive workspace, existing light/dark tokens. */
+#uzBemorlarHub,
+#uzBemorlarHub * { box-sizing: border-box; }
+#uzBemorlarHub.ubh-screen {
+  width: 100%; min-height: 100%; padding: clamp(20px, 4vw, 44px);
+  overflow-y: auto; color: var(--um-ink, #e8f4f7);
+  background: var(--um-bg, #0a1c29);
+  font: inherit;
+}
+#uzBemorlarHub .ubh-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px 24px; margin: 0 0 14px;
+}
+#uzBemorlarHub .ubh-overline {
+  display: block; color: var(--um-accent, #35dbcb);
+  font-size: 11px; font-weight: 750; letter-spacing: .12em; line-height: 1.5;
+  text-transform: uppercase;
+}
+#uzBemorlarHub .ubh-head h1 {
+  color: inherit; margin: 8px 0 0; line-height: 1.18;
+  font-size: clamp(28px, 4vw, 39px); font-weight: 760; letter-spacing: -.03em;
+}
+#uzBemorlarHub .ubh-back {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 43px; max-width: 100%; padding: 10px 15px;
+  border: 1px solid var(--um-line, rgba(100, 170, 190, .35)); border-radius: 12px;
+  background: var(--um-surface, rgba(19, 39, 51, .78));
+  color: var(--um-ink, #e8f4f7); text-decoration: none; font-size: 13px;
+  font-weight: 650; line-height: 1.4; white-space: normal;
+}
+#uzBemorlarHub .ubh-description {
+  display: block; max-width: 640px; margin: 10px 0 25px;
+  color: var(--um-muted, #b3c8d0); line-height: 1.65; font-size: 14px;
+}
+#uzBemorlarHub .ubh-grid {
+  display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px; width: 100%; max-width: 1020px; margin: 0;
+}
+#uzBemorlarHub button.ubh-tile {
+  appearance: none; display: flex !important; flex-direction: column !important;
+  align-items: flex-start !important; justify-content: flex-start !important;
+  position: relative; gap: 9px; width: 100%; min-width: 0;
+  min-height: 182px; padding: 21px 23px; margin: 0;
+  border: 1px solid var(--um-line, rgba(107, 190, 190, .28));
+  border-radius: 19px; box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  background: var(--um-surface, #152c3a); color: var(--um-ink, #e8f4f7);
+  font: inherit; text-align: left; cursor: pointer;
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+#uzBemorlarHub button.ubh-tile:hover {
+  border-color: var(--um-accent, #35dbcb);
+  transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 0, 0, .11);
+}
+#uzBemorlarHub .ubh-tile-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 43px; height: 43px; flex: 0 0 43px;
+  border-radius: 13px; background: var(--um-tint, rgba(20, 184, 166, .15));
+  color: var(--um-accent, #35dbcb); font-size: 25px; line-height: 1;
+}
+#uzBemorlarHub .ubh-tile strong {
+  display: block; margin: 3px 0 0; color: inherit;
+  font-size: 17px; font-weight: 720; line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+#uzBemorlarHub .ubh-tile small {
+  display: block; color: var(--um-muted, #b3c8d0);
+  font-size: 13px; line-height: 1.5; font-weight: 400;
+  overflow-wrap: anywhere;
+}
+#uzBemorlarHub .ubh-arrow {
+  position: absolute; right: 19px; top: 21px;
+  color: var(--um-accent, #35dbcb); font-size: 20px; line-height: 1;
+}
+#uzBemorlarHub :is(.ubh-tile, .ubh-back, .ubh-button):focus-visible {
+  outline: 3px solid var(--um-accent, #35dbcb); outline-offset: 3px;
+}
+#uzBemorlarHub .ubh-qabul {max-width: 1300px;}
+#uzBemorlarHub .ubh-tools {display:flex; gap:12px; flex-wrap:wrap; margin:0 0 12px;}
+#uzBemorlarHub .ubh-button {
+  min-height: 43px; border-radius: 11px; padding: 10px 16px;
+  border: 1px solid var(--um-line, #5a7680);
+  background: var(--um-surface, #152c3a); color: var(--um-ink, #e8f4f7);
+  font: inherit; cursor: pointer;
+}
+#uzBemorlarHub .ubh-primary {background: var(--um-accent, #11877f); color: #fff;}
+#uzBemorlarHub .ubh-secondary {background: transparent;}
+#uzBemorlarHub button:disabled {opacity:.55;cursor:wait;}
+#uzBemorlarHub .ubh-note {
+  padding: 12px 14px; border: 1px solid var(--um-line, #5a7680);
+  border-radius: 12px; color: var(--um-muted, #b3c8d0);
+  font-size: 13px; line-height: 1.5;
+}
+#uzBemorlarHub .ubh-error {color: #fda4af;}
+#uzBemorlarHub .ubh-frame {
+  display:block; width:100%; min-height:82vh; border:1px solid var(--um-line, #5a7680);
+  border-radius:14px; background:var(--um-bg,#0c1720);
+}
+@media (max-width: 780px) {
+  #uzBemorlarHub.ubh-screen {padding: 20px 15px 28px;}
+  #uzBemorlarHub .ubh-grid {grid-template-columns: minmax(0,1fr); gap: 12px;}
+  #uzBemorlarHub button.ubh-tile {min-height: 148px; padding: 17px 19px;}
+  #uzBemorlarHub .ubh-arrow {right: 17px; top: 16px;}
+  #uzBemorlarHub .ubh-head {flex-direction: column; align-items: flex-start;}
+  #uzBemorlarHub .ubh-head h1 {font-size: 30px;}
+  #uzBemorlarHub .ubh-description {margin-bottom: 20px;}
+  #uzBemorlarHub .ubh-frame {min-height: 82vh;}
+}
+@media (prefers-reduced-motion: reduce) {
+  #uzBemorlarHub .ubh-tile {transition:none;}
+  #uzBemorlarHub .ubh-tile:hover {transform:none;}
+}
+
+/* Visit shell: the writing area owns the remaining space, not a fixed minimum. */
+body#uzmedMobile #uzBemorlarHub.ubh-visit-mode.active{display:flex!important;flex-direction:column;height:100%!important;max-height:100%!important;min-height:0!important;max-width:none!important;padding:12px!important;gap:8px;overflow:hidden!important}
+#uzBemorlarHub.ubh-visit-mode .ubh-head{margin:0;align-items:center;gap:8px;flex-shrink:0}
+#uzBemorlarHub.ubh-visit-mode .ubh-head h1{font-size:20px;margin:0}
+#uzBemorlarHub.ubh-visit-mode .ubh-overline{display:none}
+#uzBemorlarHub.ubh-visit-mode .ubh-description{margin:0;font-size:12px;max-width:100%;overflow-wrap:anywhere;flex-shrink:0}
+#uzBemorlarHub.ubh-visit-mode .ubh-qabul{display:flex;flex:1 1 0;flex-direction:column;max-width:none;min-width:0;min-height:0;gap:6px}
+#uzBemorlarHub.ubh-visit-mode .ubh-tools{display:grid;grid-template-columns:44px minmax(0,1fr) 104px;gap:6px;margin:0;flex-shrink:0}
+#uzBemorlarHub.ubh-visit-mode .ubh-tools .ubh-button{min-width:0;min-height:44px;padding:8px;font-size:13px;line-height:1.25;font-weight:600;white-space:normal}
+#uzBemorlarHub.ubh-visit-mode .ubh-primary{color:var(--um-bg,#0c1720);background:var(--um-accent,#5bd4bd)}
+#uzBemorlarHub.ubh-visit-mode .ubh-note{padding:4px 8px;margin:0;flex:0 0 auto;max-height:25%;overflow:auto;line-height:1.45;font-size:12px;border:0;border-radius:0;color:var(--um-muted,#a0b5c2)}
+#uzBemorlarHub.ubh-visit-mode .ubh-note[role=alert]{color:#fb7185;border-left:3px solid currentColor}
+#uzBemorlarHub.ubh-visit-mode .ubh-frame{width:100%;height:0;min-width:0;min-height:0;flex:1 1 0;border-radius:12px}
+@media(max-width:1023px){
+ html:has(#uzBemorlarHub.ubh-visit-mode.active) .uxn-header{visibility:hidden!important;pointer-events:none!important}
+ body#uzmedMobile #uzBemorlarHub.ubh-visit-mode.active{position:fixed!important;inset:var(--ubh-viewport-top,0px) 0 auto!important;width:100%!important;height:var(--ubh-viewport-height,100dvh)!important;max-height:var(--ubh-viewport-height,100dvh)!important;z-index:100;padding:8px 8px max(8px,env(safe-area-inset-bottom))!important;gap:0}
+ #uzBemorlarHub.ubh-visit-mode .ubh-head,#uzBemorlarHub.ubh-visit-mode .ubh-description{display:none}
+ #uzBemorlarHub.ubh-visit-mode .ubh-tools{grid-template-columns:44px minmax(0,1fr) 96px}
+ #uzBemorlarHub.ubh-visit-mode .ubh-tools .ubh-button{font-size:12px;border-radius:10px}
+ #uzBemorlarHub.ubh-visit-mode .ubh-tools .ubh-button:first-child{font-size:22px}
+}
+
+.ubh-print-dialog{width:min(420px,calc(100vw - 32px));box-sizing:border-box;border:1px solid #45606c;border-radius:16px;padding:20px;background:#14232e;color:#e4eef3;font:16px/1.5 system-ui}
+.ubh-print-dialog::backdrop{background:#0008}.ubh-print-dialog a{display:block;margin:12px 0;color:#74e0cc;overflow-wrap:anywhere}
+
+/* UZMED qabul edge-to-edge v1.
+   Unframe ONLY visit shell; retain real inputs, buttons, modal dialogs and clinical state. */
+#uzBemorlarHub.ubh-visit-mode .ubh-qabul{
+ width:100%;max-width:none;min-width:0;margin:0;padding:0;
+ border:0;border-radius:0;outline:0;box-shadow:none;background:transparent;
+}
+#uzBemorlarHub.ubh-visit-mode .ubh-frame{
+ display:block;width:100%;min-width:0;min-height:0;
+ border:0!important;border-radius:0!important;outline:0!important;
+ box-shadow:none!important;background:transparent!important;
+ margin:0!important;padding:0!important;
+}
+@media screen and (max-width:1023px){
+ body#uzmedMobile #uzBemorlarHub.ubh-visit-mode.active{
+  padding:0!important;gap:0!important;
+ }
+ #uzBemorlarHub.ubh-visit-mode .ubh-qabul{gap:0!important}
+ #uzBemorlarHub.ubh-visit-mode .ubh-tools{
+  padding:7px 9px 5px!important;
+  background:transparent!important;border:0!important;
+  border-radius:0!important;box-shadow:none!important;
+ }
+ #uzBemorlarHub.ubh-visit-mode .ubh-note:not([role="alert"]){
+  padding:0 9px 4px!important;margin:0!important;
+  background:transparent!important;border:0!important;
+  border-radius:0!important;box-shadow:none!important;
+ }
+ #uzBemorlarHub.ubh-visit-mode .ubh-note[role="alert"]{
+  padding:5px 9px!important;
+ }
+}
+@media screen and (min-width:1024px){
+ #uzBemorlarHub.ubh-visit-mode.active{
+  padding:0!important;
+ }
+ #uzBemorlarHub.ubh-visit-mode .ubh-tools{padding:8px 14px 4px;margin:0!important}
+ #uzBemorlarHub.ubh-visit-mode .ubh-note:not([role="alert"]){margin:0!important;padding:0 14px 5px;border:0}
+}

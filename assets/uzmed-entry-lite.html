@@ -1,0 +1,373 @@
+<!doctype html><html lang="uz" data-uzmed-ux="on"><head><script src="/assets/uzmed-icons-20261025.js?v=2" data-uzmed-site-icons="20261025"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex"><title>UZMED</title><link rel="preload" as="script" href="/assets/patients.js?v=20261109-passport5"><link rel="preload" as="script" href="/assets/bemorlar-hub.js?v=20261109-passport5"><style id="uzmed-supabase-auth-style">
+#uzmedAuthOverlay[hidden]{display:none!important}
+#uzmedAuthOverlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;overflow:auto;padding:max(22px,env(safe-area-inset-top)) 18px max(22px,env(safe-area-inset-bottom));font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f8fbff;background:
+radial-gradient(circle at 16% 10%,rgba(47,120,255,.26),transparent 34%),
+radial-gradient(circle at 88% 82%,rgba(24,97,220,.26),transparent 38%),
+linear-gradient(145deg,#040a14 0%,#071426 50%,#071121 100%)}
+#uzmedAuthOverlay:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.03),transparent 35%,rgba(51,121,255,.05));}
+body.uz-auth-locked{overflow:hidden!important}
+body.uz-auth-locked>.phone-shell{pointer-events:none!important;user-select:none!important;filter:blur(2px) brightness(.42);transform:scale(.995)}
+.uz-auth-stage{width:min(640px,100%);margin:auto;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1}
+.uz-auth-brand{text-align:center;margin:2px 0 2px}.uz-auth-brand-logo{width:78px;height:78px;border-radius:22px;margin:0 auto 8px;display:grid;place-items:center;background:linear-gradient(145deg,#ff174c,#cc0d42);box-shadow:0 18px 50px rgba(239,18,74,.28),inset 0 1px 0 rgba(255,255,255,.28);position:relative;overflow:hidden}.uz-auth-brand-logo:before,.uz-auth-brand-logo:after{content:"";position:absolute;background:#fff;border-radius:6px}.uz-auth-brand-logo:before{width:42px;height:14px}.uz-auth-brand-logo:after{width:14px;height:42px}.uz-auth-brand-name{font-size:35px;line-height:1;font-weight:900;letter-spacing:-1.2px;text-shadow:0 8px 28px rgba(0,0,0,.32)}.uz-auth-brand-tag{margin-top:7px;font-size:15px;color:#b9c8e3}
+.uz-auth-box{width:min(600px,100%);max-height:none;overflow:visible;background:linear-gradient(145deg,rgba(20,38,68,.80),rgba(8,20,41,.78));color:#f7faff;border:1px solid rgba(111,160,232,.34);border-radius:32px;box-shadow:0 32px 100px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.10),inset 0 0 50px rgba(32,104,220,.05);padding:28px 30px 26px;backdrop-filter:blur(30px) saturate(135%);-webkit-backdrop-filter:blur(30px) saturate(135%)}
+.uz-auth-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}.uz-auth-logo{display:none}.uz-auth-title{font-size:29px;font-weight:900;line-height:1.12;letter-spacing:-.6px;flex:1}.uz-auth-subtitle{font-size:15px;color:#aebbd3;margin-top:6px}.uz-auth-close{border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.06);color:#e9f0ff;width:46px;height:46px;border-radius:15px;font-size:27px;cursor:pointer;display:grid;place-items:center}.uz-auth-close[hidden]{display:none!important}
+.uz-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:rgba(255,255,255,.055);padding:5px;border-radius:18px;margin-bottom:20px;border:1px solid rgba(255,255,255,.035)}.uz-auth-tab{border:0;background:transparent;color:#9eabc1;font-weight:800;padding:13px;border-radius:14px;cursor:pointer;font-size:14px}.uz-auth-tab.active{background:linear-gradient(180deg,rgba(116,164,236,.48),rgba(69,111,180,.45));color:#fff;box-shadow:inset 0 0 0 1px rgba(145,188,255,.48),0 5px 18px rgba(30,91,183,.26)}
+.uz-auth-field{margin:14px 0}.uz-auth-label{display:block;font-size:13px;font-weight:800;margin:0 0 8px;color:#b8c5dd}.uz-auth-input-wrap{position:relative}.uz-auth-input-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:#c9d7ee;opacity:.9;pointer-events:none}.uz-auth-input{width:100%;height:56px;border:1px solid rgba(152,176,216,.28);border-radius:16px;background:rgba(255,255,255,.055);color:#f9fbff;padding:0 48px 0 48px;font:600 15px/1.2 inherit;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}.uz-auth-input::placeholder{color:#76859d}.uz-auth-input:focus{border-color:#699df2;box-shadow:0 0 0 3px rgba(68,130,230,.14),inset 0 1px 0 rgba(255,255,255,.04)}.uz-auth-input.no-icon{padding-left:15px}.uz-auth-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;background:transparent;color:#b8caf0;border-radius:12px;cursor:pointer;display:grid;place-items:center}.uz-auth-eye svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}.uz-auth-eye:hover{background:rgba(255,255,255,.06)}
+.uz-auth-extra{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 16px;font-size:13px}.uz-auth-remember{display:flex;align-items:center;gap:8px;color:#b8c5dc;cursor:pointer}.uz-auth-remember input{width:18px;height:18px;accent-color:#1988ff}.uz-auth-link{border:0;background:transparent;color:#3c9bff;font:700 13px/1.2 inherit;cursor:pointer;padding:4px 0}.uz-auth-link:hover{text-decoration:underline}
+.uz-auth-btn{width:100%;border:0;border-radius:16px;min-height:55px;padding:13px 16px;font:800 15px/1.2 inherit;cursor:pointer;transition:transform .15s ease,filter .15s ease,background .15s ease}.uz-auth-btn:active{transform:scale(.985)}.uz-auth-primary{background:linear-gradient(90deg,#ff164a,#e80c49);color:white;box-shadow:0 12px 32px rgba(232,12,73,.23)}.uz-auth-primary:hover{filter:brightness(1.06)}.uz-auth-primary:disabled{opacity:.58;cursor:wait}.uz-auth-secondary{background:rgba(255,255,255,.055);color:#edf3ff;border:1px solid rgba(132,160,205,.23);margin-top:10px}.uz-auth-danger{background:rgba(220,38,38,.11);color:#ff7c87;border:1px solid rgba(244,63,94,.16);margin-top:10px}.uz-auth-admin{background:rgba(24,50,88,.42);color:#f3f7ff;border:1px solid rgba(92,153,245,.58);margin-top:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}.uz-auth-admin:hover{background:rgba(42,78,130,.5)}
+.uz-auth-divider{display:flex;align-items:center;gap:14px;margin:20px 0;color:#71829f;font-size:12px;font-weight:800}.uz-auth-divider:before,.uz-auth-divider:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(130,156,198,.4))}.uz-auth-divider:after{background:linear-gradient(90deg,rgba(130,156,198,.4),transparent)}
+.uz-auth-google{display:flex;align-items:center;justify-content:center;gap:10px}.uz-auth-google-g{font:900 22px/1 Arial,sans-serif;background:conic-gradient(from -45deg,#4285f4 0 25%,#34a853 0 50%,#fbbc05 0 75%,#ea4335 0);-webkit-background-clip:text;background-clip:text;color:transparent}.uz-auth-inline{text-align:center;color:#9eacc3;font-size:13px;margin-top:16px}.uz-auth-inline button{border:0;background:transparent;color:#3c9bff;font:800 13px/1.2 inherit;cursor:pointer;padding:0 2px}
+.uz-auth-note{font-size:12px;line-height:1.55;color:#8f9eb7;margin-top:13px}.uz-auth-msg{display:none;margin:12px 0 0;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.5}.uz-auth-msg.show{display:block}.uz-auth-msg.ok{background:rgba(16,185,129,.13);color:#69e0b3;border:1px solid rgba(16,185,129,.15)}.uz-auth-msg.err{background:rgba(239,68,68,.12);color:#ff737d;border:1px solid rgba(239,68,68,.16)}.uz-auth-msg.info{background:rgba(59,130,246,.12);color:#8ebcff;border:1px solid rgba(59,130,246,.16)}
+.uz-auth-admin-hint{text-align:center;color:#7889a6;font-size:11px;margin-top:10px}.uz-auth-userbar{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid rgba(135,160,202,.2);border-radius:17px;background:rgba(255,255,255,.045);margin-bottom:15px}.uz-auth-bigavatar{width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#ff174c,#cc0d42);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}.uz-auth-email{font-size:13px;font-weight:750;word-break:break-all}.uz-auth-online{font-size:11px;color:#64d6aa;margin-top:3px}.uz-auth-offline{font-size:11px;color:#f5b861;margin-top:3px}.uz-auth-reset-title{font-size:18px;font-weight:850;margin-bottom:4px}.uz-auth-reset-copy{font-size:12px;line-height:1.55;color:#9daac0;margin-bottom:10px}
+#uzmedAuthOverlay.uz-admin-mode .uz-auth-box{border-color:rgba(91,155,255,.58);box-shadow:0 32px 100px rgba(0,0,0,.48),0 0 60px rgba(34,112,244,.13),inset 0 1px 0 rgba(255,255,255,.1)}
+#uzmedAuthOverlay.uz-admin-mode .uz-auth-title:after{content:" · Admin";color:#61a7ff;font-weight:800}
+@media(max-width:620px){#uzmedAuthOverlay{padding:max(14px,env(safe-area-inset-top)) 12px max(14px,env(safe-area-inset-bottom));align-items:flex-start}.uz-auth-stage{gap:10px}.uz-auth-brand{margin-top:5px}.uz-auth-brand-logo{width:64px;height:64px;border-radius:19px}.uz-auth-brand-logo:before{width:34px;height:12px}.uz-auth-brand-logo:after{width:12px;height:34px}.uz-auth-brand-name{font-size:30px}.uz-auth-brand-tag{font-size:13px}.uz-auth-box{border-radius:26px;padding:22px 18px 20px}.uz-auth-title{font-size:25px}.uz-auth-input{height:54px}.uz-auth-btn{min-height:52px}.uz-auth-head{margin-bottom:15px}}
+@media(max-height:760px){#uzmedAuthOverlay{align-items:flex-start}.uz-auth-brand-logo{width:56px;height:56px}.uz-auth-brand-name{font-size:27px}.uz-auth-brand-tag{display:none}.uz-auth-box{padding-top:20px}.uz-auth-field{margin:10px 0}.uz-auth-input{height:50px}.uz-auth-btn{min-height:49px}.uz-auth-divider{margin:14px 0}.uz-auth-inline{margin-top:12px}}
+</style><link id="up-layout-style" rel="stylesheet" href="/assets/patients.css?v=20261026-entry1"><link rel="stylesheet" href="/assets/uzmed-ux-layout10.css"><link rel="stylesheet" href="/assets/uzmed-login-neon-20261026.css?v=3-glass"><style>
+*{box-sizing:border-box}body{margin:0;min-width:280px;font:16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button{font:inherit;cursor:pointer}button,input,select,textarea{max-width:100%}#entryWaiting{min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:10px;max-width:1120px;margin:0 auto;padding:24px 20px;color:var(--um-muted)}#entryWaiting[hidden]{display:none}#entryTitle{font-size:18px;font-weight:650;color:var(--um-ink)}#entryStatus{margin:0;font-size:14px}#entryContent>iframe{display:block;border:0;width:100%;height:100dvh}.screen{display:none}.screen.active{display:block}.screens{min-height:0}#patients-screen{max-width:1120px;margin:0 auto;padding:24px 20px 32px!important}#uzAuthAdminEntryBtn,.uz-auth-admin-hint{display:none!important}@media(max-width:650px){#patients-screen{padding:20px 16px 28px!important}}
+</style><style>#entryWaiting{min-height:100dvh!important;max-width:none!important;align-items:center!important;text-align:center!important;gap:7px!important;background:radial-gradient(circle at 50% 38%,#123a48 0%,#071925 67%,#06131e 100%);color:#d4eaf0!important;padding:32px 16px!important}#entryWaiting .uzmed-premium-load{width:180px;height:180px;position:relative;margin:0 auto 8px;filter:drop-shadow(0 0 20px rgba(75,231,215,.28))}#entryWaiting .upl-hex{position:absolute;clip-path:polygon(50% 0,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);background:conic-gradient(#63f5df,#245c84,#6cc8ff,#146c72,#63f5df);animation:uzmedPremiumSpin 6s linear infinite}#entryWaiting .upl-hex:after{content:"";position:absolute;inset:4px;clip-path:inherit;background:#092331}#entryWaiting .upl-outer{inset:7px}#entryWaiting .upl-inner{inset:34px;animation-direction:reverse;animation-duration:4s}#entryWaiting .upl-center{position:absolute;inset:63px;display:grid;place-items:center;color:#8cf5eb;font-size:34px;text-shadow:0 0 15px #43f5e2;animation:uzmedPremiumPulse 2s ease-in-out infinite alternate}#entryWaiting .upl-brand{font-size:33px;font-weight:850;letter-spacing:.17em;color:#f4ffff;text-shadow:0 0 20px rgba(85,228,219,.35)}#entryWaiting .upl-label{font-size:13px;font-weight:750;letter-spacing:.35em;color:#62e9dc}#entryWaiting #entryTitle{font-size:15px!important;font-weight:500!important;color:#d3e8ee!important;margin-top:14px}#entryWaiting #entryStatus{font-size:13px!important;color:#9db7c3!important}#entryWaiting #entryRetry{padding:12px 18px;border-radius:12px;background:#196e73;color:#fff;border:1px solid #3cc7c1;margin-top:12px}@keyframes uzmedPremiumSpin{to{transform:rotate(360deg)}}@keyframes uzmedPremiumPulse{to{opacity:.5;transform:scale(.88)}}@media(prefers-reduced-motion:reduce){#entryWaiting .upl-hex,#entryWaiting .upl-center{animation:none!important}}</style><link rel="stylesheet" href="/assets/uzmed-qabul-start-20261025.css?v=20261109-passport5"><link rel="stylesheet" href="/assets/uzmed-qabul-premium-v1.css?v=20261106-registry1"><link rel="stylesheet" href="/assets/uzmed-qabul-global-menu-v2.css?v=20261103-2120"><link rel="stylesheet" href="/assets/uzmed-new-patient-v1.css?v=20261105-compact1"><link rel="stylesheet" href="/assets/bemorlar-hub.css?v=20261026-print1"><script src="/assets/uzmed-qabul-pilot/docx.js?v=20261025-medical2"></script><link rel="stylesheet" href="/assets/uzmed-entry-real-loader-20261103.css?v=1"></head><body id="uzmedMobile"><div id="entryWaiting" class="uzmed-boot-v1" aria-busy="true" aria-label="UZMED yuklanmoqda">
+    <div class="uzb-ambient-wave" aria-hidden="true"></div>
+    <main class="uzmed-startup uzmed-boot-content">
+      <div class="uzb-icon-area" aria-hidden="true">
+        <span class="uzb-aura"></span>
+        <span class="uzb-orbit"></span>
+        <span class="uzb-float uzb-float-a">
+          <svg viewBox="0 0 32 32"><path d="M15 6c-5-6-13 3-8 8-4 5 0 12 6 11l2-3M17 6c5-6 13 3 8 8 4 5 0 12-6 11l-2-3M16 5v22M8 14c3-1 5 1 5 4m11-4c-3-1-5 1-5 4"/></svg>
+        </span>
+        <span class="uzb-float uzb-float-b">
+          <svg viewBox="0 0 32 32"><path d="M9 5v11a6 6 0 0 0 12 0V5M6 6h6m6 0h6M15 22v2a5 5 0 0 0 10 0v-6"/><circle cx="25" cy="15" r="3"/></svg>
+        </span>
+        <span class="uzb-float uzb-float-c">
+          <svg viewBox="0 0 32 32"><path d="M12 4h8m-6 0v9L7 25a2 2 0 0 0 2 3h14a2 2 0 0 0 2-3l-7-12V4M11 21h10"/></svg>
+        </span>
+        <span class="uzb-main-icon">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M16 51h20l9-12 13 29 11-26 8 9h8" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M21 30v-7h10M70 23h10v10M21 70v7h10M70 77h10V67" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".62"/>
+          </svg>
+        </span>
+        <span class="uzb-plus">+</span>
+      </div>
+      <h1 class="uzmed-startup-name uzb-brand">UZMED</h1>
+      <p class="uzb-tagline">KLINIK ISH MUHITI · MEDIKAL AI</p>
+      <output id="uzb-counter" class="uzb-counter" aria-live="off">0%</output>
+      <p id="entryTitle" class="uzb-title">Yuklanmoqda...</p>
+      <p id="entryStatus" role="status" aria-live="polite">Bo‘lim tayyorlanmoqda</p>
+      <div id="uzb-progress" class="uzmed-startup-progress uzb-progress" role="progressbar" aria-label="UZMED yuklanishi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="uzb-bar"></span></div>
+      <div class="uzb-thinking" aria-hidden="true"><i></i><i></i><i></i></div>
+      <button id="entryRetry" type="button" hidden>Qayta urinish</button>
+    </main>
+    <div class="uzb-footer">UZMED · Tibbiyot va texnologiya</div>
+  </div><script src="/assets/uzmed-entry-real-loader-20261103.js?v=20261106-registry2"></script><main id="entryContent"><div class="screens"></div></main><div id="uzmedAuthOverlay" hidden aria-hidden="true">
+  <div class="uz-auth-stage">
+    <div class="uz-auth-brand" aria-hidden="true">
+      <div class="uz-auth-brand-logo"></div>
+      <div class="uz-auth-brand-name">UZMED</div>
+      <div class="uz-auth-brand-tag">Sog‘lig‘ingiz biz uchun muhim</div>
+    </div>
+    <div class="uz-auth-box" role="dialog" aria-modal="true" aria-labelledby="uzmedAuthTitle">
+      <div class="uz-auth-head">
+        <div class="uz-auth-logo">+</div>
+        <div style="min-width:0;flex:1"><div class="uz-auth-title" id="uzmedAuthTitle">UZMED akkaunti</div><div class="uz-auth-subtitle">Supabase orqali xavfsiz kirish</div></div>
+        <button class="uz-auth-close" type="button" id="uzmedAuthClose" aria-label="Yopish" hidden>×</button>
+      </div>
+      <div id="uzmedAuthSignedOut">
+        <div class="uz-auth-tabs"><button class="uz-auth-tab active" type="button" data-auth-tab="login">Kirish</button><button class="uz-auth-tab" type="button" data-auth-tab="register">Ro‘yxatdan o‘tish</button></div>
+        <div id="uzmedAuthLoginPane">
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthEmail">Email</label><div class="uz-auth-input-wrap"><svg class="uz-auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><input class="uz-auth-input" id="uzAuthEmail" type="email" autocomplete="email" inputmode="email" placeholder="email@example.com"></div></div>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthPassword">UZMED paroli</label><div class="uz-auth-input-wrap"><svg class="uz-auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><input class="uz-auth-input" id="uzAuthPassword" type="password" autocomplete="current-password" placeholder="UZMED parolingiz"><button class="uz-auth-eye" type="button" id="uzAuthPasswordEye" aria-label="Parolni ko‘rsat"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div>
+          <div class="uz-auth-extra"><label class="uz-auth-remember"><input type="checkbox" id="uzAuthRemember" checked><span>Meni eslab qol</span></label><button class="uz-auth-link" type="button" id="uzAuthForgotBtn">Parolni unutdingizmi?</button></div>
+          <button class="uz-auth-btn uz-auth-primary" type="button" id="uzAuthLoginBtn">Kirish →</button>
+          <div class="uz-auth-divider"><span>YOKI</span></div>
+          <button class="uz-auth-btn uz-auth-secondary uz-auth-google" type="button" id="uzAuthGoogleBtn"><span class="uz-auth-google-g">G</span><span>Gmail / Google orqali kirish</span></button>
+          <div class="uz-auth-inline">Akkauntingiz yo‘qmi? <button type="button" id="uzAuthGoRegister">Ro‘yxatdan o‘tish</button></div>
+          <button class="uz-auth-btn uz-auth-admin" type="button" id="uzAuthAdminEntryBtn">🛡️ Admin panelga kirish →</button>
+          <div class="uz-auth-admin-hint">Admin panel faqat ruxsat berilgan akkaunt uchun.</div>
+        </div>
+        <div id="uzmedAuthRegisterPane" hidden>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthRegName">Ism</label><div class="uz-auth-input-wrap"><input class="uz-auth-input no-icon" id="uzAuthRegName" type="text" autocomplete="name" placeholder="Ismingiz"></div></div>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthRegEmail">Email</label><div class="uz-auth-input-wrap"><svg class="uz-auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><input class="uz-auth-input" id="uzAuthRegEmail" type="email" autocomplete="email" inputmode="email" placeholder="email@example.com"></div></div>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthRegPhone">Telefon raqami <b style="color:#fca5a5">*</b></label><div class="uz-auth-input-wrap"><input class="uz-auth-input no-icon" id="uzAuthRegPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+998 90 123 45 67"></div><div class="uz-auth-note">Telegram botda tasdiqlangan shu raqam bo‘lsa, akkaunt avtomatik bog‘lanadi.</div></div>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthRegPassword">UZMED paroli</label><div class="uz-auth-input-wrap"><svg class="uz-auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><input class="uz-auth-input" id="uzAuthRegPassword" type="password" autocomplete="new-password" placeholder="Kamida 8 ta belgi"><button class="uz-auth-eye" type="button" id="uzAuthRegPasswordEye" aria-label="Parolni ko‘rsat"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div>
+          <button class="uz-auth-btn uz-auth-primary" type="button" id="uzAuthRegisterBtn">Email + UZMED paroli bilan akkaunt ochish →</button>
+          <div class="uz-auth-divider"><span>YOKI</span></div>
+          <button class="uz-auth-btn uz-auth-secondary uz-auth-google" type="button" id="uzAuthRegisterGoogleBtn"><span class="uz-auth-google-g">G</span><span>Gmail bilan yangi akkaunt ochish</span></button>
+          <div class="uz-auth-note"><b>Gmail paroli bilan kirish:</b> “Gmail bilan yangi akkaunt ochish” tugmasini bosing. Gmail paroli faqat Google sahifasida kiritiladi va UZMED uni ko‘rmaydi. Email + parol usulini tanlasangiz, bu alohida UZMED paroli bo‘ladi.</div>
+          <div class="uz-auth-inline">Akkauntingiz bormi? <button type="button" id="uzAuthGoLogin">Kirish</button></div>
+        </div>
+        <div id="uzmedAuthResetPane" hidden>
+          <div class="uz-auth-reset-title">Yangi parol o‘rnating</div><div class="uz-auth-reset-copy" id="uzAuthResetCopy">Tiklash havolasi tasdiqlandi. Yangi parolni kiriting.</div>
+          <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthNewPassword">Yangi parol</label><div class="uz-auth-input-wrap"><svg class="uz-auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><input class="uz-auth-input" id="uzAuthNewPassword" type="password" autocomplete="new-password" placeholder="Kamida 8 ta belgi"><button class="uz-auth-eye" type="button" id="uzAuthNewPasswordEye" aria-label="Parolni ko‘rsat"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div>
+          <button class="uz-auth-btn uz-auth-primary" type="button" id="uzAuthSetPasswordBtn">Yangi parolni saqlash</button><button class="uz-auth-btn uz-auth-secondary" type="button" id="uzAuthForcedReloginBtn" hidden>Admin bergan parol bilan qayta kirish</button>
+        </div>
+        <div class="uz-auth-msg" id="uzAuthMsg"></div>
+      </div>
+      <div id="uzmedAuthSignedIn" hidden>
+        <div class="uz-auth-userbar"><div class="uz-auth-bigavatar" id="uzAuthBigAvatar">U</div><div style="min-width:0"><div class="uz-auth-email" id="uzAuthSignedEmail">—</div><div class="uz-auth-online" id="uzAuthConnState">Supabase bilan ulangan</div></div></div>
+        <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthFullName">Ism</label><input class="uz-auth-input no-icon" id="uzAuthFullName" type="text" autocomplete="name" placeholder="Ismingiz"></div>
+        <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthPhone">Telefon raqami <b style="color:#fca5a5">*</b></label><input class="uz-auth-input no-icon" id="uzAuthPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+998 90 123 45 67"><div class="uz-auth-note" id="uzAuthPhoneLinkState">Telefon majburiy.</div></div>
+        <div class="uz-auth-field"><label class="uz-auth-label" for="uzAuthSpecialty">Mutaxassislik</label><input class="uz-auth-input no-icon" id="uzAuthSpecialty" type="text" placeholder="Masalan: Allergologiya"></div>
+        <button class="uz-auth-btn uz-auth-primary" type="button" id="uzAuthSaveProfileBtn">Profilni saqlash</button>
+        <div class="uz-auth-msg" id="uzAuthProfileMsg"></div>
+        <button class="uz-auth-btn uz-auth-admin" type="button" id="uzAuthAdminBtn" hidden>🛡️ Admin panelni ochish →</button>
+        <button class="uz-auth-btn uz-auth-secondary" type="button" id="uzAuthChangePwBtn">Parolni o‘zgartirish</button><button class="uz-auth-btn uz-auth-danger" type="button" id="uzAuthLogoutBtn">Akkauntdan chiqish</button>
+      </div>
+    </div>
+  </div>
+</div><script src="/assets/uzmed-qabul-start-20261025.js?v=20261109-passport5"></script><script defer src="/assets/uzmed-qabul-premium-v1.js?v=20261109-passport5"></script><script defer src="/assets/uzmed-qabul-global-menu-v2.js?v=20261103-2120"></script><script>(function(W,D){'use strict';
+ const home=new URL('/?telegram_miniapp=1',location.origin);home.hash=location.hash;
+ const section=new URLSearchParams(location.search).get('section');
+ if(!['qabul','patients','bemorlar'].includes(section)){location.replace('/');return;}
+ const title=section==='qabul'?'Shifokor qabuli':'Bemorlarim';
+ let theme='dark';try{theme=localStorage.getItem('uzmed.ux.theme')||localStorage.getItem('uzmed_theme')||'dark';}catch{}
+ D.documentElement.setAttribute('data-uzmed-ux-theme',theme==='light'?'light':'dark');D.body.classList.toggle('dark-mode',theme!=='light');
+ D.title=title+' · UZMED';D.getElementById('entryTitle').textContent='Yuklanmoqda...';D.getElementById('entryStatus').textContent=title+' tayyorlanmoqda…';
+ let owner='',frame=null,patientsLoaded=false;
+ W.showScreen=function(id){if(!['patients-screen','uzBemorlarHub',...(section==='qabul'?['uzQabulEntry','uzQabulRegistry']:[])].includes(id))return;D.querySelectorAll('.screens>.screen').forEach(n=>n.classList.toggle('active',n.id===id));W.UZMEDEntryLoader?.screen(id);};
+ W.closeMenu=function(){};
+ D.addEventListener('click',function(e){
+  const link=e.target.closest?.('a[href="/"]');
+  if(!link||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  e.preventDefault();location.assign(home.href);
+ });
+ W.showNav=function(name){if(name==='patients')W.UZMEDPatients?.open();else location.assign(home.href);};
+ function launch(){
+  const state=W.UZMEDAuth?.getState?.(),id=state?.loggedIn?String(state.user?.id||''):'';
+  if(!id){owner='';frame?.remove();frame=null;W.UZMEDEntryLoader?.check();return;}
+  if(id===owner)return;
+  owner=id;frame?.remove();frame=null;
+  if(!patientsLoaded){
+   patientsLoaded=true;
+   const hub=D.createElement('script');hub.src='/assets/bemorlar-hub.js?v=20261109-passport5';
+   const failed=()=>{patientsLoaded=false;owner='';D.getElementById('entryStatus').textContent='Bo‘limni yuklab bo‘lmadi. Qayta urinib ko‘ring.';D.getElementById('entryRetry').hidden=false;W.UZMEDEntryLoader?.fail('Bo‘limni yuklab bo‘lmadi. Qayta urinib ko‘ring.');};
+   const s=D.createElement('script');s.src='/assets/patients.js?v=20261109-passport5';let pending=2;const ready=()=>{if(--pending!==0)return;if(!W.UZMEDPatients){failed();return;}W.UZMEDEntryLoader?.modulesReady();const task=section==='qabul'?W.UZMEDQabulStart?.open():W.UZMEDPatients.open();Promise.resolve(task).then(()=>W.UZMEDEntryLoader?.operationSettled(),e=>W.UZMEDEntryLoader?.fail(e?.message||'Bo‘limni ochib bo‘lmadi.'));};hub.onerror=failed;s.onerror=failed;hub.onload=ready;s.onload=ready;D.body.append(hub,s);
+  }else {W.UZMEDEntryLoader?.modulesReady();const task=section==='qabul'?W.UZMEDQabulStart?.open():W.UZMEDPatients?.open();Promise.resolve(task).then(()=>W.UZMEDEntryLoader?.operationSettled(),e=>W.UZMEDEntryLoader?.fail(e?.message||'Bo‘limni ochib bo‘lmadi.'));}
+ }
+ W.addEventListener('uzmed:auth-change',launch);
+ D.addEventListener('DOMContentLoaded',launch,{once:true});
+ D.getElementById('entryRetry').onclick=()=>location.reload();
+ 
+ D.getElementById('uzAuthAdminBtn').onclick=()=>location.assign(home.href);
+ W.addEventListener('pagehide',()=>{owner='';frame?.remove();frame=null;},{once:true});
+})(window,document);</script><script>
+(function(W,D){'use strict';
+  var SB_URL='https://objvfxcuxtzirnsynxgs.supabase.co';
+  var SB_KEY='sb_publishable_WR8t8iLJKZgpKuo8TtIZGA_y_ajSQT4';
+  var ADMIN_EMAIL='mominjonovmaxammadjon13@gmail.com';
+  var SESSION_KEY='uzmed_supabase_session_v2';
+  var USER_KEY='uzmed_supabase_user_v2';
+  var PROFILE_KEY='uzmed_supabase_profile_v2';
+  var REMEMBER_KEY='uzmed_supabase_remember_v2';
+  var TAB_TRUST_KEY='uzmed_verified_tab_v1';
+  var SIGNED_OUT_KEY='uzmed_explicit_signout_v1';
+  var signOutPending=null;
+  function explicitlySignedOut(){try{return !!localStorage.getItem(SIGNED_OUT_KEY)}catch(e){return false}}
+  function allowSignIn(){try{localStorage.removeItem(SIGNED_OUT_KEY)}catch(e){}}
+  function trustedTab(user){
+    try{
+      var x=safeJSON(sessionStorage.getItem(TAB_TRUST_KEY));
+      var elapsed=Date.now()-Number(x&&x.at);
+      var max=String(user&&user.email||'').toLowerCase()===ADMIN_EMAIL?8*3600000:24*3600000;
+      if(!x||String(x.user_id||'')!==String(user&&user.id||'')||!Number.isFinite(elapsed)||elapsed<0||elapsed>max)return false;
+      return true;
+    }catch(e){return false;}
+  }
+  function rememberTab(){
+    if(!state.verified||!state.session||!state.user)return;
+    try{
+      var prev=safeJSON(sessionStorage.getItem(TAB_TRUST_KEY)),now=Date.now();
+      var born=prev&&String(prev.user_id||'')===String(state.user.id)&&trustedTab(state.user)?prev.at:now;
+      sessionStorage.setItem(TAB_TRUST_KEY,JSON.stringify({user_id:String(state.user.id),at:born}));
+    }catch(e){}
+  }
+
+  var state={session:null,user:null,profile:null,busy:false,recovery:false,forceChange:false,adminLocked:false,adminMode:false,remember:true,googleEnabled:false,verified:false,telegramPhone:'',telegramLaunch:false};
+  var authEpoch=0;
+  function authChangedError(){var e=new Error('Akkaunt o‘zgardi. Oldingi kirish so‘rovi bekor qilindi.');e.authChanged=true;return e;}
+  var lastAuthIdentity=null;
+  function announceAuthState(force){
+    var logged=!!(state.verified&&state.user&&state.session),uid=logged?String(state.user.id||''):'';
+    var identity=(logged?'signed-in:':'signed-out:')+uid;
+    if(!force&&identity===lastAuthIdentity)return;
+    lastAuthIdentity=identity;
+    try{W.dispatchEvent(new CustomEvent('uzmed:auth-change',{detail:{userId:uid,loggedIn:logged}}))}catch(e){}
+  }
+  function $(id){return D.getElementById(id)}
+  function phoneDigits(v){var d=String(v||'').replace(/\D/g,'');if(d.length===9)d='998'+d;return /^\d{7,15}$/.test(d)?d:''}
+  function requirePhone(v){var d=phoneDigits(v);if(!d)throw new Error('Telefon raqamini to‘liq kiriting. Masalan: +998 90 123 45 67');return d}
+  var PENDING_PHONE_KEY='uzmed_pending_phone_v1';
+  function safeJSON(s){try{return JSON.parse(s)}catch(e){return null}}
+  function setRemember(v){state.remember=!!v;try{localStorage.setItem(REMEMBER_KEY,state.remember?'1':'0')}catch(e){}}
+  function storeSet(k,v){try{var target=state.remember?localStorage:sessionStorage,other=state.remember?sessionStorage:localStorage;other.removeItem(k);if(v!==null&&v!==undefined)target.setItem(k,JSON.stringify(v));else target.removeItem(k);}catch(e){}}
+  function loadLocal(){
+    try{state.remember=localStorage.getItem(REMEMBER_KEY)!=='0'}catch(e){state.remember=true}
+    state.session=explicitlySignedOut()?null:safeJSON(localStorage.getItem(SESSION_KEY)||sessionStorage.getItem(SESSION_KEY));
+    // Cached labels are not evidence of the identity owning the current token.
+    state.user=null;state.profile=null;state.verified=false;
+    try{localStorage.removeItem('uzadm_v4_ses');sessionStorage.removeItem('UZMED_SUPABASE_ADMIN_OK')}catch(e){}
+  }
+  function saveSession(x){state.session=x||null;storeSet(SESSION_KEY,state.session)}
+  function saveUser(x){
+    if(String(state.user&&state.user.id||'')!==String(x&&x.id||'')){state.verified=false;saveProfile(null)}
+    state.user=x||null;storeSet(USER_KEY,state.user);
+  }
+  function saveProfile(x){
+    if(x&&String(x.user_id||'')!==String(state.user&&state.user.id||''))throw new Error('Akkaunt va profil mos kelmadi. Qayta kiring.');
+    state.profile=x||null;storeSet(PROFILE_KEY,state.profile);
+  }
+  function clearAll(preserveStored){authEpoch++;refreshPending=null;state.telegramPhone='';state.telegramLaunch=false;state.verified=false;state.recovery=false;state.adminMode=false;state.session=null;state.user=null;state.profile=null;state.forceChange=false;state.adminLocked=false;[SESSION_KEY,USER_KEY,PROFILE_KEY,'uzadm_v4_ses','UZMED_SUPABASE_ADMIN_OK',TAB_TRUST_KEY].forEach(function(k){if(preserveStored)return;try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch(e){}});announceAuthState()}
+  function msg(id,text,type){var n=$(id);if(!n)return;n.textContent=text||'';n.className='uz-auth-msg'+(text?' show '+(type||'info'):'');}
+  function friendly(e){var s=String(e&&e.message||e||'Xatolik');var l=s.toLowerCase();if(l.indexOf('admin bergan')>=0||l.indexOf('admin parol')>=0||l.indexOf('admin_password')>=0)return 'UZMED tomonidan bu akkauntga admin yangi parol joriy qilgan. “Parolni unutdingizmi?” bloklangan. Faqat admin bergan email + parol bilan kiring.';if(l.indexOf('invalid login')>=0||l.indexOf('invalid credentials')>=0)return 'Email yoki UZMED paroli noto‘g‘ri.';if(l.indexOf('email not confirmed')>=0)return 'Avval emailingizni tasdiqlang.';if(l.indexOf('profiles_phone_unique')>=0||l.indexOf('duplicate key')>=0&&l.indexOf('phone')>=0)return 'Bu telefon raqami boshqa UZMED akkauntiga allaqachon ulangan.';if(l.indexOf('already registered')>=0||l.indexOf('already been registered')>=0)return 'Bu email bilan akkaunt allaqachon mavjud.';if(l.indexOf('password')>=0&&(l.indexOf('6')>=0||l.indexOf('8')>=0))return 'UZMED paroli kamida 8 ta belgidan iborat bo‘lsin.';if(l.indexOf('provider is not enabled')>=0||l.indexOf('unsupported provider')>=0)return 'Google orqali kirish Supabase’da hali yoqilmagan.';if(l.indexOf('rate')>=0||l.indexOf('too many')>=0)return 'Juda ko‘p urinish. Birozdan keyin qayta urinib ko‘ring.';if(l.indexOf('failed to fetch')>=0||l.indexOf('network')>=0)return 'Internet bilan aloqa yo‘q. Ulanishni tekshiring.';return s;}
+  async function api(path,opt){opt=opt||{};var h=Object.assign({'apikey':SB_KEY,'Content-Type':'application/json'},opt.headers||{});if(opt.token)h.Authorization='Bearer '+opt.token;var epoch=authEpoch,r,txt;try{r=await fetch(SB_URL+path,{method:opt.method||'GET',headers:h,body:opt.body===undefined?undefined:JSON.stringify(opt.body),redirect:opt.redirect||'follow'});txt=await r.text();}catch(e){if(epoch!==authEpoch)throw authChangedError();throw e;}if(epoch!==authEpoch)throw authChangedError();var data=txt?safeJSON(txt):null;if(!r.ok){var em=(data&&(data.msg||data.message||data.error_description||data.error))||('HTTP '+r.status);var er=new Error(em);er.status=r.status;er.data=data;throw er;}return data;}
+  function normalizeSession(data){if(!data||!data.access_token)return null;return {access_token:data.access_token,refresh_token:data.refresh_token||'',expires_at:data.expires_at||Math.floor(Date.now()/1000)+(Number(data.expires_in)||3600),token_type:data.token_type||'bearer'};}
+  var refreshPending=null;
+  async function refresh(){
+    if(refreshPending)return refreshPending;
+    if(!state.session||!state.session.refresh_token)throw new Error('Sessiya tugagan. Qayta kiring.');
+    var pending=(async function(){
+      var d=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:{refresh_token:state.session.refresh_token}});
+      saveSession(normalizeSession(d));if(d.user)saveUser(d.user);return state.session;
+    })();
+    refreshPending=pending;
+    try{return await pending}finally{if(refreshPending===pending)refreshPending=null;}
+  }
+  async function token(){if(!state.session)return null;var exp=Number(state.session.expires_at||0);if(exp&&exp<Math.floor(Date.now()/1000)+90&&navigator.onLine){try{await refresh()}catch(e){if(!e.authChanged&&(e.status===400||e.status===401||e.status===403))clearAll();throw e;}}return state.session&&state.session.access_token;}
+  async function getUser(){var tk=await token();if(!tk)return state.user||null;try{var u=await api('/auth/v1/user',{token:tk});saveUser(u);return u}catch(e){if(e.status===401&&state.session&&state.session.refresh_token){await refresh();return getUser()}throw e;}}
+  async function loadProfile(uid){var tk=await token();if(!tk||!uid)return state.profile||null;var rows=await api('/rest/v1/profiles?user_id=eq.'+encodeURIComponent(uid)+'&select=user_id,full_name,specialty,phone,telegram_id,telegram_username,telegram_linked_at,created_at,updated_at',{token:tk});var p=rows&&rows[0]||null;if(p)saveProfile(p);return p;}
+  async function ensureProfile(user){if(!user)return null;var p=await loadProfile(user.id);if(p)return p;var tk=await token();var nm=(user.user_metadata&&user.user_metadata.full_name)||'';var ph=phoneDigits((user.user_metadata&&user.user_metadata.phone)||'');var rows=await api('/rest/v1/profiles',{method:'POST',token:tk,headers:{'Prefer':'return=representation'},body:{user_id:user.id,full_name:nm||null,specialty:'Allergologiya',phone:ph||null}});p=rows&&rows[0]||{user_id:user.id,full_name:nm,specialty:'Allergologiya'};saveProfile(p);return p;}
+  async function updateProfile(fullName,specialty,phone){var u=state.user||await getUser();if(!u)throw new Error('Avval akkauntga kiring.');var ph=state.telegramLaunch&&phoneDigits(state.telegramPhone)?requirePhone(state.telegramPhone):requirePhone(phone);var tk=await token();var rows=await api('/rest/v1/profiles?user_id=eq.'+encodeURIComponent(u.id),{method:'PATCH',token:tk,headers:{'Prefer':'return=representation'},body:{full_name:(fullName||'').trim()||null,specialty:(specialty||'').trim()||null,phone:ph,updated_at:new Date().toISOString()}});var p=rows&&rows[0]||null;if(p)saveProfile(p);state.profile=p||state.profile;render();announceAuthState(true);return p;}
+  async function adminLockStatus(){
+    var tk=await token();if(!tk)return {locked:false,allowed:false};
+    var rows=await api('/rest/v1/rpc/admin_lock_session_status',{method:'POST',token:tk,body:{}});
+    var x=rows&&rows[0];if(!x||typeof x.allowed!=='boolean')throw new Error('Akkaunt xavfsizligini tekshirib bo‘lmadi.');
+    return {locked:!!x.locked,allowed:x.allowed};
+  }
+  async function signIn(email,password){
+    if(signOutPending)await signOutPending;var adminWanted=state.adminMode;clearAll();state.adminMode=adminWanted;render();
+    try{
+      var d=await api('/auth/v1/token?grant_type=password',{method:'POST',body:{email:email,password:password}});
+      saveSession(normalizeSession(d));saveUser(d.user||null);state.user=d.user||await getUser();
+      if(!state.session||!state.user)throw new Error('Akkaunt tasdiqlanmadi.');
+      state.profile=await ensureProfile(state.user);
+      var ls=await adminLockStatus();state.adminLocked=!!ls.locked;state.forceChange=false;
+      if(!ls.allowed)throw new Error('ADMIN_PASSWORD_LOCKED: Faqat admin bergan email + parol bilan kiring.');
+      state.verified=true;allowSignIn();rememberTab();render();return state.user;
+    }catch(e){if(e.authChanged)throw e;clearAll();state.adminMode=adminWanted;render();open();throw e}
+  }
+
+  async function checkNewPassword(password){
+    if(typeof password!=='string'||password.length<8)throw new Error('UZMED paroli kamida 8 ta belgidan iborat bo‘lsin.');
+    if(password.length>1024)throw new Error('Parol juda uzun.');
+    if(!W.crypto||!W.crypto.subtle)throw new Error('Parol himoyasi uchun saytni HTTPS orqali oching.');
+    var digest=await W.crypto.subtle.digest('SHA-1',new TextEncoder().encode(password));
+    var hash=Array.from(new Uint8Array(digest)).map(function(b){return b.toString(16).padStart(2,'0')}).join('').toUpperCase();
+    var controller=new AbortController(),timer=setTimeout(function(){controller.abort()},9000),response,text;
+    try{
+      response=await fetch('/api/security/password-range/'+hash.slice(0,5),{method:'GET',cache:'no-store',credentials:'omit',redirect:'error',signal:controller.signal});
+      if(!response.ok)throw new Error('screening_unavailable');
+      text=await response.text();
+      if(text.length>120000||text.length<1000)throw new Error('invalid_screening_response');
+      var lines=text.split(/\r?\n/).filter(Boolean);
+      if(!lines.every(function(line){return /^[A-F0-9]{35}:\d+$/.test(line)}))throw new Error('invalid_screening_response');
+      var suffix=hash.slice(5),compromised=lines.some(function(line){var parts=line.split(':');return parts[0]===suffix&&Number(parts[1])>0});
+      if(compromised)throw new Error('UZMED_COMPROMISED_PASSWORD');
+    }catch(e){
+      if(e&&e.message==='UZMED_COMPROMISED_PASSWORD')throw new Error('Bu parol sizib chiqqan parollar ro‘yxatida bor. Boshqa, noyob parol tanlang.');
+      throw new Error('Parol xavfsizligini tekshirib bo‘lmadi. Bir ozdan keyin qayta urinib ko‘ring.');
+    }finally{clearTimeout(timer)}
+    return true;
+  }
+
+  async function signUp(name,email,password,phone){
+    if(signOutPending)await signOutPending;var ph=requirePhone(phone);await checkNewPassword(password);clearAll();render();
+    try{
+      var d=await api('/auth/v1/signup',{method:'POST',body:{email:email,password:password,data:{full_name:name||'',phone:ph}}});
+      if(d&&d.access_token){
+        saveSession(normalizeSession(d));saveUser(d.user||null);state.user=d.user||await getUser();
+        if(!state.user)throw new Error('Akkaunt tasdiqlanmadi.');
+        state.profile=await ensureProfile(state.user);
+        var ls=await adminLockStatus();if(!ls.allowed)throw new Error('Akkaunt sessiyasi tasdiqlanmadi.');
+        state.adminLocked=!!ls.locked;state.verified=true;allowSignIn();rememberTab();render();return {signedIn:true,user:state.user};
+      }
+      return {signedIn:false,user:d&&d.user||null};
+    }catch(e){if(e.authChanged)throw e;clearAll();render();open();throw e}
+  }
+  async function signOut(){
+    if(signOutPending)return signOutPending;
+    var tk=state.session&&state.session.access_token;
+    try{localStorage.setItem(SIGNED_OUT_KEY,String(Date.now()))}catch(e){}
+    clearAll();render();lockPage(true);open();
+    // Remove the authenticated workspace immediately, including adjacent tabs.
+    // The marker prevents an old Telegram launch from silently signing back in.
+    var pending=(async function(){try{if(tk&&navigator.onLine)await api('/auth/v1/logout?scope=global',{method:'POST',token:tk})}catch(e){}})();
+    signOutPending=pending;
+    try{await pending}finally{if(signOutPending===pending)signOutPending=null;}
+  }
+  async function requestRecovery(email){if(!email)throw new Error('Avval emailingizni kiriting.');var red=redirectBase();await api('/functions/v1/request-password-recovery',{method:'POST',body:{email:email,redirect_to:red}});return true;}
+  var securityWatchTimer=null,securityWatchBusy=false;
+  async function securityWatch(){if(securityWatchBusy||!state.session||!state.user||!navigator.onLine)return;securityWatchBusy=true;try{var ls=await adminLockStatus();state.adminLocked=!!ls.locked;if(ls.locked&&!ls.allowed){var em=(state.user&&state.user.email)||'';clearAll();render();open();if($('uzAuthEmail'))$('uzAuthEmail').value=em;msg('uzAuthMsg','UZMED tomonidan sizga admin yangi parol joriy qilgan. “Parolni unutdingizmi?” bloklangan. Admin bergan email + parol bilan kiring.','err')}}catch(e){}finally{securityWatchBusy=false}}
+  function startSecurityWatch(){if(!securityWatchTimer)securityWatchTimer=setInterval(securityWatch,15000);try{D.addEventListener('visibilitychange',function(){if(!D.hidden)securityWatch()});W.addEventListener('focus',securityWatch)}catch(e){}}
+  async function setNewPassword(pw){var min=8;if(!pw||pw.length<min)throw new Error('UZMED paroli kamida '+min+' ta belgidan iborat bo‘lsin.');var tk=await token();if(!tk)throw new Error('Sessiya topilmadi. Qayta kiring.');var ls=await adminLockStatus();if(ls.locked)throw new Error('ADMIN_PASSWORD_LOCKED: UZMED tomonidan sizga admin yangi parol joriy qilgan. Parolni tiklash bloklangan.');await checkNewPassword(pw);await api('/auth/v1/user',{method:'PUT',token:tk,body:{password:pw}});state.recovery=false;return true;}
+  function redirectBase(){try{if(location.protocol==='http:'||location.protocol==='https:')return location.origin+location.pathname;return location.href.split('#')[0]}catch(e){return location.href}}
+  function consumeHash(){try{var h=location.hash&&location.hash.slice(1);if(!h)return false;var q=new URLSearchParams(h);var err=q.get('error_description')||q.get('error');if(err){setTimeout(function(){msg('uzAuthMsg',decodeURIComponent(err),'err')},20);return false}var at=q.get('access_token');if(!at)return false;allowSignIn();clearAll();setRemember(true);saveSession({access_token:at,refresh_token:q.get('refresh_token')||'',expires_at:Math.floor(Date.now()/1000)+(Number(q.get('expires_in'))||3600),token_type:q.get('token_type')||'bearer'});state.recovery=q.get('type')==='recovery';try{history.replaceState(null,D.title,location.pathname+location.search)}catch(e){}return true}catch(e){return false}}
+  function managedTelegram(){return /^tg-[1-9]\d{0,19}@telegram\.zmed\.uz$/.test(String(state.user&&state.user.email||''))&&!!(state.user&&state.user.app_metadata&&state.user.app_metadata.uzmed_telegram_id);}
+  function accountLabel(){return managedTelegram()?'Telegram akkaunti':String(state.user&&state.user.email||'');}
+  function profilePhone(){return phoneDigits(state.telegramPhone||(state.profile&&state.profile.phone)||(state.user&&state.user.user_metadata&&state.user.user_metadata.phone));}
+  function telegramProof(){try{var sdk=W.Telegram&&W.Telegram.WebApp&&W.Telegram.WebApp.initData;if(typeof sdk==='string'&&sdk)return sdk;return new URLSearchParams(location.hash.slice(1)).get('tgWebAppData')||'';}catch(e){return '';}}
+  function keyboardProof(){try{var value=new URLSearchParams(location.hash.slice(1)).get('uzmed_keyboard_launch')||'';if(value){try{history.replaceState(null,D.title,location.pathname+location.search)}catch(e){}}return value;}catch(e){return '';}}
+  async function telegramSignIn(raw,keyboard){
+    var resumeToken=keyboard&&state.session?await token():null;
+    clearAll(true);render();setRemember(true);var epoch=authEpoch;
+    var response,text;try{response=await fetch(keyboard?'/api/core/entry/keyboard':'/api/core/entry/telegram',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},resumeToken?{Authorization:'Bearer '+resumeToken}:{}),body:JSON.stringify(keyboard?{launch:raw}:{init_data:raw}),credentials:keyboard?'same-origin':'omit',cache:'no-store',redirect:'error'});text=await response.text();}catch(e){if(epoch!==authEpoch)throw authChangedError();throw e;}
+    var data=safeJSON(text);if(epoch!==authEpoch)throw authChangedError();
+    if(!response.ok){var code=data&&data.error;if(keyboard&&/^keyboard_(launch_|device_)/.test(code||''))throw new Error('Botda /menu yuboring va pastki klaviaturadagi tugmani qayta bosing. Email yoki parol kiritish shart emas.');throw new Error(code==='phone_verification_required'?'Avval @uz_med_bot ichida o‘z telefon raqamingizni tasdiqlang.':code==='admin_email_login_required'?'Admin email yoki Google orqali kirishi kerak.':'Telegram orqali kirishni tasdiqlab bo‘lmadi. Botdan saytni qayta oching.');}
+    if(!data||!data.session||!data.session.user||!/^[1-9]\d{0,19}$/.test(String(data.telegram_id||'')))throw new Error('Telegram akkaunti tasdiqlanmadi.');
+    saveSession(normalizeSession(data.session));state.telegramPhone=phoneDigits(data.phone);state.telegramLaunch=true;
+    if(!state.session)throw new Error('Telegram sessiyasi tasdiqlanmadi.');
+    var user=await getUser();if(!user||user.id!==data.session.user.id)throw new Error('Telegram sessiyasi boshqa akkauntga tegishli.');
+  }
+  function displayName(){return (state.profile&&state.profile.full_name)||(state.user&&state.user.user_metadata&&state.user.user_metadata.full_name)||(!managedTelegram()&&state.user&&state.user.email&&state.user.email.split('@')[0])||'UZMED Foydalanuvchisi';}
+  function initial(){var n=displayName().trim();return (n&&n.charAt(0)||'U').toUpperCase();}
+  function lockPage(v){D.body&&D.body.classList.toggle('uz-auth-locked',!!v)}
+  function render(){var logged=!!(state.verified&&state.user&&state.session),reset=!!state.recovery,o=$('uzmedAuthOverlay');var name=$('uzmedAuthName'),sub=$('uzmedAuthSub'),av=$('uzmedAuthAvatar'),st=$('uzmedAuthStatus');if(name)name.textContent=logged?displayName():'UZMED Foydalanuvchisi';if(sub)sub.textContent=logged?(accountLabel()||'UZMED akkaunti'):'Kirish yoki ro‘yxatdan o‘tish';if(av)av.textContent=logged?initial():'U';if(st)st.textContent=logged?'Faol':'Kirish';var so=$('uzmedAuthSignedOut'),si=$('uzmedAuthSignedIn'),cl=$('uzmedAuthClose');if(so)so.hidden=logged&&!reset;if(si)si.hidden=!logged||reset;if(cl)cl.hidden=!logged||reset;if($('uzmedAuthLoginPane'))$('uzmedAuthLoginPane').hidden=reset||$('uzmedAuthLoginPane').hidden;if($('uzmedAuthRegisterPane')&&reset)$('uzmedAuthRegisterPane').hidden=true;if($('uzmedAuthResetPane'))$('uzmedAuthResetPane').hidden=!reset;var rc=$('uzAuthResetCopy');if(rc)rc.textContent='Tiklash havolasi tasdiqlandi. Yangi UZMED parolini kiriting.';var rb=$('uzAuthSetPasswordBtn');if(rb)rb.textContent=state.forceChange?'Yangi shaxsiy parolni saqlash':'Yangi parolni saqlash';var ri=$('uzAuthNewPassword');if(ri)ri.placeholder='Kamida 8 ta belgi';var fr=$('uzAuthForcedReloginBtn');if(fr)fr.hidden=true;if(o)o.classList.toggle('uz-admin-mode',!!state.adminMode);if(logged&&!reset){if($('uzAuthSignedEmail'))$('uzAuthSignedEmail').textContent=accountLabel();if($('uzAuthBigAvatar'))$('uzAuthBigAvatar').textContent=initial();if($('uzAuthFullName'))$('uzAuthFullName').value=(state.profile&&state.profile.full_name)||'';if($('uzAuthSpecialty'))$('uzAuthSpecialty').value=(state.profile&&state.profile.specialty)||'Allergologiya';if($('uzAuthPhone')){$('uzAuthPhone').value=state.telegramPhone||(state.profile&&state.profile.phone)||((state.user.user_metadata&&state.user.user_metadata.phone)||'');$('uzAuthPhone').readOnly=!!(state.telegramLaunch&&phoneDigits(state.telegramPhone));}var pls=$('uzAuthPhoneLinkState');if(pls){pls.textContent=state.telegramLaunch&&phoneDigits(state.telegramPhone)?'✅ Telegramda o‘z raqamingiz tasdiqlangan.':state.profile&&state.profile.telegram_id?'✅ Telegram botdagi tasdiqlangan raqam bilan bog‘langan.':'Telefon majburiy. Telegram botda shu raqam tasdiqlangan bo‘lsa avtomatik bog‘lanadi.';pls.style.color=state.profile&&state.profile.telegram_id?'#86efac':'';}var cs=$('uzAuthConnState');if(cs){cs.textContent=navigator.onLine?'Supabase bilan ulangan':'Oflayn — saqlangan sessiya';cs.className=navigator.onLine?'uz-auth-online':'uz-auth-offline';}}lockPage(!logged||reset);announceAuthState();}
+  function open(){var o=$('uzmedAuthOverlay');if(!o)return;o.hidden=false;o.setAttribute('aria-hidden','false');render();setTimeout(function(){var e=state.recovery?$('uzAuthNewPassword'):(state.user?$('uzAuthFullName'):$('uzAuthEmail'));if(e)e.focus()},80)}
+  function close(){if(!state.verified||!state.user||state.recovery)return;if(!profilePhone()){msg('uzAuthProfileMsg','Telefon raqami majburiy. Profilga telefon raqamingizni kiriting.','err');lockPage(true);return}var o=$('uzmedAuthOverlay');if(!o)return;o.hidden=true;o.setAttribute('aria-hidden','true');lockPage(false);state.adminMode=false;o.classList.remove('uz-admin-mode');}
+  function busy(v,btn){state.busy=v;if(btn)btn.disabled=!!v;}
+  function tab(which){if(state.recovery)return;var log=which==='login';$('uzmedAuthLoginPane').hidden=!log;$('uzmedAuthRegisterPane').hidden=log;$('uzmedAuthResetPane').hidden=true;D.querySelectorAll('[data-auth-tab]').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-auth-tab')===which)});msg('uzAuthMsg','');if(!log){state.adminMode=false;$('uzmedAuthOverlay').classList.remove('uz-admin-mode')}}
+  function setupEye(btnId,inputId){var b=$(btnId),i=$(inputId);if(!b||!i)return;b.onclick=function(){var show=i.type==='password';i.type=show?'text':'password';b.setAttribute('aria-label',show?'Parolni yashirish':'Parolni ko‘rsat');b.style.color=show?'#70aaff':'#b8caf0'};}
+  async function checkGoogle(){try{var d=await api('/auth/v1/settings');state.googleEnabled=!!(d&&d.external&&d.external.google);var b=$('uzAuthGoogleBtn');if(b)b.setAttribute('data-enabled',state.googleEnabled?'1':'0')}catch(e){state.googleEnabled=false}}
+  function googleLogin(){if(!state.googleEnabled){msg('uzAuthMsg','Google orqali kirish hali yoqilmagan. Google provayderini bir marta sozlash kerak.','info');return}var regPane=$('uzmedAuthRegisterPane');if(regPane&&!regPane.hidden){var ph;try{ph=requirePhone($('uzAuthRegPhone').value)}catch(e){msg('uzAuthMsg',e.message,'err');return}try{localStorage.setItem(PENDING_PHONE_KEY,ph)}catch(e){}}var red='https://zmed.uz/';var authUrl=SB_URL+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(red)+'&apikey='+encodeURIComponent(SB_KEY)+'&prompt=select_account';allowSignIn();clearAll();render();try{if(W.Telegram&&W.Telegram.WebApp&&typeof W.Telegram.WebApp.openLink==='function'){W.Telegram.WebApp.openLink(authUrl);return}}catch(e){}location.href=authUrl;}
+  function enterAdminMode(){state.adminMode=true;tab('login');state.adminMode=true;$('uzmedAuthOverlay').classList.add('uz-admin-mode');$('uzAuthEmail').value=ADMIN_EMAIL;$('uzAuthPassword').value='';msg('uzAuthMsg','Admin email tayyor. UZMED admin parolini kiriting. Bu Gmail paroli emas.','info');setTimeout(function(){$('uzAuthPassword').focus()},50)}
+  async function init(){loadLocal();var rem=$('uzAuthRemember');if(rem)rem.checked=state.remember;var fromAuthCallback=consumeHash();render();var card=$('uzmedAuthCard');if(card)card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});var o=$('uzmedAuthOverlay');if(!o)return;$('uzmedAuthClose').onclick=close;o.addEventListener('click',function(e){if(e.target===o&&state.user&&!state.recovery)close()});D.addEventListener('keydown',function(e){if(e.key==='Escape'&&state.user&&!state.recovery)close()});D.querySelectorAll('[data-auth-tab]').forEach(function(b){b.onclick=function(){tab(b.getAttribute('data-auth-tab'))}});setupEye('uzAuthPasswordEye','uzAuthPassword');setupEye('uzAuthRegPasswordEye','uzAuthRegPassword');setupEye('uzAuthNewPasswordEye','uzAuthNewPassword');if($('uzAuthGoRegister'))$('uzAuthGoRegister').onclick=function(){tab('register')};if($('uzAuthGoLogin'))$('uzAuthGoLogin').onclick=function(){tab('login')};if($('uzAuthAdminEntryBtn'))$('uzAuthAdminEntryBtn').onclick=enterAdminMode;if($('uzAuthGoogleBtn'))$('uzAuthGoogleBtn').onclick=googleLogin;if($('uzAuthRegisterGoogleBtn'))$('uzAuthRegisterGoogleBtn').onclick=googleLogin;if(rem)rem.onchange=function(){setRemember(rem.checked)};
+    if($('uzAuthForcedReloginBtn'))$('uzAuthForcedReloginBtn').onclick=async function(){var em=(state.user&&state.user.email)||$('uzAuthEmail').value||'';try{await signOut();$('uzAuthEmail').value=em;tab('login');msg('uzAuthMsg','Admin bergan vaqtinchalik UZMED parolini kiriting.','info');setTimeout(function(){$('uzAuthPassword').focus()},50)}catch(e){msg('uzAuthMsg',friendly(e),'err')}};
+    $('uzAuthForgotBtn').onclick=async function(){var email=$('uzAuthEmail').value.trim();msg('uzAuthMsg','');try{await requestRecovery(email);msg('uzAuthMsg','UZMED parolini tiklash havolasi emailingizga yuborildi.','ok')}catch(e){msg('uzAuthMsg',friendly(e),'err')}};
+    $('uzAuthLoginBtn').onclick=async function(){var b=this;msg('uzAuthMsg','');var email=$('uzAuthEmail').value.trim().toLowerCase(),pass=$('uzAuthPassword').value;if(!email||!pass){msg('uzAuthMsg','Email va UZMED parolini kiriting.','err');return}setRemember($('uzAuthRemember')?$('uzAuthRemember').checked:true);try{busy(true,b);await signIn(email,pass);var adminWanted=state.adminMode;if(!profilePhone()){msg('uzAuthProfileMsg','Telefon raqami majburiy. Telefoningizni kiriting va “Profilni saqlash”ni bosing.','err');open();}else{msg('uzAuthProfileMsg','Akkauntga muvaffaqiyatli kirildi.','ok');close();}if(adminWanted)setTimeout(function(){if(W.UZMEDAdminAccess&&W.UZMEDAdminAccess.open)W.UZMEDAdminAccess.open()},120)}catch(e){var low=String(e&&e.message||'').toLowerCase();if(state.adminMode&&email===ADMIN_EMAIL&&(low.indexOf('invalid login')>=0||low.indexOf('invalid credentials')>=0)){try{var r=await signUp('Mominjonov Maxammadjon',email,pass);if(r.signedIn){close();setTimeout(function(){if(W.UZMEDAdminAccess&&W.UZMEDAdminAccess.open)W.UZMEDAdminAccess.open()},120)}else{msg('uzAuthMsg','Admin akkaunti yaratildi. Gmailga kelgan tasdiqlash xatini bir marta tasdiqlang, keyin shu email va UZMED paroli bilan kiring.','ok')}}catch(x){msg('uzAuthMsg',friendly(x),'err')}}else msg('uzAuthMsg',friendly(e),'err')}finally{busy(false,b)}};
+    $('uzAuthRegisterBtn').onclick=async function(){var b=this;msg('uzAuthMsg','');var name=$('uzAuthRegName').value.trim(),email=$('uzAuthRegEmail').value.trim().toLowerCase(),pass=$('uzAuthRegPassword').value,phone=$('uzAuthRegPhone').value;if(!email||!pass){msg('uzAuthMsg','Email va UZMED parolini kiriting. Agar Gmail parolingiz bilan kirmoqchi bo‘lsangiz, “Gmail bilan yangi akkaunt ochish” tugmasidan foydalaning.','err');return}if(pass.length<8){msg('uzAuthMsg','UZMED paroli kamida 8 ta belgidan iborat bo‘lsin.','err');return}try{phone=requirePhone(phone)}catch(e){msg('uzAuthMsg',e.message,'err');return}setRemember(true);try{busy(true,b);var r=await signUp(name,email,pass,phone);if(r.signedIn){msg('uzAuthProfileMsg','Akkaunt yaratildi va tizimga kirildi.','ok');close()}else{tab('login');$('uzAuthEmail').value=email;msg('uzAuthMsg','Emailingizga tasdiqlash xati yuborilgan bo‘lishi mumkin. Pochtani (Spam papkasini ham) tekshirib, havola orqali tasdiqlang va keyin kiring. Agar ushbu email bilan avval akkaunt ochilgan bo‘lsa, “Parolni unutdingizmi?” orqali tiklang.','ok')}}catch(e){msg('uzAuthMsg',friendly(e),'err')}finally{busy(false,b)}};
+    $('uzAuthSetPasswordBtn').onclick=async function(){var b=this;try{busy(true,b);await setNewPassword($('uzAuthNewPassword').value);msg('uzAuthMsg','Yangi parol saqlandi.','ok');state.user=await getUser();state.profile=await ensureProfile(state.user);render();setTimeout(close,500)}catch(e){msg('uzAuthMsg',friendly(e),'err')}finally{busy(false,b)}};
+    $('uzAuthSaveProfileBtn').onclick=async function(){var b=this;msg('uzAuthProfileMsg','');try{busy(true,b);await updateProfile($('uzAuthFullName').value,$('uzAuthSpecialty').value,$('uzAuthPhone').value);msg('uzAuthProfileMsg','Profil saqlandi. Telefon Telegram botdagi tasdiqlangan raqam bilan mos bo‘lsa avtomatik bog‘landi.','ok');try{if(typeof W.toast==='function')W.toast('Profil Supabase’da saqlandi')}catch(e){}}catch(e){msg('uzAuthProfileMsg',friendly(e),'err')}finally{busy(false,b)}};
+    $('uzAuthChangePwBtn').onclick=function(){state.recovery=true;render();var rc=$('uzAuthResetCopy');if(rc)rc.textContent='Yangi UZMED parolini kiriting (kamida 8 ta belgi).';var ri=$('uzAuthNewPassword');if(ri){ri.value='';setTimeout(function(){ri.focus()},60)}};
+    $('uzAuthLogoutBtn').onclick=async function(){var b=this;try{busy(true,b);await signOut();msg('uzAuthMsg','Akkauntdan chiqildi.','ok')}finally{busy(false,b)}};
+    checkGoogle();startSecurityWatch();
+    var rawTelegram=fromAuthCallback?'':telegramProof(),rawKeyboard=fromAuthCallback?'':keyboardProof();
+    if(!explicitlySignedOut()&&(rawTelegram||rawKeyboard)){try{await telegramSignIn(rawTelegram||rawKeyboard,!rawTelegram);}catch(e){if(e.authChanged)return;clearAll();render();open();msg('uzAuthMsg',friendly(e),'err');return;}}
+    if(state.session){
+      if(!navigator.onLine){render();open();msg('uzAuthMsg','Akkauntni tekshirish uchun internetga ulaning.','err');return}
+      try{var u=await getUser();if(!u)throw new Error('Akkaunt tasdiqlanmadi.');if(u){
+        // Every restored session still passes /user and the existing lock RPC.
+        state.profile=await ensureProfile(u);if(state.telegramLaunch&&phoneDigits(state.telegramPhone)&&!phoneDigits(state.profile&&state.profile.phone))state.profile=await updateProfile((state.profile&&state.profile.full_name)||'',(state.profile&&state.profile.specialty)||'Allergologiya',state.telegramPhone);var pending='';try{pending=localStorage.getItem(PENDING_PHONE_KEY)||''}catch(e){}if(pending&&!state.telegramLaunch&&!profilePhone()){try{state.profile=await updateProfile((state.profile&&state.profile.full_name)||((u.user_metadata&&u.user_metadata.full_name)||''),(state.profile&&state.profile.specialty)||'Allergologiya',pending);try{localStorage.removeItem(PENDING_PHONE_KEY)}catch(e){}}catch(e){}}var ls=await adminLockStatus();state.adminLocked=!!ls.locked;state.forceChange=false;if(!ls.allowed){var em=u.email||'';clearAll();render();open();if($('uzAuthEmail'))$('uzAuthEmail').value=em;msg('uzAuthMsg','UZMED tomonidan sizga admin yangi parol joriy qilgan. “Parolni unutdingizmi?” bloklangan. Admin bergan email + parol bilan kiring.','err')}else{state.verified=true;rememberTab();render();if(state.recovery)open();else if(!profilePhone()){open();lockPage(true);msg('uzAuthProfileMsg','Telefon raqami majburiy. Profilni davom ettirish uchun telefon raqamingizni kiriting.','err')}else{lockPage(false);if(state.telegramLaunch)close();}}}}catch(e){if(e.authChanged)return;console.warn('[UZMED Auth]',e);clearAll(e.status!==400&&e.status!==401&&e.status!==403);render();open();msg('uzAuthMsg','Akkauntni tekshirib bo‘lmadi. Qayta kiring.','err')}}else{render();open()}
+  }
+  W.UZMEDAuth={open:open,close:close,signIn:signIn,signUp:signUp,signOut:signOut,saveProfile:updateProfile,getAccessToken:async function(){return state.verified?token():null},getState:function(){return {user:state.verified?state.user:null,profile:state.verified?state.profile:null,loggedIn:!!(state.verified&&state.user&&state.session),adminMode:state.adminMode,adminPasswordLocked:!!state.adminLocked}},enterAdmin:enterAdminMode};
+  W.addEventListener('storage',function(e){
+    if(e.key!==SIGNED_OUT_KEY&&e.key!==SESSION_KEY)return;
+    if(e.key===SIGNED_OUT_KEY&&!e.newValue)return;
+    var saved=safeJSON(localStorage.getItem(SESSION_KEY)),sameUser=false;
+    try{sameUser=!!saved&&JSON.parse(atob(saved.access_token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub===String(state.user&&state.user.id||'')}catch(ignore){}
+    if(e.key===SESSION_KEY&&sameUser&&!explicitlySignedOut()){state.session=normalizeSession(saved);return;}
+    clearAll(true);render();lockPage(true);open();
+  });
+  if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',function(){setTimeout(init,0)});else setTimeout(init,0);
+})(window,document);
+</script><script src="/assets/uzmed-voice-guide-adam-main-20261103-v6.js?v=6" defer></script>
+
+<script defer src="/assets/uzmed-pull-refresh-20261102-v3.js?v=3"></script>
+</body></html>

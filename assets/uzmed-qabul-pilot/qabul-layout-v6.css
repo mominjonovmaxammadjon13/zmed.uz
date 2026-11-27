@@ -1,0 +1,152 @@
+/* UZMED clinical v6: reference-inspired templates + middle evidence + live prescription layout. */
+#uzmedQabulV3[data-layout="v6"] .uv3-list{max-height:min(67vh,640px)}
+#uzmedQabulV3[data-layout="v6"] .uv3-category-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:8px;
+ font-weight:780;font-size:13px;color:#e5fff2;padding:10px 9px;
+ border-radius:9px;background:linear-gradient(100deg,#1c6b4d,#0e3a2d);
+ border:1px solid #377e5b;margin:4px 0 2px;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-category-heading>span{
+ border-radius:12px;padding:2px 7px;font-size:10px;background:#2db889;color:#072e20
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-category-subheading{
+ font-size:11px;font-weight:800;letter-spacing:.02em;color:#86e9b5;
+ padding:8px 8px 5px;margin-top:3px;
+ border-bottom:1px solid #245c46;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-row{
+ min-height:49px;padding:8px 10px!important;gap:3px;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-row[aria-current=true]{
+ background:linear-gradient(105deg,#1f7653,#14553c);
+ border:1px solid #47d99d;box-shadow:inset 3px 0 #45e3a1;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-hero{
+ background:linear-gradient(120deg,#134331,#0a2920);
+ border-radius:12px;border:1px solid #336c50;padding:13px 14px;margin:0 0 12px;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-hero h3{
+ font-size:17px;line-height:1.3;margin:7px 0 4px;font-weight:800;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-category{
+ display:inline-flex;padding:4px 9px;border-radius:13px;
+ background:#1e7251;color:#bfffe0;font-size:10px;font-weight:800
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-fact{
+ padding:10px 12px;margin:8px 0;border-radius:10px;
+ border:1px solid #225c43;background:#09281f;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-fact h4{
+ font-size:12px;font-weight:800;color:#86eac0;margin:0 0 5px;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-fact p{
+ font-size:12px;white-space:pre-line;overflow-wrap:anywhere;
+ line-height:1.55;color:#e4f8ed;margin:0;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-actions{
+ display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;
+}
+#uzmedQabulV3[data-layout="v6"] .uv3-template-actions button{
+ text-align:center;font-weight:730;font-size:12px;
+}
+@media screen and (max-width:760px){
+ #uzmedQabulV3[data-layout="v6"] .uv3-left .uv3-modes{display:none}
+ #uzmedQabulV3[data-layout="v6"] .uv3-mobile-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-mobile-button{min-height:46px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-left>.uv3-panel-heading{display:none}
+ #uzmedQabulV3[data-layout="v6"] .uv3-template-actions{grid-template-columns:1fr}
+ #uzmedQabulV3[data-layout="v6"] .uv3-list .uv3-list-row{min-height:48px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-mobile-button{font-size:11px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-list{max-height:min(54dvh,510px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+ #uzmedQabulV3[data-layout="v6"] .uv3-category-heading{margin-top:4px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-template-fact p{font-size:12px}
+ #uzmedQabulV3[data-layout="v6"] .uv3-template-hero{padding:12px}
+}
+html[data-theme=light] #uzmedQabulV3[data-layout="v6"] .uv3-template-hero,
+html[data-theme=light] #uzmedQabulV3[data-layout="v6"] .uv3-template-fact{background:#f2fff8}
+html[data-theme=light] #uzmedQabulV3[data-layout="v6"] .uv3-template-hero h3,
+html[data-theme=light] #uzmedQabulV3[data-layout="v6"] .uv3-template-fact p{color:#1b4730}
+
+/* Single-toolbar embedded mobile workflow. Parent owns Back/Save; child owns clinical screens. */
+@media screen and (max-width:760px){
+ html[data-qabul-embedded] .qf.uv5-home-mode{
+   grid-template-rows:minmax(0,1fr)!important;
+ }
+ html[data-qabul-embedded] .qf.uv5-home-mode .qf-dock{
+   display:none!important;
+ }
+ html[data-qabul-embedded] .qf:not(.uv5-home-mode){
+   grid-template-rows:55px minmax(0,1fr) auto!important;
+ }
+ html[data-qabul-embedded] .qf:not(.uv5-home-mode) .qf-header{
+   display:none!important;
+ }
+ html[data-qabul-embedded] .qf:not(.uv5-home-mode) .qf-rail{
+   grid-column:1!important;grid-row:1!important;
+ }
+ html[data-qabul-embedded] .qf:not(.uv5-home-mode) .qf-main{
+   grid-column:1!important;grid-row:2!important;min-height:0;
+   padding:8px 9px 11px!important;
+ }
+ html[data-qabul-embedded] .qf:not(.uv5-home-mode) .qf-dock{
+   grid-column:1!important;grid-row:3!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active .qf:not(.uv5-home-mode){
+   grid-template-rows:55px minmax(0,1fr)!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active .qf:not(.uv5-home-mode) .qf-dock{
+   display:none!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active #qabulFocus .qf-card-head{
+   display:none!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active #qabulFocus .qf-card{
+   padding:7px!important;
+ }
+ #uzmedQabulV3[data-layout="v6"] .uv3-mobile-top{
+   margin-bottom:7px;
+ }
+ #uzmedQabulV3[data-layout="v6"] .uv3-breadcrumb{
+   font-size:17px;line-height:1.25;font-weight:840;color:#e7fff3;
+   padding:6px 0 11px;
+ }
+}
+/* Programmatic navigation does not draw a distracting text focus rectangle;
+   genuine keyboard focus remains visible. */
+#qabulFocus #qfTitle:focus:not(:focus-visible){outline:none}
+
+#uzmedQabulV3[data-layout="v6"] .uv3-title-line{display:flex;align-items:center;gap:8px}
+#uzmedQabulV3[data-layout="v6"] .uv3-home-link{display:none}
+@media screen and (max-width:760px){
+ #uzmedQabulV3[data-layout="v6"] .uv3-home-link{
+   display:grid;place-items:center;flex:0 0 39px;width:39px;height:39px;min-height:39px;
+   padding:0;border-radius:10px;background:#154332;color:#b7f8d2;
+   border:1px solid #337655;font-size:22px;font-weight:750
+ }
+ #uzmedQabulV3[data-layout="v6"] .uv3-title-line .uv3-breadcrumb{
+   flex:1;margin:0;min-width:0;padding:3px 0;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active .qf:not(.uv5-home-mode){
+   grid-template-rows:minmax(0,1fr)!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active .qf:not(.uv5-home-mode) .qf-rail{
+   display:none!important;
+ }
+ html[data-qabul-embedded] body.uv3-treatment-active .qf:not(.uv5-home-mode) .qf-main{
+   grid-row:1!important;
+ }
+}
+
+@media screen and (max-width:760px){
+ .qf .qf-rail #uv5RailHome{
+   position:sticky;left:0;z-index:3;
+   min-width:82px!important;max-width:82px;
+   font-size:12px;font-weight:800;
+   border-color:#3ba47a;
+   background:#154634;
+   box-shadow:3px 0 8px #061c1680;
+ }
+}
+@media screen and (min-width:761px){
+ .qf .qf-rail #uv5RailHome{display:none!important}
+}

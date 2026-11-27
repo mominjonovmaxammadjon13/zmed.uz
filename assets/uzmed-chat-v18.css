@@ -1,0 +1,103 @@
+/* ChatGPT-inspired conversation layout; native controls and non-chat tool panels retained. */
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile{--ucs18-chat-bg:#fff;--ucs18-user-bg:#f0f2f4;--ucs18-composer:#fff}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.dark-mode{--ucs18-chat-bg:#111c24;--ucs18-user-bg:#26333d;--ucs18-composer:#1b2831}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat .phone-shell{background:var(--ucs18-chat-bg)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #uzmedWorkspaceHeader{background:var(--ucs18-chat-bg)!important;border-bottom-color:transparent!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active{padding:0 16px!important;gap:0 8px!important;grid-template-rows:40px minmax(0,1fr) auto!important;background:var(--ucs18-chat-bg)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen #uzmedV5ModelBtn{justify-self:start!important;width:auto!important;max-width:100%!important;min-height:36px!important;margin:0!important;padding:6px 10px!important;border:0!important;border-radius:8px!important;background:transparent!important;box-shadow:none!important;text-align:start!important;font:500 12px/1.5 var(--ux-font)!important;color:var(--ux-muted)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-header{height:40px!important;min-height:40px!important;padding:0!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-header .ai-clear-btn{display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-header :is(button,.um-options-btn){border:0!important;background:transparent!important;box-shadow:none!important;width:40px!important;height:40px!important;color:var(--ux-muted)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen #aiMessages{display:block!important;padding:20px 0 8px!important;overflow-x:hidden!important;scrollbar-width:thin;scroll-behavior:auto!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active:not(.ucs18-has-messages){grid-template-rows:40px minmax(0,1fr) auto minmax(0,1.2fr)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active:not(.ucs18-has-messages) #aiMessages{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;padding:0 0 24px!important;overflow:auto!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active:not(.ucs18-has-messages) #aiMessages #umAIEmpty{margin:0!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #aiMessages #umAIEmpty{max-width:640px!important;padding:0!important;margin:0!important;text-align:center!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty .um-ai-empty-icon{display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty h2{font-size:24px!important;font-weight:620!important;letter-spacing:-.75px!important;line-height:1.3!important;margin:0 0 10px!important;color:var(--ux-ink)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty p{font:14px/1.5 var(--ux-font)!important;margin:0!important;color:var(--ux-muted)!important;max-width:100%!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty .um-ai-prompts{display:flex!important;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty .um-ai-prompts button{min-height:44px!important;padding:8px 12px!important;background:transparent!important;box-shadow:none!important;border:1px solid var(--ux-line)!important;font:500 12px/1.4 var(--ux-font)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen.ucs18-has-messages #umAIEmpty{display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-input-area{position:relative!important;padding:0 0 max(12px,env(safe-area-inset-bottom))!important;background:transparent!important;border:0!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen .ai-input-wrap{border:1px solid var(--ux-line)!important;border-radius:24px!important;background:var(--ucs18-composer)!important;box-shadow:0 3px 16px rgba(15,35,45,.04)!important;padding:8px!important;min-height:70px!important;gap:6px!important;align-items:center!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen :is(#uzmedV5Input,#aiInput){font:16px/1.6 var(--ux-font)!important;padding:12px 4px!important;min-height:52px!important;color:var(--ux-ink)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen #aiAttachBtn{border:0!important;background:transparent!important;box-shadow:none!important;color:var(--ux-ink)!important;font-size:24px!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen #uzmedV5SendBtn{width:44px!important;height:44px!important;min-width:44px!important;border-radius:50%!important;background:var(--ux-ink)!important;color:var(--ucs18-composer)!important;box-shadow:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen #uzmedV5SendBtn:disabled{opacity:.45!important;cursor:wait}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uzmed-v5-msg{font:16px/1.75 var(--ux-font)!important;overflow-wrap:anywhere!important;max-width:100%!important;margin:0 0 26px!important;white-space:pre-wrap!important;box-shadow:none!important;color:var(--ux-ink)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uzmed-v5-msg.user{width:fit-content!important;max-width:88%!important;margin-left:auto!important;padding:10px 18px!important;border:0!important;border-radius:22px!important;background:var(--ucs18-user-bg)!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uzmed-v5-msg.bot{padding:0 2px!important;border:0!important;border-radius:0!important;background:transparent!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uxn-clinical-answer{white-space:normal}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uxn-clinical-answer :is(p,li){font-size:16px!important;line-height:1.75!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uxn-clinical-answer h2{font-size:21px!important;line-height:1.4!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen:not(.um-compose-expanded) :is(.um-chat-hint,.ai-hint){font:11px/1.45 var(--ux-font)!important;color:var(--ux-muted)!important}
+/* One history heading; the original question archive remains in storage and original handlers remain callable. */
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] #ai-tarix-screen>:not(#uzmedConversations){display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] #ai-tarix-screen .ucs18-history{display:block!important;max-width:920px;margin:auto;padding:24px 20px 40px;color:var(--ux-ink)}
+.ucs18-history-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.ucs18-history h1{margin:0;font:650 28px/1.2 var(--ux-font);letter-spacing:-.8px}
+.ucs18-history-top p{font:14px/1.5 var(--ux-font);color:var(--ux-muted);margin:10px 0 0}
+.ucs18-primary{flex-shrink:0;min-height:44px;border:1px solid var(--ux-line);border-radius:12px;padding:10px 14px;background:var(--ux-surface);color:var(--ux-ink);font:600 13px/1.5 var(--ux-font);white-space:nowrap;cursor:pointer}
+.ucs18-count{font:12px/1.5 var(--ux-font);color:var(--ux-muted);margin:24px 0 10px}
+.ucs18-history-filters{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.ucs18-history-filters>input{flex:1;min-width:0;min-height:48px;border:1px solid var(--ux-line);border-radius:14px;padding:10px 14px;background:var(--ux-surface);color:var(--ux-ink);font:16px/1.5 var(--ux-font)}
+.ucs18-archive-filter{display:flex;align-items:center;gap:6px;font:13px/1.4 var(--ux-font);color:var(--ux-muted);min-height:44px}
+.ucs18-archive-filter input{accent-color:var(--ux-accent)}
+.ucs18-date-group{margin:22px 0 8px;font:600 12px/1.5 var(--ux-font);color:var(--ux-muted)}
+.ucs18-thread-row{position:relative;display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--ux-line)}
+.ucs18-thread-open{display:block;flex:1;min-width:0;text-align:left;padding:12px 4px;border:0;background:none;color:var(--ux-ink);font:550 15px/1.5 var(--ux-font);cursor:pointer;overflow:hidden;text-overflow:ellipsis}
+.ucs18-thread-open small{display:block;color:var(--ux-muted);font:13px/1.5 var(--ux-font);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ucs18-thread-row time{font:11px/1.5 var(--ux-font);color:var(--ux-muted);white-space:nowrap}
+.ucs18-thread-menu>summary{display:grid;place-items:center;list-style:none;width:44px;height:44px;border-radius:10px;cursor:pointer;color:var(--ux-muted);font:700 21px/1 var(--ux-font)}
+.ucs18-thread-menu>summary::-webkit-details-marker{display:none}
+.ucs18-thread-options{position:absolute;right:0;top:52px;z-index:8;min-width:190px;padding:6px;border:1px solid var(--ux-line);border-radius:12px;background:var(--ux-surface);box-shadow:0 8px 24px rgba(10,30,40,.12)}
+.ucs18-thread-options button{display:block;min-height:44px;width:100%;text-align:left;padding:8px 12px;border:0;border-radius:8px;background:none;color:var(--ux-ink);font:13px/1.4 var(--ux-font);cursor:pointer}
+.ucs18-thread-options button:hover,.ucs18-thread-menu>summary:hover,.ucs18-recent-thread:hover{background:var(--ux-soft)}
+.ucs18-history-empty{padding:44px 8px;text-align:center;color:var(--ux-muted)}
+.ucs18-history-empty h3{color:var(--ux-ink);font:600 20px/1.4 var(--ux-font)}
+.ucs18-history-empty p{font:14px/1.7 var(--ux-font);max-width:420px;margin:12px auto 24px}
+.ucs18-history-note{margin-top:24px;color:var(--ux-muted);font:12px/1.6 var(--ux-font)}
+.ucs18-save-error{margin:8px 4px 0;font:12px/1.5 var(--ux-font);color:var(--ux-danger,#af3737)}
+.ucs18-save-error[hidden]{display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat #doktor-screen .ai-input-area #uzmedConversationSaveStatus:not([hidden]){display:block!important}
+.ucs18-recent{margin:2px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--ux-line);flex-shrink:0}
+.ucs18-recent[hidden]{display:none!important}
+.ucs18-recent h2{font:550 11px/1.5 var(--ux-font);color:var(--ux-muted);margin:8px 10px}
+#uzmedRecentConversationList{max-height:190px;overflow-y:auto;scrollbar-width:thin}
+.ucs18-recent-thread{display:block;width:100%;min-height:40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:0;border-radius:8px;padding:9px 10px;background:none;text-align:left;color:var(--ux-ink);font:13px/1.5 var(--ux-font);cursor:pointer}
+.ucs18-recent-thread[aria-current='page']{background:var(--ux-soft);font-weight:600}
+html[data-uzmed-sidebar-size='compact'] .ucs18-recent{display:none}
+.ucs18-rename,.ucs18-picture-dialog{border:1px solid var(--ux-line);border-radius:20px;padding:24px;background:var(--ux-surface);color:var(--ux-ink);max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px)}
+.ucs18-rename::backdrop,.ucs18-picture-dialog::backdrop{background:rgba(8,20,30,.45)}
+.ucs18-rename label{display:block;font:600 16px/1.5 var(--ux-font);margin-bottom:14px}
+.ucs18-rename input{width:100%;min-height:48px;border:1px solid var(--ux-line);border-radius:10px;padding:10px;font:16px/1.5 var(--ux-font);color:inherit;background:var(--ux-soft)}
+.ucs18-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.ucs18-dialog-actions button,.ucs18-picture-dialog>button{min-height:44px;padding:10px 14px;border:1px solid var(--ux-line);border-radius:10px;color:inherit;background:var(--ux-soft);font:13px/1.5 var(--ux-font)}
+.ucs18-picture-dialog img{display:block;max-width:100%;max-height:65dvh;margin-top:12px;object-fit:contain}
+.ucs18-picture-dialog small{display:block}
+@media(min-width:1024px){html[data-uzmed-ux='on'][data-uzmed-conversations='v18'][data-uzmed-navigation='sidebar-v12'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active{padding-inline:max(32px,calc((100% - 760px)/2))!important}html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty h2{font-size:32px!important}html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #aiMessages .uzmed-v5-msg.user{max-width:80%!important}}
+@media(max-width:374px){.ucs18-history-top{align-items:flex-start;flex-direction:column}.ucs18-history h1{font-size:25px}.ucs18-thread-row time{display:none}html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile #umAIEmpty h2{font-size:22px!important}}
+@media(prefers-reduced-motion:reduce){.ucs18-history *{animation:none!important;transition:none!important}}
+
+#uzmedConversations{display:none}
+html[data-uzmed-ux=on][data-uzmed-conversations=v18] #uzmedConversations{display:block}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18']:has(#ai-tarix-screen.active) #uzimgFab{display:none!important}
+html[data-uzmed-ux='on'][data-uzmed-conversations='v18'] body#uzmedMobile.ug-chat #doktor-screen #uzmedV5SendBtn svg{stroke:currentColor!important}
+
+.ucs18-recent{margin:16px 0 0;padding:12px 0 0;border-bottom:0;border-top:1px solid var(--ux-line)}
+#uzmedRecentConversationList{max-height:none;overflow:visible}
+.ucs18-recent-row{display:flex;align-items:center;gap:2px;border-radius:10px}
+.ucs18-recent-thread{flex:1;min-width:0;width:auto;min-height:44px}
+.ucs18-recent-row:has([aria-current='page']){background:var(--ux-soft)}
+html[data-uzmed-ux='on'] .uxn-sidebar .ucs18-recent-delete{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--ux-muted);padding:10px}
+html[data-uzmed-ux='on'] .uxn-sidebar .ucs18-recent-delete:hover{background:var(--ux-soft);color:var(--ux-danger,#b02d37)}
+.ucs18-recent-status{font:11px/1.5 var(--ux-font);color:var(--ux-muted);margin:8px 10px}
+.ucs18-delete-dialog{margin:auto;border:1px solid var(--ux-line);border-radius:20px;padding:24px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--ux-surface,#fff);color:var(--ux-ink,#162d3d);font:15px/1.6 var(--ux-font,system-ui)}
+.ucs18-delete-dialog::backdrop{background:rgba(8,20,30,.45)}
+.ucs18-delete-dialog h2{font-size:20px;line-height:1.4;margin:0 0 12px}
+.ucs18-delete-dialog p{overflow-wrap:anywhere}
+.ucs18-delete-status{color:var(--ux-danger,#b02d37)}
+.ucs18-dialog-actions .ucs18-danger{background:#b02d37;color:#fff;border-color:#b02d37}
+.ucs18-delete-dialog button:focus-visible{outline:3px solid var(--ux-accent,#087f82);outline-offset:3px}
+.ucs18-thread-options .ucs18-delete-option{color:var(--ux-danger,#b02d37)}

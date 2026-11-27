@@ -1,0 +1,8 @@
+#uzOwnerPatientsScreen{color:var(--um-ink,#172b42);padding:24px;background:var(--um-bg,#f3f6fa);overflow:auto;max-height:100%}
+.upo-head{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:0 0 16px}.upo-head h1{margin:0;font-size:clamp(20px,2.4vw,30px)}
+.upo-btn{border:1px solid var(--um-line,#dae3ea);border-radius:12px;padding:11px 14px;min-height:44px;font:inherit;color:inherit;background:var(--um-surface,#fff);cursor:pointer}
+.upo-btn:focus-visible{outline:3px solid var(--um-accent,#147d83);outline-offset:2px}.upo-quiet{background:transparent}.upo-main{background:var(--um-accent,#147d83);color:white}
+.upo-controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.upo-controls input{min-width:200px;flex:1;border:1px solid var(--um-line,#dae3ea);border-radius:11px;padding:12px;font:inherit;color:inherit;background:var(--um-surface,#fff)}
+.upo-muted{color:var(--um-muted,#607084);font-size:13px}.upo-list{display:grid;gap:8px}.upo-item{text-align:left;width:100%}
+.upo-panel{background:var(--um-surface,#fff);border:1px solid var(--um-line,#dae3ea);border-radius:16px;padding:18px;margin:10px 0}.upo-panel h2{font-size:17px;margin:0 0 12px}.upo-line{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;margin:9px 0}.upo-pages{display:flex;gap:12px;margin-top:14px}
+@media(max-width:700px){#uzOwnerPatientsScreen{padding:14px}.upo-head{display:block}.upo-head h1{margin-top:12px}.upo-panel{padding:14px}}

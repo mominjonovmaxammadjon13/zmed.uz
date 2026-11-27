@@ -1,0 +1,17 @@
+/* Scoped to the existing Qabul UI, including Telegram's narrow viewport. */
+.vf-block{margin:18px 0;padding:16px;border:1px solid var(--line,#dce5e9);border-radius:14px;background:var(--surface,#fff);color:var(--text,#142a35)}
+.vf-block h3{margin:0 0 8px;font-size:15px}.vf-help{font-size:12px;line-height:1.6;color:var(--muted,#526571);white-space:pre-line}
+.vf-actions,.vf-saved-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.vf-saved-row>span{flex:1;min-width:120px;overflow-wrap:anywhere}
+.vf-action{padding:10px 12px;border:1px solid var(--line,#dce5e9);border-radius:8px;background:var(--soft,#f4f8f9);color:inherit;line-height:1.4;min-height:40px;overflow-wrap:anywhere;text-align:left}
+.vf-action:disabled{opacity:.55;cursor:default}.vf-action:focus-visible,.vf-field input:focus-visible{outline:2px solid #078d82;outline-offset:2px}
+.vf-field{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:12px}.vf-field input,.vf-field select{width:100%;min-width:0;font:inherit;background:var(--surface,#fff);color:inherit;border:1px solid var(--line,#dce5e9);border-radius:8px;padding:10px}.vf-field input[type=checkbox]{width:auto;align-self:flex-start}
+.vf-review{padding:12px;margin:10px 0;border-left:3px solid #b27e12;background:var(--soft,#f4f8f9);border-radius:8px;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.vf-review p{margin:7px 0}.vf-review.vf-contra{border-color:#c83e4f}.vf-review a,.vf-block>a,.vf-block details>a{color:var(--accent,#007f77)}
+.vf-matrix{overflow:auto;max-width:100%}.vf-matrix table{border-collapse:collapse;min-width:100%;font-size:11px}.vf-matrix th,.vf-matrix td{padding:8px;border:1px solid var(--line,#dce5e9);min-width:105px;text-align:left}
+#vfStructuredTemplates{width:100%;font-size:12px;margin-top:10px}
+.labRow .vf-lab-meta{grid-column:1/-1}.labRow input[name=date]{min-width:150px}
+.qd-editable [data-qabul-field]{outline:1px dashed #078d82;outline-offset:2px;cursor:text;min-width:16px;display:inline-block;white-space:pre-wrap}.qd-editing-paper{height:auto!important;min-height:297mm}.qd-editing-paper .docBody{height:auto!important;overflow:visible!important}
+[data-theme=dark] .vf-block{background:var(--surface,#13232d)}[data-theme=dark] .vf-action,[data-theme=dark] .vf-review{background:var(--soft,#1a303b)}
+@media(max-width:600px){.vf-block{padding:12px}.vf-action{flex:1}.vf-saved-row{align-items:stretch}.vf-matrix th,.vf-matrix td{min-width:95px}}
+@media print{.vf-block{display:none!important}[data-qabul-field]{outline:none!important}}
+
+.vf-drawer>summary{cursor:pointer;min-height:44px;font-weight:600;overflow-wrap:anywhere;padding:8px 0}.vf-drawer>section{padding-top:8px}.vf-matrix{overflow:auto;max-width:100%}.vf-drawer[open]>summary{border-bottom:1px solid var(--line,#8497a4)}

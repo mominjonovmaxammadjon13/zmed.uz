@@ -1,0 +1,154 @@
+/* Compact consultation controls shared by the web editor and Telegram WebView. */
+#qabulFocus .qc-dx-panel {
+  margin: 8px 0 12px;
+  padding: 10px;
+  border: 1px solid var(--q-line);
+  border-radius: 12px;
+  background: var(--q-card);
+  min-width: 0;
+}
+#qabulFocus .qc-dx-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+#qabulFocus .qc-dx-head h3 { margin: 0; font-size: 15px; }
+#qabulFocus .qc-dx-head button { flex-shrink: 0; padding: 4px 8px; font-size: 12px; }
+#qabulFocus .qc-dx-status { margin: 6px 0 0; }
+#qabulFocus .qc-dx-status:empty { display: none; }
+#qabulFocus :is(.qc-dx-panel,.qc-dx-catalog,.qc-dx-field,.qc-section-picker) select,
+#qabulFocus .qc-catalog-select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--q-text);
+  background: var(--q-soft);
+  border: 1px solid var(--q-line);
+  border-radius: 9px;
+}
+#qabulFocus .qc-dx-group { margin: 9px 0 3px; font-size: 13px; }
+#qabulFocus .qc-dx-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: start;
+  gap: 6px;
+  border-top: 1px solid var(--q-line);
+}
+#qabulFocus .qc-dx-option details {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+}
+#qabulFocus .qc-dx-option summary {
+  margin: 0;
+  padding: 10px 2px;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--q-text);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+#qabulFocus .qc-dx-option :is(h5,ul) { margin: 4px 0 6px; }
+#qabulFocus .qc-dx-option ul { padding-inline-start: 19px; overflow-wrap: anywhere; }
+#qabulFocus .qc-dx-add {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  font-size: 19px;
+}
+#qabulFocus .qc-dx-add[aria-pressed="true"] {
+  color: var(--q-text);
+  border-color: var(--q-accent);
+}
+#qabulFocus .qc-dx-field { margin: 10px 0; }
+#qabulFocus .qc-dx-field label { display: block; margin-bottom: 4px; }
+#qabulFocus .qc-dx-catalog { margin: 6px 0; }
+#qabulFocus .qc-dx-catalog summary { min-height: 44px; cursor: pointer; }
+#qabulFocus .qc-dx-catalog .search-results:empty { display: none; }
+#qabulFocus .qc-dx-catalog .search-results {
+  display: block;
+  max-height: 300px;
+  max-height: min(42dvh, 360px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  border-color: var(--q-line);
+  padding: 0;
+}
+#qabulFocus .qc-dx-catalog .search-results button[data-icd-row] {
+  min-height: 44px;
+  padding: 7px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--q-line);
+  border-radius: 0;
+  color: var(--q-text);
+  background: var(--q-soft);
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+#qabulFocus .qc-dx-catalog .search-results button[data-icd-row]:focus-visible {
+  outline-offset: -3px;
+}
+#qabulFocus .qc-section-picker {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 12px;
+  color: var(--q-muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+#qabulFocus :is(.qc-complaints,.qc-observations,.qc-followup,#qcDiets) {
+  padding: 10px;
+  margin: 10px 0;
+}
+#qabulFocus .qc-observations[data-qc-target="field-exam"] {
+  padding: 10px;
+  margin: 10px 0;
+}
+#qabulFocus :is(.qc-complaint-list,.qc-followup .qc-chips) { gap: 6px; }
+#qabulFocus :is(.qc-complaint-list,.qc-topic-body,.qc-followup) .qc-choice {
+  min-height: 44px;
+  padding: 6px 9px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+#qabulFocus .qc-topic > summary {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#qabulFocus .qc-tests-unified .qf-lab-search input,
+#qabulFocus #qcDiets > input { font-size: 16px; }
+#qabulFocus #qcDiets {
+  display: grid;
+  gap: 8px;
+}
+#qabulFocus #qcDiets h3 { margin: 0; font-size: 15px; }
+#qabulFocus #qcDiets > span { font-size: 13px; color: var(--q-muted); }
+#qabulFocus .qc-diet-list { gap: 5px; }
+#qabulFocus .qc-diet-item { min-width: 0; }
+#qabulFocus .qc-diet-item button { min-height: 44px; padding: 6px 9px; font-size: 13px; }
+#qabulFocus .qc-diet-item button + button { min-width: 44px; }
+#qabulFocus #panel-treatment .qflow-treatment-tools > summary {
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid var(--q-line);
+  border-radius: 9px;
+  background: var(--q-soft);
+  font-size: 14px;
+}
+#qabulFocus #panel-treatment .qflow-treatment-tools[open] > summary { margin-bottom: 6px; }
+#qabulFocus #panel-treatment .qflow-treatment-tools > button {
+  min-height: 44px;
+  padding: 7px 9px;
+  font-size: 13px;
+  white-space: normal;
+}

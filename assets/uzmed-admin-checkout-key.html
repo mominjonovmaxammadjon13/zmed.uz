@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>UZMED ADMIN · Checkout.uz ulash</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#f4faff;background:#06121c}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top right,#0f4f5666,transparent 55%),linear-gradient(155deg,#07121a,#102132);padding:calc(env(safe-area-inset-top) + 22px) 16px calc(env(safe-area-inset-bottom) + 30px)}
+main{max-width:520px;margin:0 auto}.overline{font-size:12px;font-weight:700;letter-spacing:.16em;color:#65cfca}
+h1{font-size:27px;line-height:1.25;margin:12px 0}p,li{font-size:15px;line-height:1.6;color:#bbd0d7}
+.panel{border:1px solid #39737b88;background:#102431ed;padding:21px;border-radius:22px;margin-top:23px}
+.tag{display:inline-block;font-size:12px;font-weight:700;border:1px solid #338c85;border-radius:22px;padding:7px 11px;color:#94dedb}
+a{color:#85e5ec}ol{padding-left:23px}
+label{font-weight:700;font-size:14px;display:block;margin:21px 0 9px}
+input{border-radius:13px;background:#06151e;color:#fff;border:1px solid #497b85;padding:15px;width:100%;font-size:16px}
+button{display:block;background:#67d8d1;color:#052127;border:0;border-radius:14px;padding:16px;font-size:16px;font-weight:750;width:100%;margin-top:16px;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}.note{font-size:13px;color:#b4cdd1;margin-top:18px;line-height:1.5}
+#status{min-height:40px;margin-top:17px;line-height:1.5;font-size:14px;overflow-wrap:anywhere}
+</style>
+</head><body><main>
+<div class="overline">UZMED · MAXFIY ADMIN INTEGRATSIYA</div>
+<h1>💳 Checkout.uz kassangizni ulash</h1>
+<p>Profil API kaliti faqat <strong>kassa holati, balans va statistikani o‘qish</strong> uchun ulanadi. To‘lov yaratish, pul o‘tkazish yoki PRO obunani ochish ruxsati berilmaydi.</p>
+<section class="panel">
+<span class="tag">🔒 Faqat admin · o‘qish rejimi</span>
+<ol><li>Checkout.uz’dagi Profil sahifasiga kiring.</li><li>“Profil API kaliti” yonidagi nusxalash tugmasini bosing.</li><li>Kalitni faqat shu himoyalangan oynaga qo‘ying. Telegram chatiga yubormang.</li></ol>
+<form id="keyform">
+<label for="profilekey">Checkout.uz Profil API kaliti</label>
+<input id="profilekey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="256" placeholder="Profil API kalitini kiriting" required>
+<button id="save" type="submit" disabled>🔐 Kalitni tekshirish va ulash</button>
+</form>
+<div id="status" role="status" aria-live="polite">Telegram orqali administrator tekshirilmoqda…</div>
+<p class="note">Kalit Checkout.uz API’da tekshiriladi va #395 UZMED kassasiga tegishliligi tasdiqlanadi. Kalit UZMED serverida 0600 ruxsat bilan saqlanadi.</p>
+</section>
+</main><script src="/assets/uzmed-admin-checkout-key.js?v=20261027-v1"></script><script src="/assets/uzmed-voice-guide-v1.js?v=20261102-sardor-0bc44b57b02f" defer></script>
+</body></html>

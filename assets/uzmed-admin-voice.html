@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uz">
+<head><script src="/assets/uzmed-icons-20261025.js?v=2" data-uzmed-site-icons="20261025"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark"><title>UZMED ADMIN — Jonli ovoz</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#050a13;color:#ecf4ff}
+*{box-sizing:border-box}
+body{margin:0;padding:calc(env(safe-area-inset-top) + 12px) 15px calc(env(safe-area-inset-bottom) + 18px);min-height:100dvh;background:radial-gradient(ellipse 130% 55% at 45% 3%,#102a4d 0%,#081322 55%,transparent 98%),#050a13}
+header{display:flex;gap:10px;align-items:center;padding:7px 3px 17px}.logo{display:grid;place-items:center;background:linear-gradient(135deg,#1264bc,#18346b);border:1px solid #3e6fbe;width:42px;height:42px;border-radius:13px;font-size:24px}
+header h1{font-size:17px;letter-spacing:.3px;font-weight:740;margin:0}.sub{font-size:12px;color:#91aacc;margin:3px 0 0}
+.pill{margin-left:auto;font-size:11px;border:1px solid #24596a;background:#073838;color:#9ae8db;padding:8px 10px;border-radius:30px;white-space:nowrap}
+main{display:grid;gap:12px;max-width:640px;margin:auto}.panel{background:#0d192bee;border:1px solid #24426a;border-radius:20px;padding:15px;box-shadow:0 12px 24px #0002}
+.hero{text-align:center;padding:12px 15px 16px;overflow:hidden}
+.visual{position:relative;isolation:isolate;width:min(67vw,264px);height:min(67vw,264px);margin:0 auto 4px;display:grid;place-items:center}
+.visual:before{content:"";position:absolute;inset:13%;border:1px solid #426c9733;border-radius:50%;box-shadow:0 0 40px #047bd11e;transition:transform .2s}
+.visual canvas{position:absolute;inset:0;width:100%;height:100%}
+.visual[data-mode="speaking"]:before{border-color:#b9ecff75;box-shadow:0 0 calc(26px + var(--voice-level, 0)*45px) #18b9ffa3}
+.visual[data-mode="listening"]:before{border-color:#8dfbe57a}
+.voice-center{z-index:1;font-size:20px;font-weight:700;letter-spacing:.08em;text-shadow:0 2px 10px #000b;pointer-events:none;color:#f8fdff}
+.voice-indicator{display:inline-block;vertical-align:middle;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#708daa;box-shadow:0 0 12px #427ac5}
+.visual[data-mode="listening"] .voice-indicator{background:#22e8c6;box-shadow:0 0 14px #22e8c6}
+.visual[data-mode="speaking"] .voice-indicator{background:#86d8ff;box-shadow:0 0 20px #51bfff}
+.visual[data-mode="thinking"] .voice-indicator{background:#f9c46c;box-shadow:0 0 13px #f7ae3c}
+.state-label{font-size:13px;font-weight:600;letter-spacing:.2px;color:#d1e3f9;min-height:24px;margin-top:0;margin-bottom:11px}
+button{cursor:pointer;touch-action:manipulation}
+#live{border:0;border-radius:15px;background:linear-gradient(125deg,#09a894,#087e90);color:#f8ffff;font-size:17px;font-weight:730;padding:17px 16px;width:100%;min-height:54px;box-shadow:0 5px 18px #07ae9d28}
+#live:disabled{background:#1d4354;color:#a1b5c6;opacity:.68;box-shadow:none}
+#live.running{background:linear-gradient(135deg,#b43e50,#8d3154)}
+.tools{margin-top:10px}.tools summary{cursor:pointer;color:#89abc9;font-size:12px;padding:7px;list-style:none}.tools summary::-webkit-details-marker{display:none}
+#record{width:100%;background:#162b45;color:#bfdbf3;border:1px solid #315277;border-radius:12px;padding:12px;font-size:14px}
+#record:disabled{opacity:.45}
+.caption{font-size:11px;color:#90abc7;margin:9px 1px 0;line-height:1.5}
+.status-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:4px 0 0}
+.chip{font-size:11px;color:#91b0ce;border:1px solid #203d60;border-radius:30px;padding:6px 10px;background:#0d2340}
+.status{font-size:13px;color:#b8cce0;line-height:1.5}
+.state-panel{padding:12px 15px}.feed{white-space:pre-wrap;font-size:14px;line-height:1.6;max-height:32vh;overflow:auto;min-height:92px}
+.feed b{color:#6fe5d9}.feed .line{margin-bottom:10px;padding:10px 11px;background:#13253e;border:1px solid #21426b;border-radius:12px;word-wrap:break-word}
+.feed .line:first-child{margin-top:0}
+form{display:flex;gap:9px;padding:10px}input{background:#0b1728;min-width:0;flex:1;border:1px solid #365b83;border-radius:12px;padding:14px 13px;color:#edf6ff;font-size:16px}
+#submit{min-width:53px;border:0;border-radius:12px;background:#317bf5;color:white;font-size:21px;font-weight:700}
+#submit:disabled{opacity:.45}.economy-option{display:flex;gap:10px;align-items:center;padding:2px 3px;color:#acbfdb;font-size:12px;line-height:1.5}
+.economy-option input{accent-color:#1cadac;width:18px;height:18px;flex:none}
+footer{font-size:11px;color:#6e8bab;line-height:1.55;padding:0 4px 10px}
+@media(max-height:720px){.visual{width:190px;height:190px}.feed{max-height:24vh}}
+@media(prefers-reduced-motion:reduce){.visual:before{transition:none}}
+/* Fixed logo inside the moving sphere, state label remains below it. */
+.voice-center{display:flex;flex-direction:column;gap:1px;align-items:center;justify-content:center;border:1px solid #ffffff22;background:#061325b3;border-radius:23px;padding:13px 20px 10px;box-shadow:0 8px 28px #0009,0 0 24px #326ac433;letter-spacing:.14em;font-size:23px;font-weight:850;line-height:1.1}
+.voice-center small{font-size:9px;letter-spacing:.48em;padding-left:.45em;font-weight:700;color:#8dc8ef}
+.state-label{min-height:38px}
+</style>
+</head>
+<body>
+<header><div class="logo" aria-hidden="true">✦</div><div><h1>UZMED ADMIN</h1><p class="sub">Jonli ovozli boshqaruv · Shaxsiy</p></div><span class="pill" id="connection">Tekshirilmoqda</span></header>
+<main>
+<section class="panel hero">
+<div class="visual" id="orb" data-mode="idle">
+<canvas id="voice-sphere" aria-hidden="true"></canvas>
+<div class="voice-center"><span id="voice-state">UZMED</span><small>ADMIN</small></div>
+</div>
+<div id="hero-label" class="state-label">Avval siz gapirasiz — UZMED tinglab javob beradi</div>
+<button id="live" disabled>📞 Jonli suhbatni boshlash</button>
+<details class="tools"><summary>🎙 Bir martalik ovozli xabar ▾</summary><button id="record" disabled>Mikrofonni yoqish</button></details>
+<p class="caption">Ovozli javob paytida nuqtali sfera haqiqiy tovushga mos harakatlanadi.</p>
+<div class="status-row"><span class="chip">VoiceLab STT</span><span class="chip">VoiceLab TTS</span><span class="chip">Xavfsiz ulanish</span></div>
+</section>
+<section class="panel state-panel"><div class="status" id="status" role="status">Ovoz xizmatlari tekshirilmoqda...</div></section>
+<section class="panel"><div class="feed" id="feed" aria-live="polite">Savolingizni ayting yoki pastdan yozing.</div></section>
+<form class="panel" id="form"><input id="question" placeholder="UZMED haqida savol yozing..." maxlength="450" autocomplete="off" enterkeyhint="send"><button id="submit" type="submit" aria-label="Savolni yuborish">➤</button></form>
+<label class="economy-option"><input type="checkbox" id="speak"> Matnli savollarga ham ovozli javob (VoiceLab krediti sarflanadi)</label>
+<footer>Faqat tasdiqlangan administrator. Mikrofon faqat suhbat davomida ishlaydi. Ovoz tanish: VoiceLab STT · ovozli javob: VoiceLab TTS.</footer>
+</main>
+<script src="/assets/uzmed-admin-particle-orb-v1.js?v=20261012-orb1"></script>
+<script src="/assets/uzmed-admin-handsfree-v1.js?v=20261012-speed1"></script>
+</body></html>

@@ -1,0 +1,161 @@
+/* UZMED CORE / WebOfis / 3D clinical control center
+   Original theme inspired by clinical dashboard and isometric medical-space layouts.
+   Scoped to admin-only application. */
+#uzcoreRoot{
+  --uzcore-accent:#2dd4bf;
+  --uzcore-accent-blue:#38bdf8;
+  --uzcore-border:rgba(94,234,212,.20);
+  color:#e8f6fa;
+  background:
+    radial-gradient(ellipse at 15% 6%,rgba(13,148,136,.17),transparent 40%),
+    radial-gradient(ellipse at 92% 65%,rgba(14,165,233,.11),transparent 39%),
+    #071421;
+}
+#uzcoreRoot .uzc-shell{
+  background:linear-gradient(138deg,rgba(9,26,40,.94),rgba(5,15,27,.98));
+}
+#uzcoreRoot .uzc-side{
+  background:linear-gradient(180deg,#0b2933,#081928 58%,#0a1524);
+  border-right:1px solid rgba(45,212,191,.20);
+}
+#uzcoreRoot .uzc-brand{
+  color:#e1fff6;letter-spacing:-.02em;
+  border-bottom:1px solid rgba(45,212,191,.12);
+}
+#uzcoreRoot .uzc-orb{
+  border:1px solid rgba(153,246,228,.8);
+  background:radial-gradient(circle at 34% 29%,#e0fff7,#2dd4bf 42%,#0d9488 73%);
+}
+#uzcoreRoot .uzc-nav button{
+  color:#b2cbda;
+  border:1px solid transparent;
+  border-radius:12px;
+  transition:background .15s ease,color .15s ease;
+}
+#uzcoreRoot .uzc-nav button:hover,
+#uzcoreRoot .uzc-nav button.on{
+  color:#defff8;
+  background:linear-gradient(110deg,rgba(20,184,166,.18),rgba(14,116,144,.12));
+  border-color:rgba(94,234,212,.18);
+}
+#uzcoreRoot .uzc-top{
+  background:rgba(8,31,43,.91);
+  border-bottom:1px solid var(--uzcore-border);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+#uzcoreRoot .uzc-title{color:#ecfffb;font-weight:850;letter-spacing:-.025em}
+#uzcoreRoot .uzc-content{
+  background:radial-gradient(ellipse at 95% 8%,rgba(14,165,233,.09),transparent 38%);
+}
+#uzcoreRoot .uzc-card{
+  min-width:0;overflow-wrap:anywhere;
+  background:linear-gradient(145deg,rgba(16,46,56,.98),rgba(10,27,43,.98));
+  border:1px solid rgba(93,205,196,.18);
+  border-radius:18px;
+  box-shadow:0 16px 36px rgba(0,11,22,.16),inset 0 1px rgba(187,247,239,.045);
+}
+#uzcoreRoot .uzc-grid .uzc-card{position:relative;overflow:hidden}
+#uzcoreRoot .uzc-grid .uzc-card::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:3px;
+  background:linear-gradient(180deg,#5eead4,#0ea5e9);
+}
+#uzcoreRoot .uzc-k{color:#a7c8d2;letter-spacing:.025em}
+#uzcoreRoot .uzc-v{color:#f0fffa;font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+#uzcoreRoot .uzc-sub{color:#a6bdc9}
+#uzcoreRoot .uzc-table-wrap{
+  border:1px solid var(--uzcore-border);border-radius:15px;max-width:100%;
+  box-shadow:0 9px 28px rgba(0,15,24,.16);
+}
+#uzcoreRoot .uzc-table{background:#0c2130}
+#uzcoreRoot .uzc-table th{
+  background:#12323e;color:#b7ebe5;
+  font-weight:750;letter-spacing:.025em;
+}
+#uzcoreRoot .uzc-table tr:hover td{background:rgba(26,89,99,.18)}
+#uzcoreRoot .uzc-input,
+#uzcoreRoot .uzc-select,
+#uzcoreRoot .uzc-textarea{
+  border:1px solid rgba(100,186,198,.31);
+  background:#0b2635;color:#effdfa;
+  border-radius:12px;
+}
+#uzcoreRoot .uzc-btn{
+  min-height:40px;border-radius:11px;
+}
+#uzcoreRoot .uzc-btn.primary{
+  background:linear-gradient(128deg,#0f766e,#0882a0);
+  color:white;box-shadow:0 5px 18px rgba(8,145,178,.18);
+}
+#uzcoreRoot :is(button,input,textarea,select):focus-visible{
+  outline:2px solid #5eead4;outline-offset:2px;
+}
+#uzcoreRoot .uzc-3d-wrap{
+  border:1px solid rgba(94,234,212,.27);
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(34,211,238,.14),transparent 39%),
+    linear-gradient(180deg,#0a2632,#061521 66%,#08121c);
+  box-shadow:0 20px 60px rgba(0,14,24,.28),inset 0 0 45px rgba(13,148,136,.05);
+}
+#uzcoreRoot .uzc-stage-status{
+  border:1px solid rgba(94,234,212,.38);
+  background:rgba(4,35,42,.92);
+  color:#d3fff3;border-radius:999px;
+  box-shadow:0 7px 24px rgba(0,7,20,.24);
+}
+#uzcoreRoot .uzc-agent-panel,
+#uzcoreRoot .uzc-meet-panel{
+  background:linear-gradient(155deg,rgba(9,40,48,.97),rgba(6,21,35,.98));
+  border:1px solid rgba(94,234,212,.28);
+  -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
+  box-shadow:0 25px 58px rgba(0,10,20,.42);
+}
+#uzcoreRoot .uzc-agent-speech{
+  background:rgba(6,30,39,.96);
+  border-color:rgba(94,234,212,.58);
+  color:#e8fffa;
+}
+#uzcoreRoot .uzc-3d-dialogue{
+  border-radius:15px;
+  background:linear-gradient(120deg,rgba(6,37,46,.96),rgba(7,23,36,.97));
+}
+/* WebOffice Telegram login gate, credentials stay server-validated */
+#tgGate .box{
+  border:1px solid rgba(94,234,212,.32)!important;
+  background:linear-gradient(140deg,#102c39,#0a192b)!important;
+  border-radius:23px!important;
+  box-shadow:0 22px 70px rgba(0,12,24,.40)!important;
+}
+#tgGate .box h1{color:#e5fff6;letter-spacing:-.03em}
+#tgGate .box p{color:#aed3da}
+#tgGate .orb{
+  background:radial-gradient(circle at 35% 30%,#ddfff7,#2dd4bf 43%,#0f766e 74%)!important;
+}
+@media(min-width:981px){
+  #uzcoreRoot .uzc-shell{grid-template-columns:248px minmax(0,1fr)}
+  #uzcoreRoot .uzc-content{padding:20px 24px}
+}
+@media(max-width:640px){
+  #uzcoreRoot .uzc-main{min-width:0}
+  #uzcoreRoot .uzc-top{min-width:0}
+  #uzcoreRoot .uzc-title{font-size:15px;max-width:56%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+  #uzcoreRoot .uzc-grid{gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  #uzcoreRoot .uzc-card{padding:12px}
+  #uzcoreRoot .uzc-v{font-size:23px}
+  #uzcoreRoot .uzc-side{
+    background:rgba(6,30,39,.98);border-top:1px solid rgba(94,234,212,.26);
+  }
+  #uzcoreRoot .uzc-nav>button{min-height:44px;touch-action:manipulation}
+  #uzcoreRoot .uzc-more-sheet{
+    background:rgba(7,32,43,.99);border:1px solid var(--uzcore-border);
+    box-shadow:0 16px 40px rgba(0,10,20,.48);
+    z-index:50;
+  }
+  #uzcoreRoot .uzc-more-sheet button{min-height:42px;background:rgba(26,80,84,.34);color:#e7fff7}
+  #uzcoreRoot .uzc-3d-wrap{margin:0;width:100%;min-height:0}
+  #uzcoreRoot .uzc-agent-panel{bottom:8px;left:7px;right:7px;max-height:55%;overflow:auto}
+  #uzcoreRoot .uzc-table-wrap{-webkit-overflow-scrolling:touch}
+  #uzcoreRoot :is(input,textarea,select){font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ #uzcoreRoot *{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}
+}

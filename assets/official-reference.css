@@ -1,0 +1,41 @@
+/* Reference prices share the active UZMED theme and fit their screen container. */
+#uzmedOfficialReference.uor-panel{box-sizing:border-box;min-width:0;margin:18px 12px 22px;padding:20px;border:1px solid var(--ux-line,var(--border,#dce4f2));border-radius:18px;background:var(--ux-surface,var(--white,#fff));color:var(--ux-ink,var(--text,#18313e));box-shadow:0 8px 26px rgba(16,48,94,.045);overflow-wrap:anywhere}
+#uzmedOfficialReference *{box-sizing:border-box;min-width:0}
+#uzmedOfficialReference .uor-heading{display:flex;gap:12px;align-items:flex-start;margin-bottom:8px}
+#uzmedOfficialReference .uor-icon{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;background:var(--ux-accent-soft,#e8f6f2);border-radius:12px;font-size:24px}
+#uzmedOfficialReference h2{font-size:1.125rem;font-weight:750;margin:0 0 5px;line-height:1.35;color:inherit}
+#uzmedOfficialReference .uor-heading p{margin:0;color:var(--ux-muted,var(--muted,#526a7c));font-size:.8125rem;line-height:1.55}
+#uzmedOfficialReference .uor-help{font-size:.875rem;color:var(--ux-muted,var(--muted,#526a7c));line-height:1.6;margin:14px 0}
+#uzmedOfficialReference .uor-form{margin:16px 0 12px}
+#uzmedOfficialReference .uor-form label{display:block;font-size:.875rem;font-weight:650;margin-bottom:8px}
+#uzmedOfficialReference .uor-query-row{display:flex;gap:8px;align-items:stretch}
+#uzmedOfficialReference .uor-query-row input{flex:1;width:100%;max-width:100%;min-height:48px;padding:11px 13px;border:1px solid var(--ux-line-strong,#8ca4b5);border-radius:12px;background:var(--ux-bg,var(--white,#f4f7f9));color:inherit;font:inherit;font-size:16px}
+#uzmedOfficialReference input::placeholder{color:var(--ux-muted,#526a7c);opacity:1}
+#uzmedOfficialReference .uor-query-row button{display:flex;align-items:center;justify-content:center;gap:8px;flex:none;min-height:48px;padding:11px 18px;border:0;border-radius:12px;color:var(--ux-primary-ink,#fff);background:var(--ux-primary,#08786e);font:inherit;font-size:.9375rem;font-weight:700;line-height:1.4;cursor:pointer}
+#uzmedOfficialReference .uor-query-row button:disabled{opacity:.6;cursor:wait}
+#uzmedOfficialReference :is(input,button,a,summary):focus-visible{outline:3px solid var(--ux-accent,#08786e);outline-offset:3px}
+#uzmedOfficialReference .uor-status{padding:12px;border-radius:12px;background:var(--ux-soft,#edf4f8);color:var(--ux-muted,#526a7c);font-size:.8125rem;line-height:1.6;margin-bottom:12px}
+#uzmedOfficialReference .uor-results{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+#uzmedOfficialReference .uor-result{padding:16px;border-radius:14px;background:var(--ux-bg,#f4f7f9);border:1px solid var(--ux-line,#dce4f2)}
+#uzmedOfficialReference .uor-result-head{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+#uzmedOfficialReference .uor-result-head b{display:block;line-height:1.5;font-size:1rem}
+#uzmedOfficialReference .uor-result-head small{display:block;font-size:.8125rem;color:var(--ux-muted,#526a7c);margin-top:4px}
+#uzmedOfficialReference .uor-pill{font-size:.75rem;color:var(--ux-accent,#08786e);background:var(--ux-accent-soft,#e8f6f2);border-radius:20px;padding:5px 10px;font-weight:650}
+#uzmedOfficialReference .uor-prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+#uzmedOfficialReference .uor-prices>div{background:var(--ux-surface,#fff);padding:12px;border-radius:10px;border:1px solid var(--ux-line,#dce4f2)}
+#uzmedOfficialReference dt{font-size:.8125rem;color:var(--ux-muted,#526a7c)}
+#uzmedOfficialReference dd{margin:6px 0 0;font-weight:750;font-size:1rem;font-variant-numeric:tabular-nums;line-height:1.45}
+#uzmedOfficialReference .uor-details{border-top:1px solid var(--ux-line,#dce4f2);padding-top:6px}
+#uzmedOfficialReference .uor-details summary{min-height:44px;padding:11px 0;font-weight:600;font-size:.8125rem;cursor:pointer}
+#uzmedOfficialReference .uor-details p{font-size:.8125rem;line-height:1.6;margin:8px 0}
+#uzmedOfficialReference .uor-result-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+#uzmedOfficialReference .uor-result-foot small{color:var(--ux-muted,#526a7c);font-size:.75rem}
+#uzmedOfficialReference a{color:var(--ux-accent,#08786e);text-decoration:underline;text-underline-offset:3px}
+#uzmedOfficialReference .uor-result-foot a{display:inline-flex;align-items:center;min-height:44px;font-size:.8125rem;font-weight:650}
+#uzmedOfficialReference .uor-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px;font-size:.8125rem;font-weight:650}
+#uzmedOfficialReference .uor-links a{display:flex;align-items:center;min-height:48px;padding:12px;border:1px solid var(--ux-line,#dce4f2);border-radius:12px;background:var(--ux-soft,#edf4f8);line-height:1.55;text-decoration:none}
+#uzmedOfficialReference .uor-links a:hover{border-color:var(--ux-accent,#08786e)}
+#uzmedOfficialReference .uor-disclaimer{color:var(--ux-muted,#526a7c);font-size:.75rem;margin:14px 0 0;line-height:1.65}
+@media(max-width:600px){#uzmedOfficialReference.uor-panel{margin:14px 12px;padding:16px;border-radius:16px}#uzmedOfficialReference .uor-query-row{flex-direction:column}#uzmedOfficialReference .uor-query-row button{width:100%;font-size:16px}#uzmedOfficialReference :is(.uor-prices,.uor-links){grid-template-columns:minmax(0,1fr)}}
+
+#uzmedOfficialReference svg{width:20px;height:20px;flex:none}#uzmedOfficialReference .uor-icon svg{width:26px;height:26px}

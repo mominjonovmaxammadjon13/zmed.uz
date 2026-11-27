@@ -1,0 +1,52 @@
+/* UZMED visit parent toolbar v7: compact 4-part header with native Back/AI/Save. */
+@media screen and (max-width:1023px){
+  #uzBemorlarHub.ubh-visit-mode .ubh-qabul{
+    gap:3px!important;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools{
+    display:grid!important;
+    grid-template-columns:44px minmax(72px,1fr) 58px 96px!important;
+    grid-template-rows:46px!important;align-items:stretch;
+    gap:6px!important;margin:0!important;min-height:46px;flex:0 0 46px;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools::before{
+    content:"✚ UZMED";grid-column:2;grid-row:1;
+    display:flex;align-items:center;justify-content:flex-start;
+    color:#e8fff3;font-size:16px;font-weight:850;letter-spacing:.01em;
+    white-space:nowrap;padding-left:4px;pointer-events:none;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools>.ubh-button:first-child{
+    grid-column:1;grid-row:1;font-size:22px!important;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools>.ubh-button:nth-child(2){
+    grid-column:3;grid-row:1;font-size:0!important;
+    background:#103a2d;border-color:#347c5a;padding:0!important;
+    display:grid;place-items:center;min-width:0;min-height:44px;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools>.ubh-button:nth-child(2)::before{
+    content:"✦ AI";display:block;font-size:13px;font-weight:850;color:#91efbf;
+    line-height:1.2;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools>.ubh-button:nth-child(3){
+    grid-column:4;grid-row:1;font-size:13px!important;font-weight:850!important;
+    background:linear-gradient(105deg,#20c98b,#30d9a4);
+    color:#042e21;border-color:transparent;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-note:not([role=alert]){
+    border:0;padding:0 3px;margin:0!important;
+    max-height:20px;min-height:0;overflow:hidden;
+    white-space:nowrap;text-overflow:ellipsis;
+    font-size:10px;line-height:18px!important;color:#8bbda7;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-frame{
+    border-radius:9px!important;
+    border-color:#215941!important;
+  }
+}
+@media screen and (max-width:365px){
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools{
+    grid-template-columns:42px minmax(64px,1fr) 52px 87px!important;
+    gap:4px!important;
+  }
+  #uzBemorlarHub.ubh-visit-mode .ubh-tools::before{font-size:14px}
+}

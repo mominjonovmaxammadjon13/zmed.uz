@@ -1,0 +1,46 @@
+/* Scoped, additive UZMED Shifokor qabuli v2 preview CSS */
+#uzmedTreatmentV2{--uv2-ink:#e8fff4;--uv2-muted:#abcac0;--uv2-bg:#071f1a;--uv2-panel:#0d3027;--uv2-border:#246b52;--uv2-accent:#29d99a;color:var(--uv2-ink);font-family:inherit;background:linear-gradient(155deg,#041b17,#123b2d);border:1px solid var(--uv2-border);border-radius:20px;padding:18px;margin:0 0 24px;box-shadow:0 10px 28px rgba(0,0,0,.18)}
+#uzmedTreatmentV2 *{box-sizing:border-box}
+#uzmedTreatmentV2 .uv2-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+#uzmedTreatmentV2 .uv2-kicker{font-size:.7rem;letter-spacing:.12em;color:var(--uv2-accent);font-weight:800}
+#uzmedTreatmentV2 h2{font-size:1.65rem;color:var(--uv2-ink);margin:5px 0}
+#uzmedTreatmentV2 .uv2-head p{font-size:.86rem;color:var(--uv2-muted);margin:2px 0 0}
+#uzmedTreatmentV2 .uv2-heading-actions{display:flex;gap:8px;flex-wrap:wrap}
+#uzmedTreatmentV2 button{font:inherit;cursor:pointer;border:1px solid var(--uv2-border);background:var(--uv2-panel);color:var(--uv2-ink);padding:11px 14px;border-radius:12px;line-height:1.2;min-height:43px;transition:background .15s,transform .15s}
+#uzmedTreatmentV2 button:hover{background:#195342}
+#uzmedTreatmentV2 button:focus-visible,#uzmedTreatmentV2 input:focus-visible{outline:2px solid var(--uv2-accent);outline-offset:3px}
+#uzmedTreatmentV2 button:disabled{opacity:.5;cursor:not-allowed}
+#uzmedTreatmentV2 button.uv2-primary{background:linear-gradient(120deg,#15b980,#2bd8a0);color:#06271e;border:0;font-weight:800}
+#uzmedTreatmentV2 .uv2-flow{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:9px;margin:16px 0;padding:10px;border-radius:12px;background:#052019;color:var(--uv2-muted);font-size:.76rem}
+#uzmedTreatmentV2 .uv2-flow b{background:#20c68b;color:#052b21;border-radius:18px;padding:8px 11px}
+#uzmedTreatmentV2 .uv2-tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 12px;margin:0 0 8px}
+#uzmedTreatmentV2 .uv2-tabs button{flex:1;white-space:nowrap;font-size:.86rem}
+#uzmedTreatmentV2 .uv2-tabs button[aria-pressed=true]{color:#052419;background:#2bd8a0;border-color:#2bd8a0;font-weight:800}
+#uzmedTreatmentV2 .uv2-search label{display:block;margin:6px 0 8px;font-weight:700;color:var(--uv2-ink);font-size:.9rem}
+#uzmedTreatmentV2 .uv2-search input{background:#08251f;color:#e4fff3;border:1px solid #3a7963;border-radius:10px;padding:12px;width:100%;font-size:1rem;min-height:45px}
+#uzmedTreatmentV2 .uv2-search input::placeholder{color:#a6c5b9}
+#uzmedTreatmentV2 .uv2-meta{font-size:.77rem;color:var(--uv2-muted);margin:12px 0}
+#uzmedTreatmentV2 .uv2-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+#uzmedTreatmentV2 .uv2-groups button{text-align:left;display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-height:68px;overflow-wrap:anywhere}
+#uzmedTreatmentV2 .uv2-groups small,#uzmedTreatmentV2 .uv2-drugs small{color:var(--uv2-muted);font-size:.72rem}
+#uzmedTreatmentV2 .uv2-back{margin-bottom:13px}
+#uzmedTreatmentV2 h3{color:var(--uv2-ink);font-size:1.12rem;margin:10px 0}
+#uzmedTreatmentV2 .uv2-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:14px;align-items:start}
+#uzmedTreatmentV2 .uv2-drugs{max-height:470px;overflow:auto;display:grid;gap:7px;padding:2px}
+#uzmedTreatmentV2 .uv2-drug{display:flex;flex-direction:column;text-align:left;align-items:flex-start;gap:4px;overflow-wrap:anywhere}
+#uzmedTreatmentV2 .uv2-drug[aria-pressed=true]{border-color:#2bd8a0;box-shadow:inset 3px 0 #2bd8a0}
+#uzmedTreatmentV2 .uv2-detail{border:1px solid #246b52;border-radius:14px;padding:13px;background:#071f1a;min-width:0;overflow-wrap:anywhere}
+#uzmedTreatmentV2 .uv2-fact{margin:9px 0;border-bottom:1px solid #235746;padding-bottom:8px}
+#uzmedTreatmentV2 .uv2-fact strong{color:#83efc1;font-size:.84rem}
+#uzmedTreatmentV2 .uv2-fact p{color:#e2f6ef;margin:5px 0 0;font-size:.86rem;white-space:pre-line;line-height:1.5}
+#uzmedTreatmentV2 .uv2-caution{border-left:3px solid #f4cb66;padding:8px;background:#303023;color:#f9eac4;font-size:.78rem}
+#uzmedTreatmentV2 .uv2-error{color:#ffb0a3;font-size:.84rem}
+#uzmedTreatmentV2 .uv2-success{color:#7cf3bd;font-size:.84rem}
+#uzmedTreatmentV2 .uv2-foot{margin-top:15px;border-top:1px solid #2b6650;padding-top:11px;font-size:.76rem;color:#bedfd2;line-height:1.5}
+#uzmedTreatmentV2 [hidden]{display:none!important}
+html[data-theme=light] #uzmedTreatmentV2{background:linear-gradient(155deg,#e5faf1,#f5fff9);--uv2-ink:#0d3628;--uv2-muted:#416657;--uv2-panel:#e9fff2;--uv2-border:#9fceb5;box-shadow:none}
+html[data-theme=light] #uzmedTreatmentV2 .uv2-flow,html[data-theme=light] #uzmedTreatmentV2 .uv2-detail,html[data-theme=light] #uzmedTreatmentV2 .uv2-search input{background:#f7fffa;color:#143e30}
+html[data-theme=light] #uzmedTreatmentV2 button:hover{background:#c3f5da}
+html[data-theme=light] #uzmedTreatmentV2 .uv2-fact p{color:#235240}
+@media(max-width:710px){#uzmedTreatmentV2{padding:12px;border-radius:14px}#uzmedTreatmentV2 .uv2-head{align-items:flex-start}#uzmedTreatmentV2 .uv2-head h2{font-size:1.4rem}#uzmedTreatmentV2 .uv2-heading-actions{width:100%}#uzmedTreatmentV2 .uv2-heading-actions button{flex:1;padding:10px 7px;font-size:.82rem}#uzmedTreatmentV2 .uv2-flow{font-size:.68rem}#uzmedTreatmentV2 .uv2-grid{grid-template-columns:1fr}#uzmedTreatmentV2 .uv2-groups{grid-template-columns:repeat(2,minmax(0,1fr))}#uzmedTreatmentV2 .uv2-tabs button{font-size:.75rem;padding:10px 7px}#uzmedTreatmentV2 .uv2-drugs{max-height:310px}}
+@media(max-width:370px){#uzmedTreatmentV2 .uv2-groups{grid-template-columns:1fr}}

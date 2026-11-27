@@ -1,0 +1,22 @@
+/* UZMED formal clinical report: layout only; never implies official institution certification. */
+.docPage .docBand{padding:0 0 8pt!important;margin:0 0 12pt!important;border-bottom:1px solid #6e6e6e!important;break-inside:avoid}
+.docPage .docFormalMasthead{display:grid;grid-template-columns:28mm minmax(0,1fr) 28mm;align-items:center;gap:7mm;min-height:25mm;margin-bottom:7mm}
+.docPage .docFormalLogo{width:26mm;height:26mm;border:1.3pt solid #516f64;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#1b493d!important;font:700 10pt Arial,sans-serif;letter-spacing:.4pt}
+.docPage .docFormalLogo small{font-size:6pt;font-weight:500;letter-spacing:0;margin-top:2pt}
+.docPage .docFormalOrg{text-align:center;min-width:0;font-family:'Times New Roman',serif;font-size:10pt;font-weight:700;line-height:1.2;text-transform:uppercase;overflow-wrap:anywhere}
+.docPage .docFormalOrg .docInstitution{margin:4pt 0 0;font-size:11pt;line-height:1.2}
+.docPage .docFormalStamp{width:27mm;height:21mm;border:1pt solid #b3b3b3;display:flex;align-items:center;justify-content:center;text-align:center;color:#666;font:7pt Arial,sans-serif;padding:2mm}
+.docPage .docFormalDivider{border-top:.65pt solid #777;margin:0 0 9pt}
+.docPage .docFormalTitle{text-align:center!important;font-family:'Times New Roman',serif;font-size:13pt!important;letter-spacing:1.3pt!important;font-weight:700;margin:3pt 0 1pt!important}
+.docPage .docFormalSubtitle{text-align:center!important;letter-spacing:2.2pt;font-weight:700;font-size:10pt;margin-bottom:12pt!important}
+.docPage .docType{text-align:center!important;font-style:italic;font-size:9pt;margin:0 0 9pt!important}
+.docPage .docIdentityLine{font-size:10pt!important;line-height:1.3!important;margin-bottom:2pt!important;text-align:left!important}
+.docPage .docIdentityLine strong{font-weight:700}
+.docPage .docSection{margin:0 0 7pt!important;line-height:1.3}
+.docPage .docSection>p{margin-bottom:4pt!important;text-align:justify}
+.docPage .docSection .docHeading{font-weight:700;text-decoration:none}
+.docPage .docReview{margin-top:13pt!important;padding-top:7pt!important;border-top:.5pt solid #999}
+.docPage .docSign{margin-top:19pt!important;padding-bottom:5pt;align-items:end}
+.docPage .docSign>div:last-child{min-width:55mm;border-top:1px solid #777}
+@media(max-width:600px){.qd-stage{overflow-x:hidden}}
+@media print{#qabulPrint .docPage .docFormalMasthead{display:grid!important}#qabulPrint .docPage .docBand{border-bottom:1px solid #777!important}}

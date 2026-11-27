@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /registration
+Disallow: /account
+Disallow: /dashboard
+Disallow: /patients
+Disallow: /patient
+Disallow: /private/
+Disallow: /uploads/
+Disallow: /patient-files/
+
+Sitemap: https://zmed.uz/sitemap.xml

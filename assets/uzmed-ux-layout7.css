@@ -1,0 +1,1496 @@
+/* UZMED workspace refresh. Additive and opt-in; remove data-uzmed-ux to restore.
+   Component visibility, routes, auth states and canvas coordinates remain owned
+   by the existing application. Theme and viewport hooks are shared with UX JS. */
+html[data-uzmed-ux='on'] {
+  --ux-bg: #0c1720;
+  --ux-surface: #14232e;
+  --ux-raised: #1b2e3a;
+  --ux-soft: #192d38;
+  --ux-ink: #eff6f8;
+  --ux-muted: #b1c4ce;
+  --ux-line: #3b5664;
+  --ux-line-strong: #627e8d;
+  --ux-accent: #72e5d5;
+  --ux-accent-soft: #163b3b;
+  --ux-primary: #08786e;
+  --ux-primary-hover: #09665f;
+  --ux-primary-ink: #fff;
+  --ux-danger: #ffb9bc;
+  --ux-danger-soft: #431f2a;
+  --ux-warning: #f7d690;
+  --ux-warning-soft: #392c16;
+  --ux-info: #acd7ff;
+  --ux-info-soft: #193450;
+  --ux-header: rgba(20, 35, 46, .94);
+  --ux-overlay: rgba(4, 12, 18, .78);
+  --ux-shadow: 0 20px 60px rgba(2, 9, 15, .28);
+  --ux-radius: 16px;
+  --ux-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+  color-scheme: dark;
+}
+
+html[data-uzmed-ux='on'][data-uzmed-ux-theme='light'],
+html[data-uzmed-ux='on']:not([data-uzmed-ux-theme]) body.light {
+  --ux-bg: #f4f7f9;
+  --ux-surface: #fff;
+  --ux-raised: #fff;
+  --ux-soft: #edf4f5;
+  --ux-ink: #172e3b;
+  --ux-muted: #526a79;
+  --ux-line: #c4d3dc;
+  --ux-line-strong: #8b9faa;
+  --ux-accent: #0c6d65;
+  --ux-accent-soft: #e2f4ef;
+  --ux-danger: #9c2432;
+  --ux-danger-soft: #fff0f1;
+  --ux-warning: #7a4b08;
+  --ux-warning-soft: #fff6e5;
+  --ux-info: #174e86;
+  --ux-info-soft: #eef5ff;
+  --ux-header: rgba(255, 255, 255, .94);
+  --ux-overlay: rgba(20, 38, 50, .48);
+  --ux-shadow: 0 20px 60px rgba(26, 52, 67, .12);
+  color-scheme: light;
+}
+
+/* Bridge the existing app's tokens, including older light-mode declarations. */
+html[data-uzmed-ux='on'] body#uzmedMobile {
+  --um-bg: var(--ux-bg) !important;
+  --um-surface: var(--ux-surface) !important;
+  --um-soft: var(--ux-soft) !important;
+  --um-ink: var(--ux-ink) !important;
+  --um-muted: var(--ux-muted) !important;
+  --um-line: var(--ux-line) !important;
+  --um-accent: var(--ux-accent) !important;
+  --um-tint: var(--ux-accent-soft) !important;
+  --ug-card: var(--ux-surface) !important;
+  --ug-bg: var(--ux-bg) !important;
+  --ug-shadow: none !important;
+  --bg: var(--ux-bg) !important;
+  --white: var(--ux-surface) !important;
+  --card: var(--ux-surface) !important;
+  --text: var(--ux-ink) !important;
+  --muted: var(--ux-muted) !important;
+  --border: var(--ux-line) !important;
+  --red: var(--ux-primary) !important;
+  --red2: var(--ux-primary-hover) !important;
+  --red-soft: var(--ux-accent-soft) !important;
+  --accent: var(--ux-accent) !important;
+  --accent-grad: linear-gradient(135deg, #08786e, #086b79) !important;
+  background: var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+  font-family: var(--ux-font) !important;
+  font-size: 16px !important;
+  line-height: 1.55;
+  accent-color: var(--ux-primary);
+  color-scheme: inherit;
+}
+html[data-uzmed-ux='on']:not([data-uzmed-ux-theme]) body#uzmedMobile.light {
+  color-scheme: light;
+}
+
+html[data-uzmed-ux='on'] :is(#uzmedAuthOverlay, #uaPanel, #uzcoreRoot, #umDock) {
+  color: var(--ux-ink);
+  font-family: var(--ux-font) !important;
+  color-scheme: inherit;
+}
+html[data-uzmed-ux='on'] :is(#uaPanel, #uzcoreRoot, #umDock) :is(button, input, select, textarea) {
+  font-family: var(--ux-font) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(button, [role='button']) {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+html[data-uzmed-ux='on'] :is(button, a, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--ux-accent) !important;
+  outline-offset: 3px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(input[type='text'], input[type='email'], input[type='password'], input[type='number'], input[type='tel'], input[type='url'], input[type='search'], textarea, select) {
+  min-height: 48px;
+  max-width: 100%;
+  font-size: 16px !important;
+  line-height: 1.5;
+  color: var(--ux-ink);
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(input, textarea)::placeholder {
+  color: var(--ux-muted) !important;
+  opacity: 1;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile button:disabled {
+  cursor: not-allowed;
+}
+html[data-uzmed-ux='on'] .uzmed-ux-theme-toggle {
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--ux-line) !important;
+  border-radius: 12px;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  font: 600 13px/1.3 var(--ux-font);
+  cursor: pointer;
+}
+html[data-uzmed-ux='on'] .uzmed-ux-theme-toggle svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+/* Existing loader diagnostics must never intercept clinical navigation. */
+html[data-uzmed-ux='on'] #__bundler_err {
+  pointer-events: none !important;
+  bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Auth is a real scrollable page, including short screens and open keyboards. */
+html[data-uzmed-ux='on'] #uzmedAuthOverlay {
+  top: var(--uzmed-ux-viewport-offset-top, 0px) !important;
+  bottom: auto !important;
+  height: var(--uzmed-ux-viewport-height, 100dvh) !important;
+  min-height: 0 !important;
+  padding: max(20px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)) !important;
+  align-items: flex-start !important;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-padding-block: 20px;
+  background: radial-gradient(ellipse at 20% 0%, var(--ux-accent-soft), transparent 52%), var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay::before {
+  background: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-stage {
+  width: min(440px, 100%) !important;
+  min-width: 0;
+  margin: auto !important;
+  gap: 24px;
+  flex-shrink: 0;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand {
+  margin: 0;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-logo {
+  width: 56px !important;
+  height: 56px !important;
+  margin-bottom: 12px;
+  border-radius: 18px !important;
+  background: #08786e !important;
+  box-shadow: 0 8px 22px rgba(8, 120, 110, .14) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-logo::before {
+  width: 30px;
+  height: 10px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-logo::after {
+  width: 10px;
+  height: 30px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-name {
+  font-size: 28px !important;
+  font-weight: 750 !important;
+  letter-spacing: -.9px;
+  color: var(--ux-ink) !important;
+  text-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-tag {
+  color: var(--ux-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.5;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-box {
+  width: 100% !important;
+  min-width: 0;
+  padding: 24px !important;
+  border: 1px solid var(--ux-line) !important;
+  border-radius: 24px !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: var(--ux-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-head {
+  min-width: 0;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-head > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uzmed-ux-auth-theme {
+  width: 44px;
+  padding: 10px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-title {
+  color: var(--ux-ink) !important;
+  font-size: clamp(23px, 6vw, 27px) !important;
+  font-weight: 720;
+  line-height: 1.25;
+  letter-spacing: -.7px;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay :is(.uz-auth-subtitle, .uz-auth-label, .uz-auth-remember, .uz-auth-note, .uz-auth-admin-hint, .uz-auth-reset-copy, .uz-auth-inline) {
+  color: var(--ux-muted) !important;
+  line-height: 1.55;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-subtitle {
+  margin-top: 7px;
+  font-size: 14px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay :is(.uz-auth-label, .uz-auth-note, .uz-auth-admin-hint) {
+  font-size: 13px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-tabs {
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 22px;
+  border: 1px solid var(--ux-line) !important;
+  border-radius: 14px;
+  background: var(--ux-soft) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-tab {
+  min-height: 44px !important;
+  padding: 10px 6px;
+  color: var(--ux-muted) !important;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-tab.active {
+  background: var(--ux-surface) !important;
+  color: var(--ux-accent) !important;
+  box-shadow: 0 1px 5px rgba(4, 22, 30, .1) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-field {
+  margin: 16px 0;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-label {
+  margin-bottom: 7px;
+  font-weight: 650;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-input {
+  width: 100%;
+  height: 52px !important;
+  min-height: 52px !important;
+  padding-right: 54px !important;
+  border: 1px solid var(--ux-line-strong) !important;
+  border-radius: 12px !important;
+  background: var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+  font-family: var(--ux-font) !important;
+  font-size: 16px !important;
+  font-weight: 450;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-input:focus {
+  outline: 2px solid var(--ux-accent) !important;
+  outline-offset: 2px;
+  border-color: var(--ux-accent) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay :is(.uz-auth-input-icon, .uz-auth-eye) {
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-eye {
+  right: 4px;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-extra {
+  flex-wrap: wrap;
+  gap: 0 12px;
+  margin: 0 0 12px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-remember {
+  min-height: 44px;
+  font-size: 13px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-remember input {
+  flex-shrink: 0;
+  accent-color: var(--ux-primary);
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay :is(.uz-auth-link, .uz-auth-inline button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px !important;
+  padding: 8px 2px;
+  color: var(--ux-accent) !important;
+  font-family: var(--ux-font);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  white-space: normal;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-btn {
+  min-height: 48px !important;
+  padding: 12px 14px;
+  border-radius: 12px !important;
+  font-family: var(--ux-font) !important;
+  font-size: 14px !important;
+  line-height: 1.5;
+  font-weight: 650;
+  box-shadow: none !important;
+  transform: none;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-primary {
+  background: var(--ux-primary) !important;
+  color: var(--ux-primary-ink) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-primary:hover {
+  background: var(--ux-primary-hover) !important;
+  filter: none;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay :is(.uz-auth-secondary, .uz-auth-admin, .uz-auth-close) {
+  border: 1px solid var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-admin {
+  margin-top: 12px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 6px;
+  margin-top: 10px;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-divider {
+  margin: 18px 0;
+  color: var(--ux-muted) !important;
+  font-size: 11px;
+  letter-spacing: .06em;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-divider::before,
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-divider::after {
+  background: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay.uz-admin-mode .uz-auth-title::after {
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-danger,
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-msg.err {
+  border: 1px solid var(--ux-danger) !important;
+  background: var(--ux-danger-soft) !important;
+  color: var(--ux-danger) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-msg.info {
+  background: var(--ux-info-soft) !important;
+  color: var(--ux-info) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-msg.ok {
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-userbar {
+  border-color: var(--ux-line);
+  background: var(--ux-soft);
+}
+
+/* Existing app shell and five-tab navigation retain their state transitions. */
+html[data-uzmed-ux='on'] body#uzmedMobile .phone-shell {
+  background: var(--ux-bg) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .app-header {
+  background: var(--ux-header) !important;
+  border-bottom: 1px solid var(--ux-line) !important;
+  color: var(--ux-ink) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .app-header::after {
+  background: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.app-logo, .app-logo-text, .um-wordmark) {
+  color: var(--ux-ink) !important;
+  font-weight: 750;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.app-logo-text span, .um-wordmark > span) {
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.hamburger, .hicon) {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav {
+  padding-inline: max(6px, env(safe-area-inset-left, 0px)) max(6px, env(safe-area-inset-right, 0px)) !important;
+  background: var(--ux-surface) !important;
+  border-top: 1px solid var(--ux-line) !important;
+  box-shadow: 0 -3px 16px rgba(7, 30, 42, .06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-item {
+  min-height: 52px !important;
+  padding-inline: 1px !important;
+  border-radius: 12px !important;
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-item.active {
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-icon {
+  background: var(--ux-soft) !important;
+  color: var(--ux-muted) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-item.active .nav-icon,
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-item.active .nav-icon svg {
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-accent) !important;
+  stroke: currentColor !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav :is(.nav-label, .nav-item > div:last-child) {
+  white-space: normal !important;
+  font-size: 11px !important;
+  line-height: 1.25 !important;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-dock-peek, .uz-menu-item, .uz-menu-close, .proto-chip, .mkb-letter-btn) {
+  min-height: 44px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .uz-side-menu {
+  max-width: calc(100vw - 32px);
+  border-color: var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: var(--ux-shadow) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .uz-menu-item {
+  color: var(--ux-ink) !important;
+}
+
+/* Clinical information has quiet surfaces and generous readable line lengths. */
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool, .um-recent, .proto-group, .proto-card, .cat-item, .drug-card, .derma-card, .dc-card, .tah-patient-card, .settings-item, .uhp-card, .up-card, .up-panel) {
+  border: 1px solid var(--ux-line) !important;
+  border-radius: var(--ux-radius) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .um-hero {
+  padding: 24px;
+  border: 1px solid var(--ux-line);
+  border-radius: 20px;
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .um-hero :is(h1, h1 span) {
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .um-hero :is(p, .um-eyebrow) {
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .um-hero-cta {
+  background: var(--ux-primary) !important;
+  border-color: var(--ux-primary) !important;
+  color: white !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool strong, .um-recent strong) {
+  font-size: 14px;
+  line-height: 1.5;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool small, .um-recent small, .um-page-title p, .um-ai-empty p) {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ux-muted);
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.proto-body, .derma-modal-body, .fdm-body-wrap, .tah-results, #dcResults, .up-workspace) {
+  color: var(--ux-ink);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.proto-body, .derma-modal-body, .fdm-body-wrap, .ai-bubble) :is(h2, h3, h4) {
+  color: var(--ux-ink);
+  line-height: 1.35;
+  margin-block: 1.4em .6em;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.proto-body, .derma-modal-body, .ai-bubble) :is(p, ul, ol) {
+  margin-block: .7em;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.proto-body, .derma-modal-body, .ai-bubble) a {
+  color: var(--ux-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiModeTabs .ai-mode-btn {
+  min-height: 44px !important;
+  font-size: 13px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages {
+  min-height: 0;
+  padding: 16px 0;
+  scroll-padding-block: 16px;
+}
+/* The shell already reserves the bottom navigation height. Do not reserve it
+   again inside the chat/tool screen. Existing application visibility wins. */
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen.active {
+  padding-bottom: 8px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen #aiMessages[style*='display: none'],
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen #aiMessages[style*='display:none'] {
+  display: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile:not(.ug-chat) #doktor-screen #uzmedV5ModelBtn {
+  display: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen #ugReturn {
+  flex: 0 0 auto;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen :is(#doseCalcPanel, #tahlilPanel, #uia-sp-panel) {
+  min-height: 0 !important;
+  overscroll-behavior-y: contain;
+  scroll-padding-block: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen #ugBackChat {
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  border-color: var(--ux-line) !important;
+}
+/* Chat uses one toolbar row, a scrollable conversation and a growing composer. */
+html[data-uzmed-ux='on'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen.active {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  column-gap: 8px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen #uzmedV5ModelBtn {
+  grid-area: 1 / 1;
+  align-self: center;
+  min-width: 0 !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  margin: 4px 0 !important;
+  padding-inline: 10px !important;
+  font-size: 12px !important;
+  border-color: var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-header {
+  grid-area: 1 / 2;
+  min-height: 52px !important;
+  height: 52px !important;
+  padding: 4px 0 !important;
+  gap: 6px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen .ai-clear-btn {
+  width: 44px !important;
+  min-width: 44px !important;
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen #aiMessages {
+  grid-area: 2 / 1 / 3 / -1;
+  width: 100%;
+  padding-block: 12px !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile.ug-chat:not(.um-compose-expanded) #doktor-screen .ai-input-area {
+  grid-area: 3 / 1 / 4 / -1;
+  width: 100%;
+  max-height: none;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages #umAIEmpty {
+  width: 100%;
+  max-width: 420px;
+  padding: 18px 8px;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages:has(.uzmed-v5-msg.user) #umAIEmpty {
+  display: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #umAIEmpty .um-ai-empty-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #umAIEmpty h2 {
+  font-size: 20px;
+  line-height: 1.35;
+  letter-spacing: -.3px;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #umAIEmpty .um-ai-prompts {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen .ai-input-wrap {
+  align-items: center !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #doktor-screen :is(#uzmedV5Input, #aiInput) {
+  min-width: 0 !important;
+  max-height: min(160px, 35dvh) !important;
+  resize: none;
+  overflow-y: auto;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #assosi-screen .banner {
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-ink) !important;
+  border: 1px solid var(--ux-line) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #assosi-screen .banner :is(h3, h4, .banner-title) {
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #assosi-screen .banner :is(p, .banner-sub) {
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .ai-bubble {
+  max-width: min(94%, 76ch) !important;
+  padding: 16px !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  border-radius: 16px !important;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .ai-bubble.bot {
+  border-color: var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .ai-bubble.user {
+  background: var(--ux-primary) !important;
+  color: white !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages .uzmed-v5-msg {
+  max-width: min(92%, 76ch) !important;
+  padding: 12px 14px !important;
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+  border-radius: 16px !important;
+  overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages .uzmed-v5-msg.bot {
+  align-self: flex-start;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  border-color: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #aiMessages .uzmed-v5-msg.user {
+  align-self: flex-end;
+  background: var(--ux-primary) !important;
+  color: white !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .ai-bubble :is(pre, code) {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: .9em;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.ai-bubble, .proto-body, .derma-modal-body) table {
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  border-collapse: collapse;
+  white-space: normal;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.ai-bubble, .proto-body, .derma-modal-body) :is(th, td) {
+  padding: 10px 12px;
+  border: 1px solid var(--ux-line);
+  text-align: start;
+  vertical-align: top;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.ai-bubble, .proto-body, .derma-modal-body) th {
+  background: var(--ux-soft);
+  color: var(--ux-ink);
+  font-weight: 650;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .ai-input-wrap {
+  border-color: var(--ux-line-strong) !important;
+  border-radius: 16px !important;
+  background: var(--ux-surface) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(#aiInput, #uzmedV5Input) {
+  padding: 12px 14px !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.ai-send-btn, .ai-attach-btn, .um-button, .ug-button, .uzm3-b, .uzm-md-b) {
+  min-height: 44px !important;
+  min-width: 44px !important;
+}
+
+/* Only known modal shells are resized; open/closed classes remain untouched. */
+html[data-uzmed-ux='on'] :is(.derma-modal-sheet, .proto-sheet, .ua-modal-box, .ua-confirm-box, .udp-modal, .umt-modal, .ucp-modal, .uss-modal, .uzm-narx-modal, .uzm-apteka-modal, #uzmedV5Panel, .ug-dialog, .uz-price-dialog) {
+  max-width: calc(100vw - 24px) !important;
+  max-height: calc(var(--uzmed-ux-viewport-height, 100dvh) - max(24px, env(safe-area-inset-top, 0px)) - max(24px, env(safe-area-inset-bottom, 0px))) !important;
+  border: 1px solid var(--ux-line) !important;
+  border-radius: 20px !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: var(--ux-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overscroll-behavior: contain;
+}
+html[data-uzmed-ux='on'] :is(.udp-modal, .umt-modal, .ucp-modal, .uss-modal) {
+  top: calc(var(--uzmed-ux-viewport-offset-top, 0px) + var(--uzmed-ux-viewport-height, 100dvh) / 2) !important;
+}
+html[data-uzmed-ux='on'] :is(.ua-modal, .ua-confirm, .derma-modal, #protoModal) {
+  background: var(--ux-overlay) !important;
+  padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] :is(.derma-modal-body, .proto-body, .ua-modal-body, .udp-body, .umt-body, .ucp-body, .uss-body, #uzmedV5List, .uz-price-results) {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+html[data-uzmed-ux='on'] .ua-modal-box {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+html[data-uzmed-ux='on'] .ua-modal-body {
+  flex: 1 1 auto;
+}
+html[data-uzmed-ux='on'] :is(.ua-modal-hdr, .ua-modal-foot, .proto-modal-head, .udp-hd, .umt-hd, .ucp-hd, .uss-hd) {
+  flex-shrink: 0;
+  border-color: var(--ux-line) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] :is(.derma-modal-close, .ua-modal-x, .udp-x, .umt-x, .ucp-x, .uss-x, #uzPriceClose, #uzmedV5Close) {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  flex-shrink: 0;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] :is(.udp-inp, .udp-ta, .udp-sel, .ucp-search, .ucp-inp, .ucp-sel, .uss-inp) {
+  border-color: var(--ux-line-strong) !important;
+  background: var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] :is(.udp-mut, .udp-fl, .umt-ru, .umt-hint, .ucp-fl, .ucp-note, .ucp-src, .uss-ru, .uss-hint, .uss-cat) {
+  color: var(--ux-muted) !important;
+  font-size: 13px;
+  line-height: 1.6;
+}
+html[data-uzmed-ux='on'] :is(.umt-code, .uss-code, .ucp-back) {
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] :is(.umt-t, .uss-t, .ucp-item) {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Admin, patient workspace and existing core control room share the palette. */
+html[data-uzmed-ux='on'] :is(#uaPanel, #uaApp, #umDock, #uzcoreRoot) {
+  background: var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] :is(#uaApp, #uzcoreRoot) {
+  height: var(--uzmed-ux-viewport-height, 100dvh) !important;
+  min-height: 0 !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-hdr, .ua-sb),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-side, .uzc-top) {
+  border-color: var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-sc, .ua-card, .ua-detail-item, .ua-audit-row, .ual-box),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-card, .uzc-event, .uzc-msg, .uzc-agent-panel, .uzc-meet-panel, .uzc-more-sheet) {
+  border: 1px solid var(--ux-line) !important;
+  border-radius: var(--ux-radius) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-ph-title, .ua-hdr-title, .ua-detail-val, .ua-user-email, .ua-audit-act),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-title, .uzc-v, .uzc-agent-panel h3, .uzc-meet-panel h3) {
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-ph-sub, .ua-sc-lbl, .ua-hint, .ua-label, .ua-card-title, .ua-nav-lbl, .ua-pager-info, .ua-audit-meta, .ua-detail-label, .ua-user-name, .ua-user-note, .ua-empty, .ual-sub, .ual-foot, .ua-sb-ver),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-k, .uzc-sub, .uzc-muted, .uzc-empty, .uzc-event time, .uzc-meet-panel p) {
+  color: var(--ux-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.6;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-sc-num, .ua-sb-title),
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-agent-panel b {
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-nb, .ua-btn, .ua-pager-btn, .ua-hdr-out, .ua-burger),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-btn, .uzc-nav button, .uzc-more-sheet button) {
+  min-width: 44px;
+  min-height: 44px !important;
+  color: var(--ux-ink);
+}
+html[data-uzmed-ux='on'] #uaPanel .ua-nb,
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-nav button {
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel .ua-nb.ua-act,
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-nav button.on {
+  border-color: var(--ux-accent) !important;
+  background: var(--ux-accent-soft) !important;
+  color: var(--ux-accent) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-input, .ua-textarea, .ua-fselect, .ua-search, .ua-fsel, .ual-box input),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-input, .uzc-select, .uzc-textarea) {
+  min-height: 48px !important;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--ux-line-strong) !important;
+  border-radius: 11px !important;
+  background: var(--ux-bg) !important;
+  color: var(--ux-ink) !important;
+  font-size: 16px !important;
+}
+html[data-uzmed-ux='on'] #uaPanel .ua-bp,
+html[data-uzmed-ux='on'] #uaPanel .ual-submit,
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-btn.primary {
+  border-color: var(--ux-primary) !important;
+  background: var(--ux-primary) !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-bs, .ual-cancel),
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-btn:not(.primary):not(.danger) {
+  border-color: var(--ux-line) !important;
+  background: var(--ux-soft) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel :is(.ua-bd, .ual-err),
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-btn.danger, .uzc-error) {
+  border-color: var(--ux-danger) !important;
+  background: var(--ux-danger-soft) !important;
+  color: var(--ux-danger) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel .ua-bw {
+  background: var(--ux-warning-soft) !important;
+  color: var(--ux-warning) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel .ua-content,
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-content {
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(14px, 2vw, 26px);
+  overscroll-behavior: contain;
+}
+html[data-uzmed-ux='on'] :is(.ua-tw, .uzc-table-wrap, .up-table-wrap) {
+  max-width: 100%;
+  overflow: auto;
+  border-color: var(--ux-line) !important;
+  scrollbar-width: thin;
+}
+html[data-uzmed-ux='on'] :is(.ua-table, .uzc-table, .up-table) {
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  font-size: 14px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+html[data-uzmed-ux='on'] :is(.ua-table, .uzc-table, .up-table) :is(th, td) {
+  padding: 12px 14px;
+  border-color: var(--ux-line) !important;
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] :is(.ua-table, .uzc-table, .up-table) th {
+  background: var(--ux-soft) !important;
+  color: var(--ux-muted) !important;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+html[data-uzmed-ux='on'] #uaPanel #uaLogin {
+  min-height: var(--uzmed-ux-viewport-height, 100dvh);
+  padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(16px, env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: var(--ux-bg) !important;
+}
+html[data-uzmed-ux='on'] #uaPanel .ual-box {
+  width: min(400px, 100%);
+  padding: 28px 24px;
+}
+
+/* 3D canvas is preserved; only the surrounding UI is made responsive. */
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-3d-wrap {
+  min-height: 320px;
+  background: var(--ux-bg) !important;
+  border-color: var(--ux-line) !important;
+  box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #uzcoreRoot :is(.uzc-stage-status, .uzc-3d-help, .uzc-3d-dialogue, .uzc-agent-speech) {
+  border-color: var(--ux-line) !important;
+  background: var(--ux-surface) !important;
+  color: var(--ux-ink) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-uzmed-ux='on'] #uzcoreRoot .uzc-agent-panel {
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 480px) {
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay {
+    padding-inline: max(12px, env(safe-area-inset-left, 0px)) max(12px, env(safe-area-inset-right, 0px)) !important;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-box {
+    padding: 20px 16px !important;
+    border-radius: 20px !important;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-stage {
+    gap: 20px;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .header-icons {
+    gap: 0 !important;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .um-hero {
+    padding: 22px 18px;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .um-tool {
+    gap: 8px;
+    padding: 12px 10px;
+  }
+  html[data-uzmed-ux='on'] :is(.ua-modal-hdr, .ua-modal-body, .ua-modal-foot) {
+    padding: 16px;
+  }
+  html[data-uzmed-ux='on'] .ua-modal-foot {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  html[data-uzmed-ux='on'] #uaPanel .ua-hdr {
+    gap: 8px;
+    padding-inline: 12px;
+    min-height: 60px;
+  }
+  html[data-uzmed-ux='on'] #uaPanel .ua-hdr-title {
+    min-width: 0;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+  }
+  html[data-uzmed-ux='on'] #uaPanel .ua-stats,
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  html[data-uzmed-ux='on'] #uaPanel .ua-sc {
+    min-width: 0;
+    padding: 16px 12px;
+  }
+  html[data-uzmed-ux='on'] #uaPanel .ua-search {
+    min-width: 0 !important;
+    width: 100%;
+  }
+  html[data-uzmed-ux='on'] #uaPanel .ua-sb {
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-side {
+    height: calc(62px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 5px 4px calc(5px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-main {
+    height: calc(var(--uzmed-ux-viewport-height, 100dvh) - 62px - env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-nav {
+    min-height: 48px;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-nav > button {
+    min-width: 0 !important;
+    height: 48px !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-3d-wrap {
+    min-height: 0 !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-agent-panel {
+    max-height: min(62%, 420px) !important;
+    padding: 16px !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-meet-toggle {
+    min-height: 44px !important;
+    padding: 10px !important;
+  }
+  html[data-uzmed-ux='on'] #uzcoreRoot .uzc-meet-panel {
+    top: 56px !important;
+    max-height: calc(100% - 68px) !important;
+  }
+}
+
+@media (min-width: 960px) {
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    align-items: center;
+    width: min(880px, 100%) !important;
+    gap: 64px;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand {
+    text-align: left;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-logo {
+    margin-left: 0;
+    margin-bottom: 22px;
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 22px !important;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-name {
+    font-size: 44px !important;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-tag {
+    font-size: 16px !important;
+    margin-top: 12px;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-box {
+    padding: 28px !important;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .phone-shell {
+    max-width: 1120px !important;
+    border-inline: 1px solid var(--ux-line) !important;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .screen {
+    padding-inline: 32px !important;
+  }
+  html[data-uzmed-ux='on'] body#uzmedMobile .um-tools {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-height: 680px) {
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-stage {
+    gap: 14px;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-logo {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 8px;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-brand-name {
+    font-size: 24px !important;
+  }
+  html[data-uzmed-ux='on'] #uzmedAuthOverlay .uz-auth-field {
+    margin: 12px 0;
+  }
+}
+
+html[data-uzmed-ux='on'][data-uzmed-ux-keyboard='open'] #uzmedAuthOverlay {
+  padding-top: 12px !important;
+}
+html[data-uzmed-ux='on'][data-uzmed-ux-keyboard='open'] #uzmedAuthOverlay .uz-auth-stage {
+  gap: 12px;
+}
+html[data-uzmed-ux='on'][data-uzmed-ux-keyboard='open'] #uzmedAuthOverlay .uz-auth-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+html[data-uzmed-ux='on'][data-uzmed-ux-keyboard='open'] #uzmedAuthOverlay .uz-auth-brand-logo {
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0;
+  border-radius: 12px !important;
+}
+html[data-uzmed-ux='on'][data-uzmed-ux-keyboard='open'] #uzmedAuthOverlay .uz-auth-brand-name {
+  font-size: 22px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-uzmed-ux='on'] :is(.uz-auth-btn, .uz-auth-box, .ual-box, .ual-badge-ring, .ua-ses-dot, .ua-sc, .ua-sb, .ua-toast, .nav-item, .um-dock-peek, .uzc-nav button, .uzc-stage-status i, .uzc-agent-speech) {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Theme is controlled by the original settings switch only. */
+html[data-uzmed-ux='on'] :is(#lgThemeBtn, .lg-theme-btn, .uz-menu-theme, .uz-menu-theme-btn, [onclick='menuToggleTheme()'], [onclick='toggleTheme()']):not(.soz-toggle) {
+  display: none !important;
+}
+html[data-uzmed-ux='on'] #sozlamalar-screen .soz-toggle[role='switch'] { cursor: pointer; flex-shrink: 0; }
+
+/* Existing price integration, presented as a complete medical workspace. */
+html[data-uzmed-ux='on'] body#uzmedMobile #uzPriceMenu {
+  display: flex !important; align-items: center; gap: 12px;
+  width: 100%; margin: 6px 0; padding: 14px;
+  border: 1px solid var(--ux-line) !important; border-radius: 16px;
+  background: var(--ux-surface) !important; color: var(--ux-ink) !important;
+  box-shadow: none; text-align: left; font: inherit;
+}
+html[data-uzmed-ux='on'] #uzPriceMenu .uz-menu-ico {
+  display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 40px;
+  border-radius: 12px; background: var(--ux-accent-soft); color: var(--ux-accent);
+}
+html[data-uzmed-ux='on'] #uzPriceMenu .uz-menu-txt { display: grid; gap: 4px; flex: 1; min-width: 0; }
+html[data-uzmed-ux='on'] #uzPriceMenu .uz-menu-title { display: block; font-size: 16px; line-height: 1.35; font-weight: 700; }
+html[data-uzmed-ux='on'] #uzPriceMenu .uz-menu-desc { display: block; font-size: 12px; line-height: 1.5; color: var(--ux-muted); }
+html[data-uzmed-ux='on'] #uzPriceMenu .uz-menu-arrow { flex-shrink: 0; color: var(--ux-accent); font-size: 22px; }
+html[data-uzmed-ux='on'] body#uzmedMobile #uzPriceDialog {
+  position: fixed; inset: 0; margin: auto !important;
+  box-sizing: border-box; width: min(640px, calc(100vw - 32px));
+  max-width: 640px; max-height: calc(var(--uzmed-ux-viewport-height, 100dvh) - 32px);
+  padding: 0; border: 1px solid var(--ux-line); border-radius: 20px;
+  background: var(--ux-bg) !important; color: var(--ux-ink) !important;
+  font: 16px/1.55 var(--ux-font); box-shadow: var(--ux-shadow);
+  overflow: auto; overscroll-behavior: contain;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog::backdrop { background: var(--ux-overlay); backdrop-filter: blur(4px); }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-head {
+  position: sticky; top: 0; z-index: 2; display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px; padding: 20px;
+  background: var(--ux-surface); border-bottom: 1px solid var(--ux-line); backdrop-filter: none;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-head > div { display: grid; gap: 6px; min-width: 0; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-head b { font-size: 20px; line-height: 1.35; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-head small { display: block; font-size: 13px; line-height: 1.5; color: var(--ux-muted); }
+html[data-uzmed-ux='on'] #uzPriceDialog #uzPriceClose {
+  display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px;
+  border: 1px solid var(--ux-line); border-radius: 12px;
+  background: var(--ux-soft); color: var(--ux-ink); cursor: pointer;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-form { display: grid; gap: 18px; padding: 20px; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-form label { display: grid; gap: 8px; font: 600 14px/1.45 var(--ux-font); }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 0; }
+html[data-uzmed-ux='on'] #uzPriceDialog :is(input, select) {
+  box-sizing: border-box; width: 100%; min-width: 0; min-height: 48px;
+  padding: 12px; border: 1px solid var(--ux-line-strong); border-radius: 12px;
+  background: var(--ux-surface) !important; color: var(--ux-ink) !important; font: 16px/1.5 var(--ux-font);
+}
+html[data-uzmed-ux='on'] #uzPriceDialog select:disabled { color: var(--ux-muted) !important; opacity: .75; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-submit {
+  min-height: 48px; padding: 12px 16px; border: 0; border-radius: 12px;
+  background: var(--ux-primary); color: var(--ux-primary-ink); font: 700 16px/1.5 var(--ux-font); cursor: pointer;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-status {
+  margin: 0 20px 16px; padding: 12px; border: 1px solid var(--ux-line); border-radius: 12px;
+  background: var(--ux-accent-soft); color: var(--ux-ink); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-results { display: grid; gap: 12px; padding: 0 20px 16px; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card {
+  padding: 16px; border: 1px solid var(--ux-line); border-radius: 16px;
+  background: var(--ux-surface) !important; color: var(--ux-ink) !important; box-shadow: none;
+}
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card-top > div { display: grid; gap: 4px; min-width: 0; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card b { font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card :is(strong, a) { color: var(--ux-accent); font-size: 16px; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card :is(small, .uz-price-meta) { color: var(--ux-muted); font-size: 13px; line-height: 1.5; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card a { display: inline-flex; align-items: center; min-height: 44px; }
+html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-note { margin: 0; padding: 0 20px 20px; color: var(--ux-muted); font-size: 13px; line-height: 1.6; }
+@media (max-width: 600px) {
+  html[data-uzmed-ux='on'] body#uzmedMobile #uzPriceDialog {
+    position: fixed; top: var(--uzmed-ux-viewport-offset-top, 0px); bottom: auto;
+    width: calc(100vw - 24px); height: calc(var(--uzmed-ux-viewport-height, 100dvh) - 24px);
+    max-height: calc(var(--uzmed-ux-viewport-height, 100dvh) - 24px);
+    max-width: none; margin: 12px auto 0 !important; border-radius: 18px;
+  }
+  html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-grid { grid-template-columns: 1fr; }
+  html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-card-top { flex-direction: column; }
+  html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-head,
+  html[data-uzmed-ux='on'] #uzPriceDialog .uz-price-form { padding: 16px; }
+}
+
+/* Native labels have their own color; keep the active item readable in both themes. */
+html[data-uzmed-ux='on'] body#uzmedMobile .bottom-nav .nav-item.active .nav-label {
+  color: var(--ux-accent) !important;
+}
+
+/* Premium clinical workspace: restrained surfaces, purposeful motion, native routes. */
+html[data-uzmed-ux='on'] {
+  --ux-motion-fast: 140ms;
+  --ux-motion-normal: 200ms;
+  --ux-ease: cubic-bezier(.2,.7,.2,1);
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool,.proto-card,.derma-card,.drug-card,.settings-item) {
+  box-shadow: 0 2px 8px rgba(12,32,46,.035) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile .screen:not(.active) * { animation-play-state: paused !important; }
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-ai-empty-icon,.um-hero-orb,.derma-hero-orb) {
+  animation: none !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool,.proto-card,.derma-card,.drug-card,.uz-menu-item,.ux-rail-button) {
+  transition: background-color var(--ux-motion-fast),border-color var(--ux-motion-fast),transform var(--ux-motion-fast) var(--ux-ease) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile button:active { transform: translateY(1px); }
+@media (hover:hover) {
+  html[data-uzmed-ux='on'] body#uzmedMobile :is(.um-tool,.derma-card,.drug-card):hover {
+    transform: translateY(-2px) !important; border-color: var(--ux-line-strong) !important;
+  }
+}
+html[data-uzmed-ux='on'] body#uzmedMobile :is(.screen.active,.uzd-card,.uz-price-card) {
+  animation: ux-screen-enter var(--ux-motion-normal) var(--ux-ease) both;
+}
+@keyframes ux-screen-enter { from { opacity: .5; } to { opacity: 1; } }
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg,.ai-bubble) {
+  box-shadow: none !important; text-align: start;
+}
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg.bot,.ai-bubble.bot) {
+  border: 1px solid var(--ux-line) !important; border-radius: 16px 16px 16px 4px !important;
+}
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg.user,.ai-bubble.user) {
+  border-radius: 16px 16px 4px 16px !important;
+}
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg,.ai-bubble) :is(h2,h3,h4) {
+  font-size: 1.08em; line-height: 1.45; margin: 1em 0 .45em; color: inherit !important;
+}
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg,.ai-bubble) :is(ul,ol) { padding-inline-start: 1.4em; }
+html[data-uzmed-ux='on'] #aiMessages :is(.uzmed-v5-msg,.ai-bubble) :is(p,li) { overflow-wrap: anywhere; }
+html[data-uzmed-ux='on'] #aiMessages .ux-table-scroll {
+  max-width: 100%; overflow-x: auto; border: 1px solid var(--ux-line); border-radius: 12px;
+  scrollbar-width: thin; overscroll-behavior-x: contain; margin-block: 12px;
+}
+html[data-uzmed-ux='on'] #aiMessages .ux-table-scroll table { width: max-content; min-width: 100%; margin: 0; display: table; }
+html[data-uzmed-ux='on'] #aiMessages .ux-table-scroll :is(th,td) { padding: 10px 14px; white-space: normal; min-width: 110px; }
+html[data-uzmed-ux='on'] #aiMessages .ux-table-scroll th { background: var(--ux-soft); color: var(--ux-ink); text-align: start; }
+html[data-uzmed-ux='on'] .ux-workspace-rail { display: none; }
+html[data-uzmed-ux='on'] .ux-clinical-toc {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; padding-bottom: 16px; border-bottom: 1px solid var(--ux-line);
+}
+html[data-uzmed-ux='on'] .ux-clinical-toc button {
+  min-height: 44px; padding: 8px 12px; border: 1px solid var(--ux-line); border-radius: 10px;
+  background: var(--ux-soft); color: var(--ux-ink); font: 600 13px/1.5 var(--ux-font); cursor: pointer;
+}
+html[data-uzmed-ux='on'] #dermaModal .modal-section { margin: 20px 0; scroll-margin-top: 16px; }
+html[data-uzmed-ux='on'] #dermaModal .derma-modal-sheet { display: flex; flex-direction: column; overflow: hidden !important; }
+html[data-uzmed-ux='on'] #dermaModal :is(.modal-pill,.derma-modal-top) { flex: 0 0 auto; }
+html[data-uzmed-ux='on'] #dermaModal .derma-modal-body { flex: 1 1 auto; min-height: 0; overflow-y: auto !important; overscroll-behavior: contain; }
+html[data-uzmed-ux='on'] #dermaModal .modal-section-title {
+  color: var(--ux-ink) !important; font-size: 15px !important; font-weight: 750 !important; margin-bottom: 10px;
+}
+html[data-uzmed-ux='on'] #dermaModal .modal-section-text {
+  color: var(--ux-ink) !important; font-size: 15px !important; line-height: 1.8 !important; font-weight: 450 !important;
+}
+html[data-uzmed-ux='on'] #dermaModal .ux-clinical-warning {
+  border: 1px solid var(--ux-warning); border-radius: 12px; padding: 16px; background: var(--ux-warning-soft);
+}
+html[data-uzmed-ux='on'] .ux-clinical-source {
+  color: var(--ux-muted); font: 400 13px/1.65 var(--ux-font); padding: 12px 0; overflow-wrap: anywhere;
+}
+html[data-uzmed-ux='on'] .ux-atlas-disclosure {
+  border: 1px solid var(--ux-line); border-radius: 14px; padding: 4px 16px; margin-top: 16px; background: var(--ux-surface);
+}
+html[data-uzmed-ux='on'] .ux-atlas-disclosure summary {
+  min-height: 48px; display: list-item; padding: 12px 0; cursor: pointer; font: 600 14px/1.6 var(--ux-font); color: var(--ux-accent);
+}
+html[data-uzmed-ux='on'] #derma-screen .uzd-discovery {
+  background: var(--ux-surface) !important; color: var(--ux-ink) !important; border-color: var(--ux-line) !important; box-shadow: none !important;
+}
+html[data-uzmed-ux='on'] #derma-screen :is(.uzd-intro h2,.uzd-card-title) { color: var(--ux-ink) !important; }
+html[data-uzmed-ux='on'] #derma-screen :is(.uzd-intro p,.uzd-meta,.uzd-feedback,.uzd-warning) { color: var(--ux-muted) !important; font-size: 13px !important; line-height: 1.6; }
+html[data-uzmed-ux='on'] #derma-screen :is(.uzd-status,.uzd-chip) { background: var(--ux-accent-soft) !important; color: var(--ux-accent) !important; min-height: 44px; border-color: var(--ux-line) !important; }
+html[data-uzmed-ux='on'] #derma-screen :is(.uzd-card,.uzd-form input) { background: var(--ux-bg) !important; color: var(--ux-ink) !important; border-color: var(--ux-line) !important; }
+html[data-uzmed-ux='on'] #derma-screen :is(.uzd-source,.uzd-credit) { color: var(--ux-accent) !important; font-size: 12px !important; }
+html[data-uzmed-ux='on'] #derma-screen .uzd-picture { background: var(--ux-soft) !important; }
+html[data-uzmed-ux='on'] #derma-screen .uzd-form input { font-size: 16px !important; }
+html[data-uzmed-ux='on'] #derma-screen .uzd-form button { min-height: 48px; font-size: 14px !important; background: var(--ux-primary) !important; }
+@media (min-width: 1024px) {
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) { --ux-rail-width: 232px; }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .phone-shell {
+    left: var(--ux-rail-width) !important; right: 0 !important; top: 0 !important;
+    transform: none !important; width: calc(100% - var(--ux-rail-width)) !important; max-width: none !important;
+    height: var(--uzmed-ux-viewport-height,100dvh) !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .ux-workspace-rail {
+    display: flex; flex-direction: column; position: fixed; inset: 0 auto 0 0;
+    width: var(--ux-rail-width); padding: 24px 14px 16px; border-right: 1px solid var(--ux-line);
+    background: var(--ux-surface); z-index: 160; overflow-y: auto; scrollbar-width: thin;
+  }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .bottom-nav { display: none !important; }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .screens {
+    height: calc(var(--uzmed-ux-viewport-height,100dvh) - 56px) !important;
+    flex: 1 1 auto !important; min-height: 0 !important; margin-bottom: 0 !important;
+  }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .screen { bottom: 0 !important; height: calc(var(--uzmed-ux-viewport-height,100dvh) - 56px) !important; }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) .app-header { border-bottom-color: var(--ux-line) !important; padding-inline: 24px !important; }
+  html[data-uzmed-ux='on'][data-ux-workspace='wide'] body#uzmedMobile:not(.uz-auth-locked) #doktor-screen { padding-inline: max(24px,calc((100% - 880px)/2)) !important; }
+  html[data-uzmed-ux='on'] .ux-rail-brand { font-size: 24px; color: var(--ux-accent); letter-spacing: -.5px; font-weight: 800; padding: 0 12px 22px; }
+  html[data-uzmed-ux='on'] .ux-rail-brand span { display: block; font-size: 12px; color: var(--ux-muted); font-weight: 500; letter-spacing: 0; margin-top: 6px; }
+  html[data-uzmed-ux='on'] .ux-rail-group { margin: 0 0 18px; }
+  html[data-uzmed-ux='on'] .ux-rail-group-title { font: 650 11px/1.5 var(--ux-font); color: var(--ux-muted); margin: 0 12px 8px; letter-spacing: .04em; }
+  html[data-uzmed-ux='on'] .ux-rail-button {
+    width: 100%; display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px;
+    border: 1px solid transparent; border-radius: 11px; background: transparent; color: var(--ux-muted); font: 550 14px/1.4 var(--ux-font); text-align: start; cursor: pointer;
+  }
+  html[data-uzmed-ux='on'] .ux-rail-button svg { width: 20px; height: 20px; flex: 0 0 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  html[data-uzmed-ux='on'] .ux-rail-button:hover { background: var(--ux-soft); color: var(--ux-ink); }
+  html[data-uzmed-ux='on'] .ux-rail-button[aria-current] { border-color: var(--ux-line); background: var(--ux-accent-soft); color: var(--ux-accent); font-weight: 700; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html[data-uzmed-ux='on'] *,html[data-uzmed-ux='on'] *::before,html[data-uzmed-ux='on'] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* v6: native menu ID rules previously overrode the shared light palette. */
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu.uz-side-menu {
+  background: var(--ux-surface) !important; color: var(--ux-ink) !important;
+  border-color: var(--ux-line) !important; box-shadow: var(--ux-shadow) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu :is(.uz-menu-head,.uz-menu-body,.uz-menu-foot) {
+  background: var(--ux-surface) !important; color: var(--ux-muted) !important; border-color: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu :is(.uz-menu-head b,.uz-menu-head strong,.uz-menu-brand,.uz-menu-logo,.uz-menu-title,.uz-menu-item) {
+  color: var(--ux-ink) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu :is(.uz-menu-desc,.uz-menu-section,.uz-menu-head p,.uz-menu-sub) {
+  color: var(--ux-muted) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu .uz-menu-item {
+  background: var(--ux-soft) !important; border: 1px solid var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu :is(input,.uz-menu-close,.ug-button) {
+  background: var(--ux-soft) !important; color: var(--ux-ink) !important; border-color: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu :is(.uz-menu-ico,.uz-menu-arrow) {
+  color: var(--ux-accent) !important; background: var(--ux-accent-soft) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu .uz-menu-ico svg { stroke: currentColor !important; }
+html[data-uzmed-ux='on'] body#uzmedMobile :is(#ugTheme,#lgThemeBtn,#uzPriceMenu) { display: none !important; }
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu #ugTheme { display: none !important; }
+html[data-uzmed-ux='on'][data-uzmed-drug-workspace='failed'] body#uzmedMobile #uzSideMenu #uzPriceMenu { display: flex !important; }
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu #uzmedMenuSearch20261009 {
+  background: var(--ux-soft) !important;
+  color: var(--ux-ink) !important;
+  border-color: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu #uzmedMenuSearch20261009::placeholder { color: var(--ux-muted) !important; opacity: 1; }
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu #aiModeTabs .ai-mode-btn {
+  background: var(--ux-soft) !important;
+  color: var(--ux-ink) !important;
+  border-color: var(--ux-line) !important;
+}
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu #aiModeTabs .ai-mode-btn.active { background: var(--ux-accent-soft) !important; color: var(--ux-accent) !important; }
+
+/* One drug workspace. Original tools keep their DOM nodes and handlers. */
+html[data-uzmed-ux='on'] #dorilar-screen .um-page-title { padding-bottom: 14px !important; }
+html[data-uzmed-ux='on'] #dorilar-screen .um-page-title h1 { font-size: clamp(24px,4vw,30px) !important; margin-bottom: 6px !important; }
+html[data-uzmed-ux='on'] #uzDrugWorkspace,html[data-uzmed-ux='on'] #uzDrugAdvanced {
+  margin: 0 12px 16px; color: var(--ux-ink); font-family: var(--ux-font);
+}
+html[data-uzmed-ux='on'] #uzDrugWorkspace * { box-sizing: border-box; }
+html[data-uzmed-ux='on'] .udw-search-card {
+  background: var(--ux-surface); border: 1px solid var(--ux-line); border-radius: 18px; padding: 18px; margin-bottom: 18px;
+}
+html[data-uzmed-ux='on'] .udw-eyebrow { margin: 0 0 12px; color: var(--ux-accent); font-size: 12px; font-weight: 700; }
+html[data-uzmed-ux='on'] .udw-search-row { display: flex; gap: 8px; align-items: center; }
+html[data-uzmed-ux='on'] #uzDrugQuery {
+  flex: 1; min-width: 0; height: 52px; padding: 12px 14px; border: 1px solid var(--ux-line-strong); border-radius: 12px;
+  background: var(--ux-bg); color: var(--ux-ink); font: 16px/1.5 var(--ux-font);
+}
+html[data-uzmed-ux='on'] #uzDrugSubmit {
+  min-width: 48px; min-height: 52px; padding: 12px; border: 0; border-radius: 12px;
+  background: var(--ux-primary); color: var(--ux-primary-ink); cursor: pointer; font: 700 15px/1.3 var(--ux-font);
+}
+html[data-uzmed-ux='on'] .udw-help { color: var(--ux-muted); font-size: 12px; line-height: 1.6; margin: 10px 0 0; }
+html[data-uzmed-ux='on'] .udw-example-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; }
+html[data-uzmed-ux='on'] .udw-example-row button,html[data-uzmed-ux='on'] .udw-action {
+  min-height: 44px; border: 1px solid var(--ux-line); background: var(--ux-soft); color: var(--ux-accent);
+  border-radius: 10px; padding: 8px 12px; font: 600 13px/1.4 var(--ux-font); cursor: pointer; text-align: start;
+}
+html[data-uzmed-ux='on'] .udw-region { margin-top: 10px; color: var(--ux-muted); font-size: 13px; }
+html[data-uzmed-ux='on'] .udw-region summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+html[data-uzmed-ux='on'] .udw-region-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; padding: 8px 0; }
+html[data-uzmed-ux='on'] .udw-region-fields label { display: grid; gap: 7px; min-width: 0; }
+html[data-uzmed-ux='on'] .udw-region-fields select { width: 100%; min-width: 0; height: 48px; padding: 8px; border-radius: 10px; border: 1px solid var(--ux-line); color: var(--ux-ink); background: var(--ux-bg); font: 16px var(--ux-font); }
+html[data-uzmed-ux='on'] .udw-sources { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+html[data-uzmed-ux='on'] .udw-source { color: var(--ux-muted); background: var(--ux-bg); border: 1px solid var(--ux-line); border-radius: 20px; padding: 6px 9px; font-size: 11px; line-height: 1.5; }
+html[data-uzmed-ux='on'] .udw-source[data-state='loading'] { color: var(--ux-info); }
+html[data-uzmed-ux='on'] .udw-source[data-state='error'] { color: var(--ux-danger); }
+html[data-uzmed-ux='on'] .udw-result-heading { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin: 0 0 12px; }
+html[data-uzmed-ux='on'] .udw-result-heading h2 { font-size: 18px; margin: 0; }
+html[data-uzmed-ux='on'] .udw-result-heading[hidden] { display: none !important; }
+html[data-uzmed-ux='on'] #uzDrugStatus { color: var(--ux-muted); font-size: 13px; line-height: 1.6; margin: 12px 0; }
+html[data-uzmed-ux='on'] .udw-result-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+html[data-uzmed-ux='on'] .udw-product {
+  min-width: 0; padding: 16px; background: var(--ux-surface); border: 1px solid var(--ux-line); border-radius: 14px;
+}
+html[data-uzmed-ux='on'] .udw-product-source { color: var(--ux-accent); font-size: 11px; font-weight: 650; }
+html[data-uzmed-ux='on'] .udw-product h3 { font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; margin: 8px 0 4px; }
+html[data-uzmed-ux='on'] .udw-product p { font-size: 13px; color: var(--ux-muted); line-height: 1.6; overflow-wrap: anywhere; margin: 5px 0; }
+html[data-uzmed-ux='on'] .udw-product-price { display: block; color: var(--ux-accent); font-size: 19px; font-weight: 750; margin: 12px 0 5px; }
+html[data-uzmed-ux='on'] .udw-product button { width: 100%; margin-top: 12px; }
+html[data-uzmed-ux='on'] .udw-empty { padding: 22px 16px; border-radius: 14px; border: 1px dashed var(--ux-line); color: var(--ux-muted); font-size: 14px; line-height: 1.7; background: var(--ux-soft); }
+html[data-uzmed-ux='on'] #uzDrugAdvanced { border: 1px solid var(--ux-line); border-radius: 14px; background: var(--ux-surface); overflow: hidden; }
+html[data-uzmed-ux='on'] #uzDrugAdvanced > summary { padding: 14px 16px; min-height: 52px; cursor: pointer; color: var(--ux-muted); font-size: 14px; font-weight: 600; }
+html[data-uzmed-ux='on'] #uzDrugAdvanced > .udw-original-tools { padding-bottom: 16px; }
+html[data-uzmed-ux='on'] #uzDrugAdvanced .uzdp-launch { margin: 12px !important; width: calc(100% - 24px) !important; box-shadow: none !important; background: var(--ux-soft) !important; color: var(--ux-ink) !important; border: 1px solid var(--ux-line) !important; }
+html[data-uzmed-ux='on'] #uzDrugAdvanced .udw-legacy-price { margin: 12px; width: calc(100% - 24px); }
+html[data-uzmed-ux='on'] .udw-dialog {
+  padding: 0; width: min(760px,calc(100vw - 24px)); max-height: calc(var(--uzmed-ux-viewport-height,100dvh) - 24px);
+  background: var(--ux-surface); color: var(--ux-ink); border: 1px solid var(--ux-line); border-radius: 18px; box-shadow: var(--ux-shadow); overflow: hidden;
+}
+html[data-uzmed-ux='on'] .udw-dialog[open] { display: flex; flex-direction: column; }
+html[data-uzmed-ux='on'] .udw-dialog::backdrop { background: var(--ux-overlay); }
+html[data-uzmed-ux='on'] .udw-dialog-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px; border-bottom: 1px solid var(--ux-line); flex-shrink: 0; }
+html[data-uzmed-ux='on'] .udw-dialog-head h2 { flex: 1; min-width: 0; margin: 0; font-size: 20px; line-height: 1.5; overflow-wrap: anywhere; }
+html[data-uzmed-ux='on'] .udw-dialog-close { min-width: 44px; height: 44px; border: 1px solid var(--ux-line); background: var(--ux-soft); color: var(--ux-ink); border-radius: 11px; cursor: pointer; font-size: 20px; }
+html[data-uzmed-ux='on'] .udw-dialog-body { padding: 18px; overflow: auto; overscroll-behavior: contain; min-height: 0; }
+html[data-uzmed-ux='on'] .udw-identity { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 8px 12px; font-size: 13px; line-height: 1.6; margin: 0 0 16px; }
+html[data-uzmed-ux='on'] .udw-identity dt { color: var(--ux-muted); }
+html[data-uzmed-ux='on'] .udw-identity dd { margin: 0; overflow-wrap: anywhere; }
+html[data-uzmed-ux='on'] .udw-clinical-section { padding: 14px 0; border-top: 1px solid var(--ux-line); }
+html[data-uzmed-ux='on'] .udw-clinical-section h3 { margin: 0 0 8px; font-size: 15px; color: var(--ux-ink); }
+html[data-uzmed-ux='on'] .udw-clinical-text { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.75; color: var(--ux-ink); }
+html[data-uzmed-ux='on'] .udw-agent { border: 1px solid var(--ux-line); border-radius: 14px; padding: 16px; background: var(--ux-soft); margin: 16px 0; }
+html[data-uzmed-ux='on'] .udw-agent-title { font-size: 15px; margin: 0 0 8px; }
+html[data-uzmed-ux='on'] .udw-agent-select { width: 100%; height: 48px; min-width: 0; border: 1px solid var(--ux-line); border-radius: 10px; background: var(--ux-surface); color: var(--ux-ink); padding: 8px; font: 16px var(--ux-font); margin: 6px 0 12px; }
+html[data-uzmed-ux='on'] .udw-critical-source { background: var(--ux-warning-soft); color: var(--ux-ink); border: 1px solid var(--ux-line); border-radius: 12px; padding: 14px; margin: 16px 0; }
+html[data-uzmed-ux='on'] .udw-critical-source > summary { color: var(--ux-warning); font-weight: 700; min-height: 44px; cursor: pointer; }
+html[data-uzmed-ux='on'] .udw-agent-status { font-size: 12px; color: var(--ux-muted); line-height: 1.6; }
+html[data-uzmed-ux='on'] .udw-agent-output { font-size: 14px; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 10px; }
+html[data-uzmed-ux='on'] .udw-agent-output h3 { font-size: 15px; margin: 16px 0 6px; }
+html[data-uzmed-ux='on'] .udw-original { color: var(--ux-muted); margin-top: 16px; font-size: 13px; line-height: 1.7; }
+html[data-uzmed-ux='on'] .udw-original summary { min-height: 44px; cursor: pointer; padding: 10px 0; }
+html[data-uzmed-ux='on'] .udw-note { color: var(--ux-muted); font-size: 12px; line-height: 1.7; margin-top: 16px; }
+html[data-uzmed-ux='on'] .udw-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--ux-accent); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+@media(max-width:600px) {
+  html[data-uzmed-ux='on'] .udw-result-grid { grid-template-columns: minmax(0,1fr); }
+  html[data-uzmed-ux='on'] .udw-search-card { padding: 14px; }
+}
+@media(max-width:360px) {
+  html[data-uzmed-ux='on'] .udw-region-fields { grid-template-columns: minmax(0,1fr); }
+  html[data-uzmed-ux='on'] .udw-identity { grid-template-columns: 90px minmax(0,1fr); }
+}
+@media(min-width:1024px) {
+  html[data-uzmed-ux='on'] #dorilar-screen > :is(.um-page-title,#uzDrugWorkspace,#uzDrugAdvanced) { max-width: 1000px; margin-left: auto; margin-right: auto; }
+  html[data-uzmed-ux='on'] #uzDrugWorkspace,html[data-uzmed-ux='on'] #uzDrugAdvanced { width: calc(100% - 40px); }
+}
+
+/* Native ID transition rules must also respect reduced-motion. */
+html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu.uz-side-menu {
+  left: 0 !important; right: auto !important;
+  width: min(360px, calc(100vw - 24px)) !important;
+  max-width: calc(100vw - 24px) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu,
+  html[data-uzmed-ux='on'] body#uzmedMobile #uzSideMenu * {
+    transition: none !important; animation: none !important;
+  }
+}

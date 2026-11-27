@@ -1,0 +1,55 @@
+/* UZMED Qabul clinical editor — emerald presentation overlay.
+   Leaves every field, step, control, save and clinical validation untouched. */
+html[data-theme="dark"] .qf{
+  --q-bg:#071a15;--q-card:#0e2d24;--q-text:#f2fff9;
+  --q-muted:#aac7b9;--q-soft:#173a30;--q-line:rgba(83,207,158,.29);
+  --q-accent:#39dba4;--q-light:rgba(12,203,135,.17);
+  --q-blue:#20d6a0;--q-shadow:0 16px 34px rgba(0,15,9,.19);
+}
+html[data-theme="light"] .qf{
+  --q-bg:#f6fdf9;--q-card:#ffffff;--q-text:#14392d;
+  --q-muted:#587d6d;--q-soft:#f0faf4;--q-line:#d0e7dd;
+  --q-accent:#008d62;--q-light:#dcf9ea;
+  --q-blue:#008d62;--q-shadow:0 10px 28px rgba(0,108,68,.08);
+}
+html[data-theme="dark"] body.uzmed-responsive-page{background:#071a15!important}
+html[data-theme="light"] body.uzmed-responsive-page{background:#f6fdf9!important}
+.qf .qf-card{
+  background:var(--q-card);border:1px solid var(--q-line);
+  box-shadow:var(--q-shadow);border-radius:22px;
+}
+.qf .qf-header{
+  background:var(--q-card);border-bottom:1px solid var(--q-line);
+  box-shadow:0 8px 22px rgba(0,27,18,.07);
+}
+.qf .qf-patient,.qf .qf-tool,.qf .qf-tools button{
+  background:var(--q-soft);border:1px solid var(--q-line);
+  border-radius:13px;color:var(--q-text);
+}
+.qf .qf-card-head{gap:15px}
+.qf .field label,.qf label{color:var(--q-muted);font-weight:650}
+.qf input:not([type=checkbox]),.qf select,.qf textarea{
+  background:var(--q-soft);color:var(--q-text);
+  border:1px solid var(--q-line);border-radius:13px;
+  box-shadow:none;font-size:16px;min-width:0;max-width:100%;
+}
+.qf input:focus,.qf select:focus,.qf textarea:focus{
+  border-color:var(--q-accent);
+  box-shadow:0 0 0 3px rgba(30,210,151,.15);
+}
+.qf .qf-primary,.qf .primary{
+  background:linear-gradient(115deg,#2ddaa2,#0dbf89);
+  color:#042e22;border:1px solid rgba(77,238,170,.35);
+  border-radius:13px;
+}
+.qf .qf-section{min-width:0}
+.qf textarea{line-height:1.6;resize:vertical}
+.qf .qf-dialog{border-color:var(--q-line);border-radius:19px}
+@media(max-width:760px){
+ .qf .qf-card{padding:clamp(12px,3vw,20px);border-radius:17px}
+ .qf .qf-card-head{gap:10px}
+ .qf input:not([type=checkbox]),.qf select,.qf textarea{font-size:16px;min-height:45px}
+}
+@media(prefers-reduced-motion:reduce){
+ .qf *{scroll-behavior:auto!important}
+}

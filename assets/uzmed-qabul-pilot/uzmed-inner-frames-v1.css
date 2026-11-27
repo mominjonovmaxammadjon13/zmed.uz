@@ -1,0 +1,89 @@
+/* UZMED Shifokor qabuli: frameless responsive layout.
+   Only remove outer layout boxes, not clinical fields, buttons or Rx lines. */
+#qabulFocus .qf-main{
+ min-width:0;max-width:none;
+}
+#qabulFocus .qf-main > .qf-card,
+#qabulFocus .qf-card{
+ display:block;max-width:none;width:100%;min-width:0;min-height:0;
+ margin:0!important;
+ border:0!important;outline:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+#qabulFocus .qf-main > #uv5Dashboard,
+#qabulFocus #uv5Dashboard{
+ max-width:none!important;width:100%;min-width:0;
+ border:0!important;outline:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+#qabulFocus .qf-section,
+#qabulFocus #panel-treatment{
+ min-width:0;max-width:100%;
+}
+#qabulFocus #uzmedQabulV3 .uv3-panel{
+ min-width:0;min-height:0;
+ border:0!important;outline:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+#qabulFocus #uzmedQabulV3 .uv3-welcome,
+#qabulFocus #uzmedQabulV3[data-layout="v6"] .uv3-template-hero,
+#qabulFocus #uzmedQabulV3[data-layout="v6"] .uv3-template-fact{
+ border:0!important;outline:0!important;box-shadow:none!important;
+ background:transparent!important;border-radius:0!important;
+}
+@media screen and (min-width:1150px){
+ #qabulFocus .qf-main{padding:8px 12px 12px!important}
+ #qabulFocus .qf-card{padding:7px 4px!important}
+ #qabulFocus #uzmedQabulV3{column-gap:14px;width:100%;max-width:none}
+ #qabulFocus #uzmedQabulV3 .uv3-panel{
+  padding:9px 8px!important;overflow:visible!important;margin:0!important;
+ }
+}
+@media screen and (min-width:761px) and (max-width:1149px){
+ #qabulFocus .qf-main{padding:9px 12px!important}
+ #qabulFocus .qf-card{padding:6px 4px!important}
+ #qabulFocus #uzmedQabulV3 .uv3-panel{
+  padding:8px 5px!important;overflow:visible!important;margin:0!important;
+ }
+}
+@media screen and (max-width:760px){
+ #qabulFocus .qf-main,
+ html[data-qabul-embedded] #qabulFocus .qf-main{
+  padding:5px 7px 9px!important;
+ }
+ #qabulFocus .qf-card,
+ html[data-qabul-embedded] #qabulFocus .qf-card{
+  padding:4px 2px 8px!important;
+ }
+ #qabulFocus .qf-main.uv5-dashboard-open{
+  padding:8px 9px 12px!important;
+ }
+ #qabulFocus .qf-main > #uv5Dashboard{
+  padding:0!important;margin:0!important;
+ }
+ #qabulFocus #uzmedQabulV3{
+  width:100%;max-width:none;min-width:0;padding:0!important;
+ }
+ #qabulFocus #uzmedQabulV3 .uv3-panel{
+  padding:7px 2px 9px!important;overflow:visible!important;
+  margin:0!important;
+ }
+ #qabulFocus #uzmedQabulV3 .uv3-template-hero,
+ #qabulFocus #uzmedQabulV3 .uv3-template-fact{
+  padding:7px 0!important;
+ }
+ #qabulFocus .qf-card-head{padding:1px 2px!important}
+}
+@media print{
+ #qabulFocus .qf-main,
+ #qabulFocus .qf-card{
+  box-shadow:none!important;border:0!important;
+ }
+}
+
+/* Suppress a visual outline from programmatic heading focus only.
+   Keyboard-visible focus remains intact for accessibility. */
+#qabulFocus .qf-card-head h1:focus:not(:focus-visible),
+#qabulFocus #qfTitle:focus:not(:focus-visible){
+ outline:0!important;box-shadow:none!important;
+}

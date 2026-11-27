@@ -1,0 +1,242 @@
+/* UZMED clinical treatment compact action design: inline SVG, no emoji or stickers. */
+#panel-treatment .qcx-svg{width:18px;height:18px;min-width:18px;display:inline-block;vertical-align:middle;flex-shrink:0}
+#panel-treatment .qcx-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-align:center;line-height:1.3}
+#panel-treatment .qcx-action-label{white-space:nowrap}
+#panel-treatment .qcx-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+#uzmedQabulV3 .qcx-summary{display:flex;align-items:center;gap:9px;list-style:none;cursor:pointer}
+#uzmedQabulV3 .qcx-summary::-webkit-details-marker{display:none}
+#uzmedQabulV3 .qcx-summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg);margin-left:auto;transition:transform .16s}
+#uzmedQabulV3 details[open]>.qcx-summary::after{transform:rotate(225deg)}
+#panel-treatment.qcx-treatment .uv3-quick{display:none!important}
+#uzmedQabulV3.qcx-compact .uv3-native-extra{margin:0;border:1px solid var(--q-line)!important;border-radius:12px!important;padding:0!important;background:var(--q-card)!important}
+#uzmedQabulV3.qcx-compact .uv3-existing{margin:12px 0 10px;padding:0;border:0!important}
+#uzmedQabulV3.qcx-compact .uv3-native-extra>.qcx-summary{font-size:13px!important;color:var(--q-text)!important;min-height:46px;padding:10px 13px;font-weight:750}
+#uzmedQabulV3.qcx-compact .uv3-native-extra[open]>.qcx-summary{border-bottom:1px solid var(--q-line)}
+#uzmedQabulV3.qcx-compact .uv3-native-extra .qcx-features{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--q-line)}
+#uzmedQabulV3.qcx-compact .qcx-tool-actions{display:flex!important;flex-wrap:wrap;gap:7px;margin:0!important}
+#uzmedQabulV3.qcx-compact .qcx-tool-actions>summary{display:none!important}
+#uzmedQabulV3.qcx-compact .qcx-tool-actions button{flex:0 1 auto;min-height:42px;padding:8px 11px!important;margin:0!important;border-radius:9px;font-size:12px}
+#uzmedQabulV3.qcx-compact .qcx-tool-actions button[hidden]{display:none!important}
+#uzmedQabulV3.qcx-compact .uv3-safety{display:grid;gap:5px}
+#uzmedQabulV3.qcx-compact .uv3-safety>details{border:1px solid var(--q-line)!important;border-radius:9px!important;padding:8px 10px!important;margin:0!important}
+#uzmedQabulV3.qcx-compact .uv3-safety>details>summary{min-height:29px;display:flex;align-items:center}
+#uzmedQabulV3.qcx-compact .qdx-official{margin:0!important;padding:0!important;border-radius:9px!important;background:var(--q-soft)!important}
+#uzmedQabulV3.qcx-compact .qdx-official>.qcx-summary{min-height:43px;padding:9px 11px;font-size:12px;color:var(--q-text)}
+#uzmedQabulV3.qcx-compact .qdx-official-content{padding:0 11px 11px;margin-top:0}
+#uzmedQabulV3.qcx-compact .qdx-official-content>button{width:auto;min-height:42px;padding:8px 12px;max-width:100%}
+#uzmedQabulV3.qcx-compact .qt-advanced{margin:0!important;padding:0!important;border-radius:9px!important}
+#uzmedQabulV3.qcx-compact .qt-advanced>.qcx-summary{min-height:42px;padding:9px 11px;font-size:12px;color:var(--q-text)}
+#uzmedQabulV3.qcx-compact .qt-advanced .qt-card{margin:7px;padding:9px}
+#panel-treatment.qcx-treatment .qdx-workbench{gap:11px;padding:0 0 6px}
+#panel-treatment.qcx-treatment .qdx-top h2{font-size:20px;letter-spacing:-.3px}
+#panel-treatment.qcx-treatment .qdx-top .qdx-label{display:none}
+#panel-treatment.qcx-treatment .qdx-context{padding:10px 12px;gap:8px}
+#panel-treatment.qcx-treatment .qdx-context strong{font-size:14px}
+#panel-treatment.qcx-treatment .qdx-context .qdx-subtle{font-size:12px;min-height:42px;padding:9px 10px}
+#panel-treatment.qcx-treatment .qdx-subhead h3{font-size:14px}
+#panel-treatment.qcx-treatment .qdx-subhead .qdx-label{font-size:10px}
+#panel-treatment.qcx-treatment .qdx-recommend{padding:10px}
+#panel-treatment.qcx-treatment .qdx-recommend[hidden]{display:none!important}
+#panel-treatment.qcx-treatment .qdx-rec-pick{min-height:44px;padding:8px 10px;gap:9px}
+#panel-treatment.qcx-treatment .qdx-rec-pick .qcx-svg{color:var(--q-accent);margin-left:auto;order:2}
+#panel-treatment.qcx-treatment .qdx-rec-pick strong{font-size:12px}
+#panel-treatment.qcx-treatment .qdx-rec-pick small{font-size:11px}
+#panel-treatment.qcx-treatment .qdx-actions{display:flex;justify-content:flex-start;flex-wrap:wrap;gap:8px}
+#panel-treatment.qcx-treatment .qdx-actions .qdx-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;grid-column:auto!important;width:auto!important;min-width:124px;min-height:44px;font-size:13px;padding:9px 14px}
+#panel-treatment.qcx-treatment #findDrug.qcx-icon-only{width:46px;min-width:46px;max-width:46px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+#panel-treatment.qcx-treatment .qdx-search .input-action{display:flex;gap:8px;min-width:0}
+#panel-treatment.qcx-treatment .qdx-search #drugSearch{flex:1 1 0;min-width:0}
+#panel-treatment.qcx-treatment .qdx-caution{font-size:11px}
+#panel-treatment.qcx-treatment .qc-med-table-scroll{display:block;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+#panel-treatment.qcx-treatment .qc-med-table-scroll table{width:max-content;min-width:690px}
+#panel-treatment.qcx-treatment .qdx-editor .rx-header .qc-edit-med{display:inline-flex;align-items:center;gap:5px;padding:6px 8px!important;min-width:76px!important}
+#panel-treatment.qcx-treatment .qdx-editor .rx-header .qc-edit-med .qcx-svg{width:15px;height:15px;min-width:15px}
+#uzmedQabulV3.qcx-compact .uv3-mobile-button{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px!important;min-width:0}
+#uzmedQabulV3.qcx-compact .uv3-mobile-button .qcx-svg{width:17px;height:17px;min-width:17px}
+#uzmedQabulV3.qcx-compact .uv3-mobile-button .qcx-action-label{font-weight:700}
+#panel-treatment.qcx-treatment .uv3-mobile-top .uv3-title-line{display:none}
+#panel-treatment.qcx-treatment .uv3-right .qdx-note,#panel-treatment.qcx-treatment .uv3-right .uv3-muted{line-height:1.45}
+@media screen and (max-width:760px){
+ #panel-treatment.qcx-treatment #uzmedQabulV3{gap:0}
+ #panel-treatment.qcx-treatment #uzmedQabulV3 .uv3-mobile-top{margin:0 0 8px}
+ #panel-treatment.qcx-treatment #uzmedQabulV3 .uv3-mobile-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ #panel-treatment.qcx-treatment #uzmedQabulV3 .uv3-mobile-button{min-height:45px!important;padding:8px 5px!important;border-radius:10px}
+ #panel-treatment.qcx-treatment #uzmedQabulV3 .uv3-right{padding:9px!important}
+ #panel-treatment.qcx-treatment .qdx-top h2{font-size:19px}
+ #panel-treatment.qcx-treatment .qdx-top .qdx-count{font-size:11px;padding:5px 8px}
+ #panel-treatment.qcx-treatment .qdx-context{padding:10px}
+ #panel-treatment.qcx-treatment .qdx-context .qdx-subtle{flex:0 0 auto}
+ #panel-treatment.qcx-treatment .qdx-subhead{margin-top:1px}
+ #panel-treatment.qcx-treatment .qdx-subhead .qdx-label{display:none}
+ #panel-treatment.qcx-treatment #drugSearch{font-size:16px;min-height:44px}
+ #panel-treatment.qcx-treatment #findDrug{min-height:44px}
+ #panel-treatment.qcx-treatment .qdx-actions{justify-content:flex-start}
+ #panel-treatment.qcx-treatment .qdx-actions .qdx-primary{flex:0 0 auto;width:auto;max-width:100%}
+ #panel-treatment.qcx-treatment .rx-card.qdx-editor .rx-header{gap:4px}
+ #panel-treatment.qcx-treatment .uv3-native-extra .qcx-features{padding:9px;gap:7px}
+}
+@media screen and (max-width:375px){
+ #panel-treatment.qcx-treatment .rx-card.qdx-editor .rx-grid{grid-template-columns:1fr}
+ #panel-treatment.qcx-treatment .uv3-mobile-button{gap:5px;font-size:11px!important}
+ #panel-treatment.qcx-treatment .uv3-mobile-button .qcx-svg{width:16px;height:16px;min-width:16px}
+}
+@media print{
+ #panel-treatment.qcx-treatment .qcx-features,#panel-treatment.qcx-treatment .uv3-existing{display:none!important}
+}
+
+/* Medication editor header — spacious names, small real actions. */
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{
+  display:grid!important;
+  grid-template-columns:32px minmax(0,1fr) repeat(4,40px);
+  gap:6px!important;align-items:center;min-width:0;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>span{
+  grid-column:2;grid-row:1;order:initial;flex:unset!important;min-width:0;
+  width:100%;font-size:14px;line-height:1.4;font-weight:770;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-drag-med{grid-column:1;grid-row:1;order:initial}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med{grid-column:3;grid-row:1;order:initial}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini yuqoriga"]{grid-column:4;grid-row:1;order:initial}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini pastga"]{grid-column:5;grid-row:1;order:initial}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{grid-column:6;grid-row:1;order:initial}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:40px!important;height:40px!important;min-width:40px!important;max-width:40px!important;
+  min-height:40px!important;flex:0 0 40px!important;padding:0!important;border-radius:10px!important;
+  background:var(--q-card)!important;border:1px solid var(--q-line)!important;color:var(--q-text)!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button .qcx-svg{
+  width:18px;height:18px;min-width:18px;flex:0 0 18px;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button .qcx-visually-hidden{flex:none!important}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button:disabled{opacity:.35!important;cursor:default}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button:focus-visible{outline:2px solid var(--q-accent);outline-offset:2px}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{
+ color:#ffb5ae!important;border-color:#92524d!important;background:color-mix(in srgb,var(--q-card) 82%,#a94340 18%)!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete:not(:disabled):hover{background:#64312e!important;color:#fff!important}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med:not(:disabled){color:var(--q-accent)!important}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-drag{cursor:grab}
+dialog.qcx-delete-dialog{border:1px solid var(--q-line,#317c60);border-radius:15px;max-width:min(92vw,430px);width:calc(100% - 30px);padding:0;background:var(--q-card,#103328);color:var(--q-text,#eafff4);box-shadow:0 24px 60px #0008}
+dialog.qcx-delete-dialog::backdrop{background:#0009}
+dialog.qcx-delete-dialog .qcx-delete-body{padding:18px;display:grid;gap:13px}
+dialog.qcx-delete-dialog h2{font-size:18px;line-height:1.35;margin:0;color:inherit}
+dialog.qcx-delete-dialog p{margin:0;color:inherit;font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+dialog.qcx-delete-dialog .qcx-delete-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+dialog.qcx-delete-dialog button{min-height:44px;border:1px solid var(--q-line,#317c60);border-radius:10px;background:var(--q-soft,#163d30);color:inherit;font-size:14px;font-weight:700;padding:10px 14px}
+dialog.qcx-delete-dialog .qcx-confirm-delete{background:#a93b3b;color:#fff;border-color:#a93b3b}
+@media(max-width:760px){
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{
+  grid-template-columns:minmax(0,1fr) repeat(4,40px);column-gap:5px!important;row-gap:5px!important;
+ }
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>span{
+  grid-column:1/-1;grid-row:1;white-space:normal!important;overflow-wrap:anywhere;line-height:1.3;
+  text-overflow:clip!important;max-width:100%;font-size:13px;
+ }
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-drag{display:none!important}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med{grid-column:2;grid-row:2}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini yuqoriga"]{grid-column:3;grid-row:2}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini pastga"]{grid-column:4;grid-row:2}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{grid-column:5;grid-row:2}
+}
+@media(max-width:375px){
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{grid-template-columns:minmax(0,1fr) repeat(4,38px);gap:4px!important}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button:not(.qcx-drag){width:38px!important;height:40px!important;min-width:38px!important;max-width:38px!important;flex-basis:38px!important}
+}
+
+@media(max-width:760px){
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{grid-template-columns:minmax(0,1fr) repeat(4,44px)!important}
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>button:not(.qcx-drag){width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;flex-basis:44px!important}
+}
+
+/* Two clear actions only — medication edit + confirmed delete. */
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{
+  grid-template-columns:minmax(0,1fr) repeat(2,44px)!important;
+  gap:7px!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-drag-med,
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini yuqoriga"],
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>[aria-label="Dori qatorini pastga"]{
+  display:none!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>span{
+  grid-column:1!important;grid-row:1!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med{
+  grid-column:2!important;grid-row:1!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{
+  grid-column:3!important;grid-row:1!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med,
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{
+  width:44px!important;min-width:44px!important;max-width:44px!important;
+  height:44px!important;min-height:44px!important;flex-basis:44px!important;
+}
+@media(max-width:760px){
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header{
+   grid-template-columns:minmax(0,1fr) repeat(2,44px)!important;
+   gap:6px!important;
+ }
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>span{
+   grid-column:1!important;grid-row:1!important;
+   white-space:normal!important;overflow-wrap:anywhere;
+ }
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qc-edit-med{
+   grid-column:2!important;grid-row:1!important;
+ }
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-card .rx-header>.qcx-delete{
+   grid-column:3!important;grid-row:1!important;
+ }
+}
+
+/* Treatment: concise prescription summaries, full editor remains in existing modal. */
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-compact-med{
+  padding:12px!important;min-width:0;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-compact-med>.rx-grid{
+  display:none!important;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-compact-med>.qcx-med-summary{
+  display:grid;gap:8px;margin:5px 0 8px;min-width:0;
+}
+#panel-treatment.qcx-treatment .qcx-med-facts{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
+}
+#panel-treatment.qcx-treatment .qcx-med-fact{
+  display:grid;gap:3px;min-width:0;padding:9px 10px;border:1px solid var(--q-line);
+  border-radius:9px;background:var(--q-card);font-size:12px;color:var(--q-text);
+  overflow-wrap:anywhere;line-height:1.35;
+}
+#panel-treatment.qcx-treatment .qcx-med-fact strong{
+  font-size:10px;font-weight:740;letter-spacing:.02em;color:var(--q-muted);
+}
+#panel-treatment.qcx-treatment .qcx-med-pending>span{
+  color:var(--q-muted);
+}
+#panel-treatment.qcx-treatment .qcx-med-wide{grid-column:1/-1}
+#panel-treatment.qcx-treatment .qcx-med-alert{
+  font-size:11px;color:var(--q-muted);line-height:1.4;margin:0;
+  border-left:2px solid var(--q-accent);padding-left:9px;
+}
+#panel-treatment.qcx-treatment #rxRows .rx-card.qcx-compact-med .rx-source{
+  display:inline-flex;align-items:center;max-width:100%;font-size:11px;
+  min-height:36px;text-align:left;margin-top:3px;
+}
+#panel-treatment.qcx-treatment .qrx-try-name{
+ display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+ border:1px solid var(--q-accent);background:var(--q-soft);color:var(--q-text);
+ font-size:12px;font-weight:740;border-radius:10px;margin:8px 0;padding:8px 13px;max-width:100%;
+}
+#panel-treatment.qcx-treatment .qrx-availability{font-size:11px;line-height:1.5;color:var(--q-muted);margin:8px 0 0}
+@media screen and (min-width:760px){
+ #panel-treatment.qcx-treatment .qcx-med-facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media screen and (max-width:375px){
+ #panel-treatment.qcx-treatment .qcx-med-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ #panel-treatment.qcx-treatment .qcx-med-fact{padding:8px}
+}
+@media print{
+ #panel-treatment.qcx-treatment #rxRows .rx-card.qcx-compact-med>.rx-grid{display:grid!important}
+ #panel-treatment.qcx-treatment .qcx-med-summary,#panel-treatment.qcx-treatment .qc-med-preview,#panel-treatment.qcx-treatment .qc-med-views{display:none!important}
+}

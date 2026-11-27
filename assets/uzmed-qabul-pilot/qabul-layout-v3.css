@@ -1,0 +1,147 @@
+/* UZMED Qabul v3 responsive clinical workspace. Scoped to treatment, no clinical overrides. */
+#uzmedQabulV3{--v3-base:#071c16;--v3-card:#103328;--v3-soft:#163d30;--v3-line:#287556;--v3-text:#e8fff3;--v3-muted:#b5d4c5;--v3-accent:#2bdaa0;--v3-accent-ink:#05291e;color:var(--v3-text);font:inherit;display:grid;grid-template-columns:minmax(205px,.87fr) minmax(285px,1.36fr) minmax(230px,1fr);gap:12px;width:100%;min-width:0;max-width:100%;align-items:stretch;margin:0;line-height:1.45}
+#uzmedQabulV3 *{box-sizing:border-box}
+#uzmedQabulV3 [hidden]{display:none!important}
+#uzmedQabulV3 .uv3-panel{min-width:0;min-height:0;border:1px solid var(--v3-line);border-radius:15px;background:linear-gradient(165deg,#0a291f,#0d3227);padding:15px;overflow:hidden}
+#uzmedQabulV3 h2,#uzmedQabulV3 h3,#uzmedQabulV3 h4{color:var(--v3-text);margin:0}
+#uzmedQabulV3 h2{font-size:16px;font-weight:780;line-height:1.25}
+#uzmedQabulV3 h3{font-size:15px;font-weight:760}
+#uzmedQabulV3 .uv3-panel-heading{min-height:26px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+#uzmedQabulV3 .uv3-muted{color:var(--v3-muted);font-size:12px;line-height:1.5;margin:7px 0 11px;overflow-wrap:anywhere}
+#uzmedQabulV3 button{font:inherit;cursor:pointer;color:var(--v3-text);text-align:left;border:1px solid var(--v3-line);background:var(--v3-card);border-radius:10px;min-height:39px;padding:9px 12px;transition:background .12s,border-color .12s}
+#uzmedQabulV3 button:hover{background:#194a38;border-color:#40b786}
+#uzmedQabulV3 button:focus-visible,#uzmedQabulV3 input:focus-visible{outline:2px solid #75f5c2;outline-offset:2px}
+#uzmedQabulV3 button:disabled{cursor:not-allowed;opacity:.55}
+#uzmedQabulV3 button.uv3-primary{background:linear-gradient(110deg,#20bf87,#32dba4);color:var(--v3-accent-ink);border:1px solid #33dba3;font-weight:770;text-align:center}
+#uzmedQabulV3 button.uv3-subtle{background:#112f26;color:#e5fff1}
+#uzmedQabulV3 .uv3-modes{display:flex;gap:4px;margin-bottom:11px}
+#uzmedQabulV3 .uv3-mode{flex:1;min-width:0;font-size:11px;white-space:normal;padding:8px 5px;text-align:center;line-height:1.2;min-height:39px}
+#uzmedQabulV3 .uv3-mode[aria-pressed=true]{background:#27d99c;border-color:#3fe6ac;color:#05271b;font-weight:780}
+#uzmedQabulV3 .uv3-field{display:flex;flex-direction:column;gap:5px;color:var(--v3-muted);font-size:12px;font-weight:700}
+#uzmedQabulV3 .uv3-field input,#uzmedQabulV3 .uv3-source-box input{font:inherit;width:100%;min-height:43px;background:#09251d;border:1px solid #377d5f;border-radius:9px;color:#edfff4;font-size:14px;padding:10px}
+#uzmedQabulV3 .uv3-field input::placeholder{color:#9dbda9}
+#uzmedQabulV3 .uv3-list{display:flex;flex-direction:column;gap:4px;max-height:min(60vh,550px);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#3a8e68 transparent;padding-right:3px}
+#uzmedQabulV3 .uv3-list .uv3-list-row{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;font-size:12px;gap:3px;padding:9px 10px;min-height:42px;border-color:transparent;border-bottom:1px solid #2a5543;border-radius:8px;line-height:1.35;overflow-wrap:anywhere}
+#uzmedQabulV3 .uv3-list-row small,#uzmedQabulV3 .uv3-drug small{font-size:10px;color:#abcab9}
+#uzmedQabulV3 .uv3-list-row[aria-current=true]{background:#1d6549;border-color:#36bd85}
+#uzmedQabulV3 .uv3-wide{width:100%;margin:8px 0 0}
+#uzmedQabulV3 .uv3-middle-body{min-height:230px;max-height:min(65vh,650px);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#348a61 transparent}
+#uzmedQabulV3 .uv3-drug{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:center;width:100%;border-radius:9px;border-color:#22553e;border-width:0 0 1px;margin:0 0 4px;min-height:59px;background:#103428}
+#uzmedQabulV3 .uv3-drug-name{font-size:13px;font-weight:730;grid-column:1;color:var(--v3-text);overflow-wrap:anywhere}
+#uzmedQabulV3 .uv3-drug small{grid-column:1}
+#uzmedQabulV3 .uv3-drug-arrow{grid-column:2;grid-row:1 / 3;color:#3febad;font-size:22px}
+#uzmedQabulV3 .uv3-count{font-size:11px;color:#aaf8d0;background:#1b5541;padding:6px 9px;border:1px solid #347a5d;border-radius:18px;white-space:nowrap}
+#uzmedQabulV3 .uv3-plan-rows{max-height:min(43vh,460px);overflow-y:auto;overscroll-behavior:contain}
+#uzmedQabulV3 .uv3-plan-rows .rx-card{min-width:0;border:1px solid #2a6e51;background:#12372a;border-radius:10px;margin:0 0 9px;padding:10px;box-shadow:none}
+#uzmedQabulV3 .uv3-plan-rows .rx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#uzmedQabulV3 .uv3-plan-rows .rx-grid>.field{grid-column:auto;min-width:0;margin:0}
+#uzmedQabulV3 .uv3-plan-rows .rx-grid>.field.full{grid-column:1/-1}
+#uzmedQabulV3 .uv3-plan-rows .rx-grid input{min-width:0;font-size:12px;padding:7px;min-height:36px}
+#uzmedQabulV3 .uv3-plan-rows .rx-grid label{font-size:10px;color:#bedecb}
+#uzmedQabulV3 .uv3-plan-rows .rx-header{display:flex;gap:7px;align-items:center}
+#uzmedQabulV3 .uv3-add-area{margin:8px 0}
+#uzmedQabulV3 #addRx{background:#1b5742;font-size:12px;font-weight:760;width:100%;text-align:center}
+#uzmedQabulV3 .uv3-quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:9px 0}
+#uzmedQabulV3 .uv3-quick button{font-size:11px;text-align:center;min-height:40px;padding:8px 5px}
+#uzmedQabulV3 .uv3-source-box{margin-top:13px;border-top:1px solid #28654c;padding-top:12px}
+#uzmedQabulV3 .uv3-source-box summary{color:#90ecc1;cursor:pointer;font-size:12px;font-weight:730}
+#uzmedQabulV3 .uv3-source-box>.field{margin-top:10px}
+#uzmedQabulV3 .uv3-source-box .search-results{max-height:330px;overflow-y:auto}
+#uzmedQabulV3 .uv3-existing{border-top:1px solid #25573f;margin-top:10px;padding-top:8px}
+#uzmedQabulV3 .uv3-native-extra summary,#uzmedQabulV3 .uv3-safety>details>summary{color:#a5eed0;font-weight:650;font-size:12px;cursor:pointer}
+#uzmedQabulV3 .uv3-safety>details,#uzmedQabulV3 .uv3-native-extra{padding:7px 0;border-bottom:1px solid #245742;background:transparent;border-radius:0}
+#uzmedQabulV3 .uv3-safety :is(input,select,textarea){max-width:100%;min-width:0;font-size:13px}
+#uzmedQabulV3 .uv3-existing :is(input,select,textarea){max-width:100%}
+#uzmedQabulV3 .uv3-fact{border-bottom:1px solid #275742;padding:11px 0}
+#uzmedQabulV3 .uv3-fact h4{font-size:12px;color:#83ebbb;margin-bottom:5px}
+#uzmedQabulV3 .uv3-fact p{font-size:12px;margin:0;color:#d9efe2;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere}
+#uzmedQabulV3 .uv3-product-head{display:flex;justify-content:space-between;align-items:start;gap:8px}
+#uzmedQabulV3 .uv3-pill{font-size:10px;white-space:nowrap;padding:6px;border:1px solid #35785a;border-radius:14px;color:#9eeec4}
+#uzmedQabulV3 .uv3-warning{font-size:12px;background:#313326;color:#f1dfaf;border-left:3px solid #dfbc5e;padding:9px;margin:12px 0}
+#uzmedQabulV3 .uv3-error{color:#ffbcad;font-size:12px}
+#uzmedQabulV3 .uv3-status{font-size:12px;color:#86edbd;min-height:0;margin:7px 0}
+#uzmedQabulV3 .uv3-status.is-error{color:#ffb7aa}
+#uzmedQabulV3 .uv3-mobile-top{display:none}
+#uzmedQabulV3 #rxRows .rx-source{font-size:11px;min-height:31px}
+html[data-theme=light] #uzmedQabulV3{--v3-base:#e9f9f0;--v3-card:#f2fff8;--v3-soft:#d8f3e5;--v3-line:#a2ccb5;--v3-text:#153b2d;--v3-muted:#4f715f;--v3-accent:#159b6c;--v3-accent-ink:#fff}
+html[data-theme=light] #uzmedQabulV3 .uv3-panel{background:#f6fffa}
+html[data-theme=light] #uzmedQabulV3 button{color:#16422e;background:#e9f9f0}
+html[data-theme=light] #uzmedQabulV3 button.uv3-primary,html[data-theme=light] #uzmedQabulV3 .uv3-mode[aria-pressed=true]{color:#fff;background:#0f9669}
+html[data-theme=light] #uzmedQabulV3 .uv3-field input{background:#fff;color:#163e2c}
+html[data-theme=light] #uzmedQabulV3 .uv3-drug{background:#ebf9f1}
+html[data-theme=light] #uzmedQabulV3 .uv3-drug small{color:#49775c}
+html[data-theme=light] #uzmedQabulV3 .uv3-fact p{color:#355944}
+html[data-theme=light] #uzmedQabulV3 .uv3-plan-rows .rx-card{background:#f5fff9}
+@media screen and (min-width:1150px){
+ body.uv3-treatment-active .qf{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:74px 68px minmax(0,1fr) auto!important}
+ body.uv3-treatment-active .qf-header{grid-column:1;grid-row:1;min-width:0;padding:10px 20px}
+ body.uv3-treatment-active .qf-rail{grid-column:1;grid-row:2;display:flex;flex-direction:row;align-items:center;overflow-x:auto;overflow-y:hidden;width:auto;height:auto;min-width:0;border-right:0;border-bottom:1px solid var(--q-line);padding:5px 15px;gap:6px}
+ body.uv3-treatment-active .qf-rail .qf-nav{flex:1 0 auto;min-width:136px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:7px;border:1px solid var(--q-line);border-radius:9px;padding:8px;min-height:44px;width:auto;text-align:center;font-size:12px}
+ body.uv3-treatment-active .qf-rail .qf-nav svg{width:18px;height:18px}
+ body.uv3-treatment-active .qf-main{grid-column:1;grid-row:3;min-width:0;max-width:none;padding:12px 16px 20px}
+ body.uv3-treatment-active .qf-card{max-width:none;width:100%;padding:12px;border-radius:12px;box-shadow:none}
+ body.uv3-treatment-active .qf-card-head{margin-bottom:10px}
+ body.uv3-treatment-active .qf-card-head h1{font-size:20px}
+ body.uv3-treatment-active .qf-dock{grid-column:1;grid-row:4;padding:5px 12px}
+ body.uv3-treatment-active .qf-step{margin-top:10px}
+}
+@media screen and (min-width:761px) and (max-width:1149px){
+ #uzmedQabulV3{grid-template-columns:minmax(200px,.8fr) minmax(0,1.2fr)}
+ #uzmedQabulV3 .uv3-right{grid-column:1/-1}
+ #uzmedQabulV3 .uv3-plan-rows{max-height:320px}
+}
+@media screen and (max-width:760px){
+ body.uv3-treatment-active .qf-card-head{margin-bottom:6px;padding:0 2px}
+ body.uv3-treatment-active .qf-card-head h1{font-size:20px}
+ #uzmedQabulV3{display:block;width:100%;padding:0;margin:0;min-width:0}
+ #uzmedQabulV3 .uv3-mobile-top{display:block;margin:0 0 10px;padding:0}
+ #uzmedQabulV3 .uv3-breadcrumb{font-size:12px;color:#9fd9bc;padding:6px 2px;font-weight:750}
+ #uzmedQabulV3 .uv3-mobile-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+ #uzmedQabulV3 .uv3-mobile-button{display:flex;justify-content:center;align-items:center;text-align:center;min-height:42px;font-size:11px;line-height:1.2;font-weight:700;padding:5px 3px;border-radius:9px}
+ #uzmedQabulV3 .uv3-mobile-button[aria-pressed=true]{background:#28d39a;border-color:#48e3ad;color:#06271e}
+ #uzmedQabulV3 .uv3-panel{padding:12px;border-radius:12px;margin:0 0 8px;background:#0c2e23;max-width:100%}
+ #uzmedQabulV3 .uv3-panel-heading h2{font-size:16px}
+ #uzmedQabulV3 .uv3-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ #uzmedQabulV3 .uv3-mode{font-size:11px}
+ #uzmedQabulV3 .uv3-list{max-height:min(49vh,490px);overflow:auto}
+ #uzmedQabulV3 .uv3-middle-body{max-height:none;min-height:150px;overflow:visible}
+ #uzmedQabulV3 .uv3-plan-rows{max-height:none;overflow:visible}
+ #uzmedQabulV3 .uv3-quick{grid-template-columns:1fr 1fr}
+ #uzmedQabulV3 .uv3-right .rx-card{padding:10px}
+ #uzmedQabulV3 .uv3-plan-rows .rx-grid{grid-template-columns:1fr 1fr}
+ #uzmedQabulV3 .uv3-left,#uzmedQabulV3 .uv3-middle,#uzmedQabulV3 .uv3-right{display:none}
+ #uzmedQabulV3[data-mobile-pane=groups] .uv3-left,
+ #uzmedQabulV3[data-mobile-pane=templates] .uv3-left,
+ #uzmedQabulV3[data-mobile-pane=guides] .uv3-left{display:block}
+ #uzmedQabulV3[data-mobile-pane=drugs] .uv3-middle,
+ #uzmedQabulV3[data-mobile-pane=detail] .uv3-middle{display:block}
+ #uzmedQabulV3[data-mobile-pane=plan] .uv3-right{display:block}
+}
+@media screen and (max-width:350px){
+ #uzmedQabulV3 .uv3-mobile-nav{grid-template-columns:1fr 1fr}
+ #uzmedQabulV3 .uv3-modes{grid-template-columns:1fr 1fr}
+}
+@media print{#uzmedQabulV3{display:none!important}}
+
+#uzmedQabulV3 .uv3-filters{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px}
+#uzmedQabulV3 .uv3-filter{font-size:10px;min-height:28px;padding:5px 9px;border-radius:16px;line-height:1.2}
+#uzmedQabulV3 .uv3-filter[aria-pressed=true]{background:#26c991;border-color:#4adeae;color:#052d20;font-weight:800}
+#uzmedQabulV3 .uv3-filter[hidden]{display:none!important}
+#uzmedQabulV3 #addRx{color:#eafff4!important;background:#126047!important;border-color:#298d65!important}
+#uzmedQabulV3 .uv3-safety>details>summary,#uzmedQabulV3 .uv3-native-extra>summary{color:#8feec4}
+html[data-theme=light] #uzmedQabulV3 .uv3-filter[aria-pressed=true]{background:#0d9766;color:white}
+@media screen and (max-width:760px){
+ #uzmedQabulV3 .uv3-modes{display:none}
+ #uzmedQabulV3 .uv3-list{max-height:min(50vh,460px)}
+ #uzmedQabulV3 .uv3-filter{font-size:11px;min-height:34px}
+}
+#uzmedQabulV3 .uv3-welcome{border:1px solid #225940;border-radius:12px;background:linear-gradient(145deg,#123b2b,#0b281f);padding:18px 16px;max-width:100%}
+#uzmedQabulV3 .uv3-welcome .uv3-eyebrow{font-size:10px;color:#7febbb;letter-spacing:.1em;font-weight:850}
+#uzmedQabulV3 .uv3-welcome h3{font-size:16px;margin:9px 0}
+#uzmedQabulV3 .uv3-welcome-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}
+#uzmedQabulV3 .uv3-welcome-steps span{font-size:11px;border:1px solid #285e46;background:#11392c;border-radius:9px;padding:10px;color:#d3f7df}
+#uzmedQabulV3 .uv3-welcome-actions{display:flex;gap:8px;flex-wrap:wrap}
+#uzmedQabulV3 .uv3-welcome-actions button{flex:1;font-size:12px;text-align:center}
+html[data-theme=light] #uzmedQabulV3 .uv3-welcome{background:#f5fff9}
+html[data-theme=light] #uzmedQabulV3 .uv3-welcome-steps span{background:#e2f6e9;color:#315a40;border-color:#aad6bb}
+@media(max-width:760px){#uzmedQabulV3 .uv3-welcome{padding:12px}#uzmedQabulV3 .uv3-welcome-steps{grid-template-columns:1fr 1fr}}

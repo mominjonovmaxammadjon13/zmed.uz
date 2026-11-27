@@ -1,0 +1,7 @@
+#qabulFocus .qa-diagnoses {padding:10px;margin:12px 0;border:1px solid var(--q-line);border-radius:12px;background:var(--q-card)}
+#qabulFocus .qa-diagnoses>h3{font-size:16px;margin:0 0 10px}
+#qabulFocus .qa-diagnoses input{width:100%;font-size:16px;margin-bottom:10px}
+#qabulFocus .qa-diagnoses .search-results button{display:flex;justify-content:space-between;gap:10px;text-align:left;min-height:44px;white-space:normal}
+#qabulFocus .qa-diagnoses .search-results button.selected{border-color:var(--q-accent);color:var(--q-accent)}
+#qabulFocus .qc-international-source{overflow-wrap:anywhere}
+#qabulFocus #qaInternationalExam[hidden]{display:none!important}

@@ -1,0 +1,42 @@
+/* Patient intake dialog only: match the UZMED premium Shifokor qabuli design.
+   All controls, IDs, data bindings, and existing Save flow stay unchanged. */
+html[data-theme=dark] #patientDialog {
+ --uip-bg:#071f19;--uip-surface:#103328;--uip-border:rgba(45,204,132,.27);
+ --uip-ink:#f1fff6;--uip-muted:#a7c9b9;--uip-accent:#00cb83;--uip-shadow:rgba(0,0,0,.28);
+}
+html[data-theme=light] #patientDialog {
+ --uip-bg:#f9fefa;--uip-surface:#eaf9f2;--uip-border:#b6e9d2;
+ --uip-ink:#17382e;--uip-muted:#4d7163;--uip-accent:#008d61;--uip-shadow:rgba(0,101,65,.10);
+}
+.qf #patientDialog.qf-dialog{box-sizing:border-box;width:min(790px,calc(100vw - 22px));max-width:calc(100vw - 22px);max-height:calc(100dvh - 20px);padding:clamp(15px,3vw,28px);background:linear-gradient(150deg,rgba(0,138,89,.08),transparent 50%),var(--uip-bg);color:var(--uip-ink);border:1px solid var(--uip-border);border-radius:23px;box-shadow:0 24px 85px var(--uip-shadow);overflow:auto;overscroll-behavior:contain}
+.qf #patientDialog::backdrop{background:rgba(0,15,11,.78);backdrop-filter:blur(4px)}
+.qf #patientDialog .qf-dialog-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:13px;padding:14px clamp(12px,2.8vw,22px);margin:0 0 17px;border:1px solid var(--uip-border);border-radius:19px;background:radial-gradient(ellipse at 100% 50%,rgba(0,204,144,.4),transparent 55%),linear-gradient(120deg,#063b2d,#086449);color:#fafffc}
+html[data-theme=light] .qf #patientDialog .qf-dialog-head{color:#094332;background:radial-gradient(ellipse at 100% 50%,#72deb8,transparent 55%),linear-gradient(120deg,#bbf4df,#e5fff3)}
+.qf #patientDialog .qf-dialog-head:before{content:'♙+';font-size:31px;line-height:1;display:grid;place-items:center;border-radius:14px;border:1px solid rgba(255,255,255,.25);color:#1af09f;width:46px;height:46px}
+.qf #patientDialog .qf-dialog-head h2{font-size:clamp(20px,2.7vw,29px);font-weight:820;line-height:1.3;color:inherit;margin:0}
+.qf #patientDialog .qf-close{display:grid;place-items:center;min-width:44px;min-height:44px;width:44px;height:44px;line-height:1;border-radius:13px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:inherit}
+.qf #patientDialog #panel-patient{display:block;max-width:100%;margin:0;border-radius:19px;border:1px solid var(--uip-border);background:var(--uip-bg);padding:clamp(15px,3vw,25px);box-shadow:none}
+.qf #patientDialog #panel-patient .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:clamp(12px,2vw,20px) 16px;min-width:0}
+.qf #patientDialog #panel-patient .form-grid > *{grid-column:1/-1;min-width:0}
+.qf #patientDialog #panel-patient .form-grid > #slot-age{grid-column:1}
+.qf #patientDialog #panel-patient .form-grid > .field:has(#sex){grid-column:2}
+.qf #patientDialog .form-grid .field{margin:0;min-width:0}
+.qf #patientDialog .form-grid .field label{color:var(--uip-ink);font-size:clamp(13px,1.65vw,16px);font-weight:710;margin:0 0 8px;display:flex;align-items:center;gap:9px}
+.qf #patientDialog .form-grid .field label:before{content:'';width:7px;height:7px;border:2px solid var(--uip-accent);border-radius:2px;transform:rotate(12deg);flex:none}
+.qf #patientDialog .form-grid :is(input:not([type=checkbox]),select){width:100%;min-height:52px;max-width:100%;padding:11px 14px;color:var(--uip-ink);background:var(--uip-surface);border:1px solid var(--uip-border);border-radius:13px;font-family:inherit;font-size:16px;box-shadow:none}
+.qf #patientDialog .form-grid :is(input,select):focus{border-color:var(--uip-accent);outline:2px solid rgba(0,195,127,.18);outline-offset:1px}
+.qf #patientDialog .form-grid input::placeholder{color:var(--uip-muted)}
+.qf #patientDialog .form-grid :is(input:disabled,input[readonly]){opacity:.8}
+.qf #patientDialog .inline-note{margin:20px 0 0;padding:13px 15px;background:rgba(5,155,105,.11);border:1px solid var(--uip-border);color:var(--uip-muted);border-radius:15px;font-size:13px;line-height:1.6}
+.qf #patientDialog>.qf-primary{display:block;margin:16px 0 0;width:100%;min-height:52px;border:1px solid rgba(13,213,145,.37);background:linear-gradient(105deg,#00c985,#039e71);color:#fafffc;border-radius:15px;font-size:16px;font-weight:790;box-shadow:0 7px 22px rgba(0,108,70,.1)}
+@media(max-width:600px){
+ .qf #patientDialog.qf-dialog{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:calc(100dvh - 14px);padding:11px;border-radius:19px}
+ .qf #patientDialog .qf-dialog-head{padding:12px 10px;margin-bottom:10px;gap:9px;border-radius:15px}
+ .qf #patientDialog .qf-dialog-head:before{width:37px;height:39px;font-size:25px}
+ .qf #patientDialog .qf-dialog-head h2{font-size:20px}
+ .qf #patientDialog #panel-patient{padding:14px 12px;border-radius:16px}
+ .qf #patientDialog #panel-patient .form-grid{gap:17px 8px}
+ .qf #patientDialog #panel-patient .form-grid .field label{font-size:13px}
+ .qf #patientDialog #panel-patient .form-grid :is(input:not([type=checkbox]),select){min-height:49px;font-size:16px;padding:10px 11px}
+ .qf #patientDialog .inline-note{margin:14px 0 0;padding:12px;font-size:12px}
+}

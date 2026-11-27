@@ -1,0 +1,107 @@
+/* Scoped to the allergy library; shared consultation controls keep their styles. */
+#allergyTemplateDialog{width:min(1080px,calc(100vw - 40px));height:min(820px,calc(100dvh - 48px));max-height:calc(100dvh - 48px);padding:0;overflow:hidden;border-radius:22px;background:var(--q-card);color:var(--q-text)}
+#allergyTemplateDialog[open]{display:flex;flex-direction:column}
+#allergyTemplateDialog *{box-sizing:border-box}
+#allergyTemplateDialog .qf-dialog-head{flex:none;min-height:72px;padding:16px 24px;margin:0;border-bottom:1px solid var(--q-line);gap:12px}
+#allergyTemplateDialog .qf-dialog-head h2{flex:1;font-size:19px;line-height:1.3;letter-spacing:-.025em}
+#allergyTemplateDialog .qf-close{width:40px;height:40px;min-height:40px;padding:0;font-size:26px;border-radius:12px}
+#allergyTemplateDialog .qa-back{display:none}
+#allergyTemplateDialog .qa-body{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0;min-width:0;overflow:hidden}
+#allergyTemplateDialog .qa-catalogue{display:flex;flex-direction:column;min-height:0;min-width:0;border-right:1px solid var(--q-line);background:var(--q-soft)}
+#allergyTemplateDialog .qa-catalogue-head{padding:22px 20px 12px}
+#allergyTemplateDialog .qa-step{font-size:10px;line-height:1.5;letter-spacing:.09em;font-weight:750;color:var(--q-accent)}
+#allergyTemplateDialog .qa-intro{margin:10px 0 18px;font-size:13px;line-height:1.7;color:var(--q-muted)}
+#allergyTemplateDialog .qa-intro strong{color:var(--q-text);font-size:17px;font-weight:700}
+#allergyTemplateDialog .qa-filters{display:grid;gap:12px}
+#allergyTemplateDialog .qa-label{display:block;color:var(--q-muted);font-size:12px;line-height:1.5;font-weight:500;margin:0}
+#allergyTemplateDialog input,#allergyTemplateDialog select,#allergyTemplateDialog textarea{max-width:100%;min-width:0;width:100%;background:var(--q-card);border:1px solid var(--q-line);border-radius:10px;color:var(--q-text);font-family:inherit;font-weight:400;line-height:1.5;box-shadow:none}
+#allergyTemplateDialog input,#allergyTemplateDialog select{height:44px;min-height:44px;margin-top:6px;padding:10px 12px;font-size:14px}
+#allergyTemplateDialog input::placeholder{color:var(--q-muted);opacity:1}
+#allergyTemplateDialog input:focus,#allergyTemplateDialog select:focus,#allergyTemplateDialog textarea:focus{outline:2px solid var(--q-accent);outline-offset:2px}
+#allergyTemplateDialog .qa-results{font-size:11px;color:var(--q-muted);margin:14px 0 0;min-height:17px}
+#allergyTemplateDialog .qa-list{display:flex;flex-direction:column;gap:6px;overflow:auto;min-height:0;padding:0 12px 16px;scroll-padding:8px;overscroll-behavior:contain;scrollbar-width:thin}
+#allergyTemplateDialog .qa-item{position:relative;display:block;flex:none;width:100%;text-align:left;padding:12px 34px 12px 12px;border:1px solid transparent;border-radius:11px;background:transparent;color:var(--q-text);min-width:0;overflow-wrap:anywhere}
+#allergyTemplateDialog .qa-item::after{content:'›';position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:400;color:var(--q-muted)}
+#allergyTemplateDialog .qa-item strong{display:block;font-size:13px;font-weight:650;line-height:1.5}
+#allergyTemplateDialog .qa-item small{display:block;font-size:11px;font-weight:400;margin-top:4px;color:var(--q-muted)}
+#allergyTemplateDialog .qa-item:hover{background:var(--q-card);border-color:var(--q-line)}
+#allergyTemplateDialog .qa-item[aria-pressed=true]{background:var(--q-card);border-color:var(--q-accent);box-shadow:inset 3px 0 var(--q-accent)}
+#allergyTemplateDialog .qa-item[aria-pressed=true]::after{color:var(--q-accent)}
+#allergyTemplateDialog .qa-legacy{flex:none;margin:0;border:0;border-top:1px solid var(--q-line);border-radius:0;min-height:48px;padding:12px 18px;text-align:left;background:transparent;color:var(--q-accent);font-size:12px;font-weight:600}
+#allergyTemplateDialog .qa-detail{overflow:auto;min-width:0;min-height:0;overscroll-behavior:contain;scrollbar-width:thin}
+#allergyTemplateDialog .qa-editor{padding:24px 28px}
+#allergyTemplateDialog .qa-selected-title{font-size:24px;line-height:1.35;letter-spacing:-.025em;color:var(--q-text);margin:10px 0 8px;overflow-wrap:anywhere}
+#allergyTemplateDialog .qa-selected-title:focus{outline:0}
+#allergyTemplateDialog .qa-meta{font-size:12px;line-height:1.7;color:var(--q-muted);margin:0 0 16px;overflow-wrap:anywhere}
+#allergyTemplateDialog .qa-editor-tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 10px}
+#allergyTemplateDialog .qa-editor-tools button,#allergyTemplateDialog .qa-back{border:1px solid var(--q-line);border-radius:10px;background:var(--q-soft);color:var(--q-accent);font-size:12px;font-weight:650;padding:10px 13px;min-height:44px}
+#allergyTemplateDialog .qa-hint{font-size:11px;line-height:1.7;color:var(--q-muted);margin:0 0 24px}
+#allergyTemplateDialog .qa-fields-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 5px}
+#allergyTemplateDialog .qa-fields-head h4{font-size:14px;font-weight:700;margin:0}
+#allergyTemplateDialog .qa-fields-head span{font-size:11px;color:var(--q-muted)}
+#allergyTemplateDialog .qa-field-help{font-size:11px;line-height:1.6;color:var(--q-muted);margin:0 0 12px}
+#allergyTemplateDialog details{padding:0;margin:0;border:1px solid var(--q-line);border-radius:11px;background:transparent;overflow:hidden}
+#allergyTemplateDialog .qa-field{margin:8px 0}
+#allergyTemplateDialog summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;min-height:48px;padding:13px 14px;font-size:13px;font-weight:600;line-height:1.5;color:var(--q-text)}
+#allergyTemplateDialog summary::-webkit-details-marker{display:none}
+#allergyTemplateDialog summary::after{content:'+';font-size:20px;font-weight:400;line-height:1;color:var(--q-muted);flex:none}
+#allergyTemplateDialog details[open]>summary::after{content:'−'}
+#allergyTemplateDialog .qa-field[open]>summary{color:var(--q-accent);background:var(--q-soft)}
+#allergyTemplateDialog .qa-field-content{padding:0 12px 12px;background:var(--q-soft)}
+#allergyTemplateDialog .qa-field textarea{display:block;min-height:140px;height:180px;resize:vertical;font-size:14px;padding:12px;line-height:1.7;margin:0;font-weight:400}
+#allergyTemplateDialog .qa-field textarea[readonly]{opacity:1;background:transparent;border-color:transparent;padding:2px;cursor:text}
+#allergyTemplateDialog .qa-sources,#allergyTemplateDialog .qa-settings{margin-top:18px;font-size:12px;line-height:1.7;color:var(--q-muted)}
+#allergyTemplateDialog .qa-sources summary,#allergyTemplateDialog .qa-settings summary{font-size:12px;color:var(--q-accent)}
+#allergyTemplateDialog .qa-sources a{display:block;color:var(--q-accent);margin:8px 14px;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:3px}
+#allergyTemplateDialog .qa-sources p{margin:12px 14px}
+#allergyTemplateDialog .qa-apply-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px 14px}
+#allergyTemplateDialog .qa-apply-options label{font-size:11px;font-weight:500;color:var(--q-muted);min-width:0}
+#allergyTemplateDialog .qa-bottom{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 20px;flex:none;margin:0;padding:14px 24px;background:var(--q-card);border-top:1px solid var(--q-line)}
+#allergyTemplateDialog #allergyStatus{grid-column:1/-1;margin:0;font-size:12px;line-height:1.5;color:var(--q-accent)}
+#allergyTemplateDialog #allergyStatus:empty{display:none}
+#allergyTemplateDialog .qa-apply-summary{color:var(--q-muted);font-size:12px;line-height:1.5;margin:0}
+#allergyTemplateDialog #allergyApply{margin:0;width:auto;min-width:205px;min-height:46px;padding:12px 20px;background:var(--q-accent);color:var(--q-card);font-size:13px;font-weight:700;border:0;border-radius:12px}
+#allergyTemplateDialog .qa-empty{color:var(--q-muted);font-size:13px;line-height:1.7;padding:16px 10px}
+#allergyTemplateDialog [hidden]{display:none!important}
+@media(max-width:760px){
+ #allergyTemplateDialog{position:fixed;inset:0;width:100%;height:100dvh;max-width:100%;max-height:100dvh;margin:0;border:0;border-radius:0}
+ #allergyTemplateDialog .qf-dialog-head{min-height:64px;padding:10px 16px;gap:10px}
+ #allergyTemplateDialog .qf-dialog-head h2{font-size:17px}
+ #allergyTemplateDialog .qa-body{display:block}
+ #allergyTemplateDialog .qa-catalogue{display:block;height:100%;overflow:auto;border:0;overscroll-behavior:contain}
+ #allergyTemplateDialog .qa-catalogue-head{padding:20px 18px 14px}
+ #allergyTemplateDialog .qa-intro{margin:8px 0 18px;font-size:13px}
+ #allergyTemplateDialog .qa-intro strong{font-size:19px}
+ #allergyTemplateDialog .qa-filters{gap:10px}
+ #allergyTemplateDialog input,#allergyTemplateDialog select{font-size:16px;height:46px}
+ #allergyTemplateDialog .qa-list{overflow:visible;padding:0 12px 16px;gap:5px}
+ #allergyTemplateDialog .qa-item{padding:13px 38px 13px 13px;border-color:var(--q-line);background:var(--q-card)}
+ #allergyTemplateDialog .qa-item strong{font-size:14px}
+ #allergyTemplateDialog .qa-legacy{width:100%;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+ #allergyTemplateDialog .qa-detail{height:100%}
+ #allergyTemplateDialog .qa-editor{padding:20px 18px 24px}
+ #allergyTemplateDialog .qa-selected-title{font-size:23px;margin-top:9px}
+ #allergyTemplateDialog .qa-field textarea{font-size:16px;height:190px}
+ #allergyTemplateDialog .qa-apply-options{grid-template-columns:minmax(0,1fr)}
+ #allergyTemplateDialog .qa-bottom{grid-template-columns:1fr;gap:8px;padding:10px 18px max(14px,env(safe-area-inset-bottom))}
+ #allergyTemplateDialog .qa-apply-summary{font-size:11px;text-align:center}
+ #allergyTemplateDialog #allergyApply{width:100%;min-height:48px;font-size:14px}
+ #allergyTemplateDialog[data-view=list] .qa-detail,#allergyTemplateDialog[data-view=list] .qa-bottom{display:none}
+ #allergyTemplateDialog[data-view=detail] .qa-catalogue{display:none}
+ #allergyTemplateDialog[data-view=detail] .qa-back{display:block;flex:none;padding:10px;font-size:12px;min-width:85px}
+ #allergyTemplateDialog[data-view=detail] .qf-dialog-head h2{font-size:14px}
+}
+/* Personal templates: the same visible actions are available to every visitor. */
+#allergyTemplateDialog .qa-new{display:block;width:100%;min-height:46px;border:0;border-radius:11px;background:var(--q-accent);color:var(--q-card);font-size:13px;font-weight:700;margin:0 0 14px;padding:12px}
+#allergyTemplateDialog .qa-tabs{display:flex;gap:4px;padding:4px;border-radius:11px;background:var(--q-card);border:1px solid var(--q-line);margin-bottom:16px}
+#allergyTemplateDialog .qa-tabs button{flex:1;min-width:0;min-height:40px;padding:8px 5px;border:0;border-radius:8px;background:transparent;color:var(--q-muted);font-size:11px;line-height:1.4}
+#allergyTemplateDialog .qa-tabs button[aria-pressed=true]{background:var(--q-light);color:var(--q-accent)}
+#allergyTemplateDialog .qa-intro{font-size:12px;margin-bottom:14px}
+#allergyTemplateDialog .qa-catalogue-status{font-size:12px;line-height:1.6;color:var(--q-accent);margin:0;padding:0 20px 12px}
+#allergyTemplateDialog .qa-catalogue-status:empty{display:none}
+#allergyTemplateDialog #allergyTitleLabel{margin:12px 0}
+#allergyTemplateDialog #allergySave{grid-column:1/-1;width:100%;min-height:46px;padding:12px 18px;background:var(--q-accent);color:var(--q-card);font-size:14px;font-weight:700;border:0;border-radius:12px}
+#allergyTemplateDialog #allergyDiscard{grid-column:1/-1;width:100%;min-height:40px;padding:8px;border:0;background:transparent;color:var(--q-muted);font-size:12px}
+#allergyTemplateDialog.qa-editing .qa-fields-head{margin-top:14px}
+#allergyTemplateDialog.qa-editing .qa-hint{margin-bottom:14px}
+@media(max-width:760px){#allergyTemplateDialog .qa-catalogue-head{padding-top:16px}#allergyTemplateDialog .qa-tabs button{font-size:12px}#allergyTemplateDialog .qa-new{font-size:14px}#allergyTemplateDialog .qa-intro strong{font-size:18px}#allergyTemplateDialog .qa-editor{padding-top:16px}#allergyTemplateDialog.qa-editing .qa-editor-tools:has(:only-child[hidden]){display:none}}
