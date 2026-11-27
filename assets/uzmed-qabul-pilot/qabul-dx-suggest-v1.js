@@ -130,14 +130,52 @@
    const next=e.key==='ArrowDown'?e.target.nextElementSibling:e.key==='ArrowUp'?e.target.previousElementSibling:null;
    if(next){e.preventDefault();next.focus();}
   });
-  D.addEventListener('pointerdown',e=>{if(e.target!==field&&!box.contains(e.target))hide();});
+  // Tashqariga bosilganda darhol yashirilmaydi: aks holda sahifa siljib, bosish boshqa maydonga tushadi.
+  D.addEventListener('pointerdown',e=>{if(e.target!==field&&!box.contains(e.target))setTimeout(()=>{if(D.activeElement!==field)hide();},300);});
   for(const ev of ['qabul:restored','qabul:session-ready','qabul:clinical-locked'])W.addEventListener(ev,hide);
+ }
+ // Tashxis ↔ MKB-10 avtomatik bog‘lash: aniq nom → kod, aniq kod → nom.
+ // Shifokor o‘zi yozgan qiymat ustidan yozilmaydi (faqat bo‘sh yoki avtomatik to‘ldirilgan maydon).
+ function canWrite(f){return f&&!f.readOnly&&!f.disabled&&(!f.value.trim()||f.dataset.qdxAuto===f.value);}
+ function setAuto(f,v){f.value=v;f.dataset.qdxAuto=v;f.dispatchEvent(new W.Event('input',{bubbles:true}));const c=$('icdChecked');if(c)c.checked=false;}
+ function autoLink(main,icd){
+  let t1,t2;
+  async function fromName(){
+   const line=main.value.split('\n')[0].replace(/^[A-Z]\d{2}(?:\.\d{1,2})?\s*[—–-]\s*/,'').trim();
+   if(line.length<3||!canWrite(icd)||W.UZMEDVisitBridge?.read?.()?.readOnly===true)return;
+   try{await load();}catch(_){return;}
+   const key=norm(line),hit=rows.find(r=>norm(r[1])===key)||rows.find(r=>(r.localAliases||[]).some(a=>norm(a)===key));
+   if(hit&&canWrite(icd)&&icd.value!==hit[0])setAuto(icd,hit[0]);
+   else if(!hit&&icd.dataset.qdxAuto&&icd.value===icd.dataset.qdxAuto)setAuto(icd,'');
+  }
+  async function fromCode(){
+   const code=icd.value.trim().toUpperCase();
+   if(!/^[A-Z]\d{2}(?:\.\d{1,2})?$/.test(code)||!canWrite(main)||W.UZMEDVisitBridge?.read?.()?.readOnly===true)return;
+   try{await load();}catch(_){return;}
+   const hit=rows.find(r=>r[0]===code);
+   if(hit&&canWrite(main)&&main.value!==hit[1]){setAuto(main,hit[1]);if(icd.value!==code){icd.value=code;}}
+  }
+  main.addEventListener('input',e=>{if(main.value!==main.dataset.qdxAuto)delete main.dataset.qdxAuto;clearTimeout(t1);t1=setTimeout(fromName,500);});
+  main.addEventListener('change',fromName);
+  icd.addEventListener('input',()=>{if(icd.value!==icd.dataset.qdxAuto)delete icd.dataset.qdxAuto;clearTimeout(t2);t2=setTimeout(fromCode,500);});
+  icd.addEventListener('change',fromCode);
  }
  function mount(){
   const main=$('field-diagnosis'),icd=$('field-icd');
   if(!main||!icd||!W.QabulReference||!W.UZMED_REFERENCE_SEARCH)return false;
-  attach(main,'name');attach(icd,'icd');return true;
+  attach(main,'name');attach(icd,'icd');autoLink(main,icd);return true;
  }
+ // «Tayyor tashxislar» katalog qutisi olib tashlandi: tashxis/MKB maydonidagi «Mos tayyor tashxislar» uni almashtiradi.
+ // AI tashxis paneli (#qabulDiagnosisSuggestions) va boshqa elementlar joyida qoladi.
+ function hideLibrary(){
+  const lib=$('qcDiagnoses');if(!lib)return false;
+  lib.hidden=true;lib.style.setProperty('display','none','important');
+  const host=lib.closest('.search-field');
+  if(host&&![...host.children].some(c=>c!==lib&&!c.hidden&&c.tagName!=='LABEL'&&getComputedStyle(c).display!=='none'))host.style.setProperty('display','none','important');
+  return true;
+ }
+ let libTries=0,found=0;
+ (function waitLib(){if(hideLibrary())found++;if(found>=3||++libTries>40)return;setTimeout(waitLib,500);})();
  let tries=0;
  (function retry(){if(mount()||++tries>60)return;setTimeout(retry,250);})();
 })(window,document);
