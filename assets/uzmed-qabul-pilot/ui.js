@@ -17,7 +17,7 @@
   const div=document.createElement('div');div.className='field';
   const label=document.createElement('label');label.htmlFor='field-'+id;label.textContent=title;
   const input=document.createElement(single.has(id)?'input':'textarea');
-  input.id='field-'+id;input.maxLength=5000;
+  input.id='field-'+id;input.maxLength=single.has(id)?5000:12000; // server qabul maydonlari uchun 12 000 belgigacha qabul qiladi (visit-state.js)
   if(id==='date'){input.type='date';}
   else if(single.has(id)){input.type='text';}
   if(id==='patient')input.placeholder='Maxfiylik uchun to‘liq ism o‘rniga mahalliy ID ishlatish mumkin';
