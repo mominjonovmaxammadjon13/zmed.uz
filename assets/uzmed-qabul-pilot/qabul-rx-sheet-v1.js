@@ -86,8 +86,8 @@
   const paper=el('select','qrx-paper');paper.setAttribute('aria-label','Qog‘oz o‘lchami');
   for(const p of ['A4','A5']){const o=el('option','',p);o.value=p;paper.append(o);}
   paper.onchange=()=>{S.paper=paper.value;applyPaper();};
-  const regen=btn('Qayta tuzish','refresh','qrx-btn',()=>generate(true));
-  const save=btn('Davolashga yozish','save','qrx-btn',writeToVisit);
+  const regen=btn('Qayta tuzish','refresh','qrx-btn qrx-act',()=>generate(true));
+  const save=btn('Davolashga yozish','save','qrx-btn qrx-act',writeToVisit);
   printBtn=btn('Chop etish','print','qrx-btn qrx-primary',doPrint);
   const close=btn('Yopish','close','qrx-btn qrx-icon',hide,true);
   bar.append(title,paper,regen,save,printBtn,close);
@@ -130,6 +130,54 @@
   node.addEventListener('input',()=>{item[key]=node.textContent.trim();});
   return node;
  }
+
+ // ── Davlat reyestri (O‘zbekiston, 18 353 preparat): to‘liq muqobillar ATC kodi bo‘yicha, AI siz ──
+ const REG_URL='/assets/uzmed-qabul-pilot/official-active-drugs-v4.json?v=20261108-archive6';
+ const CYR={'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'j','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'x','ц':'ts','ч':'ch','ш':'sh','щ':'sh','ъ':'','ы':'i','ь':'','э':'e','ю':'yu','я':'ya'};
+ function translit(t){return String(t||'').replace(/[а-яё]/gi,c=>{const l=c.toLowerCase(),r=CYR[l]??c;return c===l?r:r.charAt(0).toUpperCase()+r.slice(1);});}
+ const FORMS=[[/инъекц|для инфуз/i,'in’eksiya'],[/таблет|tablet/i,'tabletka'],[/капсул/i,'kapsula'],[/сироп/i,'sirop'],[/суспенз/i,'suspenziya'],[/порош|гранул/i,'kukun'],[/капли/i,'tomchi'],[/спрей|аэрозол/i,'sprey'],[/мазь/i,'malham'],[/крем/i,'krem'],[/гель/i,'gel'],[/суппоз|свеч/i,'sham'],[/раствор/i,'eritma'],[/пастил|леденц/i,'so‘rg‘ich']];
+ const formOf=t=>{for(const [re,f] of FORMS)if(re.test(t))return f;return '';};
+ const FORM_KEY=[[/tab/i,'tabletka'],[/kaps/i,'kapsula'],[/sirop/i,'sirop'],[/suspen/i,'suspenziya'],[/kukun|poroshok|granul/i,'kukun'],[/tomchi/i,'tomchi'],[/sprey|aerozol|purka/i,'sprey'],[/malham|maz/i,'malham'],[/krem/i,'krem'],[/gel/i,'gel'],[/sham|suppoz/i,'sham'],[/in.?eksiya|ukol|ampula/i,'in’eksiya'],[/eritma/i,'eritma']];
+ const itemForm=t=>{for(const [re,f] of FORM_KEY)if(re.test(t||''))return f;return '';};
+ const UNIT={'мг':'mg','мкг':'mkg','г':'g','мл':'ml','ме':'ME','доза':'doza','%':'%'};
+ function strengthOf(title){
+  const m=String(title).match(/(\d+(?:[.,]\d+)?(?:\s*\/\s*\d+(?:[.,]\d+)?)?)\s*(мкг|мг|ме|г|%)(?:\s*\/\s*(\d+(?:[.,]\d+)?)?\s*(мл|г|доза))?/i);
+  if(!m)return '';
+  return (m[1].replace(/\s+/g,'')+' '+(UNIT[m[2].toLowerCase()]||m[2])+(m[4]?'/'+(m[3]?m[3]+' ':'')+(UNIT[m[4].toLowerCase()]||m[4]):'')).replace(',','.');
+ }
+ const numKey=t=>(String(t||'').replace(',','.').match(/\d+(?:\.\d+)?/g)||[]).join('/');
+ const innKey=t=>translit(t).toLowerCase().replace(/[^a-z]/g,'').replace(/h/g,'g').replace(/x/g,'g');
+ const nameCase=t=>t.replace(/[®™]/g,'').trim().toLowerCase().replace(/(^|[\s(-])(\p{L})/gu,(m,a,b)=>a+b.toUpperCase());
+ const REG={rows:null,loading:null,failed:false};
+ function loadRegistry(){
+  if(REG.rows||REG.loading)return REG.loading||Promise.resolve(REG.rows);
+  REG.loading=W.fetch(REG_URL,{credentials:'omit'}).then(r=>{if(!r.ok)throw Error('http '+r.status);return r.json();}).then(d=>{
+   const seen=new Set(),out=[];
+   for(const r of d.rows||[]){
+    const title=String(r[3]||''),atc=String(r[7]||'').toUpperCase(),inn=String(r[6]||'');
+    if(!atc&&!inn)continue;
+    const form=formOf(title),strength=strengthOf(title);
+    const cut=title.search(/\s(?:таблет|капсул|сироп|суспенз|порош|гранул|капли|спрей|аэрозол|мазь|крем|гель|суппоз|свеч|раствор|лиоф|пастил|леденц|концентрат|эмульс)/i);
+    const name=nameCase(translit(cut>0?title.slice(0,cut):title.split(/\s\d/)[0]));
+    const key=atc+'|'+name+'|'+form+'|'+strength;
+    if(!name||seen.has(key))continue;seen.add(key);
+    out.push({atc,inn,innKey:innKey(inn),innLat:nameCase(translit(inn)),name,form,strength,label:[name,strength,form].filter(Boolean).join(' · ')});
+   }
+   REG.rows=out;return out;
+  }).catch(e=>{REG.failed=true;console.warn('[UZMED rx] reyestr',e&&e.message);return null;}).finally(()=>{REG.loading=null;});
+  return REG.loading;
+ }
+ function alternativesFor(item){
+  const rows=REG.rows||[],atc=String(item.atc||'').toUpperCase(),key=innKey(item.inn),f=itemForm(item.form||item.name);
+  const same=rows.filter(r=>(atc.length===7&&r.atc===atc)||(key.length>3&&r.innKey===key));
+  same.sort((a,b)=>(b.form===f)-(a.form===f)||a.name.localeCompare(b.name));
+  const groups=new Map();
+  if(atc.length>=5)for(const r of rows){
+   if(r.atc.slice(0,5)!==atc.slice(0,5)||r.atc===atc||!r.innKey||/утвержд/i.test(r.inn)||(key&&r.innKey===key))continue;
+   const g=groups.get(r.innKey)||{inn:r.innLat,count:0};g.count++;groups.set(r.innKey,g);
+  }
+  return {same:same.slice(0,80),group:[...groups.values()].sort((a,b)=>b.count-a.count).slice(0,40)};
+ }
  function renderItems(){
   listHost.replaceChildren();
   const items=S.data?.items||[];
@@ -149,23 +197,52 @@
    const tools=el('div','qrx-item-tools qrx-noprint');
    if(item.minAge)tools.append(el('span','qrx-chip','Yosh: '+item.minAge));
    if(item.note)tools.append(el('span','qrx-note',item.note));
-   const sel=el('select','qrx-swap');sel.setAttribute('aria-label',(index+1)+'-dori: almashtirish');
-   const first=el('option','','Almashtirish…');first.value='';sel.append(first);
-   const alts=(item.alternatives||[]).filter(a=>a.name&&a.name!==item.name);
-   if(alts.length){
-    const g=el('optgroup');g.label='Shu guruhdagi preparatlar';
-    for(const a of alts){const o=el('option','',a.name+(a.minAge?' · '+a.minAge:'')+(a.form?' · '+a.form:''));o.value=a.name;g.append(o);}
-    sel.append(g);
-   }
-   const own=el('option','','Boshqa dori yozish…');own.value='__custom';sel.append(own);
-   sel.onchange=()=>{const v=sel.value;sel.value='';if(!v)return;
-    const name=v==='__custom'?(W.prompt('Yangi dori nomi (savdo nomi va dozasi):','')||'').trim():v;
-    if(name)swap(index,name);};
-   const rm=btn('Qatorni o‘chirish','remove','qrx-btn qrx-icon',()=>{S.data.items.splice(index,1);renderItems();syncPrint();},true);
+   const sel=buildSwap(item,index);
+   const rm=btn('Qatorni o‘chirish','remove','qrx-btn qrx-icon qrx-rm',()=>{if(S.busy)return;S.data.items.splice(index,1);renderItems();syncPrint();},true);
+   rm.disabled=S.busy;
    tools.append(sel,rm);
    li.append(tools);
    listHost.append(li);
   });
+ }
+
+ function buildSwap(item,index){
+  const sel=el('select','qrx-swap');sel.setAttribute('aria-label',(index+1)+'-dori: almashtirish');
+  const first=el('option','','Almashtirish…');first.value='';sel.append(first);
+  const picks=[];
+  if(REG.rows){
+   const {same,group}=alternativesFor(item);
+   if(same.length){
+    const g=el('optgroup');g.label='Shu modda — boshqa preparatlar ('+same.length+')';
+    for(const r of same){if(r.name.toLowerCase()===String(item.name).toLowerCase())continue;const o=el('option','',r.label);o.value='p:'+picks.length;picks.push({type:'product',r});g.append(o);}
+    sel.append(g);
+   }
+   if(group.length){
+    const g=el('optgroup');g.label='Shu guruh — boshqa moddalar ('+group.length+')';
+    for(const x of group){const o=el('option','',x.inn+' — '+x.count+' ta preparat');o.value='p:'+picks.length;picks.push({type:'inn',x});g.append(o);}
+    sel.append(g);
+   }
+   if(!same.length&&!group.length){const o=el('option','','Reyestrda muqobil topilmadi');o.disabled=true;sel.append(o);}
+  }else{
+   const o=el('option','',REG.failed?'Reyestr yuklanmadi':'Reyestr yuklanmoqda…');o.disabled=true;sel.append(o);
+  }
+  const own=el('option','','Boshqa dori yozish…');own.value='__custom';sel.append(own);
+  sel.disabled=S.busy;
+  sel.onchange=()=>{
+   const v=sel.value;sel.value='';if(!v||S.busy)return;
+   if(v==='__custom'){const name=(W.prompt('Yangi dori nomi (savdo nomi va dozasi):','')||'').trim();if(name)swap(index,name);return;}
+   const pick=picks[Number(v.slice(2))];if(!pick)return;
+   if(pick.type==='inn'){swap(index,pick.x.inn);return;}
+   const r=pick.r,cur=S.data.items[index];
+   // Shu modda, shu shakl va shu kuch — doza o‘zgarmaydi: AI ga murojaatsiz darhol almashtiriladi.
+   if(cur&&r.form&&r.form===itemForm(cur.form||cur.name)&&r.strength&&numKey(r.strength)===numKey(cur.strength)){
+    S.data.items[index]={...cur,name:[r.name,r.strength].join(' ')};
+    checked.checked=false;renderAll();status.textContent=(index+1)+'-dori «'+r.name+'» ga almashtirildi (doza o‘zgarmadi).';
+    return;
+   }
+   swap(index,[r.name,r.strength,r.form].filter(Boolean).join(' '));
+  };
+  return sel;
  }
  function renderRec(){
   recHost.replaceChildren();
@@ -187,7 +264,7 @@
  function renderAll(){renderMeta();renderItems();renderRec();renderFoot();renderNotes();syncPrint();}
 
  function setBusy(v,text){S.busy=v;overlay.setAttribute('aria-busy',String(v));if(text!=null)status.textContent=text;
-  for(const s of overlay.querySelectorAll('select.qrx-swap'))s.disabled=v;syncPrint();}
+  for(const s of overlay.querySelectorAll('select.qrx-swap,.qrx-rm,.qrx-act'))s.disabled=v;syncPrint();}
 
  async function generate(force){
   const dx=diagnosisText();
@@ -214,11 +291,10 @@
   setBusy(true,'«'+selected+'» uchun doza va qabul tartibi hisoblanmoqda…');
   try{
    const items=S.data.items.map(({alternatives,_verified,_line3,_purpose,...rest})=>rest);
+   const snapshotItems=S.data.items;
    const data=await api({draft:snapshot(),diagnosis:diagnosisText(),icd:icdText(),swap:{items,index,selected}},ctrl.signal);
-   const old=S.data.items[index];
-   const merged=[...(data.item.alternatives||[])];
-   if(!merged.some(a=>a.name===old.name))merged.unshift({name:old.name,inn:old.inn,form:old.form,minAge:old.minAge});
-   S.data.items[index]={...data.item,alternatives:merged.slice(0,9)};
+   if(S.data.items!==snapshotItems||!S.data.items[index])return; // ro‘yxat o‘zgargan bo‘lsa natija tashlanadi
+   S.data.items[index]=data.item;
    S.data.cautions=[...new Set([...(S.data.cautions||[]),...(data.cautions||[])])];
    renderAll();status.textContent=(index+1)+'-dori almashtirildi. Yangi dozani tekshiring.';
   }catch(e){if(!ctrl.signal.aborted)status.textContent=e.message;}
@@ -256,6 +332,7 @@
   overlay.hidden=false;S.open=true;D.documentElement.classList.add('qrx-open');applyPaper();
   if(S.visit!==visitKey()){S.data=null;S.key='';S.visit=visitKey();}
   void generate(false);
+  if(!REG.rows)loadRegistry().then(()=>{if(S.open&&S.data?.items?.length&&!S.busy)renderItems();});
   overlay.querySelector('.qrx-btn')?.focus?.();
  }
  function hide(){
