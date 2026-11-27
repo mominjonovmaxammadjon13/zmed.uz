@@ -165,14 +165,15 @@
   if(!main||!icd||!W.QabulReference||!W.UZMED_REFERENCE_SEARCH)return false;
   attach(main,'name');attach(icd,'icd');autoLink(main,icd);return true;
  }
- // «Tayyor tashxislar» katalog qutisi olib tashlandi: tashxis/MKB maydonidagi «Mos tayyor tashxislar» uni almashtiradi.
- // AI tashxis paneli (#qabulDiagnosisSuggestions) va boshqa elementlar joyida qoladi.
+ // «Tayyor tashxislar» qutisida faqat sarlavha va qidiruv qatori olib tashlanadi;
+ // toifa tanlovi va to‘liq MKB-10 ro‘yxati (12 221 ta) joyida qoladi.
  function hideLibrary(){
   const lib=$('qcDiagnoses');if(!lib)return false;
-  lib.hidden=true;lib.style.setProperty('display','none','important');
-  const host=lib.closest('.search-field');
-  if(host&&![...host.children].some(c=>c!==lib&&!c.hidden&&c.tagName!=='LABEL'&&getComputedStyle(c).display!=='none'))host.style.setProperty('display','none','important');
-  return true;
+  const head=[...lib.children].find(c=>c.tagName==='H3'&&/Tayyor tashxislar/.test(c.textContent));
+  const search=$('icdSearch');
+  if(head)head.style.setProperty('display','none','important');
+  if(search&&lib.contains(search)){search.style.setProperty('display','none','important');if(search.value){search.value='';search.dispatchEvent(new W.Event('input',{bubbles:true}));}}
+  return !!(head||search);
  }
  let libTries=0,found=0;
  (function waitLib(){if(hideLibrary())found++;if(found>=3||++libTries>40)return;setTimeout(waitLib,500);})();
