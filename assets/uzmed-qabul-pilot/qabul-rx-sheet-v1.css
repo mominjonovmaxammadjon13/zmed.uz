@@ -77,3 +77,6 @@ html.qrx-open,html.qrx-open body{overflow:hidden}
  html.qrx-printing .qrx-sheet{max-width:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
  html.qrx-printing .qrx-sheet [contenteditable]{background:none!important}
 }
+/* v2: reyestr muqobillari */
+.qrx-item-tools .qrx-swap{flex:1 1 200px;min-width:0}
+.qrx-item-tools .qrx-btn:disabled,.qrx-swap:disabled{opacity:.5}
