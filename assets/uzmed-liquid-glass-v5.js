@@ -19,12 +19,13 @@
   /* ---------- Doim yoqilgan (sinov rejimi olib tashlandi) ---------- */
   try{ localStorage.removeItem('uzm_lg_test'); }catch(_){}   /* eski sinov belgisini tozalash */
   var NS = window.UZMEDLiquidGlass = window.UZMEDLiquidGlass || {};
-  NS.version = '5.2'; NS.enabled = true;
+  NS.version = '5.3'; NS.enabled = true;
 
   /* ---------- Sozlamalar ---------- */
   var SEL = 'button,[role="button"],[role="tab"],a.btn,.btn,input[type="button"],input[type="submit"],[onclick]';
   var SKIP = '[data-uzm-lg="off"],.uzm-lg-skip';
-  var MAX_W = 560, MAX_H = 190, MIN_S = 16, MAX_AREA_FRAC = 0.30;
+  /* v5.3: katta kartalar (bosh sahifa menyusi) linzadan chiqarildi — faqat knopka/tab o'lchamidagilar */
+  var MAX_W = 420, MAX_H = 100, MIN_S = 16, MAX_AREA_FRAC = 0.30;
   var MAG = 1.16, RIM_MAG = 1.42, GX = 1.07, GY = 1.05;
   var FLY_MS = 500, FADE_MS = 150, SETTLE_MS = 300, DRAG_MIN = 8, MAX_NODES = 220;
   var ACCENT = '#4c8dff';
@@ -445,6 +446,17 @@
   }, { capture:true, passive:true });
   document.addEventListener('touchcancel', function(){ requestAnimationFrame(function(){ if (P){ P = null; vanish(true); } }); }, { capture:true, passive:true });
 
+  /* v5.3: linza "qotib qolmasin" — sahifa almashganda/qaytganda (iOS bfcache) to'liq tozalash */
+  function hardReset(){
+    try{ P = null; clearTimeout(watchdog); cancel(); clearLayers(); L.on = false;
+      if (lens){ lens.style.opacity = '0'; lens.style.transform = 'translate(-9999px,-9999px)'; } }catch(_){}
+  }
+  NS.reset = hardReset;
+  window.addEventListener('pagehide', hardReset);
+  window.addEventListener('pageshow', hardReset);
+  window.addEventListener('popstate', hardReset);
+  window.addEventListener('hashchange', hardReset);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) hardReset(); });
   document.addEventListener('focusin', function(e){
     var t = e.target;
     if (t && t.matches && t.matches('input,textarea,select,[contenteditable="true"]')){ P = null; vanish(true); }
