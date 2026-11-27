@@ -5,7 +5,7 @@
  'use strict';
  if(W.__UZMED_QABUL_DX_SUGGEST_V1__)return;
  W.__UZMED_QABUL_DX_SUGGEST_V1__=true;
- const LIMIT=12;
+ const LIMIT=20;
  const $=id=>D.getElementById(id);
  let rows=null,loading=null;
  function load(){
@@ -14,12 +14,49 @@
   return loading;
  }
  const codeLike=q=>/^[A-Za-z]\d[\d.]*$/.test(q);
+ // O‘zbekcha nom bo‘yicha qidiruv: so‘z boshi mosligi + 1 harf xatoga chidamli (alleg → allergik)
+ const norm=t=>String(t||'').toLowerCase().replace(/[‘’ʻʼ`´']/g,"'").replace(/[^\p{L}\p{N}' ]+/gu,' ').replace(/\s+/g,' ').trim();
+ let index=null;
+ function buildIndex(){
+  index=rows.map(r=>({row:r,words:norm(r[1]).split(' '),alias:norm((r.localAliases||[]).join(' ')).split(' ').filter(Boolean),cat:!r[0].includes('.')}));
+ }
+ function near(a,b){ // a va b uzunligi teng yoki farqi 1; tahrir masofasi <=1
+  if(a===b)return true;
+  const la=a.length,lb=b.length;if(Math.abs(la-lb)>1)return false;
+  let i=0,j=0,diff=0;
+  while(i<la&&j<lb){if(a[i]===b[j]){i++;j++;continue;}if(++diff>1)return false;if(la>lb)i++;else if(lb>la)j++;else{i++;j++;}}
+  return diff+(la-i)+(lb-j)<=1;
+ }
+ function wordScore(q,words){
+  let best=9;
+  for(const w of words){
+   if(w.startsWith(q))return w.length===q.length?0:1;
+   if(q.length>=4&&w.length>=q.length&&near(q,w.slice(0,q.length)))best=Math.min(best,3);
+   else if(q.length>=4&&w.includes(q))best=Math.min(best,4);
+  }
+  return best;
+ }
  function search(q){
   if(codeLike(q)){
    const key=q.toUpperCase().replace('.','');
    return rows.filter(r=>r[0].replace('.','').startsWith(key)).slice(0,LIMIT);
   }
-  return W.UZMED_REFERENCE_SEARCH.searchMkb(rows,q,LIMIT)||[];
+  if(!index)buildIndex();
+  const words=norm(q).split(' ').filter(w=>w.length>=2);
+  if(!words.length)return [];
+  const hits=[];
+  for(const e of index){
+   let total=0,ok=true;
+   for(const w of words){
+    let s=wordScore(w,e.words);
+    if(s>=9){const a=wordScore(w,e.alias);s=a<9?a+2:9;}
+    if(s>=9){ok=false;break;}
+    total+=s;
+   }
+   if(ok)hits.push([total+(e.cat?0:0.5)+e.row[1].length/400,e.row]);
+  }
+  hits.sort((a,b)=>a[0]-b[0]||(a[1][0]<b[1][0]?-1:1));
+  return hits.slice(0,LIMIT).map(h=>h[1]);
  }
  function writable(field){
   return !field.readOnly&&!field.disabled&&W.UZMEDVisitBridge?.read?.()?.readOnly!==true;
@@ -81,7 +118,8 @@
   }
   field.addEventListener('input',e=>{if(e.isComposing)return;update();});
   field.addEventListener('compositionend',update);
-  field.addEventListener('focus',update);
+  field.addEventListener('focus',()=>requestAnimationFrame(update));
+  field.addEventListener('click',update);
   field.addEventListener('keydown',e=>{
    if(box.hidden)return;
    if(e.key==='Escape'){e.preventDefault();hide();}
