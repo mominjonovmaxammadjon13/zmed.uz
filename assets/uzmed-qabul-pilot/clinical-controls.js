@@ -956,7 +956,7 @@
   const info=dietInfoOf(code);
   if(info){const ref=node('div',undefined,'qc-diet-ref');ref.append(node('h4','Ko‘rsatmalar'),node('p',info.ind),node('h4','Umumiy tavsif'),node('p',info.char));
    const src=node('p',undefined,'minor');src.append(document.createTextNode('Matn manbasi: '));
-   String(info.src||'').split(',').filter(Boolean).forEach((k,i)=>{if(i)src.append(document.createTextNode(' · '));const a=node('a',W.UZMED_DIET_INFO.sources[k]||k);a.href=W.UZMED_DIET_INFO.links[k]||'#';a.target='_blank';a.rel='noopener noreferrer';src.append(a);});
+   String(info.src||'').split(',').filter(Boolean).forEach((k,i)=>{if(i)src.append(document.createTextNode(' · '));const label=W.UZMED_DIET_INFO.sources[k]||k,href=W.UZMED_DIET_INFO.links[k];if(!href){src.append(document.createTextNode(label));return;}const a=node('a',label);a.href=href;a.target='_blank';a.rel='noopener noreferrer';src.append(a);});
    src.append(document.createTextNode('. Ma’lumotnoma — shifokor tekshiradi va bemorga moslab tahrirlaydi.'));ref.append(src);dietInfoBody.append(ref);}
   const defaults=info?{purpose:info.ind,allowed:info.allowed,avoid:info.avoid,notes:info.patient}:{};
   const inputs={},saved=extra.diet_edits[code]||{};for(const [key,label]of [['purpose','Tayinlashdan maqsad / ko‘rsatmalar'],['allowed','Tavsiya etiladigan mahsulotlar'],['avoid','Cheklanadigan mahsulotlar'],['notes','Bemor uchun tavsiya']]){const l=node('label',label),t=node('textarea');t.maxLength=1200;t.setAttribute('aria-label',label);t.value=saved[key]!=null?saved[key]:(defaults[key]||'');l.append(t);dietInfoBody.append(l);inputs[key]=t;}
