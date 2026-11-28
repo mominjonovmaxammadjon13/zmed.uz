@@ -180,7 +180,7 @@
     </main>
     <div class="uzb-footer">UZMED · Tibbiyot va texnologiya</div>
   </div>
-  <script id="uzmed-premium-loader-js" src="/assets/uzmed-real-stage-splash-20261103.js?v=1"></script>
+  <script id="uzmed-premium-loader-js" src="/assets/uzmed-real-stage-splash-20261103.js?v=2"></script>
 
   <script>
     
@@ -411,6 +411,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.documentElement.replaceWith(doc.documentElement);
     window.__UZMED_SPLASH_V1__?.mark(73,'Asosiy sahifa chizilmoqda');
     const dead = Array.from(document.scripts);
+    // Tezlik: barcha tashqi skriptlarni bir vaqtda (parallel) yuklab olish. Bajarilish tartibi o'zgarmaydi —
+    // quyidagi tsikl ularni avvalgidek bittadan, ketma-ket ishga tushiradi, faqat endi tarmoqni kutmaydi.
+    try {
+      for (const old of dead) {
+        const src = old.getAttribute('src'), type = (old.getAttribute('type') || '').toLowerCase();
+        if (!src || (type && !/javascript|ecmascript|^module$/.test(type))) continue;
+        const l = document.createElement('link');
+        l.rel = type === 'module' ? 'modulepreload' : 'preload'; l.as = 'script'; l.href = src;
+        if (old.hasAttribute('crossorigin')) l.crossOrigin = old.getAttribute('crossorigin') || 'anonymous';
+        document.head.appendChild(l);
+      }
+    } catch (e) { console.warn('[UZMED preload]', e); }
     for (const old of dead) {
       const s = document.createElement('script');
       for (const a of old.attributes) s.setAttribute(a.name, a.value);

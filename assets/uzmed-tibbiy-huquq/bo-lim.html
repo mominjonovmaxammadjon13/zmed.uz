@@ -41,4 +41,7 @@ h1{font-size:clamp(26px,5vw,36px);line-height:1.2;margin:9px 0 9px}h2{font-size:
 <footer class="footer">Eslatma: UZMED’dagi hujjat indeksi ma’lum sanada olingan nusxadir, qonunchilikning ayni paytda amaldagi tahriri emas. Moddaning to‘liq va so‘nggi rasmiy matnini Lex.uz havolasidan tekshiring. SSV buyruqlari va protokollarining asl nusxasi rasmiy portalda ochiladi.</footer>
 <script src="./bo-lim.js" defer></script>
 <script src="/assets/uzmed-voice-guide-v1.js?v=20261102-sardor-0bc44b57b02f" defer></script>
+<script>/* Asosiy saytga qaytish: brauzer xotirasidagi sahifaga (darhol, qayta yuklanmasdan) */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="/"]');if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+try{var r=document.referrer?new URL(document.referrer):null;if(r&&r.origin===location.origin&&!/\/assets\/uzmed-tibbiy-huquq\//.test(r.pathname)&&history.length>1){e.preventDefault();history.back();}}catch(_){}},true);</script>
 </body></html>
