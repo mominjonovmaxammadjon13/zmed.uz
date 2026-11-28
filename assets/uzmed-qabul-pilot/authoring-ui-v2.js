@@ -8,6 +8,8 @@
  if(type&&library){
   const tabs=type.closest('.qc-dx-field'),main=$('slot-diagnosis').parentElement;
   tabs.querySelector('label').textContent='Tashxis turi';panel.prepend(tabs,main);
+  // Har bir tashxis turi maydoni «Tashxis turi» ostida, Asosiy tashxis bilan bir xil joyda (keyin MKB katalogi).
+  {let anchor=main;for(const n of [$('extra-complication'),$('extra-comorbid'),$('qc-differential')?.closest('.field'),$('qc-diagnostic_plan')?.closest('.field')]){if(n&&n!==main){anchor.after(n);anchor=n;}}}
   library.open=true;library.classList.add('qc-library','qc-complaints','qa-diagnoses');library.querySelector('summary').hidden=true;library.prepend(el('h3','Tayyor tashxislar'));
   const search=$('icdSearch');library.querySelector('h3').after(search);search.setAttribute('aria-label','Tashxisni kod yoki nom bo‘yicha qidirish');
   const label=D.querySelector('label[for="icdSearch"]');if(label)label.hidden=true;
