@@ -1,0 +1,35 @@
+/* UZMED — Apple HIG tuzatishlari v1 (faqat qo'shimcha; eski qoidalar o'zgarmagan).
+   Mezon: matn ≤17px uchun kontrast ≥4.5:1, shrift ≥11px, tegiladigan element ≥44px. */
+
+/* 1. Doza ekrani: sarlavha bloki — oq matn uchun to'qroq yashil (5.0:1 dan yuqori) */
+html body .doza-hero{background-image:linear-gradient(135deg,#15803d 0%,#166534 100%)!important}
+html body .doza-hero .doza-hero-sub{color:#ecfdf5!important;opacity:1!important}
+html body .doza-hero .ucp-entry{background-color:rgba(0,0,0,.22)!important}
+
+/* 2. Doza bo'lim raqamlari */
+html:not([data-uzmed-ux-theme="dark"]) body:not(.dark-mode) .doza-sec-num{color:#047857!important;background-color:#d6f5ea!important}
+
+/* 3. Dorilar: narx yorliqlari (faol bo'lmaganlari) */
+html:not([data-uzmed-ux-theme="dark"]) body:not(.dark-mode) #uzmNarxTabs .uzm-narx-tab:not(.on){color:#4b5b75!important}
+
+/* 4. Dorilar: "dori tanlash" tugmasi — oq matn uchun to'qroq ko'k */
+html body #uzdp-launch{background-image:linear-gradient(135deg,#0369a1,#1d4ed8)!important}
+
+/* 5. Juda mayda matnlar → kamida 11px (faqat kichik ekranda; kompyuterda asl o'lcham kattaroq) */
+html body h2.uxn-group-title,html[data-uzmed-ux] body .uxn-group-title,
+html body .ur-hero-top{font-size:11px!important}
+@media (max-width:770px){
+  html body .unh-grid-button .unh-card-copy small,
+  html body #uzmedNeonHome .unh-grid .unh-card-copy small,
+  html body .unh-brand-text small,
+  html body #uzmedNeonHome .unh-brand-text small{font-size:11px!important}
+}
+
+/* 6. Tegiladigan maydon */
+html body a.uxn-brand{min-height:44px!important}
+html body #assosi-screen .proto-chip,
+html body#uzmedMobile #assosi-screen .proto-chip{min-height:44px!important}
+
+@media (prefers-reduced-motion:reduce){
+  html body .doza-hero,html body #uzdp-launch{transition:none!important}
+}
