@@ -2,7 +2,7 @@
 (function(W,D){
  'use strict';
  if(new URLSearchParams(W.location.search).get('section')!=='qabul'&&!W.UZMED_QABUL_INLINE)return;
- let root=null,registry=null,owner='',revision=0,opening=0,timer=null,loading=false,clinical=false;
+ let root=null,registry=null,owner='',revision=0,opening=0,timer=null,loading=false,clinical=false,checking=false,pendingType='';
  const h=(tag,cls,text)=>{const el=D.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
  const button=(text,fn,cls)=>{const b=h('button','qstart-btn '+(cls||''),text);b.type='button';b.onclick=fn;return b;};
  const actor=()=>{try{const a=W.UZMEDAuth?.getState?.();return a?.loggedIn?String(a.user?.id||''):'';}catch{return '';}};
@@ -79,7 +79,12 @@
   if(type==='search')type='mine';
   if(type!=='new'&&type!=='mine')type='home';
   if(!root?.isConnected)return;
-  if(type!=='home'&&!clinical){status('Shifokor qabuli uchun vrach akkauntingizni ulash kerak.',true);return;}
+  if(type!=='home'&&!clinical){
+   // Klinik ruxsat hali tekshirilayotgan bo‘lsa xato ko‘rsatilmaydi: tanlov navbatga qo‘yiladi va tekshiruvdan keyin ochiladi.
+   const id=actor();
+   if(!id||checking||owner!==id){pendingType=type;status(id?'Klinik ruxsat tekshirilmoqda…':'Akkaunt tekshirilmoqda…');if(id&&!checking)open(type);return;}
+   status('Shifokor qabuli uchun vrach akkauntingizni ulash kerak.',true);return;
+  }
   const screen=type==='mine'?registryScreen():root;
   if(!show(screen))return;
   if(type==='home'&&root.dataset.qstartView==='new')scrollTop(root);
@@ -396,13 +401,17 @@
   if(owner!==id){owner=id;clinical=false;}
   const pending=revision, request=++opening;
   status('Klinik ruxsat tekshirilmoqda…');
+  checking=true;
   try{
-   const {clinicalAllowed}=await api('/auth/status');if(actor()!==id||pending!==revision||request!==opening||!screen.classList.contains('active'))return;
+   const {clinicalAllowed}=await api('/auth/status');if(request===opening)checking=false;if(actor()!==id||pending!==revision||request!==opening||!screen.classList.contains('active'))return;
    clinical=clinicalAllowed===true;
    if(!clinical){screen.querySelector('.qstart-content').replaceChildren(h('p','qstart-muted','Bu akkauntda klinik huquq tasdiqlanmagan. Vrach akkauntini ulash uchun Bemorlarim orqali ruxsat oling.'));status('Klinik kirish huquqi talab qilinadi.',true);return;}
-   choose(type);
-  }catch(err){if(pending===revision&&request===opening)status(err.message,true);}
+   const next=pendingType||type;pendingType='';
+   choose(next);
+  }catch(err){if(request===opening){checking=false;pendingType='';}if(pending===revision&&request===opening)status(err.message,true);}
  }
  W.UZMEDQabulStart={open,choose};
- W.addEventListener('uzmed:auth-change',()=>{if(actor()!==owner){clear();owner='';clinical=false;if(root){delete root.dataset.qstartView;W.UZMEDQabulPremium?.syncChoice?.('home');}}});
+ W.addEventListener('uzmed:auth-change',()=>{if(actor()!==owner){const queued=owner?'':pendingType;clear();owner='';clinical=false;checking=false;pendingType='';if(root){delete root.dataset.qstartView;W.UZMEDQabulPremium?.syncChoice?.('home');}
+  // Akkaunt endi yuklangan bo‘lsa, kutib turgan tanlov ochiladi.
+  if(queued&&actor()&&root?.isConnected){pendingType=queued;open(queued);}}});
 })(window,document);
