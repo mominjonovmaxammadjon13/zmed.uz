@@ -95,4 +95,7 @@
 </main>
 <script src="./app.js" defer></script>
 <script src="/assets/uzmed-voice-guide-v1.js?v=20261102-sardor-0bc44b57b02f" defer></script>
+<script>/* Asosiy saytga qaytish: brauzer xotirasidagi sahifaga (darhol, qayta yuklanmasdan) */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="/"]');if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+try{var r=document.referrer?new URL(document.referrer):null;if(r&&r.origin===location.origin&&!/\/assets\/uzmed-tibbiy-huquq\//.test(r.pathname)&&history.length>1){e.preventDefault();history.back();}}catch(_){}},true);</script>
 </body></html>
