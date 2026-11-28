@@ -54,6 +54,48 @@
   const v=($('qp-weight')?.value||$('weight')?.value||'').trim();
   return /^\d+(?:[.,]\d+)?$/.test(v)?v.replace(',','.'):'';
  }
+ // UZMED · retsept qatoridagi birlik va doza arifmetikasini tekshirish (frontend va backendda bir xil).
+ function rxFixItem(it){
+  if(!it||typeof it!=='object')return it;
+  const out={...it};
+  const unit=s=>String(s||'').replace(/(\d)\s*(?:µg|μg|mcg|мкг)/gi,'$1 mkg').replace(/(?:µg|μg|мкг)/g,'mkg').replace(/(\d)\s*(?:µl|μl)/gi,'$1 mkl').replace(/(\d)\s*(?:IU|ME|МЕ)\b/g,'$1 XB');
+  for(const k of ['name','form','strength','dose','frequency','duration','timing','route','purpose','minAge','note'])if(typeof out[k]==='string')out[k]=unit(out[k]);
+  if(out.form)out.form=out.form.replace(/\s*\(([^()]*)\)/g,', $1').replace(/^[,\s]+|[,\s]+$/g,'');
+  const num=s=>parseFloat(String(s).replace(',','.'));
+  const fmt=n=>(Math.round(n*10)/10).toString().replace('.',',');
+  const src=(out.strength||'')+' '+(out.name||'');
+  const combo=/\d\s*\/\s*\d+(?:[.,]\d+)?\s*(?:mg|mkg)\b|\+/i.test(src);
+  let dose=out.dose||'',fixed='';
+  // Burun spreyi: «har bir burun teshigiga N purkash» → har teshikka va jami miqdor.
+  const NOSE='har\\s+(?:bir\\s+)?burun\\s+(?:teshigiga|yo[‘\'’`]?liga|kataklariga|katagiga)',PUFF='(?:ta\\s*)?(?:purkash|puflash|doza|ingalyatsiya)';
+  const nasal=dose.match(new RegExp(NOSE+'\\s+(\\d+)\\s*'+PUFF,'i'))||dose.match(new RegExp('^\\s*(\\d+)\\s*'+PUFF+'\\b[^:]*?'+NOSE,'i'));
+  const per=src.match(/(\d+(?:[.,]\d+)?)\s*mkg/i);
+  if(nasal&&per&&!combo){
+   const n=num(nasal[1]),s=num(per[1]),each=n*s,total=each*2;
+   const freq=(out.frequency||dose).match(/kuniga\s+(\d+)\s*(?:mahal|marta)/i);
+   dose=dose.replace(/\s*\([^()]*(?:mkg|mg)[^()]*\)/gi,'').replace(/\s*[:—-]\s*har teshikka.*$/i,'').trim();
+   dose+=': har teshikka '+fmt(each)+' mkg, bir martada jami '+fmt(total)+' mkg'+(freq?', sutkasiga '+fmt(total*num(freq[1]))+' mkg':'');
+  }else if(!combo){
+   // Tabletka/kapsula: N tabletka × kuch = qavsdagi mg.
+   const tab=dose.match(/^\s*(\d+(?:[.,]\d+)?|½|1\/2|yarim)\s*(?:ta\s*)?(tabletka|kapsula|draje)\b/i);
+   const tabS=src.match(/(\d+(?:[.,]\d+)?)\s*(mg|mkg)\b(?!\s*\/)/i);
+   const inPar=dose.match(/\(\s*(\d+(?:[.,]\d+)?)\s*(mg|mkg)\s*\)/i);
+   if(tab&&tabS&&inPar&&inPar[2].toLowerCase()===tabS[2].toLowerCase()){
+    const n=/½|1\/2|yarim/i.test(tab[1])?0.5:num(tab[1]),want=n*num(tabS[1]);
+    if(Math.abs(want-num(inPar[1]))>want*0.02){dose=dose.replace(inPar[0],'('+fmt(want)+' '+inPar[2]+')');fixed='Doza miqdori qayta hisoblandi: AI '+inPar[1]+' '+inPar[2]+' yozgan edi. Tekshiring.';}
+   }
+   // Suyuq shakl: N ml × konsentratsiya = qavsdagi mg.
+   const ml=dose.match(/^\s*(\d+(?:[.,]\d+)?)\s*ml\b/i);
+   const conc=src.match(/(\d+(?:[.,]\d+)?)\s*(mg|mkg)\s*\/\s*(\d+(?:[.,]\d+)?)?\s*ml/i);
+   if(ml&&conc&&inPar&&inPar[2].toLowerCase()===conc[2].toLowerCase()){
+    const want=num(ml[1])*num(conc[1])/(conc[3]?num(conc[3]):1);
+    if(Math.abs(want-num(inPar[1]))>want*0.02){dose=dose.replace(inPar[0],'('+fmt(want)+' '+inPar[2]+')');fixed='Doza miqdori qayta hisoblandi: AI '+inPar[1]+' '+inPar[2]+' yozgan edi. Tekshiring.';}
+   }
+  }
+  out.dose=dose;
+  if(fixed&&!String(out.note||'').includes('qayta hisoblandi'))out.note=(fixed+' '+(out.note||'')).trim();
+  return out;
+ }
  function hasForm(it){return String(it.name||'').toLowerCase().includes(String(it.form||'').toLowerCase());}
  function today(){const d=new Date(),p=x=>String(x).padStart(2,'0');return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear();}
 
@@ -300,6 +342,7 @@
   try{
    const data=await api({draft:snapshot(),diagnosis:dx,icd:icdText()},ctrl.signal);
    if(ctrl.signal.aborted)return;
+   if(Array.isArray(data.items))data.items=data.items.map(rxFixItem);
    S.data=data;S.key=key;renderAll();
    status.textContent=data.items?.length?'Qoralama tayyor. Har bir dori, doza va yosh chegarasini tekshiring; matnni bosib tahrirlash mumkin.':'Retsept uchun ma’lumot yetarli emas — pastdagi eslatmani ko‘ring.';
   }catch(e){if(!ctrl.signal.aborted){status.textContent=e.message;}}
@@ -315,7 +358,7 @@
    const snapshotItems=S.data.items;
    const data=await api({draft:snapshot(),diagnosis:diagnosisText(),icd:icdText(),swap:{items,index,selected}},ctrl.signal);
    if(S.data.items!==snapshotItems||!S.data.items[index])return; // ro‘yxat o‘zgargan bo‘lsa natija tashlanadi
-   S.data.items[index]=data.item;
+   S.data.items[index]=rxFixItem(data.item);
    S.data.cautions=[...new Set([...(S.data.cautions||[]),...(data.cautions||[])])];
    renderAll();status.textContent=(index+1)+'-dori almashtirildi. Yangi dozani tekshiring.';
   }catch(e){if(!ctrl.signal.aborted)status.textContent=e.message;}
