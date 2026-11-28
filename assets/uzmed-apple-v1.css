@@ -1,0 +1,257 @@
+/* ==========================================================================
+   UZMED · Apple uslubi v1 (2026-11-28)
+   Faqat ko'rinish qatlami: rang tokenlari, shrift, burchak, soya, material.
+   Funksiya, marshrut, ma'lumot va tugma joylari O'ZGARMAYDI.
+   Prefiks :root:not(#uzc):not(#uzap) — rang tizimidan (1 ID) ustun turadi.
+   O'chirish: uzmed-hig-fixes-v1.js dagi APPLE havolasini olib tashlash.
+   ========================================================================== */
+
+/* ---------- 1. TOKENLAR · kunduzgi (iOS tizim ranglari) ---------- */
+:root:not(#uzc):not(#uzap){
+  --ap-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ap-fill:rgba(118,118,128,.12);
+  --ap-fill-2:rgba(118,118,128,.20);
+  --ap-material:rgba(249,249,249,.80);
+  --ap-sep:rgba(60,60,67,.18);
+  --ap-chevron:#C4C4C7;
+  --ux-font:var(--ap-font);
+  --uzc-bg:#F2F2F7;
+  --uzc-bg-grad:#F2F2F7;
+  --uzc-surface:#FFFFFF;
+  --uzc-surface-2:#F2F2F7;
+  --uzc-raised:#FFFFFF;
+  --uzc-field:#F2F2F7;
+  --uzc-line:#E5E5EA;
+  --uzc-line-strong:#C6C6C8;
+  --uzc-ink:#000000;
+  --uzc-ink-2:#3A3A3C;
+  --uzc-muted:#6C6C70;
+  --uzc-primary:#0071E3;
+  --uzc-primary-2:#0062C4;
+  --uzc-primary-ink:#FFFFFF;
+  --uzc-primary-soft:#E5F0FD;
+  --uzc-primary-line:rgba(0,113,227,.30);
+  --uzc-accent:#0066CC;
+  --uzc-brand:#0071E3;
+  --uzc-focus:rgba(0,113,227,.40);
+  --uzc-ring:#0071E3;
+  --uzc-shadow:none;
+  --uzc-shadow-lg:0 12px 32px rgba(0,0,0,.12);
+  --uzc-hero:transparent;
+  --uzc-hero-line:transparent;
+  --uzc-hero-ink:#000000;
+  --uzc-hero-sub:#6C6C70;
+  --uzc-hero-accent:#0071E3;
+  --uzc-shell:transparent;
+  --uzc-shell-line:transparent;
+}
+
+/* ---------- 1b. TOKENLAR · tungi ---------- */
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode),[data-uzc-theme='dark']:not([data-uzmed-ux-theme])){
+  --ap-fill:rgba(118,118,128,.24);
+  --ap-fill-2:rgba(118,118,128,.32);
+  --ap-material:rgba(28,28,30,.78);
+  --ap-sep:rgba(84,84,88,.60);
+  --ap-chevron:#5A5A5E;
+  --uzc-bg:#000000;
+  --uzc-bg-grad:#000000;
+  --uzc-surface:#1C1C1E;
+  --uzc-surface-2:#2C2C2E;
+  --uzc-raised:#2C2C2E;
+  --uzc-field:#2C2C2E;
+  --uzc-line:#38383A;
+  --uzc-line-strong:#48484A;
+  --uzc-ink:#FFFFFF;
+  --uzc-ink-2:#EBEBF5;
+  --uzc-muted:#98989F;
+  --uzc-primary:#0071E3;
+  --uzc-primary-2:#0062C4;
+  --uzc-primary-ink:#FFFFFF;
+  --uzc-primary-soft:rgba(10,132,255,.18);
+  --uzc-primary-line:rgba(10,132,255,.40);
+  --uzc-accent:#409CFF;
+  --uzc-brand:#0A84FF;
+  --uzc-focus:rgba(10,132,255,.50);
+  --uzc-ring:#0A84FF;
+  --uzc-shadow:none;
+  --uzc-shadow-lg:0 16px 40px rgba(0,0,0,.5);
+  --uzc-on-accent:#FFFFFF;
+  --uzc-hero:transparent;
+  --uzc-hero-line:transparent;
+  --uzc-hero-ink:#FFFFFF;
+  --uzc-hero-sub:#98989F;
+  --uzc-hero-accent:#409CFF;
+  --uzc-shell:transparent;
+  --uzc-shell-line:transparent;
+  /* iOS tungi tizim ranglari (kontrast #1C1C1E ustida ≥4.8:1) */
+  --uzc-c-qabul:#30D158;     --uzc-s-qabul:rgba(48,209,88,.16);
+  --uzc-c-protocols:#7D7AFF; --uzc-s-protocols:rgba(94,92,230,.20);
+  --uzc-c-mkb:#409CFF;       --uzc-s-mkb:rgba(10,132,255,.18);
+  --uzc-c-drugs:#FF6961;     --uzc-s-drugs:rgba(255,69,58,.16);
+  --uzc-c-scores:#40C8E0;    --uzc-s-scores:rgba(64,200,224,.16);
+  --uzc-c-analysis:#BF5AF2;  --uzc-s-analysis:rgba(191,90,242,.18);
+  --uzc-c-patients:#FF9F0A;  --uzc-s-patients:rgba(255,159,10,.16);
+  --uzc-c-legal:#98989F;     --uzc-s-legal:rgba(152,152,159,.18);
+  --uzc-c-chat:#64D2FF;      --uzc-s-chat:rgba(100,210,255,.16);
+  --uzc-c-templates:#DA8FFF; --uzc-s-templates:rgba(218,143,255,.16);
+  --uzc-c-history:#FFB340;   --uzc-s-history:rgba(255,179,64,.16);
+}
+
+/* Eski gradient aksent → bir tekis rang (Apple tugmalari gradientsiz) */
+:root:not(#uzc):not(#uzap) body:not(#uzc-a):not(#uzc-b):not(#uzc-c){
+  --accent-grad:linear-gradient(var(--uzc-primary),var(--uzc-primary))!important;
+}
+
+/* ---------- 2. SHRIFT: tizim shrifti (iPhone'da San Francisco) ---------- */
+:root:not(#uzc):not(#uzap) body,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome :is(h1,h2,p,span,strong,small,button,input){
+  font-family:var(--ap-font)!important;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- 3. YUQORI PANEL: shaffof material + ingichka chiziq ---------- */
+:root:not(#uzc):not(#uzap) body #uzmedWorkspaceHeader.uxn-header{
+  background:var(--ap-material)!important;
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:.5px solid var(--ap-sep)!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc):not(#uzap) body .uxn-heading-brand{color:var(--uzc-ink)!important;letter-spacing:-.01em}
+:root:not(#uzc):not(#uzap) body .uxn-heading-section{color:var(--uzc-muted)!important}
+:root:not(#uzc):not(#uzap) body .uxn-compose,
+:root:not(#uzc):not(#uzap) body #uzmedNeonHome .unh-chat{
+  background:var(--uzc-primary)!important;
+  background-image:none!important;
+  color:#fff!important;
+  border:0!important;
+  box-shadow:none!important;
+  font-weight:600!important;
+}
+:root:not(#uzc):not(#uzap) body .uxn-compose svg,
+:root:not(#uzc):not(#uzap) body #uzmedNeonHome .unh-chat svg{stroke:#fff!important}
+:root:not(#uzc):not(#uzap) body .uxn-icon-button svg{stroke:var(--uzc-primary)!important}
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body .uxn-icon-button svg{stroke:var(--uzc-accent)!important}
+
+/* ---------- 4. YON MENYU: iOS ro'yxati ---------- */
+:root:not(#uzc):not(#uzap) body #uzmedSidebar.uxn-sidebar{
+  background:var(--uzc-bg)!important;
+  border-right:.5px solid var(--ap-sep)!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body #uzmedSidebar.uxn-sidebar{background:#1C1C1E!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-brand{color:var(--uzc-ink)!important;letter-spacing:-.02em}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-search{
+  background:var(--ap-fill)!important;
+  border:0!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-search svg{stroke:var(--uzc-muted)!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-search input{color:var(--uzc-ink)!important;font-size:17px!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-search input::placeholder{color:var(--uzc-muted)!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-group-title{
+  color:var(--uzc-muted)!important;
+  font-size:13px!important;
+  font-weight:400!important;
+  letter-spacing:.02em!important;
+  padding-top:18px!important;
+}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-nav-button{
+  color:var(--uzc-ink)!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:10px!important;
+  font-size:17px!important;
+  font-weight:400!important;
+}
+/* Ikonkalar bitta aksent rangida (iOS yon menyusi kabi), monoxrom chiziqli */
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-nav-button svg{stroke:var(--uzc-primary)!important;color:var(--uzc-primary)!important}
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body #uzmedSidebar .uxn-nav-button svg{stroke:var(--uzc-brand)!important;color:var(--uzc-brand)!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-nav-button:active{background:var(--ap-fill-2)!important}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-nav-button[aria-current='page']{
+  background:var(--uzc-primary)!important;
+  color:#fff!important;
+  font-weight:600!important;
+}
+:root:not(#uzc):not(#uzap) body #uzmedSidebar .uxn-nav-button[aria-current='page'] :is(svg,span){stroke:#fff!important;color:#fff!important}
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body #uzmedSidebar .uxn-nav-button[aria-current='page'] :is(svg,span){stroke:#fff!important;color:#fff!important}
+
+/* ---------- 5. BOSH SAHIFA: katta sarlavha + guruhlangan kartalar ---------- */
+:root:not(#uzc):not(#uzap).unh-active .phone-shell,
+:root:not(#uzc):not(#uzap).unh-active .screens,
+:root:not(#uzc):not(#uzap) #uzmed-home-screen.unh-home-mode{background:var(--uzc-bg)!important;background-image:none!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-shell{background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-brand-text strong{letter-spacing:-.02em!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-brand-logo{color:var(--uzc-brand)!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-voice{
+  background:var(--ap-fill)!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:50%!important;
+}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-voice svg{fill:var(--uzc-primary)!important;stroke:var(--uzc-primary)!important}
+
+/* Banner: shifokor surati qoladi; fon — bir tekis karta, gradient/EKG chizig'i/porlash yo'q */
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero{
+  background:var(--uzc-surface)!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:22px!important;
+}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero:before,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero:after,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero .unh-ecg{display:none!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero .unh-doctor{filter:none!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero h1{
+  font-weight:700!important;
+  letter-spacing:-.022em!important;
+  color:var(--uzc-ink)!important;
+  text-shadow:none!important;
+}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero h1 span{color:var(--uzc-hero-accent)!important;text-shadow:none!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-hero p{color:var(--uzc-muted)!important}
+
+/* Kartalar: oq/to'q kulrang sirt, chegarasiz, soyasiz, gradientsiz */
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button.primary,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid.big .unh-grid-button,
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid.big .unh-grid-button.primary{
+  background:var(--uzc-surface)!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:18px!important;
+  transition:transform .16s ease-out,background-color .16s ease-out!important;
+}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid.small .unh-grid-button{padding:14px 12px 12px!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid.big .unh-grid-button{padding-left:14px!important;padding-right:12px!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button:hover{background:var(--uzc-surface)!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button:active{transform:scale(.97)!important;transition-duration:.1s!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button:focus-visible{outline:2px solid var(--uzc-ring)!important;outline-offset:2px!important}
+/* Ikonka: monoxrom chiziqli SVG, yumshoq yumaloq-kvadrat badge ichida */
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button svg{border-radius:9px!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-card-copy strong{color:var(--uzc-ink)!important;font-weight:600!important;letter-spacing:-.01em!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-card-copy small{color:var(--uzc-muted)!important}
+/* O'q: rangli doira o'rniga iOS'dagi oddiy kulrang ">" */
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-arrow{
+  background:transparent!important;
+  color:var(--ap-chevron)!important;
+  box-shadow:none!important;
+  font-size:24px!important;
+  font-weight:500!important;
+}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-footer{background:var(--uzc-surface)!important;border:0!important;box-shadow:none!important;border-radius:18px!important}
+:root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-tools-go{background:var(--uzc-primary)!important;background-image:none!important;box-shadow:none!important}
+
+/* ---------- 6. HARAKAT: qisqa, to'xtatsa bo'ladigan; kamaytirish rejimida yo'q ---------- */
+@media (prefers-reduced-motion:reduce){
+  :root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button,
+  :root:not(#uzc):not(#uzap) #uzmedNeonHome .unh-grid-button:active{transition:none!important;transform:none!important}
+}
+
+/* ---------- 7. Mayda tuzatish: och fonda aksent matn kontrasti ---------- */
+:root:not(#uzc):not(#uzap) body .drug-db-hero .udp-entry{color:var(--uzc-accent)!important}
