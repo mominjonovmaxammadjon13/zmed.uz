@@ -30,6 +30,10 @@
   b.append(el('span',iconOnly?'qcx-visually-hidden':'qrx-btn-label',label));
   b.onclick=onclick;return b;
  }
+ // Retsept varag‘i dizayni: ekranda ham, chop etishda ham bir xil (yuqori oynaga ham ko‘chiriladi).
+ const SHEET_CSS=".qrx-sheet{--ink:#13212b;--muted:#5b6b76;--line:#cfd9df;--accent:#0f6e66;--soft:#f3f7f8;box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;background:#fff;color:var(--ink);font-family:-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;font-size:15px;line-height:1.45;padding:18px;border:1px solid #d8e1e6;border-radius:8px;box-shadow:0 3px 14px #172e3b1f;-webkit-print-color-adjust:exact;print-color-adjust:exact;text-align:left}\n.qrx-sheet *{box-sizing:border-box}\n.qrx-frame{position:relative;border:1.6px solid var(--ink);border-radius:6px;padding:16px 18px 14px}\n.qrx-frame::before{content:\"\";position:absolute;inset:3px;border:.6px solid var(--ink);border-radius:4px;pointer-events:none}\n.qrx-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:10px;border-bottom:1.6px solid var(--ink)}\n.qrx-org{margin:0;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}\n.qrx-hd h1{margin:2px 0 0;font-size:24px;letter-spacing:.18em;font-weight:800;color:var(--ink)}\n.qrx-sub{margin:0;font-size:12px;color:var(--muted)}\n.qrx-hd-side{text-align:right;font-size:11px;color:var(--muted);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;font-weight:600}\n.qrx-hd-side b{display:block;color:var(--ink);font-size:15px;letter-spacing:0;text-transform:none}\n.qrx-pt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 14px;margin:12px 0 4px}\n.qrx-pt>div{min-width:0}\n.qrx-pt .qrx-wide{grid-column:1/-1}\n.qrx-pt>div>span{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}\n.qrx-pt b{display:block;font-size:15px;font-weight:600;border-bottom:1px solid var(--line);padding:1px 0 3px;overflow-wrap:anywhere;min-height:1.6em}\n.qrx-icd{display:inline-block;margin-left:6px;padding:0 6px;border:1px solid var(--ink);border-radius:4px;font-size:12px;font-weight:700;white-space:nowrap}\n.qrx-rp{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px}\n.qrx-rp strong{font-family:Georgia,\"Times New Roman\",serif;font-style:italic;font-size:22px}\n.qrx-rp span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}\n.qrx-items{list-style:none;margin:0;padding:0;counter-reset:rx}\n.qrx-item{counter-increment:rx;position:relative;padding:10px 0 10px 40px;border-bottom:1px dashed var(--line);break-inside:avoid;page-break-inside:avoid}\n.qrx-item:last-child{border-bottom:0}\n.qrx-item::before{content:counter(rx);position:absolute;left:0;top:10px;width:26px;height:26px;border-radius:50%;border:1.6px solid var(--ink);font-weight:800;font-size:13px;line-height:23px;text-align:center}\n.qrx-item p{margin:0}\n.qrx-l1{margin:0 0 4px!important;font-size:16.5px;font-weight:800}\n.qrx-form{font-weight:500;color:var(--muted)}\n.qrx-how{display:grid;grid-template-columns:max-content 1fr;gap:3px 12px;margin:0}\n.qrx-how dt{font-size:11.5px;color:var(--muted);font-weight:600;padding-top:2px}\n.qrx-how dd{margin:0;font-size:15px;min-width:0;overflow-wrap:anywhere}\n.qrx-how dd.qrx-dose{font-weight:700}\n.qrx-empty{list-style:none;color:var(--muted);font-style:italic;padding:8px 0}\n.qrx-empty::before{display:none}\n.qrx-rec{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--soft);break-inside:avoid;page-break-inside:avoid}\n.qrx-rec h2{margin:0 0 4px;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}\n.qrx-rec ul{margin:0;padding-left:18px}\n.qrx-rec li{margin:2px 0}\n.qrx-foot{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:18px;break-inside:avoid;page-break-inside:avoid}\n.qrx-sign span{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}\n.qrx-sign b{display:block;border-bottom:1px solid var(--ink);min-height:1.7em;font-weight:600;padding-bottom:2px}\n.qrx-seal{width:62px;height:62px;border:1px dashed var(--muted);border-radius:50%;font-size:10px;color:var(--muted);line-height:60px;text-align:center}\n.qrx-fine{margin:10px 0 0;font-size:10.5px;color:var(--muted);text-align:center}\n.qrx-sheet [contenteditable=true]{outline:none;border-radius:3px}\n.qrx-sheet [contenteditable=true]:focus{background:#fff6d6}\n.qrx-sheet[data-paper=A5]{max-width:560px;font-size:14px;padding:14px}\n.qrx-sheet[data-paper=A5] .qrx-pt{grid-template-columns:repeat(2,minmax(0,1fr))}\n.qrx-sheet[data-paper=A5] .qrx-hd h1{font-size:21px}\n.qrx-sheet[data-paper^=R]{max-width:310px;padding:12px 10px;font-size:12.5px;border-radius:2px;font-family:\"Helvetica Neue\",Arial,sans-serif}\n.qrx-sheet[data-paper=R58]{max-width:226px;font-size:11.5px;padding:10px 6px}\n.qrx-sheet[data-paper^=R] .qrx-frame{border:0;padding:0}\n.qrx-sheet[data-paper^=R] .qrx-frame::before{display:none}\n.qrx-sheet[data-paper^=R] .qrx-hd{flex-direction:column;align-items:center;text-align:center;gap:4px;border-bottom:1px dashed var(--ink);padding-bottom:6px}\n.qrx-sheet[data-paper^=R] .qrx-hd-side{text-align:center}\n.qrx-sheet[data-paper^=R] .qrx-hd h1{font-size:17px;letter-spacing:.14em}\n.qrx-sheet[data-paper^=R] .qrx-pt{grid-template-columns:1fr;gap:2px;margin:8px 0 2px}\n.qrx-sheet[data-paper^=R] .qrx-pt>div{display:flex;gap:6px;align-items:baseline}\n.qrx-sheet[data-paper^=R] .qrx-pt>div>span{flex:none;font-size:9.5px}\n.qrx-sheet[data-paper^=R] .qrx-pt b{border:0;font-size:inherit;min-height:0;padding:0}\n.qrx-sheet[data-paper^=R] .qrx-rp{margin:8px 0 2px;border-top:1px dashed var(--ink);padding-top:6px}\n.qrx-sheet[data-paper^=R] .qrx-rp strong{font-size:17px}\n.qrx-sheet[data-paper^=R] .qrx-item{padding:7px 0 7px 24px}\n.qrx-sheet[data-paper^=R] .qrx-item::before{width:18px;height:18px;font-size:10.5px;line-height:15px;top:7px;border-width:1.3px}\n.qrx-sheet[data-paper^=R] .qrx-l1{font-size:1.07em}\n.qrx-sheet[data-paper^=R] .qrx-how{grid-template-columns:1fr;gap:0}\n.qrx-sheet[data-paper^=R] .qrx-how dt{padding-top:3px;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em}\n.qrx-sheet[data-paper^=R] .qrx-how dd{font-size:inherit}\n.qrx-sheet[data-paper^=R] .qrx-rec{background:none;border:0;border-top:1px dashed var(--ink);border-radius:0;padding:6px 0 0}\n.qrx-sheet[data-paper^=R] .qrx-foot{grid-template-columns:1fr;gap:6px;margin-top:10px}\n.qrx-sheet[data-paper^=R] .qrx-seal{display:none}\n@media screen and (max-width:420px){.qrx-sheet{padding:10px}.qrx-frame{padding:12px 12px 10px}.qrx-pt{grid-template-columns:repeat(2,minmax(0,1fr))}.qrx-item{padding-left:34px}.qrx-hd h1{font-size:20px}}\n\n@media print{.qrx-sheet{font-size:13.5px;line-height:1.38}.qrx-sheet .qrx-frame{padding:12px 14px 10px}.qrx-sheet .qrx-l1{font-size:15px}.qrx-sheet .qrx-how dd{font-size:13.5px}.qrx-sheet .qrx-item{padding-top:7px;padding-bottom:7px}.qrx-sheet .qrx-item::before{top:7px}.qrx-sheet .qrx-pt{margin:10px 0 2px;gap:6px 14px}.qrx-sheet .qrx-rp{margin:10px 0 2px}.qrx-sheet .qrx-rec{margin-top:8px;padding:8px 10px}.qrx-sheet .qrx-foot{margin-top:14px}.qrx-sheet .qrx-hd h1{font-size:22px}.qrx-sheet[data-paper^=R]{font-size:11.5px}.qrx-sheet[data-paper^=R] .qrx-l1{font-size:12.5px}.qrx-sheet[data-paper^=R] .qrx-how dd{font-size:11.5px}.qrx-sheet[data-paper^=R] .qrx-frame{padding:0}}";
+ const PAPERS=[['A4','A4'],['A5','A5'],['R80','Chek 80 mm'],['R58','Chek 58 mm']];
+ const PAGE={A4:'size:A4 portrait;margin:12mm',A5:'size:A5 portrait;margin:8mm',R80:'size:80mm 297mm;margin:2mm 3mm',R58:'size:58mm 297mm;margin:2mm'};
  const bridge=()=>W.UZMEDVisitBridge;
  const auth=()=>W.parent?.UZMEDAuth||W.UZMEDAuth;
 
@@ -71,11 +75,19 @@
  }
 
  // ── Holat ──
- const S={visit:'',open:false,busy:false,data:null,key:'',controller:null,paper:'A4'};
+ const S={visit:'',open:false,busy:false,data:null,key:'',controller:null,paper:(()=>{try{const v=W.localStorage.getItem('uzmed_rx_paper');return PAPERS.some(p=>p[0]===v)?v:'A4';}catch{return 'A4';}})()};
  let overlay,sheet,status,notes,printBtn,checked,listHost,recHost,metaHost;
 
  function visitKey(){const s=bridge()?.read?.();return s?.visit?.visit_id||'';}
  function diagnosisText(){return ($('field-diagnosis')?.value||'').trim();}
+ // Varaq uchun: shablon qoldiqlari ([…], differensial qismi, takrorlar) olib tashlanadi.
+ function cleanDx(text){
+  let t=String(text||'').split(/\n/).map(x=>x.trim()).find(Boolean)||'';
+  t=t.split(/\s*[—–-]\s*\[|\s*\[|\.\s*Differensial|\s+Differensial tashxis/i)[0];
+  t=t.replace(/[\s—–:;,.-]+$/,'').trim();
+  return t||String(text||'').trim().slice(0,200);
+ }
+ function institution(){try{const v=JSON.parse(W.localStorage.getItem('uzmed_qabul_print_v1')||'{}');return typeof v.institution==='string'?v.institution.trim().slice(0,160):'';}catch{return '';}}
  function icdText(){return ($('field-icd')?.value||'').trim().toUpperCase();}
 
  function build(){
@@ -84,8 +96,9 @@
   const bar=el('div','qrx-bar qrx-noprint');
   const title=el('div','qrx-title');title.append(el('strong','','Retsept'),el('small','','GLM 5.3 Flash · shifokor tekshiradi'));
   const paper=el('select','qrx-paper');paper.setAttribute('aria-label','Qog‘oz o‘lchami');
-  for(const p of ['A4','A5']){const o=el('option','',p);o.value=p;paper.append(o);}
-  paper.onchange=()=>{S.paper=paper.value;applyPaper();};
+  for(const [v,l] of PAPERS){const o=el('option','',l);o.value=v;paper.append(o);}
+  paper.value=S.paper;
+  paper.onchange=()=>{S.paper=paper.value;try{W.localStorage.setItem('uzmed_rx_paper',S.paper);}catch{}applyPaper();};
   const regen=btn('Qayta tuzish','refresh','qrx-btn qrx-act',()=>generate(true));
   const save=btn('Davolashga yozish','save','qrx-btn qrx-act',writeToVisit);
   printBtn=btn('Chop etish','print','qrx-btn qrx-primary',doPrint);
@@ -95,35 +108,40 @@
   const confirm=el('label','qrx-confirm qrx-noprint');checked=D.createElement('input');checked.type='checkbox';
   checked.onchange=syncPrint;confirm.append(checked,el('span','','Dorilar, dozalar va yosh chegarasini tekshirdim — retsept mening nomimdan beriladi.'));
   notes=el('div','qrx-notes qrx-noprint');
+  if(!$('qrxSheetCss')){const st=el('style');st.id='qrxSheetCss';st.textContent=SHEET_CSS;D.head.append(st);}
   sheet=el('article','qrx-sheet');sheet.id='qrxSheet';
-  const head=el('div','qrx-sheet-head');head.append(el('h1','','RETSEPT'),el('p','','(Dori vositasini yozish uchun)'));
-  metaHost=el('dl','qrx-meta');
-  const rp=el('div','qrx-rp');rp.append(el('strong','','Rp.:'));
+  const frame=el('div','qrx-frame');
+  const head=el('header','qrx-hd'),brand=el('div'),side=el('div','qrx-hd-side');
+  brand.append(el('p','qrx-org'),el('h1','','RETSEPT'),el('p','qrx-sub','Dori vositalarini qabul qilish tartibi'));
+  side.append(D.createTextNode('Sana'),el('b','qrx-date'));head.append(brand,side);
+  metaHost=el('div','qrx-pt');
+  const rp=el('div','qrx-rp');rp.append(el('strong','','Rp.'),el('span','','Dori vositalari'));
   listHost=el('ol','qrx-items');
-  const recBox=el('section','qrx-rec');recBox.append(el('h2','','TAVSIYALAR:'));recHost=el('ul');recBox.append(recHost);
-  const foot=el('div','qrx-foot');
-  sheet.append(head,metaHost,rp,listHost,recBox,foot);
+  const recBox=el('section','qrx-rec');recBox.append(el('h2','','Tavsiyalar'));recHost=el('ul');recBox.append(recHost);
+  const foot=el('footer','qrx-foot');
+  frame.append(head,metaHost,rp,listHost,recBox,foot,el('p','qrx-fine','Dorilarni faqat shu varaqdagi tartibda qabul qiling. Savollar bo‘lsa, shifokoringizga murojaat qiling.'));
+  sheet.append(frame);
   const scroller=el('div','qrx-scroll');scroller.append(status,notes,sheet,confirm);
   overlay.append(bar,scroller);
   D.body.append(overlay);
   overlay.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
-  W.addEventListener('afterprint',()=>D.documentElement.classList.remove('qrx-printing'));
  }
  function applyPaper(){
-  let st=$('qrxPageSize');if(!st){st=el('style');st.id='qrxPageSize';D.head.append(st);}
-  st.textContent='@media print{@page{size:'+S.paper+' portrait;margin:'+(S.paper==='A5'?'9mm':'14mm')+'}}';
   sheet.dataset.paper=S.paper;
  }
  function syncPrint(){printBtn.disabled=S.busy||!S.data?.items?.length||!checked.checked;}
 
- function row(label,value){const dt=el('dt','',label),dd=el('dd','',value||'—');metaHost.append(dt,dd);}
+ function row(label,value,cls){const d=el('div',cls);d.append(el('span','',label),el('b','',value||' '));metaHost.append(d);return d;}
  function renderMeta(){
   metaHost.replaceChildren();
   const p=bridge()?.read?.()?.patient||{};
   const name=[p.last_name,p.first_name,p.middle_name].filter(Boolean).join(' ')||($('field-patient')?.value||'').trim();
-  row('Bemor:',name);row('Yoshi:',ageText(p.date_of_birth)||($('field-age')?.value||'').trim());
-  const w=weightValue();row('Tana vazni:',w?w+' kg':'');
-  row('Tashxis:',diagnosisText()+(icdText()?' ('+icdText()+')':''));
+  row('Bemor (F.I.Sh.)',name,'qrx-wide');row('Yoshi',ageText(p.date_of_birth)||($('field-age')?.value||'').trim());
+  const w=weightValue();row('Tana vazni',w?w+' kg':'');
+  const dx=row('Tashxis',cleanDx(diagnosisText()),'qrx-wide');
+  if(icdText())dx.querySelector('b').append(el('span','qrx-icd','MKB-10 '+icdText()));
+  const org=sheet.querySelector('.qrx-org');if(org)org.textContent=institution()||'UZMED · Tibbiy retsept';
+  const date=sheet.querySelector('.qrx-date');if(date)date.textContent=today();
  }
  function editable(node,item,key){
   node.contentEditable='true';node.spellcheck=false;node.dataset.field=key;
@@ -187,12 +205,15 @@
    const l1=el('p','qrx-l1');
    l1.append(editable(el('span','qrx-name',item.name),item,'name'));
    if(item.form&&!hasForm(item))l1.append(D.createTextNode(' '),editable(el('span','qrx-form','('+item.form+')'),item,'form'));
-   const l2=el('p','qrx-l2');
-   l2.append(editable(el('span','',item.dose),item,'dose'),el('span','qrx-dash',' — '),editable(el('span','',item.frequency),item,'frequency'));
-   const l3=el('p','qrx-l3');
-   l3.append(editable(el('span','',[item.duration,item.timing].filter(Boolean).join(', ')),item,'_line3'));
-   li.append(l1,l2,l3);
-   if(item.purpose)li.append(editable(el('p','qrx-purpose','Maqsad: '+item.purpose),item,'_purpose'));
+   const how=el('dl','qrx-how');
+   const line=(label,cls)=>{const dd=el('dd',cls);how.append(el('dt','',label),dd);return dd;};
+   const dose=line('Qabul','qrx-dose');
+   dose.append(editable(el('span','',item.dose),item,'dose'));
+   if(item.frequency)dose.append(el('span','qrx-dash',' — '),editable(el('span','',item.frequency),item,'frequency'));
+   if(item.duration)line('Muddati').append(editable(el('span','',item.duration),item,'duration'));
+   if(item.timing)line('Qachon').append(editable(el('span','',item.timing),item,'timing'));
+   if(item.purpose)line('Nima uchun').append(editable(el('span','',item.purpose),item,'purpose'));
+   li.append(l1,how);
    // Faqat ekranda: yosh chegarasi, asos, almashtirish
    const tools=el('div','qrx-item-tools qrx-noprint');
    if(item.minAge)tools.append(el('span','qrx-chip','Yosh: '+item.minAge));
@@ -251,9 +272,9 @@
  }
  function renderFoot(){
   const foot=sheet.querySelector('.qrx-foot');foot.replaceChildren();
-  const date=el('p');date.append(el('span','','Sana: '),el('u','',today()));
-  const doc=el('p');doc.append(el('span','','Shifokor: '),el('u','',($('field-doctor')?.value||'').trim()||' '.repeat(28)));
-  foot.append(date,doc);
+  const sign=(label,value)=>{const d=el('div','qrx-sign');d.append(el('span','',label),el('b','',value||' '));return d;};
+  foot.append(sign('Shifokor',($('field-doctor')?.value||'').trim()),sign('Imzo',''),el('div','qrx-seal','M.O‘.'));
+  const date=sheet.querySelector('.qrx-date');if(date)date.textContent=today();
  }
  function renderNotes(){
   notes.replaceChildren();
@@ -318,14 +339,38 @@
   if(adv&&t.rec&&!adv.value.trim()){adv.value=t.rec;adv.dispatchEvent(new W.Event('input',{bubbles:true}));}
   status.textContent='Retsept Davolash maydoniga yozildi. Qabulni saqlang.';
  }
+ // Chop etish: iframe ichidan emas, yuqori oynaning o‘zidan — aks holda iOS faqat
+ // ko‘rinib turgan iframe qismini (1 sahifa, kesilgan) chop etadi.
+ function printCss(paper){
+  const width={R80:'74mm',R58:'54mm'}[paper]||'none';
+  return SHEET_CSS+'\n@media screen{#uzmedRxPrint{display:none!important}}'+
+   '\n@media print{@page{'+PAGE[paper]+'}'+
+   'html.uzmed-rx-printing,html.uzmed-rx-printing body{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;background:#fff!important;margin:0!important;padding:0!important;position:static!important;transform:none!important}'+
+   'html.uzmed-rx-printing body>*:not(#uzmedRxPrint){display:none!important}'+
+   '#uzmedRxPrint{display:block!important;position:static!important;width:auto!important;margin:0!important}'+
+   '#uzmedRxPrint .qrx-sheet{box-shadow:none!important;border:0!important;border-radius:0!important;margin:0 auto!important;padding:0!important;max-width:'+width+'!important}}';
+ }
  function doPrint(){
   if(printBtn.disabled)return;
-  applyPaper();renderFoot();
-  D.documentElement.classList.add('qrx-printing');
+  applyPaper();renderMeta();renderFoot();
+  let top=W;
+  try{if(W.top&&W.top!==W&&W.top.location.origin===W.location.origin&&W.top.document.body)top=W.top;}catch{}
+  const TD=top.document;
+  TD.getElementById('uzmedRxPrint')?.remove();
+  const root=TD.createElement('div');root.id='uzmedRxPrint';
+  const style=TD.createElement('style');style.textContent=printCss(S.paper);
+  const clone=sheet.cloneNode(true);clone.removeAttribute('id');
+  clone.querySelectorAll('.qrx-noprint,select,button').forEach(n=>n.remove());
+  clone.querySelectorAll('[contenteditable]').forEach(n=>n.removeAttribute('contenteditable'));
+  if(!(S.data?.recommendations||[]).length)clone.querySelector('.qrx-rec')?.remove();
+  root.append(style,TD.importNode(clone,true));TD.body.append(root);
+  TD.documentElement.classList.add('uzmed-rx-printing');
+  const cleanup=()=>{root.remove();TD.documentElement.classList.remove('uzmed-rx-printing');};
+  top.addEventListener('afterprint',cleanup,{once:true});
   try{
-   if(typeof W.print!=='function')throw Error('unsupported');
-   W.print(); // tugma bosilishida to‘g‘ridan-to‘g‘ri chaqiriladi (iOS ruxsati)
-  }catch(_){status.textContent='Chop etish oynasi ochilmadi: brauzerning Ulashish (↑) → Chop etish bandini tanlang.';}
+   if(typeof top.print!=='function')throw Error('unsupported');
+   top.print(); // tugma bosilishida to‘g‘ridan-to‘g‘ri chaqiriladi (iOS ruxsati)
+  }catch(_){cleanup();status.textContent='Chop etish oynasi ochilmadi: brauzerning Ulashish (↑) → Chop etish bandini tanlang.';}
  }
  function show(){
   if(!overlay)build();
@@ -337,7 +382,7 @@
  }
  function hide(){
   if(!overlay)return;
-  overlay.hidden=true;S.open=false;D.documentElement.classList.remove('qrx-open','qrx-printing');
+  overlay.hidden=true;S.open=false;D.documentElement.classList.remove('qrx-open');
   S.controller?.abort();S.busy=false;
  }
 
