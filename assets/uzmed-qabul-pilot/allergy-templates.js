@@ -2,11 +2,14 @@
 (function(){
  const $=id=>document.getElementById(id),focus=window.QabulFocus,routing=window.QabulVoiceSections,data=window.UzmedAllergyTemplates;
  if(!focus||!routing||!data?.templates?.length)return;
- const account=window.QabulAccount,fieldIds=['field-complaints','field-history','life','epidemiology','field-medications','field-allergies','field-exam','field-tests','field-diagnosis','field-treatment','field-advice','field-followup'];
- const fields=fieldIds.map(id=>routing.fields.find(f=>f.id===id)),base=data.templates,legacy=$('templatesOpen').onclick;
+ const account=window.QabulAccount,fieldIds=['field-complaints','field-history','life','epidemiology','field-medications','field-allergies','field-exam','field-tests','field-diagnosis','field-icd','complication','comorbid','qc-differential','qc-diagnostic_plan','field-treatment','field-advice','field-followup'];
+ // Tashxis bo‘limining barcha turlari: MKB-10, asorat, hamroh, differensial, aniqlashtirish rejasi.
+ const coreIds=['field-complaints','field-history','life','epidemiology','field-medications','field-allergies','field-exam','field-tests','field-diagnosis','field-treatment','field-advice','field-followup'];
+ const extraLabels={'field-diagnosis':'Asosiy tashxis','field-icd':'MKB-10 kodi','complication':'Asoratlar','comorbid':'Hamroh kasalliklar','qc-differential':'Differensial tashxis','qc-diagnostic_plan':'Aniqlashtirish rejasi'};
+ const fields=fieldIds.map(id=>{const f=routing.fields.find(x=>x.id===id);return extraLabels[id]?{...(f||{id}),id,label:extraLabels[id]}:f;}),base=data.templates,legacy=$('templatesOpen').onclick;
  const clone=x=>JSON.parse(JSON.stringify(x));
  let custom=[],current=null,dirty=false,lastWrites=[],openedSection='complaints';
- function safe(t){return t&&/^custom-[a-z0-9-]{1,70}$/.test(t.id)&&typeof t.title==='string'&&t.title.trim()&&t.title.length<=120&&fieldIds.every(id=>typeof t.values?.[id]==='string'&&t.values[id].length<=5000);}
+ function safe(t){return t&&/^custom-[a-z0-9-]{1,70}$/.test(t.id)&&typeof t.title==='string'&&t.title.trim()&&t.title.length<=120&&coreIds.every(id=>typeof t.values?.[id]==='string'&&t.values[id].length<=5000)&&fieldIds.every(id=>t.values[id]===undefined||(typeof t.values[id]==='string'&&t.values[id].length<=5000));}
  // Legacy unowned browser storage is preserved and never assigned to the next account.
  function node(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e;}
  const dialog=focus.dialog('allergyTemplateDialog','Qabul shablonlari');dialog.classList.add('qa-dialog');
@@ -47,7 +50,7 @@
  $('allergyDiscard').onclick=()=>{if(dirty&&!confirm('Saqlanmagan shablon tahriri bekor qilinsinmi?'))return;const draft=current.id==='draft',source=custom.find(t=>t.id===current.id)||originals(current)||base[0];fill(source);say('Tahrir bekor qilindi.');if(draft)view('list');};
  $('allergySave').onclick=async()=>{const title=$('allergyTitle').value.trim();if(!title){$('allergyTitle').focus();return say('Shablon nomini kiriting.');}const content=values();if(!fieldIds.some(id=>content[id].trim()))return say('Kamida bitta bo‘limga shablon matnini yozing.');const existing=current.id.startsWith('custom-'),id=existing?current.id:'custom-'+crypto.randomUUID();if(!existing&&custom.length>=100)return say('100 ta shaxsiy shablon limiti. Keraksiz nusxani o‘chiring.');const t={id,title,category:'Mening shablonlarim',values:content};if(current.id!=='draft'&&(current.baseId||!existing))t.baseId=current.baseId||current.id;if(!safe(t))return say('Shablon hajmi yoki maydonlari mos kelmadi.');let saved;$('allergySave').disabled=true;try{saved=await account.save('allergy',t);}catch(e){say(e.message);return;}finally{$('allergySave').disabled=false;}custom=[saved,...custom.filter(x=>x.id!==id)];fill(saved);$('allergySearch').value='';$('allergyCategory').value='Mening shablonlarim';list();say('Shablon shaxsiy akkauntingizga saqlandi. Endi qabulga qo‘shishingiz mumkin.');};
  $('allergyDelete').onclick=async()=>{if(!current?.id.startsWith('custom-')||!confirm('Shaxsiy shablon nusxasi o‘chirilsinmi?'))return;const id=current.id;$('allergyDelete').disabled=true;try{await account.remove('allergy',id);}catch(e){say(e.message);return;}finally{$('allergyDelete').disabled=false;}custom=custom.filter(t=>t.id!==id);fill(base[0]);list();view('list');say('Shaxsiy nusxa o‘chirildi. Asl andoza saqlangan.');};
- const sectionFields={complaints:['field-complaints'],history:['field-history','life','epidemiology','field-medications','field-allergies'],exam:['field-exam'],tests:['field-tests'],diagnosis:['field-diagnosis'],treatment:['field-treatment'],advice:['field-advice','field-followup']};
+ const sectionFields={complaints:['field-complaints'],history:['field-history','life','epidemiology','field-medications','field-allergies'],exam:['field-exam'],tests:['field-tests'],diagnosis:['field-diagnosis','field-icd','complication','comorbid','qc-differential','qc-diagnostic_plan'],treatment:['field-treatment'],advice:['field-advice','field-followup']};
  // Shablon bo‘limlaridagi eski matnni yangi shablon bilan almashtirish (Qaytarish tugmasi bilan tiklanadi).
  function overwrite(sections){
   const writes=[];
@@ -59,7 +62,9 @@
   return {ok:true,writes};
  }
  $('allergyApply').onclick=()=>{if(!current)return;const scope=$('allergyScope').value==='section'?sectionFields[openedSection]||[]:fieldIds,content=values(),mode=$('allergyMode').value,onlyEmpty=mode==='empty';
-  const sections=fields.filter(f=>scope.includes(f.id)&&content[f.id].trim()&&(!onlyEmpty||!$(f.id)?.value.trim())).map(f=>({...f,text:content[f.id]}));
+  let sections=fields.filter(f=>scope.includes(f.id)&&$(f.id)&&content[f.id].trim()&&(!onlyEmpty||!$(f.id)?.value.trim())).map(f=>({...f,text:content[f.id]}));
+  // MKB-10 maydoni bir qatorli: qo‘shish rejimida kodlar «;» bilan birlashtiriladi, takror kod yozilmaydi.
+  if(mode!=='replace')sections=sections.map(s=>{if(s.id!=='field-icd')return s;const old=$(s.id).value.split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean);const add=s.text.split(/[;,\n]+/).map(x=>x.trim()).filter(x=>x&&!old.includes(x));return add.length?{...s,text:[...old,...add].join('; '),icdMerge:true}:null;}).filter(Boolean);
   if(!sections.length)return say('Qo‘shiladigan bo‘sh maydon yoki matn topilmadi.');
   const filled=sections.filter(s=>$(s.id)?.value.trim()).map(s=>s.label);
   let result,replaced=false;
@@ -67,12 +72,14 @@
    if(filled.length&&!confirm(filled.join(', ')+' — eski matn o‘chirilib, shablon matni yoziladi. Davom etilsinmi? (Keyin «Qaytarish» bilan tiklash mumkin)'))return;
    result=overwrite(sections);replaced=true;
   }else{
-   result=routing.append(sections,$);
+   const icd=sections.filter(s=>s.icdMerge),rest=sections.filter(s=>!s.icdMerge);
+   result=routing.append(rest,$);
+   if(result.ok&&icd.length){const r2=overwrite(icd);if(r2.ok)result.writes.push(...r2.writes);}
    if(!result.ok&&result.error==='overflow'&&confirm(result.label+' maydoni to‘lgan, shablon sig‘madi.\nShablon bo‘limlaridagi eski matn o‘chirilib, yangi shablon yozilsinmi? (Keyin «Qaytarish» bilan tiklash mumkin)')){result=overwrite(sections);replaced=true;}
   }
   if(!result.ok)return say(result.error==='missing'?result.label+' maydoni topilmadi. Hech bir maydon o‘zgarmadi.':result.label+' maydoniga sig‘madi. Hech bir maydon o‘zgarmadi. «Qanday qo‘shilsin?» → «Eski matnni o‘chirib, shablonni yozish»ni tanlang.');
   lastWrites=result.writes;receiptText.textContent=current.title+' · '+sections.length+(replaced?' maydonda eski matn shablon bilan almashtirildi. Bemor uchun tahrirlang.':' maydonga shablon qo‘shildi. Bemor uchun tahrirlang.');receipt.hidden=false;dirty=false;dialog.close();
-  focus.status('Shablon '+sections.length+' maydonga '+(replaced?'eski matn o‘rniga yozildi':'qo‘shildi')+'. [ ] joylarini to‘ldiring va klinik matnni tekshiring.');};
+  focus.status('Shablon '+sections.length+' maydonga '+(replaced?'eski matn o‘rniga yozildi':'qo‘shildi')+'. Matnni bemorga moslab tekshiring va tahrirlang.');};
  undoButton.onclick=()=>{if(!routing.undo(lastWrites,$))return focus.status('Shablondan keyin matn tahrirlangan. Keyingi yozuvlarni saqlash uchun avtomatik qaytarilmadi.');lastWrites=[];receipt.hidden=true;focus.status('Oxirgi shablon qo‘shilishi qaytarildi; avvalgi yozuvlar saqlandi.');};
  $('allergySearch').oninput=list;$('allergyCategory').onchange=list;
  $('allergyLegacy').onclick=()=>{if(dirty&&!confirm('Saqlanmagan tahrirni bekor qilib, bo‘lim shablonlariga o‘tasizmi?'))return;dirty=false;dialog.close();legacy();};
