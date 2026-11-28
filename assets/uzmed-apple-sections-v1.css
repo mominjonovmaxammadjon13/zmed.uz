@@ -1,0 +1,85 @@
+/* ==========================================================================
+   UZMED · Apple uslubi — bo'limlar bo'yicha tuzatishlar v1 (2026-11-28)
+   22 bo'lim birma-bir o'lchandi (kunduzgi/tungi, 390px). Faqat ko'rinish.
+   Prefiks: html body:not(#uzs1..4) — mavjud qoidalardan ustun.
+   ========================================================================== */
+
+/* ---------- 1. Gradient tugmalar → bir tekis Apple ko'ki, soyasiz ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) :is(.uhp-open,.dc-calc-btn,.uzdx2-b,.uzdp-btn.pri,.ugr-go,#ugr-sex button.on){
+  background:var(--uzc-primary,#0071E3)!important;background-image:none!important;box-shadow:none!important;color:#fff!important;border-color:transparent!important;
+}
+
+/* ---------- 2. Hisoblash ---------- */
+/* Sarlavha oq fonda oq bo'lib ko'rinmay qolgan edi (1.02:1) */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uhp-head h3{color:var(--uzc-ink)!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uhp-head p{color:var(--uzc-muted)!important;font-size:12px!important}
+/* Tez tanlash chiplari va bo'lim sarlavhalari juda xira edi (1.8–2.0:1) */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .dc-help-chip{color:var(--uzc-accent)!important;background:var(--uzc-surface)!important;border-color:var(--uzc-line)!important;font-size:13px!important;min-height:44px!important;opacity:1!important;display:inline-flex!important;align-items:center!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .dc-section-title{color:var(--uzc-muted)!important;opacity:1!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .dc-field-wrap > label,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .dc-field-wrap > label > span{font-size:11px!important;color:var(--uzc-muted)!important}
+
+/* ---------- 3. Differensial / Mutaxassislar: mayda matn ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) :is(.uzdx2-ttl > span,.uzdx2-hint > b,.uzdx2-hint > span){font-size:11px!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .uia-sp-badge{font-size:11px!important}
+
+/* ---------- 4. Dorilar ro'yxati: 9–10px va xira matnlar ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #drugDbList .drug-db-inn-hdr > span,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #drugDbList .drug-db-inn-cnt,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-mfr,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-pkg,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-price-row .drug-db-price > span,
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-price-row .drug-db-cur{font-size:11px!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-pkg{color:var(--uzc-muted)!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .drug-db-price-row .drug-db-cur{color:var(--uzc-accent)!important;background:var(--uzc-primary-soft)!important;border-color:transparent!important}
+
+/* ---------- 5. DDI Pro (dorilarning o'zaro ta'siri) ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzdp-panel :is(.uzdp-hd > b > em,.uzdp-net,.uzdp-warn p,.uzdp-s){font-size:11px!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzdp-panel .uzdp-s.no{color:var(--uzc-muted)!important;opacity:1!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzdp-panel .uzdp-em :is(b,p){color:var(--uzc-muted)!important;opacity:1!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzdp-panel .uzdp-em b{color:var(--uzc-ink-2)!important}
+
+/* ---------- 6. Pediatriya · o'sish (WHO) ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .ugr-f > label{font-size:11px!important;color:var(--uzc-muted)!important;opacity:1!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #ugr-sex button:not(.on){color:var(--uzc-ink-2)!important;opacity:1!important}
+
+/* ---------- 7. Chat: matn maydoni ichida to'rtburchak fokus ramkasi o'rniga butun qutiga yumshoq halqa ---------- */
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .ai-input-wrap :is(textarea,input):focus{outline:none!important;box-shadow:none!important}
+html body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .ai-input-wrap:focus-within{box-shadow:0 0 0 3px var(--uzc-focus)!important}
+
+/* ---------- 8. Tibbiy huquq sahifasi ---------- */
+:root:not(#uzc):not(#uzap)[data-uzc-page='legal'] .link-button.outline{color:var(--uzc-accent)!important;background:transparent!important;border:1px solid var(--uzc-line-strong)!important}
+:root:not(#uzc):not(#uzap)[data-uzc-page='legal'] :is(input,textarea)::placeholder{color:var(--uzc-muted)!important;opacity:1!important}
+:root:not(#uzc):not(#uzap)[data-uzc-page='legal'] header.top a.brand{min-height:44px!important;display:inline-flex!important;align-items:center!important}
+
+/* ---------- 9. Tungi rejim: ko'k-qora (navy) sirtlar → Apple qora/kulrang ---------- */
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) :is(.phone-shell,#doktor-screen.screen){background:#000!important;background-image:none!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .ai-input-wrap{background:#1C1C1E!important;border-color:#38383A!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzdx2Wrap{background:#000!important;background-image:none!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .uzdx2-top{background:rgba(28,28,30,.78)!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) :is(.uzdx2-inbox,#uzdx2In){background:#1C1C1E!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) :is(#mkbDbSearch,.v19-mkb-row,.search-inner){background:#1C1C1E!important;background-image:none!important}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) header.usv-top{background:rgba(28,28,30,.78)!important;-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) .um-hero{background:#1C1C1E!important;background-image:none!important;border-color:transparent!important}
+
+/* Tahlil (AI) — shadow DOM ichi o'zgaruvchilar orqali (tungi) */
+:root:not(#uzc):not(#uzap):is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) #uzmed-doc-v2{
+  --uzc-doc-ink:#FFFFFF;--uzc-doc-ink2:#EBEBF5;--uzc-doc-muted:#98989F;
+  --uzc-doc-bg:#1C1C1E;--uzc-doc-bg2:#1C1C1E;--uzc-doc-bg3:#2C2C2E;
+  --uzc-doc-line:#38383A;--uzc-doc-line2:#48484A;
+  --uzc-doc-field:#2C2C2E;--uzc-doc-soft:rgba(10,132,255,.18);--uzc-doc-softink:#409CFF;
+  --uzc-doc-intro:#1C1C1E;--uzc-doc-viewer:#000000;
+  --uzc-doc-err-bg:rgba(255,69,58,.16);--uzc-doc-err-line:#FF6961;--uzc-doc-err-ink:#FFD7D4;
+  --uzc-doc-warn-bg:rgba(255,159,10,.16);--uzc-doc-warn-line:#FF9F0A;--uzc-doc-warn-ink:#FFE1B0;
+}
+/* Tahlil (kunduzgi) — Apple neytral ranglari */
+:root:not(#uzc):not(#uzap)[data-uzmed-ux-theme='light'] #uzmed-doc-v2{
+  --uzc-doc-ink:#000000;--uzc-doc-ink2:#3A3A3C;--uzc-doc-muted:#6C6C70;
+  --uzc-doc-bg:#FFFFFF;--uzc-doc-bg2:#FFFFFF;--uzc-doc-bg3:#F2F2F7;
+  --uzc-doc-line:#E5E5EA;--uzc-doc-line2:#C6C6C8;
+  --uzc-doc-field:#F2F2F7;--uzc-doc-soft:#E5F0FD;--uzc-doc-softink:#0066CC;
+  --uzc-doc-intro:#FFFFFF;--uzc-doc-viewer:#F2F2F7;
+}
+
+/* Yon menyu qidiruvi (tungi): placeholder 4.48 → 5:1 dan yuqori */
+html:is([data-uzmed-ux-theme='dark'],:not([data-uzmed-ux-theme]):has(>body.dark-mode)) body:not(#uzs1):not(#uzs2):not(#uzs3):not(#uzs4) #uzmedSidebar .uxn-search input::placeholder{color:#A1A1A8!important;opacity:1!important}
