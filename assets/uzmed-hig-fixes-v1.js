@@ -8,7 +8,8 @@
   var SHEETS=[
     ['uzmed-apple-v1','/assets/uzmed-apple-v1.css?v=20261128-3'],
     ['uzmed-hig-fixes-v1','/assets/uzmed-hig-fixes-v1.css?v=20261128-1'],
-    ['uzmed-native-v1','/assets/uzmed-native-v1.css?v=20261128-1']
+    ['uzmed-native-v1','/assets/uzmed-native-v1.css?v=20261128-1'],
+    ['uzmed-apple-sections-v1','/assets/uzmed-apple-sections-v1.css?v=20261128-2']
   ];
   var TEXT=/^(text|search|email|tel|number|password|url|date|time|datetime-local|month|week)$/;
   var coarse=false;try{coarse=matchMedia('(pointer:coarse)').matches;}catch(e){}
@@ -45,6 +46,16 @@
   function mark(el){
     try{if(isTextField(el)&&!el.classList.contains('uz-in16')&&parseFloat(getComputedStyle(el).fontSize)<16)el.classList.add('uz-in16');}catch(e){}
   }
+  /* Ekran o'quvchi uchun: nomsiz sozlama kalitlariga qator nomini beradi */
+  function names(){
+    try{
+      var t=document.querySelectorAll('.soz-toggle:not([aria-label])');
+      for(var i=0;i<t.length;i++){
+        var row=t[i].closest('.settings-item');var lab=row&&row.querySelector('.settings-label,.soz-label,b,strong,span:not(.soz-toggle):not(.soz-toggle-slider)');
+        var txt=lab&&lab.textContent.trim();if(txt)t[i].setAttribute('aria-label',txt.slice(0,60));
+      }
+    }catch(e){}
+  }
   function sweep(){
     try{var list=document.querySelectorAll('input,textarea,select');for(var i=0;i<list.length;i++)mark(list[i]);}catch(e){}
   }
@@ -68,5 +79,5 @@
     document.addEventListener('pointerdown',function(e){mark(e.target);},true);
     document.addEventListener('focusin',function(e){mark(e.target);},true);
   }
-  var n=0;(function tick(){ensure();themeColor();if(coarse&&n%3===0)sweep();if(++n<40)setTimeout(tick,500);})();
+  var n=0;(function tick(){ensure();themeColor();names();if(coarse&&n%3===0)sweep();if(++n<40)setTimeout(tick,500);})();
 })();
