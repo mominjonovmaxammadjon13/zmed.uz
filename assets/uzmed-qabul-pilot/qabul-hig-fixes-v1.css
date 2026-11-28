@@ -63,3 +63,16 @@ html body .qf-card-head #qfTitle{overflow-wrap:break-word!important;word-break:n
 html body #qfTitle:focus:not(:focus-visible),html body [tabindex="-1"]:focus:not(:focus-visible){outline:none!important;box-shadow:none!important}
 /* Matn sifatidagi ko'k havola: tugma ko'ki (#0071E3) emas, matn ko'ki (≥4.5:1) */
 html body #diagnosisExtras details.qc-legacy > summary{color:var(--uzc-accent,#0066CC)!important}
+
+/* iPhone (WebKit): balandligi cheklangan grid ro'yxatda overflow:hidden elementlar
+   0 px gacha siqilib, faqat chiziqlar qolardi (Tekshiruvlar katalogi). Qator balandligi = kontent. */
+html body .qf .search-results,
+html body #panel-treatment .qdx-official-results,
+html body #uzmedTreatmentV2 .uv2-drugs{grid-auto-rows:max-content!important;align-content:start!important}
+/* Katalog guruhlari <details> — grid o'rniga oddiy blok oqimi: har bir guruh to'liq o'z balandligida */
+html body #qabulFocus .qc-tests-unified #testPresets{display:block!important}
+html body #qabulFocus .qc-tests-unified #testPresets > * + *{margin-top:7px!important}
+/* Tekshiruvlar bo'limi: 40–42px tugmalar → 44px */
+html body #panel-tests .segmented > button,
+html body .qc-tests-unified .qc-chips > button,
+html body #qabulFocus #testPresets > .qf-lab-group > summary{min-height:44px!important}
