@@ -36,47 +36,15 @@ html.qrx-open,html.qrx-open body{overflow:hidden}
 .qrx-confirm{display:flex;gap:10px;align-items:flex-start;max-width:720px;margin:12px auto 0;font-size:13px;line-height:1.5;font-weight:600}
 .qrx-confirm input{margin-top:2px}
 
-/* — Retsept varag‘i (bosma harf, bemor uchun) — */
-.qrx-sheet{max-width:720px;margin:0 auto;background:#fff;color:#14202a;border:1px solid #d8e1e6;border-radius:6px;padding:28px 26px 30px;font-family:"Times New Roman",Georgia,serif;font-size:16px;line-height:1.5;box-shadow:0 3px 14px #172e3b1f}
-.qrx-sheet-head{text-align:center;margin-bottom:16px}
-.qrx-sheet-head h1{margin:0;font-size:26px;letter-spacing:2px;font-weight:700;color:#14202a}
-.qrx-sheet-head p{margin:2px 0 0;font-size:14px}
-.qrx-meta{display:grid;grid-template-columns:max-content 1fr;gap:6px 10px;margin:0 0 12px;padding-bottom:12px;border-bottom:1.5px solid #14202a}
-.qrx-meta dt{font-weight:700}
-.qrx-meta dd{margin:0;border-bottom:1px solid #9fb0ba;min-height:1.5em;overflow-wrap:anywhere}
-.qrx-rp strong{font-size:18px}
-.qrx-items{margin:6px 0 14px;padding-left:28px}
-.qrx-item{margin:0 0 12px;padding-left:2px}
-.qrx-item p{margin:0}
-.qrx-l1{font-weight:700}
-.qrx-purpose{font-size:14px;font-style:italic;color:#3c4d58}
-.qrx-sheet [contenteditable=true]{outline:none;border-radius:3px}
-.qrx-sheet [contenteditable=true]:focus{background:#fff6d6}
-.qrx-item-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px;font-family:Inter,system-ui,sans-serif;font-size:12px}
+/* — Retsept varag‘i: asboblar (faqat ekranda) — */
+.qrx-item-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-family:Inter,system-ui,sans-serif;font-size:12px}
 .qrx-chip{padding:3px 8px;border-radius:999px;background:#e8f7f3;color:#0b6f66;font-weight:700}
 .qrx-note{color:#5b6d78}
 .qrx-swap{width:auto;max-width:100%;min-height:36px;padding:5px 8px;font-size:12px;background:#f5f9fa;color:#14202a;border:1px solid #cdd9df;border-radius:8px}
 .qrx-item-tools .qrx-btn{min-height:36px;color:#14202a;background:#fff;border-color:#cdd9df}
 .qrx-item-tools .qrx-btn.qrx-icon{width:36px}
-.qrx-empty{list-style:none;color:#728691;font-style:italic}
-.qrx-rec{border-top:1.5px solid #14202a;padding-top:10px}
-.qrx-rec h2{margin:0 0 4px;font-size:16px}
-.qrx-rec ul{margin:0;padding-left:20px}
-.qrx-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:22px}
-.qrx-foot p{margin:0}
-.qrx-foot u{text-decoration:none;border-bottom:1px solid #14202a;padding:0 6px}
-.qrx-sheet[data-paper=A5]{max-width:560px;font-size:15px}
-@media (max-width:420px){.qrx-sheet{padding:20px 14px;font-size:15px}.qrx-btn-label{display:none}.qrx-btn{padding:8px}}
-
-/* — Chop etish: faqat varaq — */
-@media print{
- html.qrx-printing body>*:not(#qrxOverlay){display:none!important}
- html.qrx-printing #qrxOverlay{position:static!important;display:block!important;background:#fff!important}
- html.qrx-printing .qrx-scroll{overflow:visible!important;padding:0!important}
- html.qrx-printing .qrx-noprint{display:none!important}
- html.qrx-printing .qrx-sheet{max-width:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
- html.qrx-printing .qrx-sheet [contenteditable]{background:none!important}
-}
+@media (max-width:420px){.qrx-btn-label{display:none}.qrx-btn{padding:8px}}
+/* Retsept varag‘ining o‘zi qabul-rx-sheet-v1.js dagi SHEET_CSS da (chop etishda yuqori oynaga ham ko‘chiriladi) */
 /* v2: reyestr muqobillari */
 .qrx-item-tools .qrx-swap{flex:1 1 200px;min-width:0}
 .qrx-item-tools .qrx-btn:disabled,.qrx-swap:disabled{opacity:.5}
