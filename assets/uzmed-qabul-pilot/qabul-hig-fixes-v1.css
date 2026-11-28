@@ -1,0 +1,47 @@
+/* Shifokor qabuli — Apple HIG tuzatishlari v1 (faqat qo'shimcha).
+   Tegiladigan element ≥44px, shrift ≥11px. Eski qoidalar o'zgarmagan. */
+
+/* Yuqori panel va bo'lim asboblari */
+html body #qabulFocus .qflow-toolbar .qflow-action.qflow-icon,
+html body .qf-card-head .qf-tools .qflow-icon,
+html body .qf-card-head .qf-tools .qcx-action.qcx-icon-only,
+html body .qf-tools .uv3-mobile-nav .uv3-mobile-button{min-width:44px!important;min-height:44px!important}
+html body #qabulFocus.qflow.qflow-compact .qflow-toolbar > .qflow-icon,
+html body #qabulFocus.qflow.qflow-compact .qf-tools .qflow-icon{width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important}
+
+/* Yig'iladigan bo'lim sarlavhalari (details > summary) */
+html body #diagnosisExtras details.qc-legacy > summary,
+html body .uv3-safety details.vf-drawer > summary,
+html body details.uv3-native-extra > details.tools > summary,
+html body .qcx-features details.qdx-official > summary{min-height:44px!important;box-sizing:border-box!important;align-content:center!important;cursor:pointer}
+
+/* Tugma va chiplar */
+html body .qdx-workbench .qdx-subtle.qcx-action,
+html body .qdx-official-content .qdx-subtle.qcx-action,
+html body .vf-action,
+html body .qf-helper-library .qf-helper-search,
+html body .qf-helper-library .qf-helper-category,
+html body .qf-helper-library .qf-helper-phrase,
+html body #allergyAll,html body #allergyMine,
+html body .qf-close{min-height:44px!important}
+
+/* Rasmiy havolalar: bosish maydoni kattaroq, ko'rinish o'zgarmaydi */
+html body .qdx-official-links a{display:inline-flex!important;align-items:center;min-height:44px!important}
+
+/* Retsept paneli */
+html body .qrx-btn.qrx-act,html body .qrx-btn.qrx-primary,html body .qrx-icon{min-width:44px!important;min-height:44px!important}
+html body select.qrx-paper,html body .qrx-swap{min-height:44px!important}
+
+/* Mayda yorliqlar → 11px */
+html body .qdx-context .qdx-label,
+html body span.qa-step{font-size:11px!important}
+
+/* Bosilganda yengil javob (Apple: tez va qisqa) */
+@media (hover:none){
+  html body .qflow-toolbar .qflow-action:active,
+  html body .qf-tools .qflow-icon:active{transform:scale(.96);transition:transform .1s ease-out}
+}
+@media (prefers-reduced-motion:reduce){
+  html body .qflow-toolbar .qflow-action:active,
+  html body .qf-tools .qflow-icon:active{transform:none;transition:none}
+}
