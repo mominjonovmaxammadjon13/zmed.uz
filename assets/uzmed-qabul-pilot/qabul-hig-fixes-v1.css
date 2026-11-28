@@ -45,3 +45,21 @@ html body span.qa-step{font-size:11px!important}
   html body .qflow-toolbar .qflow-action:active,
   html body .qf-tools .qflow-icon:active{transform:none;transition:none}
 }
+
+/* iOS: 16px dan kichik maydonga bosilganda sahifa kattalashib qoladi */
+@media (pointer:coarse){
+  html body .vf-field :is(input,select,textarea),
+  html body .qf-helper-library .qf-helper-search{font-size:16px!important}
+}
+/* Tugma: 300ms kutishsiz, uzun bosishda matn belgilanmaydi */
+button,a,[role="button"],summary,label,select{touch-action:manipulation}
+button,[role="button"],summary{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* Tor ekran (320px): bo'lim nomi so'z o'rtasidan bo'linmasin — asboblar kerak bo'lsa keyingi qatorga o'tadi */
+html body .qf-card-head{flex-wrap:wrap}
+html body .qf-card-head #qfTitle{overflow-wrap:break-word!important;word-break:normal!important}
+/* Bo'lim almashganda dasturiy fokuslangan sarlavhada ramka chiqmasin (klaviatura fokusi saqlanadi) */
+html body #qfTitle:focus:not(:focus-visible),html body [tabindex="-1"]:focus:not(:focus-visible){outline:none!important;box-shadow:none!important}
+/* Matn sifatidagi ko'k havola: tugma ko'ki (#0071E3) emas, matn ko'ki (≥4.5:1) */
+html body #diagnosisExtras details.qc-legacy > summary{color:var(--uzc-accent,#0066CC)!important}

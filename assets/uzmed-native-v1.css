@@ -1,0 +1,151 @@
+/* ==========================================================================
+   UZMED · telefonda "ilova kabi" his (Emil Kowalski: mobile-native + review-animations)
+   Faqat qo'shimcha qatlam. Tugma joyi, funksiya, ma'lumot o'zgarmaydi.
+   ========================================================================== */
+
+/* 1. Asos: landshaftda shrift kattalashmasin; tugmada 300ms kutish va uzun bosishda
+      matn belgilanishi bo'lmasin (matn — kontent emas, boshqaruv elementi). */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,a,[role="button"],summary,label,select{touch-action:manipulation}
+button,[role="button"],summary{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* iOS 16px dan kichik maydonga bosilganda sahifani kattalashtiradi va qaytarmaydi */
+@media (pointer:coarse){html:not(#uzi1):not(#uzi2):not(#uzi3):not(#uzi4) body .uz-in16{font-size:16px!important}}
+/* Ichki aylantiriladigan joylar sahifani tortib ketmasin */
+#uzmedSidebar .uxn-nav,#uzSideMenu,.uz-menu-list{overscroll-behavior:contain}
+
+/* 2. Sensorli ekranda hover "yopishib" qolmasin: bosilgandan keyin karta ko'tarilib
+      qolmaydi. Sichqonchali qurilmada hover avvalgidek ishlaydi. */
+@media (hover:none),(pointer:coarse){
+:root:not(#uzh) .tah-upload-zone:hover,
+:root:not(#uzh) #uzmedAuthOverlay#uzmedAuthOverlay .uz-auth-btn:not(:disabled):hover,
+:root:not(#uzh) #uzBemorlarHub button.ubh-tile:hover,
+:root:not(#uzh) .udp-entry:hover,
+:root:not(#uzh) .umt-entry:hover,
+:root:not(#uzh) .ucp-entry:hover,
+:root:not(#uzh) .uzimg-card:hover,
+:root:not(#uzh) #uaPanel .ual-submit:hover,
+:root:not(#uzh) .ua-sc:hover,
+:root:not(#uzh) #uaPanel .ua-sc:hover,
+:root:not(#uzh) #uaPanel .ua-bp:hover,
+:root:not(#uzh) #uaPanel .ua-nb:hover,
+:root:not(#uzh) .hicon:hover,
+:root:not(#uzh) .cat-item:hover,
+:root:not(#uzh) .mkb-item:hover,
+:root:not(#uzh) .drug-card:hover,
+:root:not(#uzh) .doktor-item:hover,
+:root:not(#uzh) .mkb-letter-btn:hover,
+:root:not(#uzh) .ai-chip:hover,
+:root:not(#uzh) .proto-result-item:hover,
+:root:not(#uzh) .doktor-item:hover .di-letter,
+:root:not(#uzh) .proto-result-item:hover .proto-result-icon,
+:root:not(#uzh) .derma-card:hover,
+:root:not(#uzh) .mkb-db-item:hover,
+:root:not(#uzh) .settings-item:hover,
+:root:not(#uzh) .doza-section:hover,
+:root:not(#uzh) .drug-db-item:hover,
+:root:not(#uzh) .drug-db-item-v2:hover,
+:root:not(#uzh) .als-drug-card:hover,
+:root:not(#uzh) .dc-drug-card:hover,
+:root:not(#uzh) .mkb-db-item:hover .mkb-arrow,
+:root:not(#uzh) .doktor-item:hover .settings-arrow,
+:root:not(#uzh) .dc-calc-btn:hover,
+:root:not(#uzh) .tah-btn-primary:hover,
+:root:not(#uzh) .als-main-btn:hover,
+:root:not(#uzh) .find-btn:hover,
+:root:not(#uzh) .ual-submit:hover,
+:root:not(#uzh) .ai-send-btn:hover,
+:root:not(#uzh) .tah-camera-btn:hover,
+:root:not(#uzh) .dc-clear-btn:hover,
+:root:not(#uzh) .tah-btn-secondary:hover,
+:root:not(#uzh) .mkb-load-more:hover,
+:root:not(#uzh) .ua-icon-btn:hover,
+:root:not(#uzh) .ua-btn:hover,
+:root:not(#uzh) .adm-chip:hover,
+:root:not(#uzh) .dc-help-chip:hover,
+:root:not(#uzh) .src-tab-btn:hover,
+:root:not(#uzh) .adm-v2-chip:hover,
+:root:not(#uzh) .fdm-close:hover,
+:root:not(#uzh) .derma-modal-close:hover,
+:root:not(#uzh) .proto-close:hover,
+:root:not(#uzh) .ua-modal-x:hover,
+:root:not(#uzh) .uz-menu-close:hover,
+:root:not(#uzh) .tah-upload-zone:hover .tah-upload-icon,
+:root:not(#uzh) .tah-file-item:hover,
+:root:not(#uzh) .settings-item:hover .settings-icon,
+:root:not(#uzh) .ua-card:hover,
+:root:not(#uzh) .ua-nb:hover,
+:root:not(#uzh) .derma-card:hover .derma-card-img,
+:root:not(#uzh) .drug-card:hover .drug-card-img,
+:root:not(#uzh) .derma-card:hover .derma-img-box,
+:root:not(#uzh) .derma-card:hover .derma-card-arrow,
+:root:not(#uzh) .settings-item:hover .settings-arrow,
+:root:not(#uzh) .ua-sc:hover .ua-sc-icon,
+:root:not(#uzh) .ua-pager-btn:hover:not([disabled]),
+:root:not(#uzh) .ua-table tbody tr:hover,
+:root:not(#uzh) .uzimg-card:hover .uzimg-img,
+:root:not(#uzh) .uz-imgs-f:hover .uz-imgs-i,
+:root:not(#uzh) .uzimg-fab:hover,
+:root:not(#uzh) .uzimg-strip:hover .uzimg-ico,
+:root:not(#uzh) .uzimg-lb-x:hover,
+:root:not(#uzh) .uzmkb-x:hover,
+:root:not(#uzh) .uzmkb-sec:hover,
+:root:not(#uzh) .uzmkb-retry:hover,
+:root:not(#uzh) .mkb-db-item:not(.is-class):hover{transform:none!important}
+}
+
+/* 3. Sakrovchi (overshoot) 350–450ms o'tishlar → 200ms, kuchli ease-out (Apple: tez, aniq) */
+:root:not(#uzh) .cat-item,
+:root:not(#uzh) .drug-card,
+:root:not(#uzh) .derma-card,
+:root:not(#uzh) .mkb-db-item,
+:root:not(#uzh) .doktor-item,
+:root:not(#uzh) .settings-item,
+:root:not(#uzh) .drug-db-item-v2,
+:root:not(#uzh) .proto-result-item,
+:root:not(#uzh) .dc-drug-card,
+:root:not(#uzh) .als-drug-card,
+:root:not(#uzh) .ua-sc,
+:root:not(#uzh) .ua-card,
+:root:not(#uzh) .soz-profile-card,
+:root:not(#uzh) .derma-hero,
+:root:not(#uzh) .drug-db-hero,
+:root:not(#uzh) .doza-hero,
+:root:not(#uzh) .assosi-screen .cat-icon,
+:root:not(#uzh) .assosi-screen .cat-arrow,
+:root:not(#uzh) .proto-chip,
+:root:not(#uzh) .als-main-btn,
+:root:not(#uzh) .find-btn,
+:root:not(#uzh) .derma-img-box,
+:root:not(#uzh) .derma-card-arrow,
+:root:not(#uzh) .settings-icon,
+:root:not(#uzh) .settings-arrow,
+:root:not(#uzh) .ual-submit,
+:root:not(#uzh) .ua-nb,
+:root:not(#uzh) .ua-nb-ic,
+:root:not(#uzh) .ua-sc-icon,
+:root:not(#uzh) .ua-btn,
+:root:not(#uzh) .ua-icon-btn,
+:root:not(#uzh) .uzimg-card,
+:root:not(#uzh) .uzimg-img,
+:root:not(#uzh) .uz-imgs-f .uz-imgs-i,
+:root:not(#uzh) .uz-imgs-i,
+:root:not(#uzh) .uzimg-fab,
+:root:not(#uzh) .uzimg-ico,
+:root:not(#uzh) .uzimg-lb-x,
+:root:not(#uzh) .uzmkb-x,
+:root:not(#uzh) .uzmkb-sec,
+:root:not(#uzh) .mkb-db-item:not(.is-class){transition-duration:.2s!important;transition-timing-function:cubic-bezier(.23,1,.32,1)!important}
+:root:not(#uzh) .uzmkb-tab-ind{transition-duration:.25s!important;transition-timing-function:cubic-bezier(.77,0,.175,1)!important}
+:root:not(#uzh) #mkb-db-screen .v19-mkb-search input{transition-duration:.2s!important}
+
+/* 4. Material "to'lqin" (ripple) — Android uslubi, Apple'da yo'q; scale(0) dan o'sadi */
+:root:not(#uzh) .uzp-ripple{display:none!important}
+
+/* 5. Kirish oynasidagi to'xtovsiz bezak animatsiyalari (14 ta, cheksiz) — maqsadsiz harakat,
+      batareya sarfi. Panel ochilishi (uztgIn) saqlanadi. */
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay,
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay::before,
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay::after,
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-logo,.uz-auth-brand-name,.uz-auth-brand-tag,.uz-auth-box,.uz-auth-tab,.uz-auth-btn,#uzAuthGoogleBtn,#uzAuthLoginBtn),
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-logo,.uz-auth-brand-name,.uz-auth-brand-tag,.uz-auth-box,.uz-auth-tab,.uz-auth-btn,#uzAuthGoogleBtn,#uzAuthLoginBtn)::before,
+#uzmedAuthOverlay#uzmedAuthOverlay#uzmedAuthOverlay :is(.uz-auth-brand,.uz-auth-brand-logo,.uz-auth-brand-name,.uz-auth-brand-tag,.uz-auth-box,.uz-auth-tab,.uz-auth-btn,#uzAuthGoogleBtn,#uzAuthLoginBtn)::after{animation:none!important}
