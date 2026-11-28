@@ -19,11 +19,12 @@
   /* ---------- Doim yoqilgan (sinov rejimi olib tashlandi) ---------- */
   try{ localStorage.removeItem('uzm_lg_test'); }catch(_){}   /* eski sinov belgisini tozalash */
   var NS = window.UZMEDLiquidGlass = window.UZMEDLiquidGlass || {};
-  NS.version = '5.3'; NS.enabled = true;
+  NS.version = '5.4'; NS.enabled = true;
 
   /* ---------- Sozlamalar ---------- */
   var SEL = 'button,[role="button"],[role="tab"],a.btn,.btn,input[type="button"],input[type="submit"],[onclick]';
-  var SKIP = '[data-uzm-lg="off"],.uzm-lg-skip';
+  /* v5.4: yon menyu, modal oynalar va matn kiritish joylari linzasiz (u yerda linza qotib qolardi) */
+  var SKIP = '[data-uzm-lg="off"],.uzm-lg-skip,#uzmedSidebar,#uzmedSidebarBackdrop,[aria-modal="true"],dialog,.qrx-overlay';
   /* v5.3: katta kartalar (bosh sahifa menyusi) linzadan chiqarildi — faqat knopka/tab o'lchamidagilar */
   var MAX_W = 420, MAX_H = 100, MIN_S = 16, MAX_AREA_FRAC = 0.30;
   var MAG = 1.16, RIM_MAG = 1.42, GX = 1.07, GY = 1.05;
@@ -218,6 +219,7 @@
     if (el.disabled || el.getAttribute('aria-disabled') === 'true') return false;
     if (el.closest(SKIP) || el.closest('#uzm-lg-layer')) return false;
     if (el.matches('input:not([type=button]):not([type=submit]),textarea,select,[contenteditable="true"]')) return false;
+    if (el.querySelector && el.querySelector('input:not([type=button]):not([type=submit]),textarea,select,[contenteditable="true"]')) return false;
     return true;
   }
   /* Element orqasidagi ko'rinadigan fon rangi (ota elementlar ranglarini qo'shib hisoblash) */
@@ -291,8 +293,23 @@
     L.x = cx; L.y = cy; L.sx = sx; L.sy = sy;
   }
   function stretch(speed){ var s = 1 + Math.min(speed / 2600, 0.26); return [s, 1 - (s - 1) * 0.5]; }
-  function endAnim(a){ a.onfinish = function(){ if (!L.on){ cancel(); clearLayers(); } }; }
+  function endAnim(a){ a.onfinish = function(){ if (!L.on){ cancel(); clearLayers(); if (lens){ lens.style.opacity = '0'; lens.style.transform = 'translate(-9999px,-9999px)'; } } }; }
 
+  /* v5.4: linza ko'rinib turgan har kadrda tekshiruv — element siljisa, yopilsa yoki ustini menyu/oyna qoplasa
+     (iOS bunda pointerup/pointercancel yubormaydi) linza darhol yo'qoladi. Faqat requestAnimationFrame. */
+  var mon = 0, last = null;
+  function monitor(){
+    mon = 0;
+    var visible = L.on || L.anims.length;
+    if (!visible){ last = null; return; }
+    var t = P && !P.drag ? P : (!P ? last : null);
+    if (t && t.el && gone(t.el, t.r)){
+      if (P){ P.dead = true; P = null; clearTimeout(watchdog); }
+      last = null; hardReset(); return;
+    }
+    mon = requestAnimationFrame(monitor);
+  }
+  function watch(){ if (!mon) mon = requestAnimationFrame(monitor); }
   function appear(r, rad, src, tintSet){
     cancel();
     size(r.w, r.h, rad);
@@ -351,7 +368,7 @@
 
   /* ---------- Hodisalar (teginish davomida qisqa taymer YO'Q) ---------- */
   var P = null, suppress = { until:0, par:null }, watchdog = 0;
-  function kick(){ clearTimeout(watchdog); watchdog = setTimeout(function(){ if (P){ P = null; vanish(true); } }, 8000); }  /* 8000ms > 400ms: iOS kuzatmaydi; ushlab turganda linza turadi */
+  function kick(){ clearTimeout(watchdog); watchdog = setTimeout(function(){ if (P){ P = null; vanish(true); } }, 2500); }  /* 8000ms > 400ms: iOS kuzatmaydi; ushlab turganda linza turadi */
 
   document.addEventListener('pointerdown', function(e){
     try{
@@ -374,6 +391,7 @@
         if (g.prev){ var pr = rectOf(g.prev); if (onScreen(pr)){ start = pr; startRad = radiusOf(g.prev, pr); } }
       }
       appear(start, startRad, src, tintSet);
+      last = P; watch();
       if (g && !g.scroll && g.par.style.touchAction === '') g.par.style.touchAction = 'pan-y';
       kick();
     }catch(err){ console.warn('[UZMED liquid-glass]', err); }
@@ -439,6 +457,14 @@
     P = null; release(p, e.clientX);
   }, { capture:true, passive:true });
   document.addEventListener('pointercancel', function(){ P = null; vanish(true); }, { capture:true, passive:true });
+  /* v5.4: iOS barmoq harakatini menyu surish/aylantirishga aylantirsa pointermove kelmaydi — touchmove bilan ham tekshiriladi */
+  document.addEventListener('touchmove', function(e){
+    var p = P, t = e.touches && e.touches[0]; if (!p || p.drag || p.dead || !t) return;
+    if (Math.abs(t.clientX - p.x0) >= DRAG_MIN || Math.abs(t.clientY - p.y0) >= DRAG_MIN){
+      if (p.g && !p.g.scroll && Math.abs(t.clientX - p.x0) > Math.abs(t.clientY - p.y0) * 1.5) return;   /* guruh ichida surish — pointermove boshqaradi */
+      p.dead = true; P = null; clearTimeout(watchdog); vanish(true);
+    }
+  }, { capture:true, passive:true });
   /* iOS zaxira: pointerup kelmasa — taymersiz, keyingi kadrda */
   document.addEventListener('touchend', function(e){
     var t = e.changedTouches && e.changedTouches[0];
