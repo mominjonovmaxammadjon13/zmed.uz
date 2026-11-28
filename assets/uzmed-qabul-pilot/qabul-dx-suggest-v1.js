@@ -16,9 +16,11 @@
  const codeLike=q=>/^[A-Za-z]\d[\d.]*$/.test(q);
  // O‘zbekcha nom bo‘yicha qidiruv: so‘z boshi mosligi + 1 harf xatoga chidamli (alleg → allergik)
  const norm=t=>String(t||'').toLowerCase().replace(/[‘’ʻʼ`´']/g,"'").replace(/[^\p{L}\p{N}' ]+/gu,' ').replace(/\s+/g,' ').trim();
- let index=null;
+ let index=null;const freq=new Map();
  function buildIndex(){
   index=rows.map(r=>({row:r,words:norm(r[1]).split(' '),alias:norm((r.localAliases||[]).join(' ')).split(' ').filter(Boolean),cat:!r[0].includes('.')}));
+  // So‘z nechta tashxis nomida uchraydi: «alle» yozilganda kam uchraydigan «allesheroz» emas, «allergik» oldinda chiqadi.
+  for(const e of index)for(const w of new Set(e.words))freq.set(w,(freq.get(w)||0)+1);
  }
  function near(a,b){ // a va b uzunligi teng yoki farqi 1; tahrir masofasi <=1
   if(a===b)return true;
@@ -30,7 +32,7 @@
  function wordScore(q,words){
   let best=9;
   for(const w of words){
-   if(w.startsWith(q))return w.length===q.length?0:1;
+   if(w.startsWith(q))return w.length===q.length?0:1+((freq.get(w)||0)<=2?0.8:0);
    if(q.length>=4&&w.length>=q.length&&near(q,w.slice(0,q.length)))best=Math.min(best,3);
    else if(q.length>=4&&w.includes(q))best=Math.min(best,4);
   }
@@ -90,7 +92,10 @@
    }else{
     field.setRangeText(name,r.start,r.end,'end');signal(field);
     if(icd){const codes=icd.value.split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean);
-     if(!codes.includes(code)){codes.push(code);icd.value=codes.join('; ');signal(icd);}}
+     // Tashxis bitta qator bo‘lsa — eski kod almashtiriladi (eski tashxis kodi qolib ketmasin); bir necha qator bo‘lsa — qo‘shiladi.
+     const lines=field.value.split('\n').map(x=>x.trim()).filter(Boolean);
+     if(lines.length<=1){if(icd.value.trim()!==code){icd.value=code;signal(icd);}}
+     else if(!codes.includes(code)){codes.push(code);icd.value=codes.join('; ');signal(icd);}}
    }
    const checked=$('icdChecked');if(checked)checked.checked=false;
    field.focus({preventScroll:true});hide();
