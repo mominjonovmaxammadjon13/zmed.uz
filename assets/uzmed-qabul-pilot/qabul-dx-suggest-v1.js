@@ -81,12 +81,16 @@
    if(mode==='icd'){const start=Math.max(v.lastIndexOf(';',end-1),v.lastIndexOf(',',end-1))+1;
     const raw=v.slice(start,end),lead=raw.length-raw.trimStart().length;return {start:start+lead,end,q:raw.trim()};}
    const start=v.lastIndexOf('\n',end-1)+1,raw=v.slice(start,end),lead=raw.length-raw.trimStart().length;
+   if(mode==='list'){const m=raw.trimStart().match(/^[-•*\d.)\s]*/);const pre=m?m[0].length:0;return {start:start+lead+pre,end,q:raw.trim().slice(pre).trim()};}
    return {start:start+lead,end,q:raw.trim()};
   }
   function pick(row,r,value){
    if(!writable(field)||field.value!==value){hide();return;}
    const [code,name]=row,main=$('field-diagnosis'),icd=$('field-icd');
-   if(mode==='icd'){
+   if(mode==='list'){
+    // Asorat, hamroh, differensial, aniqlashtirish: qatorga «KOD — Nom» yoziladi (MKB kodi ko‘rinib turadi).
+    field.setRangeText(code+' — '+name,r.start,r.end,'end');signal(field);
+   }else if(mode==='icd'){
     field.setRangeText(code,r.start,r.end,'end');signal(field);
     if(main&&!main.value.trim()){main.value=name;signal(main);}
    }else{
@@ -170,6 +174,15 @@
   if(!main||!icd||!W.QabulReference||!W.UZMED_REFERENCE_SEARCH)return false;
   attach(main,'name');attach(icd,'icd');autoLink(main,icd);return true;
  }
+ // Boshqa tashxis turlari: maydonlar keyinroq yaratiladi, shuning uchun alohida kutiladi.
+ const LIST_IDS=['complication','comorbid','qc-differential','qc-diagnostic_plan'];
+ function mountList(){
+  if(!W.QabulReference||!W.UZMED_REFERENCE_SEARCH)return false;
+  let all=true;for(const id of LIST_IDS){const f=$(id);if(f)attach(f,'list');else all=false;}
+  return all;
+ }
+ let ltries=0;
+ (function lretry(){if(mountList()||++ltries>80)return;setTimeout(lretry,250);})();
  // «Tayyor tashxislar» qutisida faqat sarlavha va qidiruv qatori olib tashlanadi;
  // toifa tanlovi va to‘liq MKB-10 ro‘yxati (12 221 ta) joyida qoladi.
  function hideLibrary(){
